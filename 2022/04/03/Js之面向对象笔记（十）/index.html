@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Js之面向对象笔记（十） | 星辰的博客</title>
+  <meta name="description" content="1.面向过程与面向对象1.1面向过程 面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的依次调用就可以了。  1.2面向对象 面向对象是把事务分解成为一个个对象，然后由对象之间分工与合作。  1.3面向过程与面向对象对比    面向过程 面向对象    优点 性能比面向对象高，适合跟硬件联系很紧密的东西，例如单片机就采用的面向过程编程。 易维护、易复用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Js之面向对象笔记（十）">
+<meta property="og:url" content="http://example.com/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="1.面向过程与面向对象1.1面向过程 面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的依次调用就可以了。  1.2面向对象 面向对象是把事务分解成为一个个对象，然后由对象之间分工与合作。  1.3面向过程与面向对象对比    面向过程 面向对象    优点 性能比面向对象高，适合跟硬件联系很紧密的东西，例如单片机就采用的面向过程编程。 易维护、易复用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images2/img3.png">
+<meta property="og:image" content="http://example.com/images2/img4.png">
+<meta property="og:image" content="http://example.com/images2/img5.png">
+<meta property="og:image" content="http://example.com/images2/img6.png">
+<meta property="og:image" content="http://example.com/images2/img7.png">
+<meta property="og:image" content="http://example.com/images2/img2.png">
+<meta property="og:image" content="http://example.com/images2/img1.png">
+<meta property="article:published_time" content="2022-04-03T02:29:25.000Z">
+<meta property="article:modified_time" content="2022-04-03T02:32:15.261Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images2/img3.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">时间路人</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/Java/">Java</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MATLAB/">MATLAB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MATLAB/" rel="tag">MATLAB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/MATLAB/" style="font-size: 13.33px;">MATLAB</a> <a href="/tags/css/" style="font-size: 13.67px;">css</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">测试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/JavaScript/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8BVue%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89/" class="title">Js之Vue笔记（十六）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T04:02:15.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/JavaScript/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8BAjax%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89/" class="title">Js之Ajax笔记（十五）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T03:09:42.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/" class="title">Js之面向对象笔记（十四）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T03:02:36.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/" class="title">Js之面向对象笔记（十三）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T02:43:43.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/" class="title">Js之面向对象笔记（十二）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T02:39:55.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Js之面向对象笔记（十）" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Js之面向对象笔记（十）
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89/" class="article-date">
+	  <time datetime="2022-04-03T02:29:25.000Z" itemprop="datePublished">2022-04-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89/" class="leancloud_visitors"  data-flag-title="Js之面向对象笔记（十）">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="1-面向过程与面向对象"><a href="#1-面向过程与面向对象" class="headerlink" title="1.面向过程与面向对象"></a>1.面向过程与面向对象</h2><h3 id="1-1面向过程"><a href="#1-1面向过程" class="headerlink" title="1.1面向过程"></a>1.1面向过程</h3><ul>
+<li>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的依次调用就可以了。</li>
+</ul>
+<h3 id="1-2面向对象"><a href="#1-2面向对象" class="headerlink" title="1.2面向对象"></a>1.2面向对象</h3><ul>
+<li>面向对象是把事务分解成为一个个对象，然后由对象之间分工与合作。</li>
+</ul>
+<h3 id="1-3面向过程与面向对象对比"><a href="#1-3面向过程与面向对象对比" class="headerlink" title="1.3面向过程与面向对象对比"></a>1.3面向过程与面向对象对比</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>面向过程</th>
+<th>面向对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>优点</td>
+<td>性能比面向对象高，适合跟硬件联系很紧密的东西，例如单片机就采用的面向过程编程。</td>
+<td>易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统 更加灵活、更加易于维护</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>不易维护、不易复用、不易扩展</td>
+<td>性能比面向过程低</td>
+</tr>
+</tbody></table>
+<h2 id="2-对象与类"><a href="#2-对象与类" class="headerlink" title="2.对象与类"></a>2.对象与类</h2><h3 id="2-1对象"><a href="#2-1对象" class="headerlink" title="2.1对象"></a>2.1对象</h3><p>对象是由属性和方法组成的：是一个无序键值对的集合,指的是一个具体的事物</p>
+<ul>
+<li>属性：事物的特征，在对象中用属性来表示（常用名词）</li>
+<li>方法：事物的行为，在对象中用方法来表示（常用动词）</li>
+</ul>
+<h4 id="2-1-1创建对象"><a href="#2-1-1创建对象" class="headerlink" title="2.1.1创建对象"></a>2.1.1创建对象</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下代码是对对象的复习</span></span><br><span class="line"><span class="comment">//字面量创建对象</span></span><br><span class="line"><span class="keyword">var</span> ldh = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;刘德华&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ldh);</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造函数创建对象</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">Star</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> <span class="title class_">Star</span>(<span class="string">&#x27;刘德华&#x27;</span>, <span class="number">18</span>)<span class="comment">//实例化对象</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ldh);	</span><br></pre></td></tr></table></figure>
+
+<p>如上两行代码运行结果为:<img src="/images2/img3.png"></p>
+<h3 id="2-2类"><a href="#2-2类" class="headerlink" title="2.2类"></a>2.2类</h3><ul>
+<li>在 ES6 中新增加了类的概念，可以使用 class 关键字声明一个类，之后以这个类来实例化对象。类抽象了对象的公共部分，它泛指某一大类（class）对象特指某一个，通过类实例化一个具体的对象</li>
+</ul>
+<h4 id="2-2-1创建类"><a href="#2-2-1创建类" class="headerlink" title="2.2.1创建类"></a>2.2.1创建类</h4><ol>
+<li>语法:</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//步骤1 使用class关键字</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">name</span> &#123;</span><br><span class="line">  <span class="comment">// class body</span></span><br><span class="line">&#125;     </span><br><span class="line"><span class="comment">//步骤2使用定义的类创建实例  注意new关键字</span></span><br><span class="line"><span class="keyword">var</span> xx = <span class="keyword">new</span> <span class="title function_">name</span>();     </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>示例</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建类 class  创建一个 明星类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Star</span> &#123;</span><br><span class="line">  <span class="comment">// 类的共有属性放到 constructor 里面</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">// 2. 利用类创建对象 new</span></span><br><span class="line">  <span class="keyword">var</span> ldh = <span class="keyword">new</span> <span class="title class_">Star</span>(<span class="string">&#x27;刘德华&#x27;</span>, <span class="number">18</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(ldh);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码运行结果: </p>
+<p><img src="/images2/img4.png"></p>
+<p>通过结果我们可以看出,运行结果和使用构造函数方式一样</p>
+<h4 id="2-2-2类创建添加属性和方法"><a href="#2-2-2类创建添加属性和方法" class="headerlink" title="2.2.2类创建添加属性和方法"></a>2.2.2类创建添加属性和方法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 1. 创建类 class  创建一个类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Star</span> &#123;</span><br><span class="line">    <span class="comment">// 类的共有属性放到 constructor 里面 constructor是 构造器或者构造函数</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">uname, age</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">uname</span> = uname;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    &#125;<span class="comment">//-------------------------------------------&gt;注意,方法与方法之间不需要添加逗号</span></span><br><span class="line">    <span class="title function_">sing</span>(<span class="params">song</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">uname</span> + <span class="string">&#x27;唱&#x27;</span> + song);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2. 利用类创建对象 new</span></span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> <span class="title class_">Star</span>(<span class="string">&#x27;刘德华&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ldh); <span class="comment">// Star &#123;uname: &quot;刘德华&quot;, age: 18&#125;</span></span><br><span class="line">ldh.<span class="title function_">sing</span>(<span class="string">&#x27;冰雨&#x27;</span>); <span class="comment">// 刘德华唱冰雨</span></span><br></pre></td></tr></table></figure>
+
+<p> 以上代码运行结果:</p>
+<p><img src="/images2/img5.png"></p>
+<p><strong>注意哟:</strong></p>
+<ol>
+<li>通过class 关键字创建类, 类名我们还是习惯性定义首字母大写</li>
+<li>类里面有个constructor 函数,可以接受传递过来的参数,同时返回实例对象</li>
+<li>constructor 函数 只要 new 生成实例时,就会自动调用这个函数, 如果我们不写这个函数,类也会自动生成这个函数</li>
+<li>多个函数方法之间不需要添加逗号分隔</li>
+<li>生成实例 new 不能省略</li>
+<li>语法规范, 创建类 类名后面不要加小括号,生成实例 类名后面加小括号, 构造函数不需要加function</li>
+</ol>
+<h4 id="2-2-3类的继承"><a href="#2-2-3类的继承" class="headerlink" title="2.2.3类的继承"></a>2.2.3类的继承</h4><ol>
+<li>语法</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span>&#123;   </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类继承父类</span></span><br><span class="line"><span class="keyword">class</span>  <span class="title class_">Son</span>  <span class="keyword">extends</span> <span class="title class_ inherited__">Father</span> &#123;  </span><br><span class="line">&#125;       </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>示例</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">      <span class="title function_">constructor</span>(<span class="params">surname</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">surname</span>= surname;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">say</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;你的姓是&#x27;</span> + <span class="variable language_">this</span>.<span class="property">surname</span>);</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Father</span>&#123;  <span class="comment">// 这样子类就继承了父类的属性和方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> damao= <span class="keyword">new</span> <span class="title class_">Son</span>(<span class="string">&#x27;刘&#x27;</span>);</span><br><span class="line">damao.<span class="title function_">say</span>();      <span class="comment">//结果为 你的姓是刘</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码运行结果:</p>
+<p><img src="/images2/img6.png"></p>
+<ul>
+<li><p>子类使用super关键字访问父类的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义了父类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">   <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="title function_">sum</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span> + <span class="variable language_">this</span>.<span class="property">y</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//子元素继承父类</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Father</span> &#123;</span><br><span class="line">   		 <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">    		<span class="variable language_">super</span>(x, y); <span class="comment">//使用super调用了父类中的构造函数</span></span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> son = <span class="keyword">new</span> <span class="title class_">Son</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    son.<span class="title function_">sum</span>(); <span class="comment">//结果为3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意:</strong> </p>
+<ol>
+<li><p>继承中,如果实例化子类输出一个方法,先看子类有没有这个方法,如果有就先执行子类的</p>
+</li>
+<li><p>继承中,如果子类里面没有,就去查找父类有没有这个方法,如果有,就执行父类的这个方法(就近原则)</p>
+</li>
+<li><p>如果子类想要继承父类的方法,同时在自己内部扩展自己的方法,利用super 调用父类的构造函数,super 必须在子类this之前调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 父类有加法方法</span></span><br><span class="line"> <span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">   <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="title function_">sum</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span> + <span class="variable language_">this</span>.<span class="property">y</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 子类继承父类加法方法 同时 扩展减法方法</span></span><br><span class="line"> <span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Father</span> &#123;</span><br><span class="line">   <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">   <span class="comment">// 利用super 调用父类的构造函数 super 必须在子类this之前调用,放到this之后会报错</span></span><br><span class="line">   <span class="variable language_">super</span>(x, y);</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">subtract</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span> - <span class="variable language_">this</span>.<span class="property">y</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> son = <span class="keyword">new</span> <span class="title class_">Son</span>(<span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">son.<span class="title function_">subtract</span>(); <span class="comment">//2</span></span><br><span class="line">son.<span class="title function_">sum</span>();<span class="comment">//8</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码运行结果为:</p>
+<p><img src="/images2/img7.png"></p>
+</li>
+<li><p>时刻注意this的指向问题,类里面的共有的属性和方法一定要加this使用.</p>
+<ol>
+<li>constructor中的this指向的是new出来的实例对象 </li>
+<li>自定义的方法,一般也指向的new出来的实例对象</li>
+<li>绑定事件之后this指向的就是触发事件的事件源</li>
+</ol>
+</li>
+<li><p>在 ES6 中类没有变量提升，所以必须先定义类，才能通过类实例化对象<img src="/images2/img2.png"></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/images2/img1.png"></h2></li>
+</ol>
+</li>
+</ul>
+<h2 id="3-面向对象版tab-栏切换"><a href="#3-面向对象版tab-栏切换" class="headerlink" title="3.面向对象版tab 栏切换"></a>3.面向对象版tab 栏切换</h2><h3 id="3-1功能需求"><a href="#3-1功能需求" class="headerlink" title="3.1功能需求"></a>3.1功能需求</h3><ol>
+<li>点击 tab栏,可以切换效果.</li>
+<li>点击 + 号, 可以添加 tab 项和内容项.</li>
+<li>点击 x 号, 可以删除当前的tab项和内容项.</li>
+<li>双击tab项文字或者内容项文字可以修改里面的文字内容</li>
+</ol>
+<h3 id="3-2案例准备"><a href="#3-2案例准备" class="headerlink" title="3.2案例准备"></a>3.2案例准备</h3><ol>
+<li>获取到标题元素</li>
+<li>获取到内容元素</li>
+<li>获取到删除的小按钮 x号</li>
+<li>新建js文件,定义类,添加需要的属性方法(切换,删除,增加,修改)</li>
+<li>时刻注意this的指向问题</li>
+</ol>
+<h3 id="3-3切换"><a href="#3-3切换" class="headerlink" title="3.3切换"></a>3.3切换</h3><ul>
+<li><p>为获取到的标题绑定点击事件,展示对应的内容区域,存储对应的索引</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">lis</span>[i].<span class="property">index</span> = i;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">lis</span>[i].<span class="property">onclick</span> = <span class="variable language_">this</span>.<span class="property">toggleTab</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用排他,实现只有一个元素的显示</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">toggleTab</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">//将所有的标题与内容类样式全部移除</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">lis</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">lis</span>[i].<span class="property">className</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">sections</span>[i].<span class="property">className</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//为当前的标题添加激活样式</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">className</span> = <span class="string">&#x27;liactive&#x27;</span>;</span><br><span class="line">   <span class="comment">//为当前的内容添加激活样式</span></span><br><span class="line">    that.<span class="property">sections</span>[<span class="variable language_">this</span>.<span class="property">index</span>].<span class="property">className</span> = <span class="string">&#x27;conactive&#x27;</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-4添加"><a href="#3-4添加" class="headerlink" title="3.4添加"></a>3.4添加</h3><ul>
+<li><p>为添加按钮+ 绑定点击事件 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">add</span>.<span class="property">onclick</span> = <span class="variable language_">this</span>.<span class="property">addTab</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现标题与内容的添加,做好排他处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addTab</span>(<span class="params"></span>) &#123;</span><br><span class="line">    that.<span class="title function_">clearClass</span>();</span><br><span class="line">    <span class="comment">// (1) 创建li元素和section元素 </span></span><br><span class="line">    <span class="keyword">var</span> random = <span class="title class_">Math</span>.<span class="title function_">random</span>();</span><br><span class="line">    <span class="keyword">var</span> li = <span class="string">&#x27;&lt;li class=&quot;liactive&quot;&gt;&lt;span&gt;新选项卡&lt;/span&gt;&lt;span class=&quot;iconfont icon-guanbi&quot;&gt;				&lt;/span&gt;&lt;/li&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">var</span> section = <span class="string">&#x27;&lt;section class=&quot;conactive&quot;&gt;测试 &#x27;</span> + random + <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line">    <span class="comment">// (2) 把这两个元素追加到对应的父元素里面</span></span><br><span class="line">    that.<span class="property">ul</span>.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&#x27;beforeend&#x27;</span>, li);</span><br><span class="line">    that.<span class="property">fsection</span>.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&#x27;beforeend&#x27;</span>, section);</span><br><span class="line">    that.<span class="title function_">init</span>();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-5删除"><a href="#3-5删除" class="headerlink" title="3.5删除"></a>3.5删除</h3><ul>
+<li><p>为元素的删除按钮x绑定点击事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">remove</span>[i].<span class="property">onclick</span> = <span class="variable language_">this</span>.<span class="property">removeTab</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取到点击的删除按钮的所在的父元素的所有,删除对应的标题与内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">removeTab</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">stopPropagation</span>(); <span class="comment">// 阻止冒泡 防止触发li 的切换点击事件</span></span><br><span class="line">    <span class="keyword">var</span> index = <span class="variable language_">this</span>.<span class="property">parentNode</span>.<span class="property">index</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(index);</span><br><span class="line">    <span class="comment">// 根据索引号删除对应的li 和section   remove()方法可以直接删除指定的元素</span></span><br><span class="line">    that.<span class="property">lis</span>[index].<span class="title function_">remove</span>();</span><br><span class="line">    that.<span class="property">sections</span>[index].<span class="title function_">remove</span>();</span><br><span class="line">    that.<span class="title function_">init</span>();</span><br><span class="line">    <span class="comment">// 当我们删除的不是选中状态的li 的时候,原来的选中状态li保持不变</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.liactive&#x27;</span>)) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 当我们删除了选中状态的这个li 的时候, 让它的前一个li 处于选定状态</span></span><br><span class="line">    index--;</span><br><span class="line">    <span class="comment">// 手动调用我们的点击事件  不需要鼠标触发</span></span><br><span class="line">    that.<span class="property">lis</span>[index] &amp;&amp; that.<span class="property">lis</span>[index].<span class="title function_">click</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-6编辑"><a href="#3-6编辑" class="headerlink" title="3.6编辑"></a>3.6编辑</h3><ul>
+<li><p>为元素(标题与内容)绑定双击事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">spans</span>[i].<span class="property">ondblclick</span> = <span class="variable language_">this</span>.<span class="property">editTab</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">sections</span>[i].<span class="property">ondblclick</span> = <span class="variable language_">this</span>.<span class="property">editTab</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在双击事件处理文本选中状态,修改内部DOM节点,实现新旧value值的传递</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">editTab</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> str = <span class="variable language_">this</span>.<span class="property">innerHTML</span>;</span><br><span class="line">    <span class="comment">// 双击禁止选定文字</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">getSelection</span> ? <span class="variable language_">window</span>.<span class="title function_">getSelection</span>().<span class="title function_">removeAllRanges</span>() : 				    <span class="variable language_">document</span>.<span class="property">selection</span>.<span class="title function_">empty</span>();</span><br><span class="line">    <span class="comment">// alert(11);</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">innerHTML</span> = <span class="string">&#x27;&lt;input type=&quot;text&quot; /&gt;&#x27;</span>;</span><br><span class="line">      <span class="keyword">var</span> input = <span class="variable language_">this</span>.<span class="property">children</span>[<span class="number">0</span>];</span><br><span class="line">      input.<span class="property">value</span> = str;</span><br><span class="line">      input.<span class="title function_">select</span>(); <span class="comment">// 文本框里面的文字处于选定状态</span></span><br><span class="line">      <span class="comment">// 当我们离开文本框就把文本框里面的值给span </span></span><br><span class="line">      input.<span class="property">onblur</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">parentNode</span>.<span class="property">innerHTML</span> = <span class="variable language_">this</span>.<span class="property">value</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="comment">// 按下回车也可以把文本框里面的值给span</span></span><br><span class="line">      input.<span class="property">onkeyup</span> = <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (e.<span class="property">keyCode</span> === <span class="number">13</span>) &#123;</span><br><span class="line">      <span class="comment">// 手动调用表单失去焦点事件  不需要鼠标离开操作</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">blur</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89/" title="Js之面向对象笔记（十）" target="_blank" rel="external">http://example.com/2022/04/03/Js之面向对象笔记（十）/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">时间路人</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/" title="Js之面向对象笔记（十一）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/04/03/Js%E4%B9%8BjQuery%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/" title="Js之jQuery笔记（九）"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
