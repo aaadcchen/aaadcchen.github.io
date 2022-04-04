@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>C语言基础题 | 星辰的博客</title>
+  <meta name="description" content="123456789101112131415161718192021222324252627282930目录1.阶乘2.最大数3.平行四边形4.素数5.最大公约数6.[m,n]区间的所有素数7.n行等边三角形8.回文数9.鸡兔同笼10.水仙花数11.求所有小于等于n(n&lt;100)的与7无关的正整数的平方和12.判断字符13.数字的顺序进行排列14.谁能出线15.n个数的平均值16.n个数的平均">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言基础题">
+<meta property="og:url" content="http://example.com/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930目录1.阶乘2.最大数3.平行四边形4.素数5.最大公约数6.[m,n]区间的所有素数7.n行等边三角形8.回文数9.鸡兔同笼10.水仙花数11.求所有小于等于n(n&lt;100)的与7无关的正整数的平方和12.判断字符13.数字的顺序进行排列14.谁能出线15.n个数的平均值16.n个数的平均">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-04T16:06:45.000Z">
+<meta property="article:modified_time" content="2022-04-04T16:14:14.077Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">时间路人</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/Java/">Java</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MATLAB/">MATLAB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MATLAB/" rel="tag">MATLAB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/MATLAB/" style="font-size: 13.33px;">MATLAB</a> <a href="/tags/css/" style="font-size: 13.67px;">css</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">测试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" class="title">C++版基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-04T16:11:37.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/" class="title">C语言基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-04T16:06:45.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/JavaScript/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8BVue%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89/" class="title">Js之Vue笔记（十六）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T04:02:15.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/JavaScript/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8BAjax%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89/" class="title">Js之Ajax笔记（十五）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T03:09:42.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/" class="title">Js之面向对象笔记（十四）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T03:02:36.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-C语言基础题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C语言基础题
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/" class="article-date">
+	  <time datetime="2022-04-04T16:06:45.000Z" itemprop="datePublished">2022-04-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/" class="leancloud_visitors"  data-flag-title="C语言基础题">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 22(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">目录</span><br><span class="line">1.阶乘</span><br><span class="line">2.最大数</span><br><span class="line">3.平行四边形</span><br><span class="line">4.素数</span><br><span class="line">5.最大公约数</span><br><span class="line">6.[m,n]区间的所有素数</span><br><span class="line">7.n行等边三角形</span><br><span class="line">8.回文数</span><br><span class="line">9.鸡兔同笼</span><br><span class="line">10.水仙花数</span><br><span class="line">11.求所有小于等于n(n&lt;100)的与7无关的正整数的平方和</span><br><span class="line">12.判断字符</span><br><span class="line">13.数字的顺序进行排列</span><br><span class="line">14.谁能出线</span><br><span class="line">15.n个数的平均值</span><br><span class="line">16.n个数的平均值</span><br><span class="line">17.字符串相连</span><br><span class="line">18.字符串回文</span><br><span class="line">函数</span><br><span class="line">19.四舍五入（保留2位小数）</span><br><span class="line">20.求两个整数的最大公约数和最小公倍数</span><br><span class="line">21.求出数组中所有素数之和</span><br><span class="line">22.将a的十位和个位依次存放在c数的十位和千位上，b的十位和个位依次存放在c数的个位和百位上</span><br><span class="line">结构体</span><br><span class="line">23.顺序输出总分最低的学生信息</span><br><span class="line">24.分别输出工资变化之前和之后的所有职工的信息</span><br><span class="line">25.按学号顺序排序输出后在输入要统计的院系名称</span><br><span class="line">26.将该学生的各科成绩都乘以一个系数a</span><br><span class="line">27.把指定分数范围内的学生数据放在h所指的数组中，分数范围内的学生人数由函数值返回</span><br></pre></td></tr></table></figure>
+
+<p>1.计算一个整数N的阶乘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,sum=1,i=1;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(n;n&lt;=12&amp;&amp;n&gt;0;n--)</span><br><span class="line">        sum=sum*n;</span><br><span class="line">    printf(&quot;%d&quot;,sum);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.最大数 输入若干个整数,以-1标记输入结束。输出其中的最大数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">        int a,b;</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;a);</span><br><span class="line">        b=a;</span><br><span class="line">        while(a != -1)</span><br><span class="line">        &#123;</span><br><span class="line">         scanf(&quot;%d&quot;,&amp;a);</span><br><span class="line">                if(a&gt;b&amp;&amp;a!=-1)</span><br><span class="line">          b=a;   </span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.平行四边形 输入图形的每行有n个星号，高 n ，输出对应的图形 .</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,a,b;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;a);</span><br><span class="line">    for(i=0;i&lt;a;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(j=0;j&lt;i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot; &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        for(b=0;b&lt;a;b++)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;*&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.求素数。输入一个数n，判断其是否为素数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=2;i&lt;n;i++)</span><br><span class="line">   &#123;     </span><br><span class="line">   	     if(n%i==0)</span><br><span class="line">         break;</span><br><span class="line">   &#125;</span><br><span class="line">     if(n==i)</span><br><span class="line">        printf(&quot;y\n&quot;);</span><br><span class="line">        else</span><br><span class="line">        printf(&quot;n\n&quot;);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.【循环】最大公约数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int m,n,a,b,c;</span><br><span class="line">    scanf(&quot;%d%d&quot;,&amp;m,&amp;n);</span><br><span class="line">    if(m&lt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        c=m;</span><br><span class="line">        m=n;</span><br><span class="line">        n=c;</span><br><span class="line">    &#125;</span><br><span class="line">    b=m*n;</span><br><span class="line">    a=m%n;</span><br><span class="line">    while(a!=0)</span><br><span class="line">    &#123;</span><br><span class="line">        m=n;</span><br><span class="line">        n=a;</span><br><span class="line">        a=m%n;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;the greatest common divisor is %d\n&quot;,n);</span><br><span class="line">    printf(&quot;the least common multiple is %d\n&quot;,b/n);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6.输入两个正整数m和n，求出[m,n]区间的所有素数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m,i,j,flag=1;</span><br><span class="line">    scanf(&quot;%d %d&quot;,&amp;m,&amp;n);</span><br><span class="line">    for(i=m;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">     flag=1;</span><br><span class="line">     for(j=2;j&lt;i;j++)</span><br><span class="line">     &#123;</span><br><span class="line">     if(i%j==0)</span><br><span class="line">      &#123;</span><br><span class="line">       flag=0;</span><br><span class="line">       break;</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">      if(flag==1)</span><br><span class="line">      printf(&quot;%d &quot;,i);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7.输入整数n，打印出n行等边三角形</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i,j,k;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    for(k=1;k&lt;=n-i;k++)</span><br><span class="line">        printf(&quot; &quot;);</span><br><span class="line">    for(j=1;j&lt;=2*i-1;j++)</span><br><span class="line">        printf(&quot;*&quot;);</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>8.回文数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,a,k=0,m;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    m=n;</span><br><span class="line">   while(n!=0)</span><br><span class="line">    &#123;</span><br><span class="line">      a=n%10;</span><br><span class="line">      k=k*10+a;</span><br><span class="line">      n=n/10;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    if(m==k)</span><br><span class="line">      printf(&quot;Yes&quot;);</span><br><span class="line">    else</span><br><span class="line">     printf(&quot;No&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9.鸡和兔关在一个笼子里，鸡有2只脚，兔有4只脚，没有例外。已知现在可以看到笼子里m个头和n只脚，求鸡和兔子各有多少只？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m,c,r,flag;</span><br><span class="line">    scanf(&quot;%d %d&quot;,&amp;m,&amp;n);</span><br><span class="line">    for(c=0;c&lt;=m;c++)</span><br><span class="line">    &#123;</span><br><span class="line">       for(r=0;r&lt;=m;r++)</span><br><span class="line">       &#123;</span><br><span class="line">        if(r+c==m&amp;&amp;c*2+r*4==n)</span><br><span class="line">        printf(&quot;%d %d&quot;,c,r);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>10.输出所有的水仙花数。所谓的水仙花数是指一个3位数，其各位数字立方和等于该数本身。例如153是一水仙花数， 如153&#x3D;13+53+33</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,a,b,c;</span><br><span class="line">    for(n=100;n&lt;=999;n++)</span><br><span class="line">    &#123;</span><br><span class="line">        a=n/100;</span><br><span class="line">        b=n/10%10;</span><br><span class="line">        c=n%10;</span><br><span class="line">    if(a*a*a+b*b*b+c*c*c==n)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%d\n&quot;,n);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>11.一个正整数，如果它能被7整除，或者它的十进制表示法中某一位上的数字为7，则称其为与7相关的数。求所有小于等于n(n&lt;100)的与7无关的正整数的平方和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i,sum=0,j;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    if(i/10!=7&amp;&amp;i%10!=7&amp;&amp;i%7!=0)</span><br><span class="line">    &#123;</span><br><span class="line">         sum=sum+i*i;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;,sum);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>12.编写程序，从键盘输入一个字符，输出字符所属的类型：大写字母时输出capital letters， 小写字母时输出small letters，数字是输出figures,其他字符时输出 others。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char a;</span><br><span class="line">    scanf(&quot;%c&quot;,&amp;a);</span><br><span class="line">    if(a&gt;=&#x27;A&#x27;&amp;&amp;a&lt;=&#x27;Z&#x27;)</span><br><span class="line">    printf(&quot;capital letters&quot;);</span><br><span class="line">    else if(a&gt;=&#x27;a&#x27;&amp;&amp;a&lt;=&#x27;z&#x27;)</span><br><span class="line">    printf(&quot;small letters&quot;);</span><br><span class="line">    else if(a&gt;=&#x27;0&#x27;&amp;&amp;a&lt;=&#x27;9&#x27;)</span><br><span class="line">         printf(&quot;figures&quot;);</span><br><span class="line">    else</span><br><span class="line">        printf(&quot;others&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>13.将十个数进行从大到小的顺序进行排列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[10],b,i,t;</span><br><span class="line">    for(i=0;i&lt;10;i++)</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">    for(i=0;i&lt;9;i++)</span><br><span class="line">    for(b=i+1;b&lt;10;b++)</span><br><span class="line">    if(a[b]&gt;a[i])</span><br><span class="line">        &#123;</span><br><span class="line">        t=a[b];</span><br><span class="line">        a[b]=a[i];</span><br><span class="line">        a[i]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    for(i=0;i&lt;10;i++)</span><br><span class="line">    printf(&quot;%d &quot;,a[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>14.电视台举办“超级学生”才艺大赛，由于报名人数狂多，所以要先进行分组预赛。按规定，每10名学生为一个预赛小组，评委打出分数（0~100分），各小组第一名可以进入下一轮；如果有多名学生得分相同都是第一名，则可同时进入下一轮。</p>
+<p>输入描述</p>
+<p>按顺序给出一个小组10个人的最后得分（int）。</p>
+<p>输出描述</p>
+<p>能够出线的学生序号（0~9），多名学生时，每行输出一个序号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[10],b,c=0,i,m;</span><br><span class="line">    for(i=0;i&lt;10;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d\n&quot;,&amp;a[i]);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        for(i=0;i&lt;10;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(a[i]&gt;=c)</span><br><span class="line">       c=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        m=c;</span><br><span class="line">      for(b=0;b&lt;10;b++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(a[b]==m)</span><br><span class="line">            printf(&quot;%d\n&quot;,b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>16.题目描述</p>
+<p>输入n个数，求n个数的平均值（5&lt;&#x3D;n&lt;&#x3D;10）</p>
+<p>输入描述</p>
+<p>第一行输入n的值，第二行输入n个数</p>
+<p>输出描述</p>
+<p>分两行输出平均值和低于平均值的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i,t=0,b=0;</span><br><span class="line">    float y;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    int a[n];</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t=t+a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    y=(float)t/n;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">        if(a[i]&lt;y)</span><br><span class="line">        b=b+1;</span><br><span class="line">    printf(&quot;average=%.2f\n&quot;,y);</span><br><span class="line">    printf(&quot;%d&quot;,b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>17.将两个字符串按照要求进行首尾相连，即：将一个字符串链接到另一个字符串尾部，并输出。</p>
+<p>输入描述</p>
+<p>输入两行字符串</p>
+<p>输出描述</p>
+<p>输出一行连接后的字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int i,m,n;</span><br><span class="line">    char a[100],b[100],c[100];</span><br><span class="line">    gets(a);</span><br><span class="line">    gets(b);</span><br><span class="line">    n=strlen(a);</span><br><span class="line">    m=strlen(b);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">        printf(&quot;%c&quot;,a[i]);</span><br><span class="line">    for(i=0;i&lt;m;i++)</span><br><span class="line">        printf(&quot;%c&quot;,b[i]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>18.题目描述</p>
+<p>编程，输入一个字符串，输出该字符串是否回文。</p>
+<p>关于输入<br>输入为一行字符串（字符串中没有空白字符，字符串长度不超过100）。</p>
+<p>关于输出<br>如果字符串是回文，输出yes；否则，输出no。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char a[100];</span><br><span class="line">    int n,i,flag;</span><br><span class="line">    gets(a);</span><br><span class="line">    n=strlen(a);</span><br><span class="line">    for(i=0;i&lt;=n/2;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        flag=0;</span><br><span class="line">       if(a[i]!=a[n-i-1])</span><br><span class="line">       &#123;</span><br><span class="line">            flag=1;</span><br><span class="line">            break;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(flag=0)</span><br><span class="line">        printf(&quot;yes&quot;);</span><br><span class="line">    else</span><br><span class="line">        printf(&quot;no&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>19.请编一个函数Fun，函数的功能是使实型数保留2位小数，并对第3位进行四舍五入（规定实型数为正数）<br>例如：实型数为1234.567，则函数返回1234.570000<br>      实型数为1234.564，则函数返回1234.560000</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">double fun(double x)</span><br><span class="line">&#123;</span><br><span class="line">	double y,m;</span><br><span class="line">	y=(int)(x*100+0.5);</span><br><span class="line">	m=y/100;</span><br><span class="line">	return m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;   </span><br><span class="line">    double  a;</span><br><span class="line">    scanf ( &quot;%lf&quot;, &amp;a );</span><br><span class="line">    printf ( &quot;%f\n&quot;, fun ( a ) );</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>20.写两个函数，分别求两个整数的最大公约数和最小公倍数。用主函数分别调用这两个函数，并输出结果。</p>
+<p>输入描述</p>
+<p>两个用空格隔开的正整数，保证二者的值均不超过10000。</p>
+<p>输出描述</p>
+<p>输出两个正整数的最大公约数和最小公倍数，用空格隔开。<br>请注意行尾输出换行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int max(int a,int b);</span><br><span class="line">int min(int a,int b);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">   int a,b;</span><br><span class="line">   scanf(&quot;%d %d&quot;,&amp;a,&amp;b);</span><br><span class="line">   printf(&quot;%d %d\n&quot;,max(a,b),min(a,b));</span><br><span class="line">&#125;</span><br><span class="line">int max(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	int m;</span><br><span class="line">	m=x%y;</span><br><span class="line">	while(m!=0)</span><br><span class="line">	&#123;</span><br><span class="line">	x=y;</span><br><span class="line">	y=m;</span><br><span class="line">	m=x%y;</span><br><span class="line">	&#125;</span><br><span class="line">	return y;</span><br><span class="line">&#125;</span><br><span class="line">int min(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	int m;</span><br><span class="line">	m=x*y/max(x,y);</span><br><span class="line">	return m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>21.请编一个函数 Fun，函数的功能是分别求出数组中所有素数之和。形参 n 给了数组中数据的个数：利用指针 prime 返回素数之和。<br>例如：数组中的值依次为： 5， 8 ， 76 ， 3 ， 11 ， 6 ；则利用指针 prime 返回素数之和 19。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">注意：本题只需提交Fun函数即可，还可以编写一个判断是否素数的函数，在Fun()里调用**</span><br><span class="line"></span><br><span class="line">**int main()</span><br><span class="line">&#123; </span><br><span class="line">  int a[N],i,n,prime;</span><br><span class="line">  scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">  for(i=0;i&lt;n;i++) </span><br><span class="line">    scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">  Fun(a,n,&amp;prime);</span><br><span class="line">  printf(&quot;The sum of prime numbers:%d\n&quot;,prime);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void Fun(int a[],int n,int *x)</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,c=0;</span><br><span class="line">    *x=0;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c=0;</span><br><span class="line">        for(j=2;j&lt;a[i];j++)</span><br><span class="line">            if(a[i]%j==0)</span><br><span class="line">               &#123;</span><br><span class="line">                   c=1;break;</span><br><span class="line">               &#125;</span><br><span class="line">        if(c==0)</span><br><span class="line">            *x+=a[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[999],i,n,prime;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">    Fun(a,n,&amp;prime);</span><br><span class="line">    printf(&quot;The sum of prime numbers:%d\n&quot;,prime);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>22.编写函数Fun，其功能是将两个两位数的正整数a、b合并形成一个整数放在c中。合并的方式是：将a的十位和个位依次存放在c数的十位和千位上，b的十位和个位依次存放在c数的个位和百位上。</p>
+<p>输入描述</p>
+<p>仅一行。两个整数a和b，以逗号分隔。</p>
+<p>输出描述</p>
+<p>仅一行。一个整数，表示合并后的数据c。</p>
+<p>样例输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45,12</span><br></pre></td></tr></table></figure>
+
+<p>样例输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5241</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void Fun(int a,int b,int *x)</span><br><span class="line">&#123;</span><br><span class="line">    *x=a%10*1000+b%10*100+a/10*10+b/10;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,c;</span><br><span class="line">    scanf(&quot;%d,%d&quot;,&amp;a,&amp;b);</span><br><span class="line">    Fun(a,b,&amp;c);</span><br><span class="line">    printf(&quot;%d\n&quot;,c);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>23.上小学的小红刚考完期末考试，拿到成绩的她迫切想知道自己的成绩如何，你能帮帮她吗？</p>
+<p>输入描述</p>
+<p>有多行。第1行是一个整数n（1≤n≤100）表示有n位同学。接下来有n行，每行表示一位同学的相关信息，依次是姓名（姓名中不包含空格，长度不超过20）、语文成绩、数学成绩、英语成绩，三门课程的成绩均为整数（0≤成绩≤100）。</p>
+<p>输出描述</p>
+<p>仅1行，按照学生姓名、语文、数学、英语成绩和三门课的总分的顺序输出总分最低的学生信息（数据能确保所有学生的总分成绩不会出现相同的情况）。</p>
+<p>样例输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">Xiaoli 65 45 87</span><br><span class="line">Xiaohong 78 89 93</span><br><span class="line">Xiaozhang 87 67 54</span><br></pre></td></tr></table></figure>
+
+<p>样例输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Xiaoli 65 45 87 197</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">struct student</span><br><span class="line">&#123;</span><br><span class="line">    char name[30];</span><br><span class="line">    int a;</span><br><span class="line">    int b;</span><br><span class="line">    int c;</span><br><span class="line">    int d;</span><br><span class="line">&#125;;</span><br><span class="line">struct student stu[50];</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,x,i,t;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       scanf(&quot;%s%d%d%d&quot;,stu[i].name,&amp;stu[i].a,&amp;stu[i].b,&amp;stu[i].c);</span><br><span class="line">       stu[i].d=stu[i].a+stu[i].b+stu[i].c;</span><br><span class="line">    &#125;</span><br><span class="line">    x=stu[0].d;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(stu[i].d&lt;=x)</span><br><span class="line">            x=stu[i].d;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">        if(stu[i].d==x)</span><br><span class="line">        t=i;</span><br><span class="line">    printf(&quot;%s %d %d %d %d&quot;,stu[t].name,stu[t].a,stu[t].b,stu[t].c,stu[t].d);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>24.题目描述</p>
+<p>编写程序，定义一个存放职工信息的结构体类型，职工信息包括职工姓名、工作年限、工资总额。初始化5名职工的信息，对工作年限超过30年的职工每人加100元工资，要求分别输出工资变化之前和之后的所有职工的信息。</p>
+<p>输入描述</p>
+<p>输入5个员工的职工姓名、工作年限、工资总额</p>
+<p>输出描述</p>
+<p>输出两部分，第一部分输出工资变化之前所有职工的信息，第二部分输出工资变化之后的所有职工的信息</p>
+<p>样例输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zhang1 5 1000 </span><br><span class="line">zhang2 10 2000 </span><br><span class="line">zhang3 20 3000 </span><br><span class="line">zhang4 40 4000 </span><br><span class="line">zhang5 50 5000 </span><br></pre></td></tr></table></figure>
+
+<p>样例输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">原始工资</span><br><span class="line">姓名 年限 工资</span><br><span class="line">zhang1 5 1000</span><br><span class="line">zhang2 10 2000</span><br><span class="line">zhang3 20 3000</span><br><span class="line">zhang4 40 4000</span><br><span class="line">zhang5 50 5000</span><br><span class="line">加薪后工资</span><br><span class="line">姓名 年限 工资</span><br><span class="line">zhang1 5 1000</span><br><span class="line">zhang2 10 2000</span><br><span class="line">zhang3 20 3000</span><br><span class="line">zhang4 40 4100</span><br><span class="line">zhang5 50 5100</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">struct student</span><br><span class="line">&#123;</span><br><span class="line">    char name[30];</span><br><span class="line">    int years;</span><br><span class="line">    int sum;</span><br><span class="line">&#125;;</span><br><span class="line">struct student stu[5];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       scanf(&quot;%s%d%d&quot;,stu[i].name,&amp;stu[i].years,&amp;stu[i].sum);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;原始工资\n&quot;);</span><br><span class="line">    printf(&quot;姓名 年限 工资\n&quot;);</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">        &#123;</span><br><span class="line">        printf(&quot;%s %d %d\n&quot;,stu[i].name,stu[i].years,stu[i].sum);</span><br><span class="line">        &#125;</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(stu[i].years&gt;=30)</span><br><span class="line">            stu[i].sum=stu[i].sum+100;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;加薪后工资\n&quot;);</span><br><span class="line">    printf(&quot;姓名 年限 工资\n&quot;);</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">        &#123;</span><br><span class="line">        printf(&quot;%s %d %d\n&quot;,stu[i].name,stu[i].years,stu[i].sum);</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>25.输入描述</p>
+<p>先输入5名学生的信息，按学号顺序排序输出后在输入要统计的院系名称</p>
+<p>输出描述</p>
+<p>先按学号从小到大的顺序输出学生信息</p>
+<p>样例输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zhang3 20149003 M 信息系</span><br><span class="line">zhang5 20149005 F 信息系</span><br><span class="line">zhang10 20149010 F 管理系</span><br><span class="line">zhang1 20149001 M 会计系</span><br><span class="line">zhang9 20149009 M 会计系</span><br></pre></td></tr></table></figure>
+
+<p>样例输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zhang1 20149001 M 会计系</span><br><span class="line">zhang3 20149003 M 信息系</span><br><span class="line">zhang5 20149005 F 信息系</span><br><span class="line">zhang9 20149009 M 会计系</span><br><span class="line">zhang10 20149010 F 管理系</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">struct Student</span><br><span class="line">&#123;</span><br><span class="line">    char name[20]; </span><br><span class="line">    long num; </span><br><span class="line">    char sex; </span><br><span class="line">    char dept[20]; </span><br><span class="line">&#125;;</span><br><span class="line">struct Student stu[40];</span><br><span class="line">int main( )</span><br><span class="line">&#123;</span><br><span class="line">    struct Student tmp;</span><br><span class="line">    int i,j;</span><br><span class="line">    for(i=0; i&lt;5; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%s %ld %c %s&quot;,stu[i].name, &amp;stu[i].num,&amp;stu[i].sex, stu[i].dept);</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">        for(j=0;j&lt;4-i;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(stu[j].num&gt;stu[j+1].num)</span><br><span class="line">            &#123;</span><br><span class="line">                tmp=stu[j];</span><br><span class="line">                stu[j]=stu[j+1];</span><br><span class="line">                stu[j+1]=tmp;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0; i&lt;5; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%s %ld %c %s\n&quot;,stu[i].name, stu[i].num,stu[i].sex,stu[i].dept);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>26.给定程序通过定义并赋初值的方式，利用结构体变量存储了一名学生的学号、姓名和3门课的成绩。函数fun的功能是将该学生的各科成绩都乘以一个系数a。 请在程序的下划线处填入正确的内容并把下划线删除，使程序得出正确的结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">int num;</span><br><span class="line">char name[9];</span><br><span class="line">float score[3];</span><br><span class="line">&#125;STU;</span><br><span class="line">void show(STU tt)</span><br><span class="line">&#123;</span><br><span class="line">int i;</span><br><span class="line">printf(&quot;%d %s : &quot;,tt.num,tt.name);</span><br><span class="line">for(i=0; i&lt;3; i++)</span><br><span class="line">printf(&quot;%5.1f&quot;,tt.score[i]);</span><br><span class="line">printf(&quot;\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">int main( )</span><br><span class="line">&#123;</span><br><span class="line">STU std=&#123; 1,&quot;Zhanghua&quot;,76.5,78.0,82.0 &#125;;</span><br><span class="line">float a;</span><br><span class="line">scanf(&quot;%f&quot;,&amp;a);</span><br><span class="line">for(int i=0;i&lt;3;i++)</span><br><span class="line">&#123;</span><br><span class="line">	std.score[i] *=a;</span><br><span class="line">&#125;</span><br><span class="line">show(std);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>27.学生的记录由学号和成绩组成，N名学生的数据已在主函数中放入结构体数组s中, 请编写函数fun，它的功能是：把指定分数范围内的学生数据放在h所指的数组中，分数范围内的学生人数由函数值返回。</p>
+<p>例如，输入的分数是60 69, 则应当把分数在60到69的学生数据进行输出，包含60分和69分的学生数据。主函数中将把60放在low中，把69放在heigh中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#define N 16</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">char num[10];</span><br><span class="line">int s;</span><br><span class="line">&#125; STREC;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">STREC s[N]=&#123;&#123;&quot;GA005&quot;,85&#125;,&#123;&quot;GA003&quot;,76&#125;,&#123;&quot;GA002&quot;,69&#125;,&#123;&quot;GA004&quot;,85&#125;,&#123;&quot;GA001&quot;,96&#125;,&#123;&quot;GA007&quot;,72&#125;,&#123;&quot;GA008&quot;,64&#125;,&#123;&quot;GA006&quot;,87&#125;,&#123;&quot;GA015&quot;,85&#125;,&#123;&quot;GA013&quot;,94&#125;,&#123;&quot;GA012&quot;,64&#125;,&#123;&quot;GA014&quot;,91&#125;,&#123;&quot;GA011&quot;,90&#125;,&#123;&quot;GA017&quot;,64&#125;,&#123;&quot;GA018&quot;,64&#125;,&#123;&quot;GA016&quot;,72&#125;&#125;;</span><br><span class="line">STREC h[N];</span><br><span class="line">int i,n,low,heigh,t;</span><br><span class="line">scanf(&quot;%d%d&quot;, &amp;low,&amp;heigh);</span><br><span class="line">if ( heigh &lt; low )</span><br><span class="line">&#123;</span><br><span class="line">t=heigh;</span><br><span class="line">heigh=low;</span><br><span class="line">low=t;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;The student&#x27;s data between %d--%d :\n&quot;,low,heigh);</span><br><span class="line">for(int i=0;i&lt;N;i++)</span><br><span class="line">&#123;</span><br><span class="line">	if(s[i].s&gt;=low&amp;&amp;s[i].s&lt;=heigh)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %4d\n&quot;,s[i].num,s[i].s);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/" title="C语言基础题" target="_blank" rel="external">http://example.com/2022/04/05/C语言基础题/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">时间路人</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" title="C++版基础题"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/04/03/Js%E4%B9%8BVue%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89/" title="Js之Vue笔记（十六）"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

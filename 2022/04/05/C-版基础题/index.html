@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>C++版基础题 | 星辰的博客</title>
+  <meta name="description" content="12345678910111213141516目录1.用C++实现日历功能2.用C++实现计算器功能3.编写C++程序解决百钱问题4.C++程序实现函数重载5.引用实现排序输出6.定义一个Dog类，包含age, weight等数据成员7.计算矩形面积8.计算圆的周长和面积9.对象数组求解问题10. 对象指针及其使用11.This指针及其用法12.静态成员的用法13.游泳池改造预算14.类的组合应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++版基础题">
+<meta property="og:url" content="http://example.com/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="12345678910111213141516目录1.用C++实现日历功能2.用C++实现计算器功能3.编写C++程序解决百钱问题4.C++程序实现函数重载5.引用实现排序输出6.定义一个Dog类，包含age, weight等数据成员7.计算矩形面积8.计算圆的周长和面积9.对象数组求解问题10. 对象指针及其使用11.This指针及其用法12.静态成员的用法13.游泳池改造预算14.类的组合应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-04T16:11:37.000Z">
+<meta property="article:modified_time" content="2022-04-04T16:12:28.827Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">时间路人</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/Java/">Java</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MATLAB/">MATLAB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MATLAB/" rel="tag">MATLAB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/MATLAB/" style="font-size: 13.33px;">MATLAB</a> <a href="/tags/css/" style="font-size: 13.67px;">css</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">测试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" class="title">C++版基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-04T16:11:37.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/" class="title">C语言基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-04T16:06:45.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/JavaScript/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8BVue%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89/" class="title">Js之Vue笔记（十六）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T04:02:15.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/JavaScript/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8BAjax%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89/" class="title">Js之Ajax笔记（十五）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T03:09:42.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/03/Js%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/" class="title">Js之面向对象笔记（十四）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-03T03:02:36.000Z" itemprop="datePublished">2022-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-C-版基础题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++版基础题
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" class="article-date">
+	  <time datetime="2022-04-04T16:11:37.000Z" itemprop="datePublished">2022-04-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" class="leancloud_visitors"  data-flag-title="C++版基础题">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 13(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">目录</span><br><span class="line">1.用C++实现日历功能</span><br><span class="line">2.用C++实现计算器功能</span><br><span class="line">3.编写C++程序解决百钱问题</span><br><span class="line">4.C++程序实现函数重载</span><br><span class="line">5.引用实现排序输出</span><br><span class="line">6.定义一个Dog类，包含age, weight等数据成员</span><br><span class="line">7.计算矩形面积</span><br><span class="line">8.计算圆的周长和面积</span><br><span class="line">9.对象数组求解问题</span><br><span class="line">10. 对象指针及其使用</span><br><span class="line">11.This指针及其用法</span><br><span class="line">12.静态成员的用法</span><br><span class="line">13.游泳池改造预算</span><br><span class="line">14.类的组合应用</span><br><span class="line">15.友元函数的应用</span><br></pre></td></tr></table></figure>
+
+<p>1.用C++实现日历功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;iostream&quot;</span><br><span class="line">using namespace std;</span><br><span class="line">class date</span><br><span class="line">&#123;</span><br><span class="line">int year,month,day;</span><br><span class="line">public:</span><br><span class="line">void setdate(int yy,int mm,int dd)</span><br><span class="line">&#123;year=yy;month=mm;day=dd;&#125;</span><br><span class="line">void showdate()</span><br><span class="line">&#123;cout&lt;&lt;year&lt;&lt;&#x27;-&#x27;&lt;&lt;month&lt;&lt;&#x27;-&#x27;&lt;&lt;day&lt;&lt;endl;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int a,b,c;</span><br><span class="line">	date dd;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">	dd.setdate(a,b,c);</span><br><span class="line">	dd.showdate();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.用C++实现计算器功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;iostream&quot;</span><br><span class="line">using namespace std;</span><br><span class="line">class caculater</span><br><span class="line">&#123;</span><br><span class="line">int a,b,d;</span><br><span class="line">char c,zz;</span><br><span class="line">public:</span><br><span class="line">void setcaculater(int yy,char mm,int dd)</span><br><span class="line">&#123;a=yy;c=mm;b=dd;&#125;</span><br><span class="line">void computer(int zz)</span><br><span class="line">&#123;</span><br><span class="line">    c=zz;</span><br><span class="line">    if(c==&#x27;+&#x27;)</span><br><span class="line">    d=a+b;</span><br><span class="line"> else if(c==&#x27;-&#x27;)</span><br><span class="line">    d=a-b;</span><br><span class="line"> else if(c==&#x27;*&#x27;)</span><br><span class="line">    d=a*b;</span><br><span class="line"> else if(c==&#x27;/&#x27;)</span><br><span class="line">    d=a/b;&#125;</span><br><span class="line">void showcaculater()</span><br><span class="line">&#123;</span><br><span class="line">    cout&lt;&lt;a&lt;&lt;c&lt;&lt;b&lt;&lt;&quot;=&quot;&lt;&lt;d&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int a,c;</span><br><span class="line">	char b;</span><br><span class="line">	caculater dd;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">	dd.setcaculater(a,b,c);</span><br><span class="line">	dd.computer(b);</span><br><span class="line">	dd.showcaculater();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.编写C++程序解决百钱问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;iostream&quot;</span><br><span class="line">using namespace std;</span><br><span class="line">int main() &#123;</span><br><span class="line">	int count=0,n,m,a=1,b=2,c=5,temp;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	m=n*100;</span><br><span class="line">	for(int i=0; i&lt;=m/b;++i)</span><br><span class="line">        &#123;</span><br><span class="line">		for (int j=0;j&lt;=m/c;++j)</span><br><span class="line">		 &#123;</span><br><span class="line">			temp=m-(b*i+c*j);</span><br><span class="line">			if(temp&gt;=0&amp;&amp;temp%a==0)</span><br><span class="line">                &#123;</span><br><span class="line">				++count;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; &quot;将&quot;&lt;&lt;n&lt;&lt;&quot;元人民币兑换成1、2、5分的硬币，共有&quot;&lt;&lt;count&lt;&lt;&quot;种换法。&quot; ;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.C++程序实现函数重载</p>
+<p>编写一个C++风格的程序，建立一个被称为sroot()的函数，返回其参数的二次方根。重载sroot()3次，让它返回整数、长整数与双精度数的二次方根（计算二次方根时，可以使用标准库函数sqrt()）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int sroot(int);</span><br><span class="line">long sroot(long);</span><br><span class="line">double sroot(double);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">         int i,x;</span><br><span class="line">         long l,y;</span><br><span class="line">         double d,z;</span><br><span class="line">         cin&gt;&gt;i&gt;&gt;l&gt;&gt;d;</span><br><span class="line">         x=sroot(i);</span><br><span class="line">         y=sroot(l);</span><br><span class="line">         z=sroot(d);</span><br><span class="line">         cout&lt;&lt;x&lt;&lt;&#x27;,&#x27;&lt;&lt;y&lt;&lt;&#x27;,&#x27;&lt;&lt;z&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br><span class="line">int sroot(int n) &#123;</span><br><span class="line">	return sqrt(n);</span><br><span class="line">&#125;</span><br><span class="line">long sroot(long n) &#123;</span><br><span class="line">	return sqrt(n);</span><br><span class="line">&#125;</span><br><span class="line">double sroot(double n) &#123;</span><br><span class="line">	return sqrt(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.引用实现排序输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">void swap(int &amp;x,int &amp;y);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">         int a,b;</span><br><span class="line">         cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">         swap(a,b);</span><br><span class="line">         cout&lt;&lt;a&lt;&lt;&#x27;,&#x27;&lt;&lt;b&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int &amp;x,int &amp;y)</span><br><span class="line">&#123;</span><br><span class="line">	int t;</span><br><span class="line">	if(x&gt;y)</span><br><span class="line">	&#123;</span><br><span class="line">		t=x;</span><br><span class="line">	x=y;</span><br><span class="line">	y=t;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6.定义一个Dog类，包含age, weight等数据成员，以及对这些数据成员操作的方法。实现并测试这个类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class Dog</span><br><span class="line">&#123;</span><br><span class="line">     int Age,Weight;</span><br><span class="line">     public: Dog(int a,int b)</span><br><span class="line">     &#123;</span><br><span class="line">     	Age=a,Weight=b;</span><br><span class="line">     &#125;</span><br><span class="line">     int getAge()</span><br><span class="line">     &#123;</span><br><span class="line">     	return Age;</span><br><span class="line">     &#125;</span><br><span class="line">     int getWeight()</span><br><span class="line">     &#123;</span><br><span class="line">     	return Weight;</span><br><span class="line">     &#125;</span><br><span class="line">     void setAge(int x)</span><br><span class="line">     &#123;</span><br><span class="line">     	Age=x;</span><br><span class="line">     &#125;</span><br><span class="line">     void setWeight(int y)</span><br><span class="line">     &#123;</span><br><span class="line">     	Weight=y;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">         Dog Jack(2,10);</span><br><span class="line"></span><br><span class="line">         cout&lt;&lt;&quot;Jack is a Dog who is &quot;;</span><br><span class="line"></span><br><span class="line">         cout&lt;&lt;Jack.getAge()&lt;&lt;&quot; years old and &quot;&lt;&lt;Jack.getWeight()&lt;&lt;&quot; pounds weight&quot;&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">         Jack.setAge(7);</span><br><span class="line"></span><br><span class="line">         Jack.setWeight(20);</span><br><span class="line"></span><br><span class="line">         cout&lt;&lt;&quot;Now Jack is &quot;;</span><br><span class="line"></span><br><span class="line">         cout&lt;&lt;Jack.getAge()&lt;&lt;&quot; years old and &quot;&lt;&lt;Jack.getWeight()&lt;&lt;&quot; pounds weight.&quot;&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">         return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7.计算矩形面积</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class Rectangle</span><br><span class="line">&#123;</span><br><span class="line">	int x1,y1,x2,y2;</span><br><span class="line">	public:</span><br><span class="line">	Rectangle(int a,int b,int c,int d)</span><br><span class="line">	&#123;</span><br><span class="line">		x1=a,y1=b,x2=c,y2=d;</span><br><span class="line">	&#125;</span><br><span class="line">	int getArea()</span><br><span class="line">	&#123;</span><br><span class="line">		return (x1-x2)*(y2-y1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">         Rectangle rect(100,80,200,40);</span><br><span class="line">         cout&lt;&lt;&quot;Area: &quot;&lt;&lt;rect.getArea()&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>8.计算圆的周长和面积</p>
+<p>定义一个Circle类，有数据成员radius（半径）、成员函数getCircumference()计算圆的周长，成员函数getArea()计算圆的面积。在主函数中定义圆对象，通过调用成员函数计算圆的周长和面积。提示：圆周率取值3.14</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class Circle</span><br><span class="line">&#123;</span><br><span class="line">	float radius;</span><br><span class="line">	public:</span><br><span class="line">	Circle (float a)</span><br><span class="line">	&#123;</span><br><span class="line">		radius=a;</span><br><span class="line">	&#125;</span><br><span class="line">	float getCircumference()</span><br><span class="line">	&#123;</span><br><span class="line">		return 2*3.14*radius;</span><br><span class="line">	&#125;</span><br><span class="line">	float getArea()</span><br><span class="line">	&#123;</span><br><span class="line">		return 3.14*radius*radius;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">         float radius;</span><br><span class="line">         cin&gt;&gt;radius;</span><br><span class="line">         Circle c(radius);</span><br><span class="line">         cout&lt;&lt;&quot;半径为&quot;&lt;&lt;radius&lt;&lt;&quot;的圆的周长为：&quot;&lt;&lt;c.getCircumference()&lt;&lt;&quot;,面积为：&quot;&lt;&lt;c.getArea()&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9.对象数组求解问题</p>
+<p>构建一个类book，其中含有两个私有数据成员qu和price，将qu初始化为1~5，将price初始化为qu的10倍，建立一个有5个元素的数组对象。显示每个对象数组元素的qu*price值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class book</span><br><span class="line">&#123;</span><br><span class="line">	int qu,price;</span><br><span class="line">	public:</span><br><span class="line">	book(int a)</span><br><span class="line">	&#123;</span><br><span class="line">		qu=a;</span><br><span class="line">		price=10*qu;</span><br><span class="line">	&#125;</span><br><span class="line">	void print()</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;&quot;qu*price=&quot;&lt;&lt;qu*price&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line"> book b[5]=&#123;1,2,3,4,5&#125;;</span><br><span class="line"> for(int i=0;i&lt;5;i++)</span><br><span class="line">  b[i].print();</span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="10">
+<li>对象指针及其使用</li>
+</ol>
+<p>构建一个类book，其中含有两个私有数据成员qu和price，将price初始化为qu的10倍，建立一个有5个元素的数组对象，将qu初始化为6~10。<strong>要求通过对象指针访问对象数组</strong>，按相反的顺序显示每个对象数组元素的qu*price值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">class book </span><br><span class="line">&#123;   </span><br><span class="line">  int qu,price;</span><br><span class="line">public:</span><br><span class="line">  book(int i)</span><br><span class="line">  &#123;</span><br><span class="line">    qu=i;</span><br><span class="line">    price=10*i;</span><br><span class="line">  &#125;</span><br><span class="line">void print()</span><br><span class="line">&#123; cout&lt;&lt;&quot;qu*price=&quot;&lt;&lt;qu*price&lt;&lt;endl;&#125;</span><br><span class="line">&#125;; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	     int x=5;</span><br><span class="line">         book b[5]=&#123;6,7,8,9,10&#125;;</span><br><span class="line">         book *p=&amp;b[4];</span><br><span class="line">         while(x!=0)</span><br><span class="line">        &#123;</span><br><span class="line">        (*p).print();</span><br><span class="line">        p--;</span><br><span class="line">        x--;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>11.This指针及其用法</p>
+<p>构建一个类Stock，含字符数组stockcode[]及整型数据成员quan、双精度型数据成员price。</p>
+<p>构造函数含3个参数：字符数组na[]及q、p。当定义Stock的类对象时，将对象的第1个字符串参数赋值给数据成员stockcode，第2个和第3个参数分别赋给quan、price。未设置第2和第3个参数时，quan的值为1000，price的值为8.98。</p>
+<p>成员函数print没有形参，需使用this指针，显示对象数据成员的内容。假设类Stock第1个对象的三个参数分别为：”600001”，3000和5.67，第2个对象的第1个数据成员的值为”600002”，第2个和第3个数据成员的值取默认值。</p>
+<p>要求编写程序分别显示这两个对象数据成员的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class stock</span><br><span class="line">&#123;</span><br><span class="line">	int quan;</span><br><span class="line">	string stockcode;</span><br><span class="line">	double price;</span><br><span class="line">	public:</span><br><span class="line">	stock(string na,int q=1000,double p=8.98)</span><br><span class="line">	&#123;</span><br><span class="line">		stockcode=na;</span><br><span class="line">		quan=q;</span><br><span class="line">		price=p;</span><br><span class="line">	&#125;</span><br><span class="line">	void print()</span><br><span class="line">	&#123;</span><br><span class="line">		 cout&lt;&lt;stockcode&lt;&lt;endl&lt;&lt;quan&lt;&lt;endl&lt;&lt;price&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">      stock st1(&quot;600001&quot;,3000,5.67);</span><br><span class="line">      st1.print();</span><br><span class="line">      stock st2(&quot;600002&quot;);</span><br><span class="line">      st2.print();</span><br><span class="line">      return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="12">
+<li>静态成员的用法</li>
+</ol>
+<p>编写一个程序，已有若干学生的数据，包括学号、姓名、成绩，要求输入这些学生的数据并计算出学生人数和平均成绩（要求将学生人数和总成绩用静态数据成员表示）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class student</span><br><span class="line">&#123;</span><br><span class="line">      string num;</span><br><span class="line">      string name;</span><br><span class="line">      int score;</span><br><span class="line">      static double sum;</span><br><span class="line">      static int count1;</span><br><span class="line">      static double aver;</span><br><span class="line">      public:</span><br><span class="line">      student(string num1,string name1,int score1)</span><br><span class="line">&#123;</span><br><span class="line">      num=num1;</span><br><span class="line">      name=name1;</span><br><span class="line">      score=score1;</span><br><span class="line">      count1++;</span><br><span class="line">      sum+=score1;</span><br><span class="line">      aver=sum/count1;</span><br><span class="line">&#125;</span><br><span class="line">      void print()</span><br><span class="line">&#123;</span><br><span class="line">	   cout&lt;&lt;num&lt;&lt;&quot;   &quot;&lt;&lt;name&lt;&lt;&quot;   &quot;&lt;&lt;score&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">       static int get_count()</span><br><span class="line">&#123;</span><br><span class="line">       return count1;</span><br><span class="line">&#125;</span><br><span class="line">       static double get_avg()</span><br><span class="line">&#123;</span><br><span class="line">	   return aver;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">      double student::sum=0.0;</span><br><span class="line">     int student::count1=0;</span><br><span class="line">     double  student::aver=0.0;</span><br><span class="line">     int main()</span><br><span class="line">&#123;</span><br><span class="line">         student s1(&quot;201601&quot;,&quot;john&quot;,85),s2(&quot;201602&quot;,&quot;mike&quot;,90),s3(&quot;201603&quot;,&quot;june&quot;,95);</span><br><span class="line">         s1.print();</span><br><span class="line">         s2.print();</span><br><span class="line">         s3.print();</span><br><span class="line">          cout&lt;&lt;&quot;共有&quot;&lt;&lt;student::get_count()&lt;&lt;&quot;位学生，平均成绩为：&quot;&lt;&lt;student::get_avg()&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>13.游泳池改造预算</p>
+<p>一个圆形游泳池如图所示，现在需要在其周围建一个圆形过道，并在其四周围上栅栏。栅栏价格为35元&#x2F;米，过道造价为20元&#x2F;平方米。过道宽度为3米，游泳池半径由键盘输入。要求编程计算并输出过道和栅栏的造价。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b;</span><br><span class="line">    float c=3.14,x,y;</span><br><span class="line">    cin&gt;&gt;a;</span><br><span class="line">    x=(float)((a+3)*(a+3)*c-a*a*c)*20;</span><br><span class="line">    y=2*c*(a+3)*35;</span><br><span class="line">    cout&lt;&lt;&quot;Enter the radius of the pool:&quot;&lt;&lt;endl&lt;&lt;&quot;Fencing Cost is $&quot;&lt;&lt;y&lt;&lt;endl&lt;&lt;&quot;Concrete Cost is $&quot;&lt;&lt;x;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>14.类的组合应用</p>
+<p>定义一个线段类Line，实现根据起点坐标和终点坐标计算线段的长度。坐标点又包含X坐标值和Y坐标值，因此定义坐标点类Point，其对象作为线段类的数据成员。试编程实现根据坐标点计算线段长度的功能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class Point</span><br><span class="line">&#123;</span><br><span class="line">         int x,y;</span><br><span class="line">public:</span><br><span class="line">         Point(int a=0,int b=0)</span><br><span class="line">         &#123;</span><br><span class="line">                   x=a;</span><br><span class="line">                   y=b;</span><br><span class="line">         &#125;</span><br><span class="line">         Point(Point &amp;p)</span><br><span class="line">         &#123;</span><br><span class="line">                   x=p.x;</span><br><span class="line">                   y=p.y;</span><br><span class="line">         &#125;</span><br><span class="line">         int getX()</span><br><span class="line">         &#123;</span><br><span class="line">                   return x;</span><br><span class="line">         &#125;</span><br><span class="line">         int getY()</span><br><span class="line">         &#123;</span><br><span class="line">                   return y;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Line</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,c,n;</span><br><span class="line">public:</span><br><span class="line">    Line(Point pp1,Point pp2)</span><br><span class="line">    &#123;</span><br><span class="line">        a=pp1.getX();</span><br><span class="line">        b=pp1.getY();</span><br><span class="line">        c=pp2.getX();</span><br><span class="line">        n=pp2.getY();</span><br><span class="line">    &#125;</span><br><span class="line">    int getLen()</span><br><span class="line">    &#123;</span><br><span class="line">       return sqrt((c-a)*(c-a)+(n-b)*(n-b));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">         Point p1(1,1),p2(4,5);</span><br><span class="line">         Line line1(p1,p2);</span><br><span class="line">         Line line2(line1);</span><br><span class="line">         cout&lt;&lt;&quot;The length of the line1 is:&quot;&lt;&lt;line1.getLen()&lt;&lt;endl;</span><br><span class="line">         cout&lt;&lt;&quot;The length of the line2 is:&quot;&lt;&lt;line2.getLen()&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>15.友元函数的应用</p>
+<p>定义Boat与Car两个类，二者都有weight属性，定义二者的一个友元函数getTotalWeight()，计算二者的重量和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class Car;</span><br><span class="line">class Boat</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    int x;</span><br><span class="line">    Boat(int a)</span><br><span class="line">    &#123;</span><br><span class="line">        x=a;</span><br><span class="line">    &#125;</span><br><span class="line">    friend int getTotalWeight(Boat &amp;n,Car &amp;m);</span><br><span class="line">&#125;;</span><br><span class="line">class Car</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    int y;</span><br><span class="line">    Car(int b)</span><br><span class="line">    &#123;</span><br><span class="line">        y=b;</span><br><span class="line">    &#125;</span><br><span class="line">    friend int getTotalWeight(Boat &amp;n,Car &amp;m);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">int getTotalWeight(Car &amp;n,Boat &amp;m)</span><br><span class="line">&#123;</span><br><span class="line">    return (n.y+m.x);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">         Car c(4);</span><br><span class="line">         Boat b(5);</span><br><span class="line">         cout&lt;&lt;getTotalWeight(c,b)&lt;&lt;endl;</span><br><span class="line">         return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" title="C++版基础题" target="_blank" rel="external">http://example.com/2022/04/05/C-版基础题/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">时间路人</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/" title="C语言基础题"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
