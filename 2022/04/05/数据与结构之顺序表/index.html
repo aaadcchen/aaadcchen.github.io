@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>数据与结构之顺序表 | 星辰的博客</title>
+  <meta name="description" content="1234目录一，顺序表的逻辑二，顺序表的实现三，基于顺序存储结构的图书信息表的创建和输出（C++版）  一，顺序表的逻辑 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据与结构之顺序表">
+<meta property="og:url" content="http://example.com/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="1234目录一，顺序表的逻辑二，顺序表的实现三，基于顺序存储结构的图书信息表的创建和输出（C++版）  一，顺序表的逻辑 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-05T04:19:04.000Z">
+<meta property="article:modified_time" content="2022-04-05T04:22:56.483Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/Java/">Java</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MATLAB/">MATLAB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MATLAB/" rel="tag">MATLAB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.25px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.25px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/MATLAB/" style="font-size: 13.25px;">MATLAB</a> <a href="/tags/css/" style="font-size: 13.75px;">css</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">测试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.5px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%93%BE%E8%A1%A8/" class="title">数据与结构之链表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-05T04:19:26.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/" class="title">数据与结构之顺序表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-05T04:19:04.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98-1/" class="title">C#版基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-05T04:18:29.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/Java%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" class="title">Java版基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-05T04:18:07.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98/" class="title">C++版基础题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-04T16:11:37.000Z" itemprop="datePublished">2022-04-05</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-数据与结构之顺序表" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据与结构之顺序表
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/" class="article-date">
+	  <time datetime="2022-04-05T04:19:04.000Z" itemprop="datePublished">2022-04-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/" class="leancloud_visitors"  data-flag-title="数据与结构之顺序表">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 14(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">目录</span><br><span class="line">一，顺序表的逻辑</span><br><span class="line">二，顺序表的实现</span><br><span class="line">三，基于顺序存储结构的图书信息表的创建和输出（C++版）</span><br></pre></td></tr></table></figure>
+
+<p>一，顺序表的逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;malloc.h&gt; //头文件包含命令</span><br><span class="line">#define List_init_size 100 //符号常量的定义</span><br><span class="line">#define Listincrement 100</span><br><span class="line">#define TRUE 1</span><br><span class="line">#define FALSE 0</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define INFEASIBLE -1</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">typedef int Elemtype;//抽象数据类型elemtype具体化为int类型</span><br><span class="line">typedef int Status;</span><br><span class="line">typedef struct &#123; //定义结构体</span><br><span class="line">    Elemtype *elem;</span><br><span class="line">    int length;</span><br><span class="line">    int listsize;</span><br><span class="line">&#125;Sqlist;</span><br><span class="line">Status Initlist_sq(Sqlist *l) //函数（初始化顺序表）初始化失败则返回-2</span><br><span class="line">&#123;</span><br><span class="line">    l-&gt;elem =(Elemtype*)malloc(sizeof(Elemtype));</span><br><span class="line">    if(!l-&gt;elem ) return(OVERFLOW);</span><br><span class="line">    l-&gt;length =0;</span><br><span class="line">    l-&gt;listsize =List_init_size;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br><span class="line">Status Creatlist_sq(Sqlist *l,int n) //初始化顺序表为含有n个元素的顺序表</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    printf(&quot;Input %d numbers:\n&quot;,n);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;(l-&gt;elem [i]));</span><br><span class="line">    l-&gt;length =n;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br><span class="line">void Outputlist_sq(Sqlist *l) //函数（输出顺序表的元素）</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i=0;i&lt;l-&gt;length ;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    printf(&quot;%5d&quot;,l-&gt;elem [i]);</span><br><span class="line">    if((i+1)%5==0)</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">void Destroylist_sq(Sqlist*l) //销毁顺序表l</span><br><span class="line">&#123;</span><br><span class="line">    free(l-&gt;elem );</span><br><span class="line">&#125;</span><br><span class="line">Status Insertlist_sq(Sqlist*l,int i,Elemtype e) //在顺序表的第i个位置前插入元素e</span><br><span class="line">&#123;</span><br><span class="line">    int j;</span><br><span class="line">    Elemtype *p;</span><br><span class="line">    if(i&gt;l-&gt;length )</span><br><span class="line">    &#123;</span><br><span class="line">    printf(&quot;输入数据不合法!&quot;);</span><br><span class="line">    return (OVERFLOW);</span><br><span class="line">    &#125;</span><br><span class="line">    if(l-&gt;length&gt;=l-&gt;listsize )</span><br><span class="line">    &#123;</span><br><span class="line">    Elemtype *p;</span><br><span class="line">    p=(Elemtype*)realloc(l-&gt;elem ,(List_init_size+Listincrement)*sizeof(Elemtype));</span><br><span class="line">    if(p==0)</span><br><span class="line">    &#123;</span><br><span class="line">    return(OVERFLOW);&#125;</span><br><span class="line">    l-&gt;elem =p;</span><br><span class="line">    l-&gt;listsize =+Listincrement;</span><br><span class="line">    &#125;</span><br><span class="line">    p=&amp;(l-&gt;elem[i-1]);</span><br><span class="line">    for(j=l-&gt;length +1;j&gt;=i;j--)</span><br><span class="line">    l-&gt;elem [j]=l-&gt;elem [j-1];</span><br><span class="line">    *p=e;</span><br><span class="line">    l-&gt;length ++;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br><span class="line">Elemtype Deletelist_sq(Sqlist*l,int i)//函数（删除）用e返回删除的元素</span><br><span class="line">&#123;</span><br><span class="line">    int j;</span><br><span class="line">    Elemtype e;</span><br><span class="line">    e=l-&gt;elem [i-1];</span><br><span class="line">    for(j=i-1;j&lt;l-&gt;length-1 ;j++)</span><br><span class="line">    l-&gt;elem [j]=l-&gt;elem [j+1];</span><br><span class="line">    l-&gt;elem [l-&gt;length -1]=0;</span><br><span class="line">    l-&gt;length --;</span><br><span class="line">    return e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>二，顺序表的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdbool.h&gt;</span><br><span class="line"></span><br><span class="line"># define List_Init_Size  100</span><br><span class="line"># define ListIncrement   10</span><br><span class="line">typedef  int ElemType;       //定义数据元素的类型 </span><br><span class="line"></span><br><span class="line">typedef  struct &#123;         </span><br><span class="line">    ElemType   *elem;  //存储空间基址</span><br><span class="line">    int        length; //当前长度(数据元素个数)</span><br><span class="line">    int        ListSize;//当前分配的存储容量</span><br><span class="line">&#125; Sqlist;           //定义顺序表的类型 </span><br><span class="line"></span><br><span class="line">bool InitList (Sqlist *L); //顺序表初始化函数</span><br><span class="line">void  InsertList(Sqlist *L,int i,ElemType x);   //向向顺序表插入第i个元素</span><br><span class="line"></span><br><span class="line">//顺序表初始化函数 </span><br><span class="line">bool InitList (Sqlist *L)&#123;   </span><br><span class="line">    </span><br><span class="line">    L-&gt;elem=(ElemType *)malloc(List_Init_Size*sizeof(ElemType));//为顺序表分配一个大小为List_Init_Size的数组空间</span><br><span class="line">    if (!L-&gt;elem) exit(0) ;</span><br><span class="line">    L-&gt;length=0;</span><br><span class="line">    L-&gt;ListSize=List_Init_Size;</span><br><span class="line">    return  true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//向顺序表插入第i个元素 </span><br><span class="line">void  InsertList(Sqlist *L,int i,ElemType x)   </span><br><span class="line">&#123;     //int j;</span><br><span class="line">    if(i &lt;1 || i &gt;L-&gt;length+1)</span><br><span class="line">    &#123;printf(&quot;Position error&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(L-&gt;length&gt;=L-&gt;ListSize)</span><br><span class="line">    &#123;printf(&quot;overflow&quot;);</span><br><span class="line">        exit(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int j=L-&gt;length-1;j&gt;= i-1;--j)</span><br><span class="line">        L-&gt;elem[j+1]=L-&gt;elem[j];</span><br><span class="line">    L-&gt;elem[i-1]=x;</span><br><span class="line">    ++L-&gt;length;</span><br><span class="line">    return;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> //删除顺序表中第i个数据元素</span><br><span class="line">void deleteList(Sqlist *L,int i)   </span><br><span class="line">&#123;</span><br><span class="line">    int j;</span><br><span class="line">    if(i&lt;1 || i&gt;L-&gt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;Position error&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for(j=i;j&lt;L-&gt;length;j++)</span><br><span class="line">        L-&gt;elem[j-1]=L-&gt;elem[j];</span><br><span class="line">    L-&gt;length--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//查找元素x，找到返回序号，找不到返回0</span><br><span class="line">int Locate(Sqlist L, ElemType x)</span><br><span class="line">&#123;  int i=1;</span><br><span class="line">    while(i&lt;=L.length &amp;&amp; L.elem[i-1]!=x)</span><br><span class="line">        ++i;</span><br><span class="line">    if(i&lt;=L.length)  return i;</span><br><span class="line">    else return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//获取第i个元素 </span><br><span class="line">void GetElem(Sqlist L,int i, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">    *e=L.elem[i-1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//返回顺序表的长度 </span><br><span class="line">int ListLength(Sqlist L)</span><br><span class="line">&#123;</span><br><span class="line">    return L.length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//输出顺序表 </span><br><span class="line">void Output(Sqlist L)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;number of elements：%d\n&quot;,L.length);</span><br><span class="line">    for (int i=1;i&lt;=L.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%d element:%d\n&quot;,i,L.elem[i-1]);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//输入n个数据元素 </span><br><span class="line">void Input(Sqlist *L)</span><br><span class="line">&#123;</span><br><span class="line">    int n,x;</span><br><span class="line">    scanf (&quot;%d&quot;,&amp;n);</span><br><span class="line">    for (int i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (&quot;%d&quot;,&amp;x);</span><br><span class="line">        L-&gt;elem[i-1]=x;</span><br><span class="line">        L-&gt;length++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//两个线性表并运算               </span><br><span class="line">void unio(Sqlist *La,Sqlist Lb) &#123;</span><br><span class="line">    ElemType e;</span><br><span class="line">    int La_len=La-&gt;length;</span><br><span class="line">    int Lb_len=Lb.length;</span><br><span class="line">    for(int i=1;i&lt;=Lb_len;++i) &#123;</span><br><span class="line">        GetElem(Lb,i,&amp;e);</span><br><span class="line">        if(!Locate(*La,e))</span><br><span class="line">        InsertList(La,++La_len,e);</span><br><span class="line">    &#125;</span><br><span class="line">    Output(*La);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//将两个顺序表合并到第三个顺序表中 </span><br><span class="line">void  mergelist(Sqlist La,Sqlist Lb,Sqlist *Lc)&#123;</span><br><span class="line">    int i=1,j=1,k=0;</span><br><span class="line">    ElemType ai,bj;</span><br><span class="line">    int La_len=ListLength(La);</span><br><span class="line">    int Lb_len=ListLength(Lb);</span><br><span class="line">    while((i&lt;=La_len)&amp;&amp;(j&lt;=Lb_len))</span><br><span class="line">    &#123;</span><br><span class="line">    GetElem(La,i,&amp;ai);GetElem(Lb,j,&amp;bj);</span><br><span class="line">    if(ai&lt;=bj)</span><br><span class="line">        &#123;</span><br><span class="line">        InsertList(Lc,++k,ai);++i;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;InsertList(Lc,++k,bj);++j;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;=La_len)&#123;</span><br><span class="line">        GetElem(La,i++,&amp;ai);InsertList(Lc,++k,ai);</span><br><span class="line">        &#125;</span><br><span class="line">    while(j&lt;=Lb_len)&#123;</span><br><span class="line">        GetElem(Lb,j++,&amp;bj);InsertList(Lc,++k,bj);</span><br><span class="line">        &#125;</span><br><span class="line">                   </span><br><span class="line">    Output(*Lc);</span><br><span class="line">               &#125;</span><br><span class="line">int main(int argc, const char * argv[]) &#123;   //主函数 </span><br><span class="line">    Sqlist L,La,Lb,Lc;</span><br><span class="line">    int conti=1,choice=0,loc=0; ElemType x;</span><br><span class="line">    while (conti)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        printf(&quot;1.Initial  2.Insert  3.Delete  4.Locate  5.并集  6.Merge  7.Output 8.Exit&quot;);</span><br><span class="line">        scanf (&quot;%d&quot;,&amp;choice);</span><br><span class="line">        switch (choice)&#123;</span><br><span class="line">                int i;</span><br><span class="line">            case  1:</span><br><span class="line">                InitList(&amp;L);break;</span><br><span class="line">            case  2:</span><br><span class="line">                </span><br><span class="line">                printf(&quot;请输入要插入的位置&quot;);</span><br><span class="line">                scanf (&quot;%d&quot;,&amp;i);</span><br><span class="line">                printf(&quot;请输入要插入的内容&quot;);</span><br><span class="line">                scanf (&quot;%d&quot;,&amp;x);</span><br><span class="line">                InsertList(&amp;L,i,x);</span><br><span class="line">                break;</span><br><span class="line">            case  3:</span><br><span class="line">                printf(&quot;请输入要删除的位置&quot;);</span><br><span class="line">                scanf (&quot;%d&quot;,&amp;i);</span><br><span class="line">                deleteList(&amp;L,i);</span><br><span class="line">                break;</span><br><span class="line">            case  4:</span><br><span class="line">                printf(&quot;请输入要定位的内容：&quot;);</span><br><span class="line">                scanf (&quot;%d&quot;,&amp;x);</span><br><span class="line">                loc = Locate(L,x);</span><br><span class="line">                if (!loc) printf(&quot;该元素不存在\n&quot;);</span><br><span class="line">                else printf(&quot;该元素的序号是：%d \n&quot;,loc);</span><br><span class="line">                break;</span><br><span class="line">            case  5:</span><br><span class="line">                InitList(&amp;La);</span><br><span class="line">                InitList(&amp;Lb);</span><br><span class="line">                printf(&quot;请输入La中的元素个数:&quot;);</span><br><span class="line">                Input(&amp;La);</span><br><span class="line">                printf(&quot;请输入Lb中的元素个数:&quot;);</span><br><span class="line">                Input(&amp;Lb);</span><br><span class="line">                unio(&amp;La,Lb);</span><br><span class="line">                break;</span><br><span class="line">            case  6:</span><br><span class="line">                InitList(&amp;La);</span><br><span class="line">                InitList(&amp;Lb);</span><br><span class="line">                InitList(&amp;Lc);</span><br><span class="line">                printf(&quot;请输入La中的元素个数:&quot;);</span><br><span class="line">                Input(&amp;La);</span><br><span class="line">                printf(&quot;请输入Lb中的元素个数:&quot;);</span><br><span class="line">                Input(&amp;Lb);</span><br><span class="line">                mergelist(La,Lb,&amp;Lc);</span><br><span class="line">                break;</span><br><span class="line">            case  7:</span><br><span class="line">                Output(L);	break;</span><br><span class="line">                </span><br><span class="line">            case  8:</span><br><span class="line">                conti=0;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三，基于顺序存储结构的图书信息表的创建和输出（C++）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;fstream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;iomanip&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">typedef int Status; //Status 是函数返回值类型，其值是函数结果状态代码。</span><br><span class="line">typedef int ElemType; //ElemType 为可定义的数据类型，此设为int类型</span><br><span class="line"></span><br><span class="line">#define MAXSIZE 100			//顺序表可能达到的最大长度</span><br><span class="line">struct Book &#123;</span><br><span class="line">	string id;//ISBN</span><br><span class="line">	string name;//书名</span><br><span class="line">	double price;//定价</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct &#123;</span><br><span class="line">	Book *elem; //存储空间的基地址</span><br><span class="line">	int length; //当前长度</span><br><span class="line">&#125; SqList;</span><br><span class="line"></span><br><span class="line">Status InitList_Sq(SqList &amp;L) &#123; //算法2.1 顺序表的初始化</span><br><span class="line">	//构造一个空的顺序表L</span><br><span class="line">	L.elem = new Book[MAXSIZE]; //为顺序表分配一个大小为MAXSIZE的数组空间</span><br><span class="line">	if (!L.elem)</span><br><span class="line">		exit(OVERFLOW); //存储分配失败退出</span><br><span class="line">	L.length = 0; //空表长度为0</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Status GetElem(SqList L, int i, Book &amp;e) &#123;//算法2.2　顺序表的取值</span><br><span class="line">	if (i &lt; 1 || i &gt; L.length)</span><br><span class="line">		return ERROR; //判断i值是否合理，若不合理，返回ERROR</span><br><span class="line">	e = L.elem[i - 1]; //elem[i-1]单元存储第i个数据元素</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int LocateElem_Sq(SqList L, double e) &#123; //算法2.3 顺序表的查找</span><br><span class="line">	//顺序表的查找</span><br><span class="line">	for (int i = 0; i &lt; L.length; i++)</span><br><span class="line">		if (L.elem[i].price == e)</span><br><span class="line">			return i + 1;//查找成功，返回序号i+1</span><br><span class="line">	return 0;//查找失败，返回0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Status ListInsert_Sq(SqList &amp;L, int i, Book e) &#123; //算法2.4 顺序表的插入</span><br><span class="line">	//在顺序表L中第i个位置之前插入新的元素e</span><br><span class="line">	//i值的合法范围是1&lt;=i&lt;=L.length+1</span><br><span class="line">	if ((i &lt; 1) || (i &gt; L.length + 1))</span><br><span class="line">		return ERROR; //i值不合法</span><br><span class="line">	if (L.length == MAXSIZE)</span><br><span class="line">		return ERROR; //当前存储空间已满</span><br><span class="line">	for (int j = L.length - 1; j &gt;= i - 1; j--)</span><br><span class="line">		L.elem[j + 1] = L.elem[j]; //插入位置及之后的元素后移</span><br><span class="line">	L.elem[i - 1] = e; //将新元素e放入第i个位置</span><br><span class="line">	++L.length; //表长增1</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Status ListDelete_Sq(SqList &amp;L, int i) &#123; //算法2.5 顺序表的删除</span><br><span class="line">	//在顺序表L中删除第i个元素，并用e返回其值</span><br><span class="line">	//i值的合法范围是1&lt;=i&lt;=L.length</span><br><span class="line">	if ((i &lt; 1) || (i &gt; L.length))</span><br><span class="line">		return ERROR; //i值不合法</span><br><span class="line">	for (int j = i; j &lt;= L.length; j++)</span><br><span class="line">		L.elem[j - 1] = L.elem[j]; //被删除元素之后的元素前移</span><br><span class="line">	--L.length; //表长减1</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	SqList L;  //生成顺序表变量 </span><br><span class="line">	int i = 0, temp, a, c, choose;</span><br><span class="line">	double price;</span><br><span class="line">	Book e;</span><br><span class="line">	string head_1, head_2, head_3;</span><br><span class="line">	cout &lt;&lt; &quot;1. 建立\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;2. 输入\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;3. 取值\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;4. 查找\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;5. 插入\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;6. 删除\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;7. 输出\n&quot;;</span><br><span class="line">	cout &lt;&lt; &quot;0. 退出\n\n&quot;;</span><br><span class="line"></span><br><span class="line">	choose = -1;</span><br><span class="line">	while (choose != 0) &#123;</span><br><span class="line">		cout &lt;&lt; &quot;your choose?&quot;;</span><br><span class="line">		cin &gt;&gt; choose;      //输入选项 </span><br><span class="line">		switch (choose) &#123;</span><br><span class="line">		case 1://创建顺序表</span><br><span class="line">			if (InitList_Sq(L))</span><br><span class="line">				cout &lt;&lt; &quot;成功建立顺序表\n\n&quot;;</span><br><span class="line">			else</span><br><span class="line">				cout &lt;&lt; &quot;顺序表建立失败\n\n&quot;;</span><br><span class="line">			break;</span><br><span class="line">		case 2: &#123;//顺序表信息输入</span><br><span class="line">			i = 0;</span><br><span class="line">			L.elem = new Book[MAXSIZE];</span><br><span class="line">			if (!L.elem)</span><br><span class="line">				exit(OVERFLOW);</span><br><span class="line">			L.length = 0;</span><br><span class="line">			fstream file;</span><br><span class="line">			file.open(&quot;book.txt&quot;);  //文件打开 </span><br><span class="line">			if (!file) &#123;</span><br><span class="line">				cout &lt;&lt; &quot;错误！未找到文件！&quot; &lt;&lt; endl;</span><br><span class="line">				exit(ERROR);</span><br><span class="line">			&#125;</span><br><span class="line">			file &gt;&gt; head_1 &gt;&gt; head_2 &gt;&gt; head_3;</span><br><span class="line">			while (!file.eof()) &#123;</span><br><span class="line">				file &gt;&gt; L.elem[i].id &gt;&gt; L.elem[i].name &gt;&gt; L.elem[i].price;//从文件中读入一条数据元素的三个数据项 </span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; &quot;输入 book.txt 信息完毕\n\n&quot;;</span><br><span class="line">			L.length = i;</span><br><span class="line">			file.close();       //文件关闭 </span><br><span class="line">		&#125;</span><br><span class="line">			break;</span><br><span class="line">		case 3://顺序表的取值</span><br><span class="line">			cout &lt;&lt; &quot;请输入一个位置用来取值：\n&quot;;</span><br><span class="line">			cin &gt;&gt; i;</span><br><span class="line">			temp = GetElem(L, i, e);</span><br><span class="line">			if (temp != 0) &#123;</span><br><span class="line">				cout &lt;&lt; &quot;查找成功\n&quot;;</span><br><span class="line">				cout &lt;&lt; &quot;第&quot; &lt;&lt; i &lt;&lt; &quot;本图书的信息是：\n&quot;;</span><br><span class="line">				cout &lt;&lt; left &lt;&lt; setw(15) &lt;&lt; e.id &lt;&lt; &quot;\t&quot; &lt;&lt; left &lt;&lt; setw(50)</span><br><span class="line">						&lt;&lt; e.name &lt;&lt; &quot;\t&quot; &lt;&lt; left &lt;&lt; setw(5) &lt;&lt; e.price &lt;&lt; endl</span><br><span class="line">						&lt;&lt; endl;</span><br><span class="line">			&#125; else</span><br><span class="line">				cout &lt;&lt; &quot;查找失败！位置超出范围\n\n&quot;;</span><br><span class="line">			break;</span><br><span class="line">		case 4: //顺序表的查找</span><br><span class="line">			cout &lt;&lt; &quot;请输入所要查找价格:&quot;;</span><br><span class="line">			cin &gt;&gt; price;</span><br><span class="line">			temp = LocateElem_Sq(L, price);</span><br><span class="line">			if (temp != 0) &#123;</span><br><span class="line">				cout &lt;&lt; &quot;查找成功\n&quot;;</span><br><span class="line">				cout &lt;&lt; &quot;该价格对应的书名为：&quot; &lt;&lt; L.elem[temp - 1].name &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">			&#125; else</span><br><span class="line">				cout &lt;&lt; &quot;查找失败！没有这个价格对应的书籍\n\n&quot;;</span><br><span class="line">			break;</span><br><span class="line">		case 5: //顺序表的插入</span><br><span class="line">			cout &lt;&lt; &quot;请输入插入的位置和书本信息，包括：编号 书名 价格（用空格隔开）:&quot;;</span><br><span class="line">			cin &gt;&gt; a;</span><br><span class="line">			cin &gt;&gt; e.id &gt;&gt; e.name &gt;&gt; e.price; //输入a和b，a代表插入的位置，b代表插入的数值（书本信息）</span><br><span class="line">			if (ListInsert_Sq(L, a, e))</span><br><span class="line">				cout &lt;&lt; &quot;插入成功.\n\n&quot;;</span><br><span class="line">			else</span><br><span class="line">				cout &lt;&lt; &quot;插入失败.\n\n&quot;;</span><br><span class="line">			break;</span><br><span class="line">		case 6: //顺序表的删除</span><br><span class="line">			cout &lt;&lt; &quot;请输入所要删除的书籍的位置:&quot;;</span><br><span class="line">			cin &gt;&gt; c;</span><br><span class="line">			if (ListDelete_Sq(L, c))</span><br><span class="line">				cout &lt;&lt; &quot;删除成功.\n\n&quot;;</span><br><span class="line">			else</span><br><span class="line">				cout &lt;&lt; &quot;删除失败.\n\n&quot;;</span><br><span class="line">			break;</span><br><span class="line">		case 7: //顺序表的输出</span><br><span class="line">			cout &lt;&lt; &quot;当前图书系统信息（顺序表）读出:\n&quot;;</span><br><span class="line">			for (i = 0; i &lt; L.length; i++)</span><br><span class="line">				cout &lt;&lt; left &lt;&lt; setw(15) &lt;&lt; L.elem[i].id &lt;&lt; &quot;\t&quot; &lt;&lt; left</span><br><span class="line">						&lt;&lt; setw(50) &lt;&lt; L.elem[i].name &lt;&lt; &quot;\t&quot; &lt;&lt; left</span><br><span class="line">						&lt;&lt; setw(5) &lt;&lt; L.elem[i].price &lt;&lt; endl;</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8/" title="数据与结构之顺序表" target="_blank" rel="external">http://example.com/2022/04/05/数据与结构之顺序表/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BB%93%E6%9E%84%E4%B9%8B%E9%93%BE%E8%A1%A8/" title="数据与结构之链表"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/04/05/C-%E7%89%88%E5%9F%BA%E7%A1%80%E9%A2%98-1/" title="C#版基础题"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
