@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>JAVA实现http请求的三种方式 | 星辰的博客</title>
-  <meta name="description" content="JAVA实现http请求的三种方式1、HttpURLConnection： HttpURLConnection是java的标准类，什么都没封装，用起来太原始，不方便，比如重访问的自定义，以及一些高级功能等。 2、java.net.http.HttpClientjdk11正式启用自带HttpClient，代替之前比较旧的HttpURLConnection。其实从java9的jdk.incubator">
+  <title>Jsoup实现高效率爬虫 | 星辰的博客</title>
+  <meta name="description" content="Jsoup我们抓取到页面之后，还需要对页面进行解析。可以使用字符串处理工具解析页面，也可以使用正则表达式，但是这些方法都会带来很大的开发成本，所以我们需要使用一款专门解析html页面的技术。 1234567目录1.1 jsoup介绍1.2 使用dom方式遍历文档1.3 使用选择器语法查找元素1.4 Selector选择器概述1.5 Selector选择器组合使用2.0 实现案例    1.1 js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA实现http请求的三种方式">
-<meta property="og:url" content="http://example.com/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:title" content="Jsoup实现高效率爬虫">
+<meta property="og:url" content="http://example.com/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/index.html">
 <meta property="og:site_name" content="星辰的博客">
-<meta property="og:description" content="JAVA实现http请求的三种方式1、HttpURLConnection： HttpURLConnection是java的标准类，什么都没封装，用起来太原始，不方便，比如重访问的自定义，以及一些高级功能等。 2、java.net.http.HttpClientjdk11正式启用自带HttpClient，代替之前比较旧的HttpURLConnection。其实从java9的jdk.incubator">
+<meta property="og:description" content="Jsoup我们抓取到页面之后，还需要对页面进行解析。可以使用字符串处理工具解析页面，也可以使用正则表达式，但是这些方法都会带来很大的开发成本，所以我们需要使用一款专门解析html页面的技术。 1234567目录1.1 jsoup介绍1.2 使用dom方式遍历文档1.3 使用选择器语法查找元素1.4 Selector选择器概述1.5 Selector选择器组合使用2.0 实现案例    1.1 js">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-16T13:05:54.000Z">
-<meta property="article:modified_time" content="2022-04-16T13:16:12.044Z">
+<meta property="article:published_time" content="2022-04-21T13:48:21.000Z">
+<meta property="article:modified_time" content="2022-04-21T13:49:19.061Z">
 <meta property="article:author" content="陈斌">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
+  <link rel="canonical" href="http://example.com/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/index.html">
   
     <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
   
@@ -348,14 +348,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JAVA实现http请求的三种方式" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Jsoup实现高效率爬虫" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JAVA实现http请求的三种方式
+      Jsoup实现高效率爬虫
     </h1>
   
 
@@ -363,8 +363,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="article-date">
-	  <time datetime="2022-04-16T13:05:54.000Z" itemprop="datePublished">2022-04-16</time>
+	<a href="/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/" class="article-date">
+	  <time datetime="2022-04-21T13:48:21.000Z" itemprop="datePublished">2022-04-21</time>
 	</a>
 </span>
         
@@ -391,36 +391,80 @@
 
 	<span class="article-read hidden-xs">
     	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="leancloud_visitors"  data-flag-title="JAVA实现http请求的三种方式">0</span>
+    	<span id="/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/" class="leancloud_visitors"  data-flag-title="Jsoup实现高效率爬虫">0</span>
     </span>
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 635(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.4k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="JAVA实现http请求的三种方式"><a href="#JAVA实现http请求的三种方式" class="headerlink" title="JAVA实现http请求的三种方式"></a>JAVA实现http请求的三种方式</h3><p><strong>1、HttpURLConnection：</strong></p>
-<p>HttpURLConnection是java的标准类，什么都没封装，用起来太原始，不方便，比如重访问的自定义，以及一些高级功能等。</p>
-<h3 id="2、java-net-http-HttpClient"><a href="#2、java-net-http-HttpClient" class="headerlink" title="2、java.net.http.HttpClient"></a>2、java.net.http.HttpClient</h3><p>jdk11正式启用自带HttpClient，代替之前比较旧的HttpURLConnection。其实从java9的jdk.incubator.httpclient模块迁移到java.net.http模块，包名由jdk.incubator.http改为java.net.http。</p>
-<h3 id="3、Apache-HttpClient："><a href="#3、Apache-HttpClient：" class="headerlink" title="3、Apache HttpClient："></a><strong>3、Apache HttpClient：</strong></h3><p>在Android中，AndroidSDK中集成了Apache的HttpClient模块，HttpClient就是一个增强版的HttpURLConnection，它只是关注于如何发送请求、接收响应，以及管理HTTP连接。</p>
-<p>1.HttpURLConnection</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Dome3 &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        //1.构造网络资源实例</span><br><span class="line">        String urlPath = &quot;https://www.360kuai.com/&quot;;</span><br><span class="line">        URL url = new URL(urlPath);</span><br><span class="line">        //2.获取输入流，准备向内存读入数据</span><br><span class="line">        URLConnection urlConnection = url.openConnection();</span><br><span class="line">        InputStream in = urlConnection.getInputStream();</span><br><span class="line">        //3.读取数据逻辑实现</span><br><span class="line">        InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);</span><br><span class="line">        char[] b = new char[1024];</span><br><span class="line">        int i = 0;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while (-1 != (i = reader.read(b))) &#123;</span><br><span class="line">            sb.append(String.valueOf(b, 0, i));</span><br><span class="line">        &#125;</span><br><span class="line">        in.close();</span><br><span class="line">        System.out.println(sb);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <h1 id="Jsoup"><a href="#Jsoup" class="headerlink" title="Jsoup"></a>Jsoup</h1><p>我们抓取到页面之后，还需要对页面进行解析。可以使用字符串处理工具解析页面，也可以使用正则表达式，但是这些方法都会带来很大的开发成本，所以我们需要使用一款专门解析html页面的技术。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">目录</span><br><span class="line">1.1 jsoup介绍</span><br><span class="line">1.2 使用dom方式遍历文档</span><br><span class="line">1.3 使用选择器语法查找元素</span><br><span class="line">1.4 Selector选择器概述</span><br><span class="line">1.5 Selector选择器组合使用</span><br><span class="line">2.0 实现案例</span><br></pre></td></tr></table></figure>
 
-<p>2.java.net.http.HttpClient</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Dome01 &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        String url=&quot;https://www.360kuai.com/&quot;;</span><br><span class="line">        HttpClient client = new DefaultHttpClient();</span><br><span class="line">        HttpGet get = new HttpGet(url);</span><br><span class="line">        //发起请求</span><br><span class="line">        HttpResponse response = client.execute(get);</span><br><span class="line">        //获取响应体</span><br><span class="line">        HttpEntity entity = response.getEntity();</span><br><span class="line">        if (entity != null) &#123;</span><br><span class="line">            InputStream instream = entity.getContent();</span><br><span class="line">            try &#123;</span><br><span class="line">                BufferedReader reader = new BufferedReader(new InputStreamReader(instream, &quot;UTF-8&quot;));</span><br><span class="line">                System.out.println(reader.readLine());</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                instream.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 关闭连接.</span><br><span class="line">        client.getConnectionManager().shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>3.Apache HttpClient：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Dome2 &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        //创建HttpClient对象</span><br><span class="line">        CloseableHttpClient httpClient = HttpClients.createDefault();</span><br><span class="line">        //创建HttpGet请求</span><br><span class="line">        HttpGet httpGet = new HttpGet(&quot;http://www.itcast.cn/&quot;);</span><br><span class="line">        CloseableHttpResponse response = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            //使用HttpClient发起请求</span><br><span class="line">            response = httpClient.execute(httpGet);</span><br><span class="line">            //判断响应状态码是否为200</span><br><span class="line">            if (response.getStatusLine().getStatusCode() == 200) &#123;</span><br><span class="line">                //如果为200表示请求成功，获取返回数据</span><br><span class="line">                String content = EntityUtils.toString(response.getEntity(), &quot;UTF-8&quot;);</span><br><span class="line">                //打印数据长度</span><br><span class="line">                System.out.println(content);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            //释放连接</span><br><span class="line">            if (response == null) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    response.close();</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>​    CloseableHttpClient是在HttpClient的扩展的，是目前推荐的用法。不仅可以简单设置请求头，还可以利用fastjson转换请求或返回结果字符串为json格式。<br>HttpClient是一个简单的HTTP客户端（不是浏览器），可以看做一个增强版的HttpURLConnection，它关注于如何发送请求、接收响应，以及管理HTTP连接，但不会缓存服务器的响应，不能执行HTML页面中嵌入的Javascript代码；也不会对页面内容进行任何解析、处理。</p>
+<h2 id="1-1-jsoup介绍"><a href="#1-1-jsoup介绍" class="headerlink" title="1.1 jsoup介绍"></a>1.1 jsoup介绍</h2><p>jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。</p>
+<h6 id="jsoup的主要功能如下："><a href="#jsoup的主要功能如下：" class="headerlink" title="jsoup的主要功能如下："></a>jsoup的主要功能如下：</h6><ol>
+<li><p>从一个URL，文件或字符串中解析HTML；</p>
+</li>
+<li><p>使用DOM或CSS选择器来查找、取出数据；</p>
+</li>
+<li><p>可操作HTML元素、属性、文本；</p>
+</li>
+</ol>
+<p>Jsoup工程准备maven工程</p>
+<p>给pom.xml加入依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;!-- jsoup HTML parser library @ https://jsoup.org/ --&gt;</span><br><span class="line">           &lt;groupId&gt;org.jsoup&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jsoup&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.14.3&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>1</p>
+<p>Jsoup可以直接输入字符串，并封装为Document对象</p>
+<h6 id="两种方式："><a href="#两种方式：" class="headerlink" title="两种方式："></a>两种方式：</h6><p>1.解析文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void testJsoupString() throws Exception &#123;</span><br><span class="line">    //读取文件获取</span><br><span class="line">    String html = FileUtils.readFileToString(new File(&quot;D:\\jsoup.html&quot;), &quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">    //    解析字符串</span><br><span class="line">    Document document = Jsoup.parse(html);</span><br><span class="line"></span><br><span class="line">    //获取title的内容</span><br><span class="line">    Element title = document.getElementsByTag(&quot;title&quot;).first();</span><br><span class="line">    System.out.println(title.text());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.获取网络资源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String url=&quot;http://........&quot;;</span><br><span class="line">   Document doc = Jsoup.connect(url).get();</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-使用dom方式遍历文档"><a href="#1-2-使用dom方式遍历文档" class="headerlink" title="1.2 使用dom方式遍历文档"></a>1.2 <strong>使用dom方式遍历文档</strong></h3><p>元素获取（.first表示获取第一个）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//1.    根据id查询元素getElementById</span><br><span class="line">Element element = document.getElementById(&quot;city_bj&quot;);</span><br><span class="line"></span><br><span class="line">//2.   根据标签获取元素getElementsByTag</span><br><span class="line">element = document.getElementsByTag(&quot;title&quot;).first();</span><br><span class="line"></span><br><span class="line">//3.   根据class获取元素getElementsByClass</span><br><span class="line">element = document.getElementsByClass(&quot;s_name&quot;).last();</span><br><span class="line"></span><br><span class="line">//4.   根据属性获取元素getElementsByAttribute</span><br><span class="line">element = document.getElementsByAttribute(&quot;abc&quot;).first();</span><br><span class="line">element = document.getElementsByAttributeValue(&quot;class&quot;, &quot;city_con&quot;).first();</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3使用选择器语法查找元素"><a href="#1-3使用选择器语法查找元素" class="headerlink" title="1.3使用选择器语法查找元素"></a>1.3<strong>使用选择器语法查找元素</strong></h3><p>jsoup elements对象支持类似于CSS (或jquery)的选择器语法，来实现非常强大和灵活的查找功能。这个select 方法在Document, Element,或Elements对象中都可以使用。且是上下文相关的，因此可实现指定元素的过滤，或者链式选择访问。</p>
+<p>Select方法将返回一个Elements集合，并提供一组方法来抽取和处理结果。</p>
+<h3 id="1-4-Selector选择器概述"><a href="#1-4-Selector选择器概述" class="headerlink" title="1.4 Selector选择器概述"></a>1.4 <strong>Selector选择器概述</strong></h3><p><strong>tagname</strong>: 通过标签查找元素，比如：span</p>
+<p><strong>#id</strong>: 通过ID查找元素，比如：# city_bj</p>
+<p><strong>.class</strong>: 通过class名称查找元素，比如：.class_a</p>
+<p><strong>[attribute]</strong>: 利用属性查找元素，比如：[abc]</p>
+<p><strong>[attr&#x3D;value]</strong>: 利用属性值来查找元素，比如：[class&#x3D;s_name]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//tagname: 通过标签查找元素，比如：span</span><br><span class="line">Elements span = document.select(&quot;span&quot;);</span><br><span class="line">for (Element element : span) &#123;</span><br><span class="line">    System.out.println(element.text());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//#id: 通过ID查找元素，比如：#city_bjj</span><br><span class="line">String str = document.select(&quot;#city_bj&quot;).text();</span><br><span class="line"></span><br><span class="line">//.class: 通过class名称查找元素，比如：.class_a</span><br><span class="line">str = document.select(&quot;.class_a&quot;).text();</span><br><span class="line"></span><br><span class="line">//[attribute]: 利用属性查找元素，比如：[abc]</span><br><span class="line">str = document.select(&quot;[abc]&quot;).text();</span><br><span class="line"></span><br><span class="line">//[attr=value]: 利用属性值来查找元素，比如：[class=s_name]</span><br><span class="line">str = document.select(&quot;[class=s_name]&quot;).text();</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-Selector选择器组合使用"><a href="#1-5-Selector选择器组合使用" class="headerlink" title="1.5 Selector选择器组合使用"></a>1.5 <strong>Selector选择器组合使用</strong></h3><p><strong>el#id</strong>: 元素+ID，比如： h3#city_bj</p>
+<p><strong>el.class</strong>: 元素+class，比如： li.class_a</p>
+<p><strong>el[attr]</strong>: 元素+属性名，比如： span[abc]</p>
+<p><strong>任意组合</strong>: 比如：span[abc].s_name</p>
+<p><strong>ancestor child</strong>: 查找某个元素下子元素，比如：.city_con li 查找”city_con”下的所有li</p>
+<p><strong>parent &gt; child</strong>: 查找某个父元素下的直接子元素，比如：</p>
+<p>.city_con &gt; ul &gt; li 查找city_con第一级（直接子元素）的ul，再找所有ul下的第一级li</p>
+<p><strong>parent &gt; *</strong>: 查找某个父元素下所有直接子元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//el#id: 元素+ID，比如： h3#city_bj</span><br><span class="line">String str = document.select(&quot;h3#city_bj&quot;).text();</span><br><span class="line"></span><br><span class="line">//el.class: 元素+class，比如： li.class_a</span><br><span class="line">str = document.select(&quot;li.class_a&quot;).text();</span><br><span class="line"></span><br><span class="line">//el[attr]: 元素+属性名，比如： span[abc]</span><br><span class="line">str = document.select(&quot;span[abc]&quot;).text();</span><br><span class="line"></span><br><span class="line">//任意组合，比如：span[abc].s_name</span><br><span class="line">str = document.select(&quot;span[abc].s_name&quot;).text();</span><br><span class="line"></span><br><span class="line">//ancestor child: 查找某个元素下子元素，比如：.city_con li 查找&quot;city_con&quot;下的所有li</span><br><span class="line">str = document.select(&quot;.city_con li&quot;).text();</span><br><span class="line"></span><br><span class="line">//parent &gt; child: 查找某个父元素下的直接子元素，</span><br><span class="line">//比如：.city_con &gt; ul &gt; li 查找city_con第一级（直接子元素）的ul，再找所有ul下的第一级li</span><br><span class="line">str = document.select(&quot;.city_con &gt; ul &gt; li&quot;).text();</span><br><span class="line"></span><br><span class="line">//parent &gt; * 查找某个父元素下所有直接子元素.city_con &gt; *</span><br><span class="line">str = document.select(&quot;.city_con &gt; *&quot;).text();</span><br></pre></td></tr></table></figure>
+
+<h1 id="实现案例"><a href="#实现案例" class="headerlink" title="实现案例"></a>实现案例</h1><ol>
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class Dome4 &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        String url=&quot;http://........&quot;;</span><br><span class="line">        Document doc = Jsoup.connect(url).get();</span><br><span class="line">        Elements picture=doc.select(&quot;img[src$=.jpg]&quot;);</span><br><span class="line">        Elements urlpath= doc.select(&quot;a[href]&quot;);</span><br><span class="line">        Elements title =doc.select(&quot;h2&quot;);</span><br><span class="line">        int j=0;</span><br><span class="line">        String photo[]=new String[50];</span><br><span class="line">        String path[]=new String[50];</span><br><span class="line">        String name[]=new String[50];</span><br><span class="line">        for (Element link : picture) &#123;</span><br><span class="line">            //System.out.println(link.attr(&quot;abs:src&quot;));</span><br><span class="line">            photo[j]=link.attr(&quot;abs:src&quot;);</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        j=0;</span><br><span class="line">        for (Element link : urlpath) &#123;</span><br><span class="line">            //System.out.println(link.attr(&quot;abs:href&quot;));</span><br><span class="line">            path[j]=link.attr(&quot;abs:href&quot;);</span><br><span class="line">            j++;</span><br><span class="line">            &#125;</span><br><span class="line">        j=0;</span><br><span class="line">        for (Element link : title) &#123;</span><br><span class="line">            //System.out.println(link.text());</span><br><span class="line">            name[j]=link.text();</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.对象类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Attribute &#123;</span><br><span class="line">    String name;</span><br><span class="line">    String pid0;</span><br><span class="line">    String pid;</span><br><span class="line">    int level;</span><br><span class="line">    String url;</span><br><span class="line">	//类属性的set，get方法省略</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Dome5 &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        String url = &quot;https://.........&quot;;</span><br><span class="line">        Document doc = Jsoup.connect(url).get();</span><br><span class="line">        Elements doc1 = doc.select(&quot;div[class=\&quot;navigation-box\&quot;]&quot;);</span><br><span class="line">        ArrayList&lt;Attribute&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        for (Element path : doc1) &#123;</span><br><span class="line">            Elements doc2 = path.select(&quot;a[href]&quot;);</span><br><span class="line">            Elements doc3 = path.select(&quot;h4&quot;);</span><br><span class="line">            String uuid = UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;);</span><br><span class="line">            for (Element path1 : doc2) &#123;</span><br><span class="line">                Attribute attribute = new Attribute();</span><br><span class="line">                String id = UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;);</span><br><span class="line">                attribute.pid0 = id;</span><br><span class="line">                attribute.level = 2;</span><br><span class="line">                attribute.pid = uuid;</span><br><span class="line">                attribute.url = path1.attr(&quot;abs:href&quot;);</span><br><span class="line">                attribute.name = path1.text();</span><br><span class="line">                for (Element path2 : doc3) &#123;</span><br><span class="line">                    if (path2.toString().contains(path1.toString())) &#123;</span><br><span class="line">                        attribute.setPid0(&quot;0&quot;);</span><br><span class="line">                        attribute.setLevel(1);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                list.add(attribute);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -430,7 +474,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="JAVA实现http请求的三种方式" target="_blank" rel="external">http://example.com/2022/04/16/JAVA实现http请求的三种方式/</a>
+      <a href="http://example.com/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/" title="Jsoup实现高效率爬虫" target="_blank" rel="external">http://example.com/2022/04/21/Jsoup实现高效率爬虫/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -476,13 +520,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2022/04/21/Jsoup%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%8E%87%E7%88%AC%E8%99%AB/" title="Jsoup实现高效率爬虫"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2022/04/06/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B-%E5%AD%98%E5%82%A8%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%B8%8E%E4%BC%A0%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93/" title="爬虫实例-存储到本地与传到数据库"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/04/16/JAVA%E5%AE%9E%E7%8E%B0http%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="JAVA实现http请求的三种方式"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
