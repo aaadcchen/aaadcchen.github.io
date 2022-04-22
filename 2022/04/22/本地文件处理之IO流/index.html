@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>本地文件处理之IO流 | 星辰的博客</title>
+  <meta name="description" content="123456789101112目录1.FileOutputStream类2.FileInputStream类3.BufferedOutputStream类4.BufferedInputStream类5.FileWriter类6.FileReader类7.BufferedWriter类8.BufferedReader类9.OutputStreamWriter类10.InputStreamReader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地文件处理之IO流">
+<meta property="og:url" content="http://example.com/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="123456789101112目录1.FileOutputStream类2.FileInputStream类3.BufferedOutputStream类4.BufferedInputStream类5.FileWriter类6.FileReader类7.BufferedWriter类8.BufferedReader类9.OutputStreamWriter类10.InputStreamReader">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images2/0000.jpg">
+<meta property="article:published_time" content="2022-04-22T09:51:37.000Z">
+<meta property="article:modified_time" content="2022-04-22T09:54:14.138Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images2/0000.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/Java/">Java</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.25px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/css/" style="font-size: 13.5px;">css</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.75px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/" class="title">本地文件处理之IO流</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-22T09:51:37.000Z" itemprop="datePublished">2022-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/22/java%E5%AF%B9%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86/" class="title">java对本地文件的处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-22T09:51:11.000Z" itemprop="datePublished">2022-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/22/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE/" class="title">稀疏矩阵的转置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-22T04:12:40.000Z" itemprop="datePublished">2022-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/22/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BEKMP%E7%AE%97%E6%B3%95/" class="title">字符串查找KMP算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-22T04:10:23.000Z" itemprop="datePublished">2022-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/" class="title">循环队列与链式队列</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-22T04:09:34.000Z" itemprop="datePublished">2022-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-本地文件处理之IO流" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      本地文件处理之IO流
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/" class="article-date">
+	  <time datetime="2022-04-22T09:51:37.000Z" itemprop="datePublished">2022-04-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Java/" rel="tag">Java</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/" class="leancloud_visitors"  data-flag-title="本地文件处理之IO流">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 17(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">目录</span><br><span class="line">1.FileOutputStream类</span><br><span class="line">2.FileInputStream类</span><br><span class="line">3.BufferedOutputStream类</span><br><span class="line">4.BufferedInputStream类</span><br><span class="line">5.FileWriter类</span><br><span class="line">6.FileReader类</span><br><span class="line">7.BufferedWriter类</span><br><span class="line">8.BufferedReader类</span><br><span class="line">9.OutputStreamWriter类</span><br><span class="line">10.InputStreamReader类</span><br><span class="line">11.ObjectInputStream类</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="IO流的概念"><a href="#IO流的概念" class="headerlink" title="IO流的概念"></a>IO流的概念</h3><p>IO就是Input和Output的简写，也就是输入和输出的含义。<br>IO流就是指读写数据时像流水一样从一端流到另外一端，因此得名为“流”。</p>
+<h4 id="基本分类"><a href="#基本分类" class="headerlink" title="基本分类"></a>基本分类</h4><p>1.按照读写数据的基本单位不同 可分为两种</p>
+<p>字节流：其中字节流主要指以字节为单位进行数据读写的流，可以读写任意类型的文件 。(txt,jpg,avi,mp4等)</p>
+<p>字符流：其中字符流主要指以字符(2个字节)为单位进行数据读写的流，只能读写文本文件 含有中文的文本文件推荐用</p>
+<p>2.按照读写数据的方向不同，可分为两种（站在程序的角度）。</p>
+<p>输入流：其中输入流主要指从文件中读取数据内容输入到程序中，也就是读文件。</p>
+<p>输出流：其中输出流主要指将程序中的数据内容输出到文件中，也就是写文件。</p>
+<p><img src="/images2/0000.jpg" alt="0000"></p>
+<h4 id="1-FileOutputStream类"><a href="#1-FileOutputStream类" class="headerlink" title="1.FileOutputStream类"></a>1.FileOutputStream类</h4><p>基本概念：java.io.FileOutputStream类主要用于将图像数据之类的原始字节流写入到输出流中。</p>
+<p>常用的方法   方法声明    功能介绍<br>FileOutputStream(String name)    根据参数指定的文件名来构造对象<br>FileOutputStream(String name, boolean append)    以追加的方式根据参数指定的文件名来构造对象<br>void write(int b)    将指定字节写入此文件输出流<br>void write(byte[] b, int off, int len)    将指定字节数组中从偏移量off开始的len个字节写入 此文件输出流<br>void write(byte[] b)    将 b.length 个字节从指定字节数组写入此文件输出 流中<br>void flush()    刷新此输出流并强制写出任何缓冲的输出字节<br>void close()    关闭流对象并释放有关的资源</p>
+<h4 id="2-FileInputStream类"><a href="#2-FileInputStream类" class="headerlink" title="2.FileInputStream类"></a>2.FileInputStream类</h4><p>基本概念：java.io.FileInputStream类主要用于从输入流中以字节流的方式读取图像数据等。</p>
+<p>常用的方法       方法声明    功能介绍<br>FileInputStream(String name)    根据参数指定的文件路径名来构造对象<br>int read()    从输入流中读取单个字节的数据并返回，返回-1表示读取到末尾<br>int read(byte[] b, int off, int len)从此输入流中将最多len个字节的数据读入字节数组中，返回读取到的字节个数返回-1表示读取到末尾<br>int read(byte[] b)    从此输入流中将最多 b.length 个字节的数据读入字节数组中，返回读 取到的字节个数，返回-1表示读取到末尾<br>void close()    关闭流对象并释放有关的资源<br>int available()    获取输入流所关联文件的大小<br>案例题目</p>
+<p>编程实现两个文件之间的拷贝功能(异常未处理 处理异常的方式和上面相同)</p>
+<p>拷贝方式一: 文件捎到时 拷贝效率低</p>
+<pre><code>public static void main(String[] args) &#123;
+    // 1.创建字节输入流 FileInputStream 与文件 z:/c.png 进行关联
+    FileInputStream inputStream = new FileInputStream(&quot;z:/d.png&quot;);
+    // 2.创建字节输出流 FileOutputStream 与文件 z:/d.png 进行关联
+    FileOutputStream outputStream = new FileOutputStream(&quot;z:/c.png&quot;);
+    // 3.将字节输入流读到的数据写入到字节输出流上
+    int res = 0;
+    while ((res = inputStream.read()) != -1)&#123;
+        outputStream.write(res);
+    &#125;
+    // 4.关闭流信息 释放相关的资源
+    outputStream.close();
+    inputStream.close();
+&#125;
+</code></pre>
+<p>拷贝方式二:准备一个和文件大小相同的数据缓冲区 一次性将文件拷贝完成(缺点是 文件太大时 无法申请和文件大小一样的缓冲区 真实的物理内存不足)</p>
+<pre><code>          // 3.将字节输入流读到的数据写入到字节输出流上 
+         // 将下面代码改为3以后的代码
+           int leng = inputStream.available();
+           byte[] temp = new byte[leng];
+           outputStream.write(temp);
+</code></pre>
+<p>拷贝方式三：准备一个相对适当的缓冲区 分多次将文件拷贝完成 一般用1024的倍数或 1024</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 3.将字节输入流读到的数据写入到字节输出流上</span><br><span class="line">            byte[] b = new byte[1024];</span><br><span class="line">            int res = 0;</span><br><span class="line">            while ((res = inputStream.read(b)) != -1)&#123;</span><br><span class="line">                outputStream.write(b,0,res);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-BufferedOutputStream类"><a href="#3-BufferedOutputStream类" class="headerlink" title="3.BufferedOutputStream类"></a>3.BufferedOutputStream类</h4><p>基本概念：java.io.BufferedOutputStream类主要用于描述缓冲输出流，此时不用为写入的每个字节调用底层系统</p>
+<p>常用的方法   方法声明    功能介绍<br>BufferedOutputStream(OutputStream out)    根据参数指定的引用来构造对象<br>BufferedOutputStream(OutputStream out, int size)    根据参数指定的引用和缓冲区大小来构造 对象<br>void write(int b)    写入单个字节<br>void write(byte[] b, int off, int len)    写入字节数组中的一部分数据<br>void write(byte[] b)    写入参数指定的整个字节数组<br>void flush()    刷新流<br>void close()    关闭流对象并释放有关的资源</p>
+<h4 id="4-BufferedInputStream类"><a href="#4-BufferedInputStream类" class="headerlink" title="4.BufferedInputStream类"></a>4.BufferedInputStream类</h4><p>基本概念：java.io.BufferedInputStream类主要用于描述缓冲输入流。</p>
+<p>常用的方法  方法声明    功能介绍<br>BufferedInputStream(InputStream in)    根据参数指定的引用构造对象<br>BufferedInputStream(InputStream in, int size)    根据参数指定的引用和缓冲区大小构造对象<br>int read()    读取单个字节<br>int read(byte[] b, int off, int len)    读取len个字节<br>int read(byte[] b)    读取b.length个字节<br>void close()    关闭流对象并释放有关的资源<br>使用缓冲输入输出流实现文件的拷贝（未进行异常的处理 自己也可以定义缓冲区 ）默认缓冲区为 8192 &#x3D; 1024 * 8</p>
+<pre><code>    // 1.创建BufferedInputStream 类型与 z://c.png 文件管理
+    BufferedInputStream bis = new BufferedInputStream(new FileInputStream(&quot;z:/c.png&quot;)); // 处理流
+    // 2.创建BufferedIOutputStream 类型与 z://d.png 文件管理
+    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(&quot;z/d.png&quot;)); // 处理流
+    // 3.不断地从输入流读取文件数据 写入到输出流中
+    int res = 0;
+    while ((res = bis.read()) != -1)&#123;
+        bos.write(res);
+    &#125;
+    // 4.关闭流对象 释放有关的资源
+    bos.close();
+    bis.close();
+</code></pre>
+<p>使用：</p>
+<p>当牵扯到文件复制是 首选 BufferedInputStream 和 BufferedOutoutStream</p>
+<h4 id="5-FileWriter类"><a href="#5-FileWriter类" class="headerlink" title="5.FileWriter类"></a>5.FileWriter类</h4><p>java.io.FileWriter类主要用于将文本内容写入到文本文件。</p>
+<p>常用的方法   方法声明    功能介绍<br>FileWriter(String fileName)    根据参数指定的文件名构造对象<br>FileWriter(String fileName, boolean append)    以追加的方式根据参数指定的文件名来构造对象<br>void write(int c)    写入单个字符<br>void write(char[] cbuf, int off, int len)    将指定字符数组中从偏移量off开始的len个字符写入此 文件输出流<br>void write(char[] cbuf)    将cbuf.length个字符从指定字符数组写入此文件输出 流中<br>void flush()    刷新流 void close() 关闭流对象并释放有关的资源<br>void close()    关闭流对象并释放有关的资源<br>常用方法代码演示</p>
+<p>对象的构造 需要进行异常单处理</p>
+<pre><code>        // 1.构造FileWrite类型的对象 与 z://a.txt文件关联
+        // 若文件不存在创建一个新文件
+        // 若文件存在 该流会清空文件中原有的内容
+        FileWriter writer = new FileWriter(&quot;z:/a.txt&quot;);
+        // 加true之后 文件以追加的形式创建对象 去关联文件
+        // 若文件不存在则自动创建新的空文件 并保留文件中原有的数据内容
+        FileWriter writer = new FileWriter(&quot;z:/a.txt&quot;, true);
+</code></pre>
+<p>文件的写入</p>
+<pre><code>        // 2.通过流对象写入数据内容
+        writer.write(&#39;a&#39;);
+</code></pre>
+<p>写入字符数组</p>
+<pre><code>          // 准备一个字符串并将字符串转化为char[]
+           char[] charsArr = &quot;hello, java !!!&quot;.toCharArray();
+          // 将字符的一部分写入到文件中
+           writer.write(charsArr,6,charsArr.length-1 - 6); // java !!!
+          // 此处不会清除文件中的内容 而是在末尾进行追加
+           writer.write(charsArr);  // java !!hello, java !!!
+</code></pre>
+<p>流的关闭 防在捕获异常之后的finally类中</p>
+<pre><code>    // 3.关闭流对象 并释放资源
+    // 如果在创建对象时发生异常 则writer为空值 可能引发空指针异常 在这进行判断防止异常的发生
+    if (writer != null)&#123;
+            try &#123;
+                writer.close();
+            &#125; catch (IOException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+</code></pre>
+<p>数刷新 flush 只有大量写入数据时才用到</p>
+<pre><code>     // 刷新流
+     write.flush();
+</code></pre>
+<h4 id="6-FileReader类"><a href="#6-FileReader类" class="headerlink" title="6.FileReader类"></a>6.FileReader类</h4><p>基本概念：java.io.FileReader类主要用于从文本文件读取文本数据内容</p>
+<p>常用的方法  方法声明    功能介绍<br>FileReader(String fileName)    根据参数指定的文件名构造对象<br>int read()    读取单个字符的数据并返回，返回-1表示读取到末尾<br>int read(char[] cbuf, int offset, int length)    从输入流中将最多len个字符的数据读入一个字符数组中，返回读取到的字符个数，返回-1表示读取到末尾<br>int read(char[] cbuf)    从此输入流中将最多 cbuf.length 个字符的数据读入字符数组中，返回读取到的字符个数，返回-1表示读取到末尾<br>void close()    关闭流对象并释放有关的资源<br>常用方法代码演示</p>
+<p>对象的构造并进行遍历文本文件进行打印</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FileReader reader = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 1.构造FileReader类型的对象 与 z:/a.txt 文件关联</span><br><span class="line">            reader = new FileReader(&quot;z:/a.txt&quot;); // 文件中的内容是  java !!hello, java !!!</span><br><span class="line">            // 2.读取文件内容并打印</span><br><span class="line">            // System.out.println(reader.read()); // 输出为 32 可能为ASCII码</span><br><span class="line">            // 进行数字转换为char 返回值是对应的ASCII码值</span><br><span class="line">            // 当读取单文件的最后位置返回为 - 1</span><br><span class="line">            int temp = 0; // 初始化用来接受输入流的信息</span><br><span class="line">            while ( (temp = reader.read()) != -1)&#123;</span><br><span class="line">                System.out.print( (char) temp); //  java !!hello, java !!!</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; </span><br></pre></td></tr></table></figure>
+
+
+<p>将关联文件读取到字符数组中</p>
+<pre><code>        // 1.定义一个字符串数组 长度为10  文件中的字符为java!!hellojava
+        char[] charArr = new char[10];
+        reader.read(charArr,1,8);
+        // 打印数组中的元素
+        System.out.println(Arrays.toString(charArr)); // [,  , j, a, v, a, !, !, h,  ]
+        // 由于用的是同一个对象 指针保留到下一个字符 如果读取完毕  指针自动调用前调用方第一个字符 最后一个字符返回为空
+       reader.read(charArr); 
+        System.out.println(Arrays.toString(charArr)); // [e, l, l, o, j, a, v, a, h,  ]
+</code></pre>
+<p>关闭流对象并释放有关的资源</p>
+<pre><code>finally &#123;
+        // 3.关闭流对象并释放有关的资源
+        // 如果在创建对象时发生异常 则reader为空值 可能引发空指针异常 在这进行判断防止异常的发生
+        if (reader != null)&#123;
+            try &#123;
+                reader.close();
+            &#125; catch (IOException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<p>实现文件的拷贝(单个字符)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">FileReader reader = null;</span><br><span class="line">        FileWriter writer = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 1.创建FileReader类型的对象 与 z:/a.txt 关联</span><br><span class="line">            reader = new FileReader(&quot;z:/a.txt&quot;);</span><br><span class="line">            // 2.创建FileWriter类型的对象 与 z:/b.txt 关联</span><br><span class="line">            writer = new FileWriter(&quot;z:/b.txt&quot;);</span><br><span class="line">            // 3.从输入流中读取到的数据写入到输出流</span><br><span class="line">            int temp = 0;</span><br><span class="line">            while ((temp = reader.read()) != -1)&#123;</span><br><span class="line">                writer.write(temp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            // 4.关闭流信息 并释放对应的资源</span><br><span class="line">            // 关闭流信息一般操作是 县创建的后关闭</span><br><span class="line">            if (writer != null)&#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    writer.close();</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(reader != null)&#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    reader.close();</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-BufferedWriter类"><a href="#7-BufferedWriter类" class="headerlink" title="7.BufferedWriter类"></a>7.BufferedWriter类</h4><p>基本概念：java.io.BufferedWriter类主要用于写入单个字符、字符数组以及字符串到输出流中。</p>
+<p>常用的方法    方法声明    功能介绍<br>BufferedWriter(Writer out)    根据参数指定的引用来构造对象<br>BufferedWriter(Writer out, int sz)    根据参数指定的引用和缓冲区大小来构造对象<br>void write(int c)    写入单个字符到输出流中<br>void write(char[] cbuf, int off, int len)    将字符数组cbuf中从下标off开始的len个字符写入输出流 中<br>void write(char[] cbuf)    将字符串数组cbuf中所有内容写入输出流中<br>void write(String s, int off, int len)    将参数s中下标从off开始的len个字符写入输出流中<br>void write(String str)    将参数指定的字符串内容写入输出流中<br>void newLine()    用于写入行分隔符到输出流中<br>void flush()    刷新流<br>void close()    关闭流对象并释放有关的资源</p>
+<h4 id="8-BufferedReader类"><a href="#8-BufferedReader类" class="headerlink" title="8.BufferedReader类"></a>8.BufferedReader类</h4><p>基本概念：java.io.BufferedReader类用于从输入流中读取单个字符、字符数组以及字符串。</p>
+<p>常用的方法   方法声明    功能介绍<br>BufferedReader(Reader in)    根据参数指定的引用来构造对象<br>BufferedReader(Reader in, int sz)    根据参数指定的引用和缓冲区大小来构造对象<br>int read()    从输入流读取单个字符，读取到末尾则返回-1，否则返回实际读取到 的字符内容<br>int read(char[] cbuf, int off, int len)    从输入流中读取len个字符放入数组cbuf中下标从off开始的位置上， 若读取到末尾则返回-1，否则返回实际读取到的字符个数<br>int read(char[] cbuf)    从输入流中读满整个数组<br>cbuf String readLine()    读取一行字符串并返回，返回null表示读取到末尾<br>void close()    关闭流对象并释放有关的资源<br>数据缓冲输入流(字符 按照行数据 )实现文件的拷贝(有异常未进行处理)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1.定义一个字符缓冲输入流 BufferedReader 与文件 z:/a.txt 文件关联</span><br><span class="line">       BufferedReader reader = new BufferedReader(new FileReader(&quot;z:a.txt&quot;));</span><br><span class="line">       // 2.定义一个字符缓冲输出流 BufferedWriter 与文件 z:/a.txt 文件关联</span><br><span class="line">       BufferedWriter writer = new BufferedWriter(new FileWriter(&quot;z:/b.txt&quot;));</span><br><span class="line">       // 3.将读到的行数据输入流按照行输出到输出流上</span><br><span class="line">       String res = null;</span><br><span class="line">       while ((res = reader.readLine()) != null)&#123; // 读取一行数据</span><br><span class="line">           writer.write(res); // 写入一行数据</span><br><span class="line">            writer.newLine(); // 新建一行 不添加此处代码 默认在末尾追加 当前系统的行分隔符是 </span><br><span class="line">       &#125;</span><br><span class="line">       // 4.关闭流信息 释放相关的资源</span><br><span class="line">       writer.close();</span><br><span class="line">       reader.close();</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-OutputStreamWriter类"><a href="#9-OutputStreamWriter类" class="headerlink" title="9.OutputStreamWriter类"></a>9.OutputStreamWriter类</h4><p>基本概念：java.io.OutputStreamWriter类主要用于实现从字符流到字节流的转换。</p>
+<p>常用的方法  方法声明    功能介绍<br>OutputStreamWriter(OutputStream out)    根据参数指定的引用来构造对象<br>OutputStreamWriter(OutputStream out, String charsetName)    根据参数指定的引用和编码构造 对象<br>void write(String str)    将参数指定的字符串写入<br>void flush()    刷新流<br>void close()    用于关闭输出流并释放有关的资源</p>
+<h4 id="10-InputStreamReader类"><a href="#10-InputStreamReader类" class="headerlink" title="10.InputStreamReader类"></a>10.InputStreamReader类</h4><p>基本概念：java.io.InputStreamReader类主要用于实现从字节流到字符流的转换。</p>
+<p>常用的方法   方法声明    功能介绍<br>InputStreamReader(InputStream in)    根据参数指定的引用来构造对象<br>InputStreamReader(InputStream in, String charsetName)    根据参数指定的引用和编码来构造对 象<br>int read(char[] cbuf)    读取字符数据到参数指定的数组<br>void close()    用于关闭输出流并释放有关的资源</p>
+<h4 id="11-ObjectInputStream类"><a href="#11-ObjectInputStream类" class="headerlink" title="11.ObjectInputStream类"></a>11.ObjectInputStream类</h4><p>基本概念：java.io.ObjectInputStream类主要用于从输入流中一次性将对象整体读取出来。<br>所谓反序列化主要指将有效组织的字节序列恢复为一个对象及相关信息的转化过程。<br>常用的方法   方法声明    功能介绍<br>ObjectInputStream(InputStream in)    根据参数指定的引用来构造对象<br>Object readObject()    主要用于从输入流中读取一个对象并返回 无法通过返回值 来判断是否读取到文件的末尾<br>void close()    用于关闭输入流并释放有关的资源<br>方法使用</p>
+<pre><code>  ObjectInputStream inputStream = null;
+    try &#123;
+        // 1.创建 ObjectInoutStream 对象与 z:/a.txt 文件关联
+        inputStream = new ObjectInputStream(new FileInputStream(&quot;z:/a.txt&quot;));
+        // 2.读取文件内容并打印信息
+        User user = (User)inputStream.readObject();
+        System.out.println(user);
+    &#125; catch (IOException e) &#123;
+        e.printStackTrace();
+    &#125; catch (ClassNotFoundException e) &#123;
+        e.printStackTrace();
+    &#125; finally &#123;
+        // 3.关闭流信息 并释放对应的资源
+        if (inputStream != null)&#123;
+            try &#123;
+                inputStream.close();
+            &#125; catch (IOException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<p>字符编码<br>编码表的由来</p>
+<p>计算机只能识别二进制数据，早期就是电信号。为了方便计算机可以识别各个国家的文字，就需要 将各个国家的文字采用数字编号的方式进行描述并建立对应的关系表，该表就叫做编码表。</p>
+<p>常见的编码表</p>
+<p>ASCII：美国标准信息交换码， 使用一个字节的低7位二位进制进行表示。</p>
+<p>ISO8859-1：拉丁码表，欧洲码表，使用一个字节的8位二进制进行表示。</p>
+<p>GB2312：中国的中文编码表，最多使用两个字节16位二进制为进行表示。</p>
+<p>GBK：中国的中文编码表升级，融合了更多的中文文字符号，最多使用两个字节16位二进制位表 示。</p>
+<p>Unicode：国际标准码，融合了目前人类使用的所有字符，为每个字符分配唯一的字符码。所有的 文字都用两个字节16位二进制位来表示</p>
+<p>编码的发展</p>
+<p>面向传输的众多 UTF（UCS Transfer Format）标准出现了，UTF-8就是每次8个位传输数据，而 UTF-16就是每次16个位。这是为传输而设计的编码并使编码无国界，这样就可以显示全世界上所 有文化的字符了。<br>Unicode只是定义了一个庞大的、全球通用的字符集，并为每个字符规定了唯一确定的编号，具体 存储成什么样的字节流，取决于字符编码方案。推荐的Unicode编码是UTF-8和UTF-16。<br>UTF-8：变长的编码方式，可用1-4个字节来表示一个字符。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Junsunnyl/article/details/119973088">https://blog.csdn.net/Junsunnyl/article/details/119973088</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/04/22/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B9%8BIO%E6%B5%81/" title="本地文件处理之IO流" target="_blank" rel="external">http://example.com/2022/04/22/本地文件处理之IO流/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/04/22/java%E5%AF%B9%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86/" title="java对本地文件的处理"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
