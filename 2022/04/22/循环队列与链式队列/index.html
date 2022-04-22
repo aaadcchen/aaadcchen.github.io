@@ -17,37 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>HTML入门基础笔记(一) | 星辰的博客</title>
-  <meta name="description" content="##HTML第一天###我们接下来是进行的网页开发网页的相关概念:  什么是网页? 什么是HTML? 网页的形成?##什么是网页： 1.网站是指在因特网上根据一定的规则，使用 HTML 等制作的用于展示特定内容相关的网页集合。 2.网页是网站中的一“页”，通常是 HTML 格式的文件，它要通过浏览器来阅读。###网页的组成： 1.网页是构成网站的基本元素，它通常由图片、链接、文字、声音、视频等元素">
+  <title>循环队列与链式队列 | 星辰的博客</title>
+  <meta name="description" content="1.循环队列123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include&lt;iostream&gt;#include&lt;fstream&gt;using namespace std;#define MAXQSIZE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTML入门基础笔记(一)">
-<meta property="og:url" content="http://example.com/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="循环队列与链式队列">
+<meta property="og:url" content="http://example.com/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="星辰的博客">
-<meta property="og:description" content="##HTML第一天###我们接下来是进行的网页开发网页的相关概念:  什么是网页? 什么是HTML? 网页的形成?##什么是网页： 1.网站是指在因特网上根据一定的规则，使用 HTML 等制作的用于展示特定内容相关的网页集合。 2.网页是网站中的一“页”，通常是 HTML 格式的文件，它要通过浏览器来阅读。###网页的组成： 1.网页是构成网站的基本元素，它通常由图片、链接、文字、声音、视频等元素">
+<meta property="og:description" content="1.循环队列123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include&lt;iostream&gt;#include&lt;fstream&gt;using namespace std;#define MAXQSIZE">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BB%84%E6%88%90.png">
-<meta property="og:image" content="http://example.com/images/%E6%B5%8F%E8%A7%88%E5%99%A8.png">
-<meta property="og:image" content="http://example.com/images/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8.png">
-<meta property="og:image" content="http://example.com/images/web%E6%A0%87%E5%87%86.png">
-<meta property="og:image" content="f:/D盘/javadocument/web/01-阶段一：前端开发基础资料/01-阶段一：前端开发基础资料/01-HTML资料/01-前端基础第一天-HTML（1-4小节）/笔记/images/图片45.png">
-<meta property="og:image" content="http://example.com/images/%E9%B8%9F.png">
-<meta property="og:image" content="http://example.com/images/%E7%86%8A%E5%A4%A7.png">
-<meta property="og:image" content="http://example.com/images/%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png">
-<meta property="og:image" content="http://example.com/images/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7.png">
-<meta property="og:image" content="http://example.com/images/%E5%89%AA%E5%A4%B4.png">
-<meta property="og:image" content="http://example.com/images/%E6%B2%A1%E6%9C%89%E8%AF%AD%E4%B9%89.png">
-<meta property="og:image" content="http://example.com/images/%E8%AF%AD%E4%B9%89%E5%8C%96.png">
-<meta property="og:image" content="http://example.com/images/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE.png">
-<meta property="og:image" content="http://example.com/images/%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7.png">
-<meta property="og:image" content="http://example.com/images/%E8%B7%AF%E5%BE%84.png">
-<meta property="article:published_time" content="2022-04-02T11:41:41.000Z">
-<meta property="article:modified_time" content="2022-04-05T02:30:17.183Z">
+<meta property="article:published_time" content="2022-04-22T04:09:34.000Z">
+<meta property="article:modified_time" content="2022-04-22T04:15:35.126Z">
 <meta property="article:author" content="陈斌">
-<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BB%84%E6%88%90.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+  <link rel="canonical" href="http://example.com/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/index.html">
   
     <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
   
@@ -364,14 +348,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-HTML笔记（一）" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-循环队列与链式队列" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      HTML入门基础笔记(一)
+      循环队列与链式队列
     </h1>
   
 
@@ -379,20 +363,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
-	  <time datetime="2022-04-02T11:41:41.000Z" itemprop="datePublished">2022-04-02</time>
+	<a href="/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/" class="article-date">
+	  <time datetime="2022-04-22T04:09:34.000Z" itemprop="datePublished">2022-04-22</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/HTML/">HTML</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/HTML/" rel="tag">HTML</a>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
   </span>
 
 
@@ -407,97 +391,26 @@
 
 	<span class="article-read hidden-xs">
     	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="leancloud_visitors"  data-flag-title="HTML入门基础笔记(一)">0</span>
+    	<span id="/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/" class="leancloud_visitors"  data-flag-title="循环队列与链式队列">0</span>
     </span>
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 687(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>##HTML第一天<br>###我们接下来是进行的网页开发网页的相关概念:</p>
-<ul>
-<li>什么是网页?</li>
-<li>什么是HTML?</li>
-<li>网页的形成?<br>##什么是网页：<br> 1.网站是指在因特网上根据一定的规则，使用 HTML 等制作的用于展示特定内容相关的网页集合。<br> 2.网页是网站中的一“页”，通常是 HTML 格式的文件，它要通过浏览器来阅读。<br>###网页的组成：<br> 1.网页是构成网站的基本元素，它通常由图片、链接、文字、声音、视频等元素组成。通常我们看到的网页，常见以 .htm 或 .html 后缀结尾的文件，因此将其俗称为 HTML 文件。</li>
-<li><img src="/images/%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BB%84%E6%88%90.png"><br>###什么是HTML：<br> 1.HTML 指的是超文本标记语言 (Hyper Text Markup Language) ，它是用来描述网页的一种语言。<br> 2.HTML 不是一种编程语言，而是一种标记语言 (markup language)。<br> 标记语言是一套标记标签 (markup tag)。<br>###网页的总结：<br> 1.网页是图片、链接、文字、声音、视频等元素组成, 其实就是一个html文件(后缀名为html)<br> 2.网页生成制作:  有前端人员书写 HTML 文件, 然后浏览器打开,就能看到了网页.<br> 3.HTML: 超文本标记语言, 用来制作网页的一门语言. 有标签组成的. 比如 图片标签 链接标签 视频标签等…<br>###浏览器：<br><strong>常用的浏览器</strong></li>
-<li>IE</li>
-<li>火狐</li>
-<li>谷歌</li>
-<li>苹果</li>
-<li>欧朋</li>
-</ul>
-<ul>
-<li>浏览器是网页显示、运行的平台。常用的浏览器有 IE、火狐（Firefox）、谷歌（Chrome）、Safari和Opera等。平时称为五大浏览器。</li>
-<li>查看浏览器市场份额：<a target="_blank" rel="noopener" href="http://tongji.baidu.com/data/browser">http://tongji.baidu.com/data/browser</a><br><img src="/images/%E6%B5%8F%E8%A7%88%E5%99%A8.png"><br><strong>浏览器内核（渲染引擎)</strong></li>
-</ul>
-<ul>
-<li><p>负责读取网页内容，整理讯息，计算网页的显示方式并显示页面<br><img src="/images/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8.png"></p>
-</li>
-<li><p>目前国内一般浏览器都会采用 Webkit&#x2F;Blink 内核，如 360、UC、QQ、搜狗等。<br>##web标准：</p>
-</li>
-<li><p>Web 标准是由 W3C 组织和其他标准化组织制定的一系列标准的集合。W3C（万维网联盟）是国际最著名的标准化组织。<br>###为什么需要Web标准：</p>
-</li>
-<li><p>浏览器不同，它们显示页面或者排版就有些许差异<br><img src="/images/web%E6%A0%87%E5%87%86.png"></p>
-</li>
-<li><p>遵循 Web 标准除了可以让不同的开发人员写出的页面更标准、更统一外，还有以下优点：<br>1.让 Web 的发展前景更广阔。<br>2.内容能被更广泛的设备访问。<br>3.更容易被搜寻引擎搜索。<br>4.降低网站流量费用。<br>5.使网站更易于维护。<br>6.提高页面浏览速度。<br>##web标准的构成：<br>主要包括 《结构Structure》 、《表现（Presentation）》和《行为（Behavior）》三个方面。<br><img src="F:/D盘/javadocument/web/01-阶段一：前端开发基础资料/01-阶段一：前端开发基础资料/01-HTML资料/01-前端基础第一天-HTML（1-4小节）/笔记/images/图片45.png"><br>Web 标准提出的最佳体验方案：<strong>结构、样式、行为相分离</strong>。<br>简单理解：<strong>结构写到 HTML 文件中， 表现写到 CSS 文件中， 行为写到 JavaScript 文件中</strong><br><img src="/images/%E9%B8%9F.png"></p>
-</li>
-</ul>
-<p>1.结构类似身体</p>
-<p>2.表现类似外观装饰</p>
-<p>3.行为类似行为动作</p>
-<p>4.相比较而言, 三者中结构最重要.<br>##HTML标签的导读：<br>###HTML语法规则：<br>    1.HTML 标签是由尖括号包围的关键词，例如 <html>。<br>    2.HTML 标签通常是成对出现的，例如 <html> 和 </html> ，我们称为<strong>双标签</strong>。<br>    3.签。标签对中的第一个标签是开始标签，第二个标签是结束标签。<br>有些特殊的标签必须是单个标签（极少情况），例如 <br />，我们称为<strong>单标签</strong>。<br>###标签的关系：<br>    双标签关系可以分为两类：包含关系和并列关系<br>    包含标签：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;  </span><br><span class="line">            &lt;title&gt; &lt;/title&gt; </span><br><span class="line">        &lt;/head&gt;</span><br><span class="line">![](/images/大头儿子.png) </span><br><span class="line">    并列关系：</span><br></pre></td></tr></table></figure>
+        <h3 id="1-循环队列"><a href="#1-循环队列" class="headerlink" title="1.循环队列"></a>1.循环队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;fstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define MAXQSIZE 100</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">typedef char QElemType;</span><br><span class="line">typedef char SElemType;</span><br><span class="line">typedef int Status;</span><br><span class="line"></span><br><span class="line">typedef struct &#123;</span><br><span class="line">QElemType *base;//初始化时动态分配存储空间</span><br><span class="line">	int front;//头指针</span><br><span class="line">	int rear;//尾指针</span><br><span class="line">&#125; SqQueue;</span><br><span class="line">Status EnQueue(SqQueue &amp;Q, QElemType e);</span><br><span class="line">Status DeQueue(SqQueue &amp;Q, QElemType &amp;e);</span><br><span class="line">//算法3.11　循环队列的初始化</span><br><span class="line">Status InitQueue(SqQueue &amp;Q) &#123;//构造一个空队列Q</span><br><span class="line">	Q.base = new QElemType[MAXQSIZE]; //为队列分配一个最大容量为MAXSIZE的数组空间</span><br><span class="line"> 	//存储分配失败</span><br><span class="line">	Q.front = Q.rear = 0; //头指针和尾指针置为零，队列为空</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	SqQueue Q;</span><br><span class="line">	QElemType e, j;</span><br><span class="line">	int n,i;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	cin&gt;&gt;n; //输入n的值</span><br><span class="line">	for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    	cin&gt;&gt;e;  //输入e的值</span><br><span class="line">    	EnQueue(Q, e);</span><br><span class="line">    &#125;</span><br><span class="line">	while (DeQueue(Q, e))&#123;</span><br><span class="line">		cout &lt;&lt; e &lt;&lt;endl;    //输出e的值</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">//入队</span><br><span class="line">Status EnQueue(SqQueue &amp;Q, QElemType e) &#123;//插入元素e为Q的新的队尾元素</span><br><span class="line">	if ((Q.rear + 1) % MAXQSIZE == Q.front) //尾指针在循环意义上加1后等于头指针，表明队满</span><br><span class="line">	return ERROR;</span><br><span class="line">	Q.base[Q.rear] = e; //新元素插入队尾</span><br><span class="line">	Q.rear = (Q.rear + 1) % MAXQSIZE; //队尾指针加1</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">//出队</span><br><span class="line">Status DeQueue(SqQueue &amp;Q, QElemType &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    if(Q.front==Q.rear)</span><br><span class="line">        return ERROR;</span><br><span class="line">    e=Q.base[Q.front];</span><br><span class="line">    Q.front=(Q.front+1)%MAXQSIZE;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code>     &lt;head&gt; &lt;/head&gt;
-     &lt;body&gt; &lt;/body&gt;
-</code></pre>
-<p><img src="/images/%E7%86%8A%E5%A4%A7.png"><br>###基本结构标签：<br>​    每个网页都会有一个基本的结构标签（也称为骨架标签），页面内容也是在这些基本标签上书写<br><img src="/images/%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png"><br>###开发工具：<br>   <img src="/images/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7.png"><br>   <img src="/images/%E5%89%AA%E5%A4%B4.png"><br><strong>VSCode的使用：</strong></p>
-<pre><code>1. 双击打开软件。
-    2. 新建文件（Ctrl + N ）。
-    3. 保存（Ctrl + S ）, 注意移动要保存为 .html 文件
-    4. Ctrl + 加号键 ，Ctrl + 减号键  可以放大缩小视图 
-    5. 生成页面骨架结构。 输入! 按下 Tab 键。
-    6. 利用插件在浏览器中预览页面：单击鼠标右键，在弹出窗口中点击“Open In Default Browser”。
-        **DOCTYPE**
+<h3 id="2-链式队列"><a href="#2-链式队列" class="headerlink" title="2.链式队列"></a>2.链式队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;fstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">typedef char QElemType;</span><br><span class="line">typedef int Status;</span><br><span class="line">typedef char SElemType;</span><br><span class="line"></span><br><span class="line">//- - - - - 队列的链式存储结构- - - - - </span><br><span class="line">typedef struct QNode &#123;</span><br><span class="line">	QElemType data;</span><br><span class="line">	struct QNode *next;</span><br><span class="line">&#125; QNode, *QueuePtr;</span><br><span class="line">typedef struct &#123;</span><br><span class="line">	QueuePtr front; //队头指针</span><br><span class="line">	QueuePtr rear; //队尾指针</span><br><span class="line">&#125; LinkQueue;</span><br><span class="line">Status EnQueue(LinkQueue &amp;Q, QElemType e); </span><br><span class="line">Status DeQueue(LinkQueue &amp;Q, QElemType &amp;e);</span><br><span class="line">//算法3.16　链队的初始化</span><br><span class="line">Status InitQueue(LinkQueue &amp;Q) &#123;//构造一个空队列Q</span><br><span class="line">	Q.front = Q.rear = new QNode; //生成新结点作为头结点，队头和队尾指针指向此结点</span><br><span class="line">	Q.front-&gt;next = NULL; //头结点的指针域置空</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	LinkQueue Q;</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	QElemType e, j;</span><br><span class="line">	int n,i;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	cin&gt;&gt;n; </span><br><span class="line">	for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    	cin&gt;&gt;e;</span><br><span class="line">    	EnQueue(Q, e);</span><br><span class="line">    &#125;  </span><br><span class="line">    while(DeQueue(Q,e))</span><br><span class="line">    	cout&lt;&lt;e&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">//算法3.17　链队的入队</span><br><span class="line">Status EnQueue(LinkQueue &amp;Q, QElemType e) &#123;</span><br><span class="line">	//插入元素e为Q的新的队尾元素</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	p = new QNode; //为入队元素分配结点空间，用指针p指向</span><br><span class="line">	p-&gt;data = e; //将新结点数据域置为e</span><br><span class="line">	p-&gt;next = NULL;</span><br><span class="line">	Q.rear-&gt;next = p; //将新结点插入到队尾</span><br><span class="line">	Q.rear = p; //修改队尾指针</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">//出队</span><br><span class="line">Status DeQueue(LinkQueue &amp;Q, QElemType &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	p=new QNode;</span><br><span class="line">	if(Q.front==Q.rear)</span><br><span class="line">	return ERROR;</span><br><span class="line">	p=Q.front-&gt;next;</span><br><span class="line">	e=p-&gt;data;</span><br><span class="line">	Q.front-&gt;next=p-&gt;next;</span><br><span class="line">	if(Q.rear==p)</span><br><span class="line">	Q.rear=Q.front;</span><br><span class="line">	delete p;</span><br><span class="line">	return 	OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-&lt;!DOCTYPE html&gt;  文档类型声明标签,告诉浏览器这个页面采取html5版本来显示页面.
-</code></pre>
-<p><strong>lang 语言种类</strong><br>    用来定义当前文档显示的语言。<br>    en定义语言为英语<br>    zh-CN定义语言为中文<br>    简单来说,定义为en 就是英文网页, 定义为 zh-CN 就是中文网页<br>    其实对于文档显示来说，定义成en的文档也可以显示中文，定义成zh-CN的文档也可以显示英文<br>    这个属性对浏览器和搜索引擎(百度.谷歌等)还是有作用的<br><strong>字符集</strong><br>    1.字符集 (Character set)是多个字符的集合。以便计算机能够识别和存储各种文字。<br>    2.在<head>标签内，可以通过<meta> 标签的 charset 属性来规定 HTML 文档应该使用哪种字符编码。<br>    3.<meta charset=" UTF-8" /><br>    4.charset 常用的值有：GB2312 、BIG5 、GBK 和 UTF-8，其中 UTF-8 也被称为万国码，基本包含了全世界所有国家需要用到的字符.<br>    5.注意：上面语法是必须要写的代码，否则可能引起乱码的情况。一般情况下，统一使用“UTF-8”编码，尽量统一写成标准的 “UTF-8”，不要写成  “utf8” 或 “UTF8”。<br>###语义化标签：<br>    学习标签是有技巧的，重点是记住每个标签的语义。简单理解就是指标签的含义，即这个标签是用来干嘛的。<br>###什么是语义化标签：<br>    根据标签的语义，在合适的地方给一个最为合理的标签，可以让页面结构更清晰。<br>    下图没有语义化标签：<br><img src="/images/%E6%B2%A1%E6%9C%89%E8%AF%AD%E4%B9%89.png"><br>###添加语义标签：<br><img src="/images/%E8%AF%AD%E4%B9%89%E5%8C%96.png"><br>###常用的标签：<br>###标题标签<br>    <strong>标题标签 <h1> - <h6>（重要)</strong><br>    为了使网页更具有语义化，我们经常会在页面中用到标题标签。HTML 提供了 6 个等级的网页标题，即</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt; - &lt;h6&gt; 。</span><br><span class="line">    具体实现：</span><br><span class="line">          &lt;h1&gt; 我是一级标题 &lt;/h1&gt;</span><br><span class="line"> 特点：</span><br><span class="line">​    1.加了标题的文字会变的加粗，字号也会依次变大。</span><br><span class="line">    2. 一个标题独占一行。</span><br><span class="line">        来！！！左边。。。右边。。。中间：</span><br><span class="line">        &lt;h1&gt;标题一共六级选,&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;文字加粗一行显。&lt;/h2&gt;</span><br><span class="line">        &lt;h3&gt;由大到小依次减，&lt;/h3&gt;</span><br><span class="line">        &lt;h4&gt;从重到轻随之变。&lt;/h4&gt;</span><br><span class="line">        &lt;h5&gt;语法规范书写后，&lt;/h5&gt;</span><br><span class="line">        &lt;h6&gt;具体效果刷新见。&lt;/h6&gt;</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<p>###段落标签：<br>    在网页中，要把文字有条理地显示出来，就需要将这些文字分段显示。在 HTML 标签中，<p>标签用于定义段落，它可以将整个网页分为若干个段落。<br>    具体实现：</p>
-<pre><code>     &lt;p&gt; 我是一个段落标签 &lt;/p&gt;
-</code></pre>
-<p>​    特点：<br>​        1. 文本在一个段落中会根据浏览器窗口的大小自动换行。<br>​                2. 段落和段落之间保有空隙。<br>​        ###换行标签<br>​                在 HTML 中，一个段落中的文字会从左到右依次排列，直到浏览器窗口的右端，然后才自动换行。如果希望某段文本强制换行显示，就需要使用换行标签 <br />。<br>​<br>​        <code>​         具体实现： ​                            &lt;br /&gt; ​                特点： ​                        1. &lt;br /&gt; 是个单标签。 ​                                2. &lt;br /&gt; ​       </code><br>​<br>         标签只是简单地开始新的一行，跟段落不一样，段落之间会插入一些垂直的间距。<br>        ###文本格式化标签：<br>                    在网页中，有时需要为文字设置粗体、斜体 或下划线等效果，这时就需要用到 HTML 中的文本格式化标签，使文字以特殊的方式显示。<br>        <img src="/images/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE.png"><br>        ###div和span标签<br>            <div> 和 <span> 是没有语义的，它们就是一个盒子，用来装内容的。<br>            具体实现：<br>                 <div> 这是头部 </div><br>                 <span> 今日价格 </span><br>            特点：<br>                1. <div> 标签用来布局，但是现在一行只能放一个<div>。 大盒子<br>                2. <span> 标签用来布局，一行上可以多个 <span>。小盒子<br>        ###图片标签：<br>            在 HTML 标签中，<img> 标签用于定义 HTML 页面中的图像。<br>            具体实现：<br>                  <img src="" /><br>            解释：<br>                src 是<img>标签的必须属性，它用于指定图像文件的路径和文件名。<br>                所谓属性：简单理解就是属于这个图像标签的特性。<br>            图像标签的其他属性：<br>        <img src="/images/%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7.png"><br>        ​<br>            图像标签注意点：<br>                1.图像标签可以拥有多个属性，必须写在标签名的后面。<br>                2.属性之间不分先后顺序，标签名与属性、属性与属性之间均以空格分开。<br>                3.属性采取键值对的格式，即 key&#x3D;“value” 的格式，属性 &#x3D;“属性值”。<br>        ###路径：<br>            分为相对路径和绝对路径：<br>                <strong>路径之相对路径</strong><br>                相对路径：以引用文件所在位置为参考基础，而建立出的目录路径。<br>                这里简单来说，图片相对于 HTML 页面的位置<br>        <img src="/images/%E8%B7%AF%E5%BE%84.png"><br>            特点：<br>                相对路径是从代码所在的这个文件出发，去寻找目标文件的，而我们这里所说的上一级 、下一级和同一级就是 图片相对于 HTML 页面的位置。<br>                路径之绝对路径：<br>                    绝对路径：<br>                    1.是指目录下的绝对位置，直接到达目标位置，通常是从盘符开始的路径。<br>                    例如，“D:\web\img\logo.gif”或完整的网络地址“<a target="_blank" rel="noopener" href="http://www.i”/">http://www.i”</a><br>        ###链接标签：<br>             链接的语法格式<br>                <a href="跳转目标" target="目标窗口的弹出方式"> 文本或图像 </a><br>            属性：<br>                1.href：用于指定链接目标的url地址<br>                2.target:用于指定链接页面的打开方式_self默认值 _blank新窗口打开<br>                3.#：空链接<br>        链接分类：<br>            1.外部链接: 例如 &lt; a href&#x3D;”http:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> “&gt; 百度</a >。<br>            2.内部链接:网站内部页面之间的相互链接. 直接链接内部页面名称即可，例如 &lt; a href&#x3D;”index.html”&gt; 首页 </a >。<br>            3.空链接: 如果当时没有确定链接目标时，&lt; a href&#x3D;”#”&gt; 首页 </a > 。<br>            4.下载链接: 如果 href 里面地址是一个文件或者压缩包，会下载这个文件。<br>            5.网页元素链接: 在网页中的各种网页元素，如文本、图像、表格、音频、视频等都可以添加超链接.<br>            6.锚点链接:  点我们点击链接,可以快速定位到页面中的某个位置. </p>
-<ul>
-<li><pre><code>   在链接文本的 href 属性中，设置属性值为 #名字 的形式，如&lt;a href=&quot;#two&quot;&gt; 第2集 &lt;/a&gt; 
-</code></pre>
-</li>
-<li><pre><code>   找到目标位置标签，里面添加一个 id 属性 = 刚才的名字 ，如：&lt;h3 id=&quot;two&quot;&gt;第2集介绍&lt;/h3&gt;
-   ###注释
-   如果需要在 HTML 文档中添加一些便于阅读和理解但又不需要显示在页面中的注释文字，就需要使用注释标签。
-   HTML中的注释以“&lt;!--”开头，以“ --&gt;”结束。
-   具体实现：
-        &lt;!-- 注释语句 --&gt;      快捷键: ctrl +  / 
-   一句话: 注释标签里面的内容是给程序猿看的, 这个代码是不执行不显示到页面中的.
-   添加注释是为了更好地解释代码的功能，便于相关开发人员理解和阅读代码，程序是不会执行注释内容的
-   ###特殊字符：
-   在 HTML 页面中，一些特殊的符号很难或者不方便直接使用，此时我们就可以使用下面的字符来替代。
-   ![](/images/特殊字符.png) 
-   重点记住：空格 、大于号、 小于号 这三个， 其余的使用很少，如果需要回头查阅即可。
-</code></pre>
-</li>
-</ul>
 
       
     </div>
@@ -507,7 +420,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" title="HTML入门基础笔记(一)" target="_blank" rel="external">http://example.com/2022/04/02/HTML笔记（一）/</a>
+      <a href="http://example.com/2022/04/22/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E4%B8%8E%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/" title="循环队列与链式队列" target="_blank" rel="external">http://example.com/2022/04/22/循环队列与链式队列/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -554,12 +467,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" title="HTML入门基础笔记(二)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2022/04/22/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BEKMP%E7%AE%97%E6%B3%95/" title="字符串查找KMP算法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2022/03/25/hello-world/" title="Hello World"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/04/22/%E9%A1%BA%E5%BA%8F%E6%A0%88%E4%B8%8E%E9%93%BE%E6%A0%88/" title="顺序栈与链栈"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
