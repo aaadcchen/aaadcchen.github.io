@@ -18,15 +18,15 @@
   
   
   <title>Java面向对象 | 星辰的博客</title>
-  <meta name="description" content="面向对象概念  所有操作基于对象进行操作实现 面向对象的三大特征  封装、继承、多态 类：具有相同特征和行为物体的统称 在java中类的定义语法： [修饰符]   class   类名{  属性;  方法;} 属性和方法称为成员、分别是成员属性和成员方法  类的使用：1.创建对象结合关键字new， new 对象名(参数列表); 2.调用它的方法和属性对象名.属性对象名.方法(参数列表) 对象创建的">
+  <meta name="description" content="面向对象概念  所有操作基于对象进行操作实现 面向对象的三大特征  封装、继承、多态 类：具有相同特征和行为物体的统称 在java中类的定义语法： 12345[修饰符] class 类名&amp;#123;  		属性;  		方法;&amp;#125;  属性和方法称为成员、分别是成员属性和成员方法  类的使用：1.创建对象结合关键字new， new 对象名(参数列表); 2.调用它的方法和属性对象名.属性对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java面向对象">
 <meta property="og:url" content="http://example.com/2022/05/03/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="星辰的博客">
-<meta property="og:description" content="面向对象概念  所有操作基于对象进行操作实现 面向对象的三大特征  封装、继承、多态 类：具有相同特征和行为物体的统称 在java中类的定义语法： [修饰符]   class   类名{  属性;  方法;} 属性和方法称为成员、分别是成员属性和成员方法  类的使用：1.创建对象结合关键字new， new 对象名(参数列表); 2.调用它的方法和属性对象名.属性对象名.方法(参数列表) 对象创建的">
+<meta property="og:description" content="面向对象概念  所有操作基于对象进行操作实现 面向对象的三大特征  封装、继承、多态 类：具有相同特征和行为物体的统称 在java中类的定义语法： 12345[修饰符] class 类名&amp;#123;  		属性;  		方法;&amp;#125;  属性和方法称为成员、分别是成员属性和成员方法  类的使用：1.创建对象结合关键字new， new 对象名(参数列表); 2.调用它的方法和属性对象名.属性对象">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-03T15:20:47.000Z">
-<meta property="article:modified_time" content="2022-05-03T15:46:14.603Z">
+<meta property="article:modified_time" content="2022-05-07T11:07:14.750Z">
 <meta property="article:author" content="陈斌">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -411,7 +411,8 @@
 <h2 id="面向对象的三大特征"><a href="#面向对象的三大特征" class="headerlink" title="面向对象的三大特征"></a>面向对象的三大特征</h2><p>  封装、继承、多态</p>
 <p>类：具有相同特征和行为物体的统称</p>
 <p>在java中类的定义语法：</p>
-<p>[修饰符]   class   类名{<br>  属性;<br>  方法;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] class 类名</span><br><span class="line">&#123;</span><br><span class="line">  		属性;</span><br><span class="line">  		方法;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>属性和方法称为成员、分别是成员属性和成员方法</p>
 <blockquote>
 <p>类的使用：<br>1.创建对象<br>结合关键字new， new 对象名(参数列表);</p>
@@ -446,7 +447,8 @@
 <p>反面角度：将子类中相同的代码抽象到父类中，提高代码的复用性，减少重复代码</p>
 <p><strong>继承语法：</strong></p>
 </blockquote>
-<p><code>   public class 子类名 extends 父类名&#123;     &#125;</code>方法的重写：<br>子类重写父类中的方法，除了方法体重写之外，其他的和父类定义的一样<br>方法的重载：<br>在同一个类中，方法名相同，参数列表不同(类型，顺序，个数)，和返回值相同<br><strong>super：</strong><br>1、可以在子类的构造方法中调用父类的构造方法，通过super调用父类中的构造方法<br>必须放在子类构造方法中的第一行，如果子类构造方法没有调用父类的构造方法，默认调用无参构造<br>2、调用父类的构造方法给父类中定义的属性赋值，或调用父类中的属性和方法</p>
+<p><code>   public class 子类名 extends 父类名&#123;     &#125;</code></p>
+<p>方法的重写：<br>子类重写父类中的方法，除了方法体重写之外，其他的和父类定义的一样<br>方法的重载：<br>在同一个类中，方法名相同，参数列表不同(类型，顺序，个数)，和返回值相同<br><strong>super：</strong><br>1、可以在子类的构造方法中调用父类的构造方法，通过super调用父类中的构造方法<br>必须放在子类构造方法中的第一行，如果子类构造方法没有调用父类的构造方法，默认调用无参构造<br>2、调用父类的构造方法给父类中定义的属性赋值，或调用父类中的属性和方法</p>
 <p><strong>修饰符：</strong><br>访问修饰符、static修饰符、final修饰符</p>
 <p>访问修饰符的作用：控制被修饰的内容(类、类的成员)在其他类中的访问情况，具体参考baidu</p>
 <p>一般结论：属性使用private，方法使用public</p>
