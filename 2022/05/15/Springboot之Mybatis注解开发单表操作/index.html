@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Springboot之Mybatis注解开发单表操作与多表联查 | 星辰的博客</title>
+  <meta name="description" content="一.Springboot之Mybatis注解开发单表操作1.1 MyBatis的常用注解这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样我们就可以减少编写Mapper 映射文件了。 @Insert：实现新增 @Update：实现更新 @Delete：实现删除 @Select：实现查询 @Result：实现结果集封装 @Results：可以与@Result 一起使用，封装多个结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Springboot之Mybatis注解开发单表操作与多表联查">
+<meta property="og:url" content="http://example.com/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="一.Springboot之Mybatis注解开发单表操作1.1 MyBatis的常用注解这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样我们就可以减少编写Mapper 映射文件了。 @Insert：实现新增 @Update：实现更新 @Delete：实现删除 @Select：实现查询 @Result：实现结果集封装 @Results：可以与@Result 一起使用，封装多个结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images3/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://example.com/images3/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://example.com/images3/1590942011460.png">
+<meta property="og:image" content="http://example.com/images3/1590942772892.png">
+<meta property="og:image" content="http://example.com/images3/1590943489827.png">
+<meta property="og:image" content="http://example.com/images3/1590943921472.png">
+<meta property="article:published_time" content="2022-05-15T13:34:22.000Z">
+<meta property="article:modified_time" content="2022-05-15T13:37:06.340Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images3/%E5%9B%BE%E7%89%8710.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.8px;">JavaScript</a> <a href="/tags/css/" style="font-size: 13.4px;">css</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.2px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.6px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="title">Springboot之Mybatis注解开发单表操作与多表联查</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-15T13:34:22.000Z" itemprop="datePublished">2022-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/15/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/" class="title">Mysql常用语句</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-15T13:33:49.000Z" itemprop="datePublished">2022-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/12/Java%E8%BF%90%E8%A1%8C%E9%9D%9EWeb%E7%9A%84Springboot%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" class="title">Java运行非Web的Springboot项目的两种方法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-12T14:18:37.000Z" itemprop="datePublished">2022-05-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/12/SpringBoot-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9F%BA%E7%A1%80%E6%B3%A8%E8%A7%A3/" class="title">SpringBoot 常用的基础注解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-12T12:26:13.000Z" itemprop="datePublished">2022-05-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/09/JavaEE%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%BD%93%E7%B3%BB%E7%9A%84%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84/" class="title">JavaEE软件开发体系的三层架构与Spring</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-09T13:59:09.000Z" itemprop="datePublished">2022-05-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Springboot之Mybatis注解开发单表操作" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Springboot之Mybatis注解开发单表操作与多表联查
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="article-date">
+	  <time datetime="2022-05-15T13:34:22.000Z" itemprop="datePublished">2022-05-15</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Java/" rel="tag">Java</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="leancloud_visitors"  data-flag-title="Springboot之Mybatis注解开发单表操作与多表联查">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一-Springboot之Mybatis注解开发单表操作"><a href="#一-Springboot之Mybatis注解开发单表操作" class="headerlink" title="一.Springboot之Mybatis注解开发单表操作"></a>一.Springboot之Mybatis注解开发单表操作</h3><h4 id="1-1-MyBatis的常用注解"><a href="#1-1-MyBatis的常用注解" class="headerlink" title="1.1 MyBatis的常用注解"></a>1.1 MyBatis的常用注解</h4><p>这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样我们就可以减少编写Mapper</p>
+<p>映射文件了。</p>
+<p>@Insert：实现新增</p>
+<p>@Update：实现更新</p>
+<p>@Delete：实现删除</p>
+<p>@Select：实现查询</p>
+<p>@Result：实现结果集封装</p>
+<p>@Results：可以与@Result 一起使用，封装多个结果集</p>
+<p>@One：实现一对一结果集封装</p>
+<p>@Many：实现一对多结果集封装</p>
+<h4 id="1-2-MyBatis的增删改查"><a href="#1-2-MyBatis的增删改查" class="headerlink" title="1.2 MyBatis的增删改查"></a>1.2 MyBatis的增删改查</h4><p>我们完成简单的student表的增删改查的操作</p>
+<ul>
+<li><p>步骤一:持久层，在dao中创建mapper接口，Student对象类省略</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM student&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//新增操作</span></span><br><span class="line">    <span class="meta">@Insert(&quot;INSERT INTO student VALUES (#&#123;id&#125;,#&#123;name&#125;,#&#123;age&#125;)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">insert</span><span class="params">(Student stu)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//修改操作</span></span><br><span class="line">    <span class="meta">@Update(&quot;UPDATE student SET name=#&#123;name&#125;,age=#&#123;age&#125; WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">update</span><span class="params">(Student stu)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除操作</span></span><br><span class="line">    <span class="meta">@Delete(&quot;DELETE FROM student WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤二：业务层，Server类</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Server&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentMapper studentMapper; </span><br><span class="line">    </span><br><span class="line">	//查询全部</span><br><span class="line">    public List&lt;Student&gt; selectstu() &#123;</span><br><span class="line">        return studentMapper.selectAll();</span><br><span class="line">    &#125;</span><br><span class="line">    //新增操作</span><br><span class="line">    public Integer insertstu(Student stu)&#123;</span><br><span class="line">    	return studentMapper.insert(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    //修改操作</span><br><span class="line">    public Integer updatestu(Student stu)&#123;</span><br><span class="line">    	return studentMapper.update(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    //删除操作</span><br><span class="line">    public Integer delete(Integer id)&#123;</span><br><span class="line">    	return studentMapper.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>步骤三：打开springboot测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MybatisApplicationTests</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Server server;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//添加测试方法</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">selectdome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        List&lt;Student&gt; list = server.selectstu();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        <span class="keyword">for</span> (Student student : list) &#123;</span><br><span class="line">            System.out.println(student);</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">insertdome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;赵六&quot;</span>,<span class="number">26</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.insertstu(stu);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">updatedome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;赵六&quot;</span>,<span class="number">26</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.updatestu(stu);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">deletedome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.deletestu(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="1-3-注解开发总结"><a href="#1-3-注解开发总结" class="headerlink" title="1.3 注解开发总结"></a>1.3 注解开发总结</h4><p>注解可以简化开发操作，省略映射配置文件的编写。 </p>
+<ul>
+<li><p>常用注解 </p>
+<p>@Select(“查询的 SQL 语句”)：执行查询操作注解</p>
+<p> @Insert(“查询的 SQL 语句”)：执行新增操作注解</p>
+<p> @Update(“查询的 SQL 语句”)：执行修改操作注解</p>
+<p> @Delete(“查询的 SQL 语句”)：执行删除操作注解</p>
+</li>
+</ul>
+<h3 id="二-MyBatis注解开发的多表操作"><a href="#二-MyBatis注解开发的多表操作" class="headerlink" title="二.MyBatis注解开发的多表操作"></a>二.MyBatis注解开发的多表操作</h3><h4 id="2-1-MyBatis的注解实现复杂映射开发"><a href="#2-1-MyBatis的注解实现复杂映射开发" class="headerlink" title="2.1  MyBatis的注解实现复杂映射开发"></a>2.1  MyBatis的注解实现复杂映射开发</h4><p>实现复杂关系映射之前我们可以在映射文件中通过配置<resultMap>来实现，使用注解开发后，我们可以使用@Results注解，@Result注解，@One注解，@Many注解组合完成复杂关系的配置</p>
+<p><img src="/images3/%E5%9B%BE%E7%89%8710.png"></p>
+<p><img src="/images3/%E5%9B%BE%E7%89%8711.png"></p>
+<p>通常在@Results(………,fetchType&#x3D; FetchType.EAGER)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Select(&quot;select * from test where level = 1&quot;)</span><br><span class="line">    @Results(value = &#123;</span><br><span class="line">            @Result(id = true,column = &quot;pid0&quot;,property = &quot;pid0&quot;),</span><br><span class="line">            @Result(column = &quot;pid0&quot;, property = &quot;child&quot;, many = @Many(select = &quot;com.example.demo.Database.Dataselect.getpid&quot;,fetchType= FetchType.EAGER))</span><br><span class="line">    &#125;)</span><br><span class="line">    List&lt;Classdify&gt; getclassification();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-一对一查询"><a href="#2-2-一对一查询" class="headerlink" title="2.2  一对一查询"></a>2.2  一对一查询</h4><h5 id="2-2-1-一对一查询的模型"><a href="#2-2-1-一对一查询的模型" class="headerlink" title="2.2.1 一对一查询的模型"></a>2.2.1 一对一查询的模型</h5><p>一对一查询的需求：查询一个用户信息，与此同时查询出该用户对应的身份证信息</p>
+<p><img src="/images3/1590942011460.png" alt="picture"></p>
+<h5 id="2-2-2-一对一查询的语句"><a href="#2-2-2-一对一查询的语句" class="headerlink" title="2.2.2 一对一查询的语句"></a>2.2.2 一对一查询的语句</h5><p>对应的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> card；</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> person <span class="keyword">WHERE</span> id<span class="operator">=</span>#&#123;id&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h5 id="2-2-3-创建PersonMapper接口"><a href="#2-2-3-创建PersonMapper接口" class="headerlink" title="2.2.3 创建PersonMapper接口"></a>2.2.3 创建PersonMapper接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PersonMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据id查询</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM person WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Person <span class="title function_">selectById</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-4-使用注解配置Mapper"><a href="#2-2-4-使用注解配置Mapper" class="headerlink" title="2.2.4 使用注解配置Mapper"></a>2.2.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CardMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM card&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;number&quot;,property = &quot;number&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;p&quot;,             // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = Person.class,    // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;pid&quot;,             // 根据查询出的card表中的pid字段来查询person表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        one、@One 一对一固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    one = @One(select = &quot;com.itheima.one_to_one.PersonMapper.selectById&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Card&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-5-测试类省略"><a href="#2-2-5-测试类省略" class="headerlink" title="2.2.5 测试类省略"></a>2.2.5 测试类省略</h5><h5 id="2-2-6-一对一配置总结"><a href="#2-2-6-一对一配置总结" class="headerlink" title="2.2.6  一对一配置总结"></a>2.2.6  一对一配置总结</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	one 属性：一对一查询固定属性</span><br><span class="line"> @One：一对一查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-3-一对多查询"><a href="#2-3-一对多查询" class="headerlink" title="2.3 一对多查询"></a>2.3 一对多查询</h4><h5 id="2-3-1-一对多查询的模型"><a href="#2-3-1-一对多查询的模型" class="headerlink" title="2.3.1 一对多查询的模型"></a>2.3.1 一对多查询的模型</h5><p>一对多查询的需求：查询一个课程，与此同时查询出该该课程对应的学生信息</p>
+<p><img src="/images3/1590942772892.png" alt="picture"></p>
+<h5 id="2-3-2-一对多查询的语句"><a href="#2-3-2-一对多查询的语句" class="headerlink" title="2.3.2 一对多查询的语句"></a>2.3.2 一对多查询的语句</h5><p>对应的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> classes</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> cid<span class="operator">=</span>#&#123;cid&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="-1"><a href="#-1" class="headerlink" title=""></a></h5><h5 id="2-3-3-创建StudentMapper接口"><a href="#2-3-3-创建StudentMapper接口" class="headerlink" title="2.3.3 创建StudentMapper接口"></a>2.3.3 创建StudentMapper接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据cid查询student表</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM student WHERE cid=#&#123;cid&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Student&gt; <span class="title function_">selectByCid</span><span class="params">(Integer cid)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-4-使用注解配置Mapper"><a href="#2-3-4-使用注解配置Mapper" class="headerlink" title="2.3.4 使用注解配置Mapper"></a>2.3.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ClassesMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM classes&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;students&quot;,  // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = List.class,  // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;id&quot;,          // 根据查询出的classes表的id字段来查询student表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        many、@Many 一对多查询的固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个查询方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.itheima.one_to_many.StudentMapper.selectByCid&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Classes&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-5-测试类省略"><a href="#2-3-5-测试类省略" class="headerlink" title="2.3.5 测试类省略"></a>2.3.5 测试类省略</h5><h5 id="2-3-6-一对多配置总结"><a href="#2-3-6-一对多配置总结" class="headerlink" title="2.3.6 一对多配置总结"></a>2.3.6 一对多配置总结</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	many 属性：一对多查询固定属性</span><br><span class="line">@Many：一对多查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4-多对多查询"><a href="#2-4-多对多查询" class="headerlink" title="2.4  多对多查询"></a>2.4  多对多查询</h4><h5 id="2-4-1-多对多查询的模型"><a href="#2-4-1-多对多查询的模型" class="headerlink" title="2.4.1 多对多查询的模型"></a>2.4.1 多对多查询的模型</h5><p>多对多查询的需求：查询学生以及所对应的课程信息</p>
+<p><img src="/images3/1590943489827.png" alt="picture"></p>
+<h5 id="2-4-2-多对多查询的语句"><a href="#2-4-2-多对多查询的语句" class="headerlink" title="2.4.2 多对多查询的语句"></a>2.4.2 多对多查询的语句</h5><p>对应的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> s.id,s.name,s.age <span class="keyword">FROM</span> student s,stu_cr sc <span class="keyword">WHERE</span> sc.sid<span class="operator">=</span>s.id</span><br><span class="line"><span class="keyword">SELECT</span> c.id,c.name <span class="keyword">FROM</span> stu_cr sc,course c <span class="keyword">WHERE</span> sc.cid<span class="operator">=</span>c.id <span class="keyword">AND</span> sc.sid<span class="operator">=</span>#&#123;id&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-4-3-添加CourseMapper-接口方法"><a href="#2-4-3-添加CourseMapper-接口方法" class="headerlink" title="2.4.3  添加CourseMapper 接口方法"></a>2.4.3  添加CourseMapper 接口方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CourseMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据学生id查询所选课程</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT c.id,c.name FROM stu_cr sc,course c WHERE sc.cid=c.id AND sc.sid=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Course&gt; <span class="title function_">selectBySid</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4-4-使用注解配置Mapper"><a href="#2-4-4-使用注解配置Mapper" class="headerlink" title="2.4.4 使用注解配置Mapper"></a>2.4.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT DISTINCT s.id,s.name,s.age FROM student s,stu_cr sc WHERE sc.sid=s.id&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;age&quot;,property = &quot;age&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;courses&quot;,   // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = List.class,  // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;id&quot;,          // 根据查询出student表的id来作为关联条件，去查询中间表和课程表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        many、@Many 一对多查询的固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个查询方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.itheima.many_to_many.CourseMapper.selectBySid&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Student&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4-5-测试类省略"><a href="#2-4-5-测试类省略" class="headerlink" title="2.4.5 测试类省略"></a>2.4.5 测试类省略</h5><h5 id="2-4-6-多对多配置总结"><a href="#2-4-6-多对多配置总结" class="headerlink" title="2.4.6 多对多配置总结"></a>2.4.6 多对多配置总结</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	many 属性：一对多查询固定属性</span><br><span class="line">@Many：一对多查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三-构建sql"><a href="#三-构建sql" class="headerlink" title="三.构建sql"></a>三.构建sql</h3><h4 id="3-1-SQL-构建对象介绍"><a href="#3-1-SQL-构建对象介绍" class="headerlink" title="3.1 SQL 构建对象介绍"></a>3.1 SQL 构建对象介绍</h4><ul>
+<li>我们之前通过注解开发时，相关 SQL 语句都是自己直接拼写的。一些关键字写起来比较麻烦、而且容易出错。 </li>
+<li>MyBatis 给我们提供了 org.apache.ibatis.jdbc.SQL 功能类，专门用于构建 SQL 语句    </li>
+<li><img src="/images3/1590943921472.png" alt="picture"></li>
+</ul>
+<h4 id="3-2-查询功能的实现"><a href="#3-2-查询功能的实现" class="headerlink" title="3.2  查询功能的实现"></a>3.2  查询功能的实现</h4><ul>
+<li><p>定义功能类并提供获取查询的 SQL 语句的方法。 </p>
+</li>
+<li><p>@SelectProvider：生成查询用的 SQL 语句注解。</p>
+<p>type 属性：生成 SQL 语句功能类对象 </p>
+<p>method 属性：指定调用方法</p>
+</li>
+</ul>
+<h4 id="3-3-新增功能的实现"><a href="#3-3-新增功能的实现" class="headerlink" title="3.3  新增功能的实现"></a>3.3  新增功能的实现</h4><ul>
+<li><p>定义功能类并提供获取新增的 SQL 语句的方法。 </p>
+</li>
+<li><p>@InsertProvider：生成新增用的 SQL 语句注解。 </p>
+<p>type 属性：生成 SQL 语句功能类对象 </p>
+<p>method 属性：指定调用方法</p>
+</li>
+</ul>
+<h4 id="3-4-修改功能的实现"><a href="#3-4-修改功能的实现" class="headerlink" title="3.4  修改功能的实现"></a>3.4  修改功能的实现</h4><ul>
+<li><p>定义功能类并提供获取修改的 SQL 语句的方法。 </p>
+</li>
+<li><p>@UpdateProvider：生成修改用的 SQL 语句注解。 </p>
+<p>type 属性：生成 SQL 语句功能类对象</p>
+<p> method 属性：指定调用方法</p>
+</li>
+</ul>
+<h4 id="3-5-删除功能的实现"><a href="#3-5-删除功能的实现" class="headerlink" title="3.5  删除功能的实现"></a>3.5  删除功能的实现</h4><ul>
+<li><p>定义功能类并提供获取删除的 SQL 语句的方法。 </p>
+</li>
+<li><p>@DeleteProvider：生成删除用的 SQL 语句注解。</p>
+<p>type 属性：生成 SQL 语句功能类对象 </p>
+<p>method 属性：指定调用方法</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" title="Springboot之Mybatis注解开发单表操作与多表联查" target="_blank" rel="external">http://example.com/2022/05/15/Springboot之Mybatis注解开发单表操作/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/05/15/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/" title="Mysql常用语句"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
