@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>第八章排序 | 星辰的博客</title>
+  <meta name="description" content="一、排序的相关概念【排序】将一组杂乱无章的数据按一定规律（关键字排序）顺次排列起来，以便于查找。 【内部排序】若待排序记录都在内存中，称为内部排序。 【外部排序】若待排序记录一部分在内存，一部分在外存，则称为外部排序。外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 【算法性能衡量】 ​      ①时间效率：反映出排序速度（比较次数与移动次数）； ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八章排序">
+<meta property="og:url" content="http://example.com/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="一、排序的相关概念【排序】将一组杂乱无章的数据按一定规律（关键字排序）顺次排列起来，以便于查找。 【内部排序】若待排序记录都在内存中，称为内部排序。 【外部排序】若待排序记录一部分在内存，一部分在外存，则称为外部排序。外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 【算法性能衡量】 ​      ①时间效率：反映出排序速度（比较次数与移动次数）； ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-28T15:56:12.000Z">
+<meta property="article:modified_time" content="2022-05-28T15:57:10.173Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.8px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.6px;">JavaScript</a> <a href="/tags/css/" style="font-size: 13.4px;">css</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.2px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/" class="title">第八章排序</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-28T15:56:12.000Z" itemprop="datePublished">2022-05-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/20/%E7%AC%AC%E4%B8%83%E7%AB%A0%E6%9F%A5%E6%89%BE/" class="title">第七章查找</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-20T10:33:45.000Z" itemprop="datePublished">2022-05-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="title">17.Springboot之Mybatis注解开发单表操作与多表联查</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-15T13:34:22.000Z" itemprop="datePublished">2022-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/15/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/" class="title">16.Mysql常用语句</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-15T13:33:49.000Z" itemprop="datePublished">2022-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/12/Java%E8%BF%90%E8%A1%8C%E9%9D%9EWeb%E7%9A%84Springboot%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" class="title">15.Java运行非Web的Springboot项目的两种方法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-12T14:18:37.000Z" itemprop="datePublished">2022-05-12</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-第八章排序" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第八章排序
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/" class="article-date">
+	  <time datetime="2022-05-28T15:56:12.000Z" itemprop="datePublished">2022-05-28</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/" class="leancloud_visitors"  data-flag-title="第八章排序">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 17(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>一、排序的相关概念<br>【排序】将一组杂乱无章的数据按一定规律（关键字排序）顺次排列起来，以便于查找。</p>
+<p>【内部排序】若待排序记录都在内存中，称为内部排序。</p>
+<p>【外部排序】若待排序记录一部分在内存，一部分在外存，则称为外部排序。外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。</p>
+<p>【算法性能衡量】</p>
+<p>​      ①时间效率：反映出排序速度（比较次数与移动次数）；</p>
+<p>​      ②空间效率：反应出占内存辅助空间的大小；</p>
+<p>​     ③稳定性为A和B的关键字相等，排序后A、B的先后次序保持不变，则称这种排序算法是稳定的。</p>
+<p>二、插入排序<br>       插入排序的基本思想为每步将一个待排序的对象，按其关键码大小，插入到前面已经排好序的一组对象的适当位置上，直到对象全部插入为止。即边插入边排序，保证子序列中随时都是排好序的。</p>
+<p>2.1 直接插入排序（基于顺序查找）<br>【算法思想】整个排序过程为n-1趟插入，即先将序列中第1个记录看成是一个有序子序列，然后从第2个记录开始，逐个进行插入，直至整个序列有序。</p>
+<p>【例子】对序列（13，6，3，31，9，27，5，11）进行增序排列。</p>
+<p>   ①将元素13作为第一个记录，将元素13与元素6比较，13&gt;6,插入至元素13前；</p>
+<p>   ②将元素3与元素6比较，3&lt;6，插入至元素6前；</p>
+<p>   ③以此循环，直至最后成为一个有序序列。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void InsertSort(SqList ＆L)</span><br><span class="line"> </span><br><span class="line"> &#123;int i,j;</span><br><span class="line"> </span><br><span class="line">   for(i=2;i&lt;=L.length;++i)</span><br><span class="line"> </span><br><span class="line">     if( L.r[i].key&lt;L.r[i-1].key)//将L.r[i]插入有序子表</span><br><span class="line"> </span><br><span class="line">       &#123; L.r[0]=L.r[i]; // 复制为哨兵</span><br><span class="line"> </span><br><span class="line">          L.r[i]=L.r[i-1];</span><br><span class="line"> </span><br><span class="line">          for(j=i-2; L.r[0].key&lt;L.r[j].key;--j)</span><br><span class="line"> </span><br><span class="line">                   L.r[j+1]=L.r[j]; // 记录后移</span><br><span class="line"> </span><br><span class="line">         L.r[j+1]=L.r[0]; //插入到正确位置</span><br><span class="line"> </span><br><span class="line">       &#125;</span><br><span class="line"> </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>【算法分析】</strong>设对象个数为n，则执行n-1趟，比较次数和移动次数与初始排列有关。</p>
+<p>​    ①最好情况下，每趟只需比较 1 次，不移动，总比较次数为 n-1；</p>
+<p>​    ②最坏情况下：第 i 趟比较i次，移动i+1次；</p>
+<p>​    ③若出现各种可能排列的概率相同，则可取最好情况和最坏情况的平均情况，时间复杂度为 O(n2)，空间复杂度为O(1)，是一种稳定的排序方法。</p>
+<p>2.2 折半插入排序（基于折半查找）<br>【算法思想】假设待排序的记录存放在数组r[1 … n]中，r[1 ]是一个有序序列。</p>
+<p>  ①循环n-1次,每次用折半查找法，查找r[i] (i&#x3D;2, …，n)在已排好序的序列r[1..i-1]中的插入位置；</p>
+<p>  ②然后将r[i]插入表长为i-1的有序序列r[1 …i-1], 直到将r[n]插入表长为n-1的有序序列r[1… n-1] , 最后得到一个表长为n的有序序列。</p>
+<p>【算法描述】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">void Binsert Sort(SqList &amp;L)//对顺序表L做折半插入排序</span><br><span class="line"> </span><br><span class="line">｛</span><br><span class="line">   for (i=2; i &lt; =L. length; ++i)</span><br><span class="line"> </span><br><span class="line">      L.r[O)=L.r[i); //将待插人的记录暂存到监视哨中</span><br><span class="line"> </span><br><span class="line">   low=l;high=i-1;// 置查找区间初值</span><br><span class="line"> </span><br><span class="line">   while(low&lt;=high) //在r[low .. high]中折半查找插入的位置</span><br><span class="line"> </span><br><span class="line">      m=(low+high)/2; //折半</span><br><span class="line"> </span><br><span class="line">   if(L.r[0] .key&lt;L.r[m) .key) </span><br><span class="line">      high=m-1; //插入点在前一子表</span><br><span class="line"> </span><br><span class="line">   else low=m+l; //插入点在后一子表</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">   for (j=i-1;j&gt;=high+1; --j) </span><br><span class="line">      L.r[j+l1=L.r(j]; //记录后移</span><br><span class="line"> </span><br><span class="line">   L.r[high+1]=L.r[0]; //将r[]即原r[i], 插入到正确位置</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【算法分析】</p>
+<p>   ①折半插入排序的时间复杂度仍为 O(n2)；折半插入排序所需附加存储空间和直接插入排序相同，只需要一个记录的辅助空间，所以空间复杂度为O(1)；</p>
+<p>   ②折半插入算法是一种稳定的排序算法。</p>
+<p>【算法特点】</p>
+<p>   ①因为要进行折半查找， 所以只能用于顺序结构，不能用于链式结构;</p>
+<p>   ②适合初始记录无序、n较大时的情况。</p>
+<p>2.3 希尔排序（基于逐趟缩小增量）<br>【算法思想】先将整个待排记录序列分割成若干子序列,分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行一次直接插入排序。</p>
+<p>【算法技巧】子序列的构成不是简单地“逐段分割”，将相隔某个增量dk的记录组成一个子序列，让增量dk逐趟缩短（例如依次取5,3,1），直到dk＝1为止。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">void   ShellSort(SqList &amp;L，int dlta[ ]，int t)&#123;</span><br><span class="line"> </span><br><span class="line">        //按增量序列dlta[0…t-1]对顺序表L作Shell排序</span><br><span class="line"> </span><br><span class="line">   for(k=0；k&lt;t；++k)</span><br><span class="line"> </span><br><span class="line">    　ShellInsert(L，dlta[k])；// dk值依次装在dlta[t]中</span><br><span class="line"> </span><br><span class="line">　 　//增量为dlta[k]的一趟插入排序</span><br><span class="line"> </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line">void   ShellInsert(SqList &amp;L，int dk) &#123;</span><br><span class="line"> </span><br><span class="line">     //对顺序表L进行一趟增量为dk的Shell排序，dk为步长因子</span><br><span class="line"> </span><br><span class="line">for(i=dk+1；i&lt;=L.length； ++ i) //开始将r[i] 插入有序增量子表</span><br><span class="line"> </span><br><span class="line">      if(r[i].key &lt; r[i-dk].key) &#123;        </span><br><span class="line"> </span><br><span class="line">       r[0]=r[i]；//暂存在r[0]</span><br><span class="line"> </span><br><span class="line">       for(j=i-dk; j&gt;0 &amp;&amp;(r[0].key&lt;r[j].key); j=j-dk)</span><br><span class="line"> </span><br><span class="line">        r[j+dk]=r[j]；//关键字较大的记录在子表中后移</span><br><span class="line"> </span><br><span class="line">        r[j+dk]=r[0]；//在本趟结束时将r[i]插入到正确位置</span><br><span class="line"> </span><br><span class="line">       &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【算法分析】①时间复杂度是n和d的函数</p>
+<p>​                 ②空间复杂度为 o(1)；</p>
+<p>​                 ③希尔排序是一种不稳定的排序方法。</p>
+<p>【算法特点】①dk 值较大，子序列中对象较少，速度较快；</p>
+<p>​                ②dk 值逐渐变小，子序列中对象变多，但大多数对象已基本有序，所以排序速度仍然很快；</p>
+<p>​                 ③该算法中，最后一个增量值必须为1且不能在链式存储结构上实现。</p>
+<p>【算法优点】①小元素跳跃式前移，且最后一趟增量为1时，序列已基本有序；</p>
+<p>​                ②平均性能优于直接插入排序。</p>
+<p>三、交换排序<br>      交换排序的基本思想为两两比较，如果发生逆序则交换，直到所有记录都排好序为止。</p>
+<p>3.1 冒泡排序<br>【算法思想】每趟不断将记录两两比较，并按“前小后大” 规则交换</p>
+<p>【例子】 对关键字序列 T&#x3D;( 21，25，49， 25<em>，16，  08），进行关键字递增排序（25</em>代表第二次出现关键字25）。如下：</p>
+<p>  ①第一趟，21与25比较：不需交换；25与49比较：不需交换；49与25*比较：进行交换；49与16进行比较：需要交换；49与08比较：需要交换。</p>
+<p> 即第一趟最终结果为{21，25，25*，16， 08 ，（49）}。</p>
+<p> ②第二趟，21与25比较：不需交换；25与25<em>比较：不需交换；25</em>与16比较：进行交换；25*与08进行比较：需要交换。</p>
+<p> 即第二趟最终结果为{21，25， 16， 08 ，（ 25*，49）}。</p>
+<p> ③第三趟，21与25比较：不需交换；25与16比较：进行交换；25与08比较：进行交换。</p>
+<p> 即第三趟最终结果为{21，16， 08 ，（ 25， 25*，49）}。</p>
+<p> ④第四趟，21与16比较：进行交换；21与08比较：进行交换。</p>
+<p> 即第四趟最终结果为{16，08 ，（ 21， 25， 25*，49）}。</p>
+<p> ⑤第五趟，16与08比较：进行交换。</p>
+<p> 即第四趟最终结果为{08 ，（16，21， 25， 25*，49）}。此时未排序元素只剩1个，排序结束，因每次比较交换后，最大关键字都会被排序，过程像吐泡泡，由上至下从大到小，故称为冒泡排序。</p>
+<p>【算法描述】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">void bubble_sort(SqList &amp;L)</span><br><span class="line"></span><br><span class="line">&#123; int m,i,j,flag=1;   RedType x;</span><br><span class="line"></span><br><span class="line">  m=n-1;</span><br><span class="line"></span><br><span class="line">  while((m&gt;0)&amp;&amp;(flag==1))</span><br><span class="line"></span><br><span class="line">  &#123;  flag=0;</span><br><span class="line"></span><br><span class="line">     for(j=1;j&lt;=m;j++)</span><br><span class="line"></span><br><span class="line">        if(L.r[j].key&gt;L.r[j+1].key)</span><br><span class="line"></span><br><span class="line">         &#123;  flag=1;</span><br><span class="line"></span><br><span class="line">            x=L.r[j];L.r[j]=L.r[j+1];L.r[j+1]=x; //交换</span><br><span class="line"></span><br><span class="line">          &#125;//endif</span><br><span class="line"></span><br><span class="line">     m--;</span><br><span class="line"></span><br><span class="line">   &#125;//endwhile</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>【算法分析】</strong>设对象个数为n，比较次数和移动次数与初始排列有关。</p>
+<p>​    ①最好情况下：只需 1趟排序，比较次数为 n-1，不移动；</p>
+<p>​    ②最坏情况下：需 n-1趟排序，第i趟比较n-i次，移动3(n-i)次</p>
+<p>③时间复杂度为 o(n2)，空间复杂度为 o(1)；</p>
+<p>​    ④冒泡排序是一种稳定的排序方法。</p>
+<p><strong>【算法优点】</strong>①每趟结束时，不仅能挤出一个最大值到最后面位置，还能同时部分理顺其他元素；</p>
+<p>​          ②一旦某趟没有交换，提前结束排序。</p>
+<h2 id="3-2-快速排序"><a href="#3-2-快速排序" class="headerlink" title="3.2 快速排序"></a>3.2 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F&spm=1001.2101.3001.7020">快速排序</a></h2><p><strong>【算法思想】</strong>快速排序需满足以下几点：<br>   ①任取一个元素 (如第一个) 为中心；</p>
+<p>   ②所有比它小的元素一律前放，比它大的元素一律后放，形成左右两个子表；</p>
+<p>   ③对各子表重新选择中心元素并依此规则调整，直到每个子表的元素只剩一个。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> void QSort ( SqList &amp;L，int low,  int  high )</span><br><span class="line"> </span><br><span class="line">&#123;  if  ( low &lt; high )</span><br><span class="line"> </span><br><span class="line">    &#123;  pivotloc = Partition(L, low, high ) ;</span><br><span class="line"> </span><br><span class="line">        Qsort (L, low, pivotloc-1) ;</span><br><span class="line"> </span><br><span class="line">        Qsort (L, pivotloc+1, high )</span><br><span class="line"> </span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">int Partition ( SqList &amp;L，int low,  int  high )</span><br><span class="line"> </span><br><span class="line">&#123;  L.r[0] = L.r[low];   pivotkey = L.r[low].key;</span><br><span class="line"> </span><br><span class="line">   while  ( low &lt; high )</span><br><span class="line"> </span><br><span class="line">    &#123; while ( low &lt; high &amp;&amp; L.r[high].key &gt;= pivotkey )  --high;</span><br><span class="line"> </span><br><span class="line">                 L.r[low] = L.r[high];</span><br><span class="line"> </span><br><span class="line">      while ( low &lt; high &amp;&amp; L.r[low].key &lt;= pivotkey )  ++low;</span><br><span class="line"> </span><br><span class="line">                 L.r[high] = L.r[low];</span><br><span class="line"> </span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">    L.r[low]=L.r[0];</span><br><span class="line"> </span><br><span class="line">    return low;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【算法分析】</p>
+<p>​    ①最好情况为划分后，左侧右侧子序列的长度相同；</p>
+<p>   ②最坏情况为从小到大排好序，递归树成为单支树，每次划分只得到一个比上一次少一个对象的子序列，必须经过 n-1 趟才能把所有对象定位，而且第 i 趟需要经过 n-i 次关键码比较才能找到第 i 个对象的安放位置。</p>
+<p>   ③时间效率： 因每趟确定的元素呈指数增加，因此时间复杂度为O(nlog2n)；空间效率：因递归要用到栈空间，因此空间复杂度为O（log2n）。</p>
+<p>   ④因可选任一元素为支点，所以快速排序算法为不稳定算法。</p>
+<p>【算法特点】       </p>
+<p>   ①每一趟的子表的形成是采用从两头向中间交替式逼近法；</p>
+<p>   ②由于每趟中对各子表的操作都相似，可采用递归算法；</p>
+<p>   ③快速排序算法可以证明，平均计算时间是O(nlog2n)。平均计算时间而言，快速排序是我们所讨论的所有内排序方法中最好的一个；</p>
+<p>   ④快速排序是递归的，需要有一个栈存放每层递归调用时参数（新的low和high）；</p>
+<p>   ⑤最大递归调用层次数与递归树的深度一致，因此，要求存储开销为 O(log2n) 。</p>
+<p>四、选择排序<br>       选择排序的基本思想为第i 趟中就是在后面 n-i +1个记录中选出关键码最小的对象, 作为有序序列的第 i 个记录。</p>
+<p>4.1 简单选择排序<br>【算法思想】</p>
+<p>   ①设待排序的记录存放在数组r[l… n]中。第一趟从r[I]开始，通过n-1次比较，从n个记录中选出关键字最小的记录，记为r[k], 交换r[l]和r[k]。</p>
+<p>   ②第二趟从r[2]开始，通过n-2次比较，从n-1个记录中选出关键字最小的记录，记为r[k],</p>
+<p>交换r[2]和r[k] 。</p>
+<p>   ③依次类推，第l趟从r[i]开始，通过n-i次比较，从n-i+l个记录中选出关键字最小的记录，记为r[k], 交换r[i]和r[k]。</p>
+<p>   ④经过n-1趟，排序完成。</p>
+<p>【算法描述】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void SelectSort(SqList &amp;K)</span><br><span class="line"> </span><br><span class="line"> &#123;</span><br><span class="line"> </span><br><span class="line">    for (i=1; i&lt;L.length; ++i)</span><br><span class="line"> </span><br><span class="line">    &#123; //在L.r[i..L.length] 中选择key最小的记录</span><br><span class="line"> </span><br><span class="line">        k=i;    </span><br><span class="line"> </span><br><span class="line">        for( j=i+1;j&lt;=L.length ; j++)</span><br><span class="line"> </span><br><span class="line">            if ( L.r[j].key &lt;L.r[k].key) k=j;</span><br><span class="line"> </span><br><span class="line">        if(k!=i)L.r[i]←→L.r[k];           </span><br><span class="line"> </span><br><span class="line">    &#125; </span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【算法分析】 ①移动次数，在最好情况下为0次，最坏情况下为3（n-1）次；</p>
+<p>​                ③简单排序的时间复杂度：O(n²)，空间复杂度：O(1)；</p>
+<p>​                ④简单排序算法是稳定的排序算法。</p>
+<p>4.2 堆排序<br>4.2.1 堆排序的相关概念<br>   【堆】n个元素的序列{k1,k2,…,kn}，当且仅当满足下列关系时，成为堆：</p>
+<p>​     如果将序列看成一个完全二叉树，非终端结点的值均小于或大于左右子结点的值。</p>
+<p>   【大根堆】在堆中，堆顶元素（或完全二叉树的根）必为序列中 n个元素的最大值，称之为大根堆。</p>
+<p>   【小根堆】在堆中，堆顶元素（或完全二叉树的根）必为序列中 n个元素的最小值，称之为小根堆。</p>
+<p>4.2.2 堆排序算法<br>  对于堆排序算法最主要问题的如何建？如何调整？两大问题。</p>
+<p>【算法思想】</p>
+<p>  ①将无序序列建成一个堆，输出堆顶的最小（大）值，使剩余的n-1个元素又调整成一个堆，则可得到n个元素的次小值；</p>
+<p> ②重复执行，得到一个有序序列。</p>
+<p>五、归并排序<br>5.1 归并的相关概念<br>【归并】将两个或两个以上的有序表组合成一个新有序表</p>
+<p>5.2 2-路归并排序<br>【算法思想】初始序列看成n个有序子序列，每个子序列长度为1：</p>
+<p>​              ①两两合并，得到⌊n&#x2F;2⌋个长度为2或1的有序子序列；</p>
+<p>​              ②再两两合并，重复直至得到一个长度为n的有序序列为止。</p>
+<p>六、基数排序<br>  前面的排序方法主要通过关键字值之间的比较和移动，而基数排序不需要关键字之间的比较。</p>
+<p>【多关键字排序】多关键字的排序主要分为两大类：最高位优先（MSD）和最低位优先（LSD）；</p>
+<p>【链式基数排序】用链表作存储结构的基数排序。</p>
+<p>6.1 最高位优先的基数排序<br>【算法思想】①先对最高位关键字k1（如花色）排序，将序列分成若干子序列，每个子序列有相同的k1值；</p>
+<p>​                ②然后让每个子序列对次关键字k2（如面值）排序，又分成若干更小的子序列；</p>
+<p>​               ③依次重复，直至就每个子序列对最低位关键字kd排序，就可以得到一个有序序列。</p>
+<p>【特点】十进制数比较可以看作是一个多关键字排序。</p>
+<p>【例子】对关键字序列 T&#x3D;( 278, 109,063,930,184,589 ,269,008,083），按照最高位优先，进行基数排序，如下：</p>
+<p>  ①先按百位进行排序，结果为（008,063,083,109,184,269,278,589,930）；</p>
+<p> ②按照上步的排序结果，按十位进行排序，结果为（008，063，083，109，184，269，278，589，930）。</p>
+<p>6.2 最低位优先的基数排序<br>【算法思想】①首先依据最低位排序码Kd对所有对象进行一趟排序；</p>
+<p>​                ②再依据次低位排序码Kd-1对上一趟排序结果排序；</p>
+<p>​               ③依次重复，直到依据排序码K1最后一趟排序完成，就可以得到一个有序的序列。</p>
+<p>【特点】这种方法不需要再分组，而是整个对象组都参加排序。</p>
+<p>【例子】对关键字序列 T&#x3D;( 278, 109,063,930,184,589 ,269,008,083），按照最低位优先，进行基数排序，如下：</p>
+<p>   ①先按百位进行排序，结果为（930，063，083，184， 278， 008，109， 589，269）；</p>
+<p>   ②按照上步的排序结果，按十位进行排序，结果为（008，109，930, 063，169，278，083，184，589）;</p>
+<p>  ③按照②中排序结果，按照百位进行排序，结果为（008，063，083，109，169，184，278，589， 930）。</p>
+<p>6.3 链式基数排序<br>【先决条件】①知道各级关键字的主次关系；</p>
+<p>​                ②知道各级关键字的取值范围。</p>
+<p>【算法思想】</p>
+<p>​     ①首先对低位关键字排序，各个记录按照此位关键字的值‘分配’到相应的序列里；</p>
+<p>​    ②按照序列对应的值的大小，从各个序列中将记录‘收集’，收集后的序列按照此位关键字有序；</p>
+<p>​     ③在此基础上，对前一位关键字进行排序。</p>
+<p>【算法步骤】设置10个队列，f[i]和e[i]分别头指针和尾指针</p>
+<p>​     ①第一趟分配对最低位关键字（个位）进行，改变记录的指针值，将链表中记录分配至10个链队列中，每个队列记录的关键字的个位相同；</p>
+<p>​    ②第一趟收集是改变所有非空队列的队尾记录的指针域，令其指向下一个非空队列的队头记录，重新将10个队列链成一个链表；</p>
+<p>​    ③重复上述两步，进行第二趟、第三趟分配和收集，分别对十位、百位进行，最后得到一个有序序列。</p>
+<p>【算法分析】该算法需要重复执行d趟“分配”与“收集”，每趟对 n 个记录进行“分配”，对rd个队列进行“收集”，需要增加n+2rd个附加链接指针。</p>
+<p>   ①链式基数排序算法的时间效率为O(d( n+rd)) ，空间效率为O(n+rd)；</p>
+<p>   ②基数排序算法是稳定算法。</p>
+<p>七、外部排序<br>【算法思想】外部排序由相对独立的两个步骤组成：</p>
+<p>   ①按可用内存大小,利用内部排序方法，构造若干个记录的有序子序列写入外存，通常称这些记录的有序子序列为 “归并段”;</p>
+<p>   ②通过“归并”，逐步扩大(记录的)有序子序列的长度，直至外存中整个记录序列按关键字有序为止。</p>
+<p>【分析】</p>
+<p>   ①外排总的时间还应包括内部排序所需时间和逐趟归并时进行内部归并的时间。</p>
+<p>​          外部排序总时间&#x3D;产生初始归并段的时间（m<em>tIS）+外存信息读写时间 （d</em>tIO）+内部归并所需时间（s*utmg）；</p>
+<p>   ②tIO值取决于外存，远远大于tIS和tmg。 外部排序的时间取决于读写外存的次数d。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/" title="第八章排序" target="_blank" rel="external">http://example.com/2022/05/28/第八章排序/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/05/20/%E7%AC%AC%E4%B8%83%E7%AB%A0%E6%9F%A5%E6%89%BE/" title="第七章查找"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

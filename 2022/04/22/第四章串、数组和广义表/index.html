@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>第四章串、数组和广义表 | 星辰的博客</title>
+  <meta name="description" content="第四章 串、数组和广义表​     本章对串、数组和广义表这几类特殊的线性表进行讨论，也可看做为线性表的扩充。串的特殊性体现在数据元素是一个字符，即是内容受限的线性表，数组与广义表的特殊性为线性表的数据元素自身又是一个数据结构。 一、串1.1  串的相关概念​       【定义】由零个或多个字符组成的有限序列， 一般记为 s&#x3D; “a1 a2 … an” (n≥O)    【串名】s就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章串、数组和广义表">
+<meta property="og:url" content="http://example.com/2022/04/22/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="第四章 串、数组和广义表​     本章对串、数组和广义表这几类特殊的线性表进行讨论，也可看做为线性表的扩充。串的特殊性体现在数据元素是一个字符，即是内容受限的线性表，数组与广义表的特殊性为线性表的数据元素自身又是一个数据结构。 一、串1.1  串的相关概念​       【定义】由零个或多个字符组成的有限序列， 一般记为 s&#x3D; “a1 a2 … an” (n≥O)    【串名】s就是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images4/20210729154242685.png">
+<meta property="og:image" content="http://example.com/images4/20210729151348946.png">
+<meta property="og:image" content="http://example.com/images4/20210729154424538.png">
+<meta property="article:published_time" content="2022-04-22T04:15:40.000Z">
+<meta property="article:modified_time" content="2022-05-28T15:47:10.536Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images4/20210729154242685.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/04/22/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 13.8px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.6px;">JavaScript</a> <a href="/tags/css/" style="font-size: 13.4px;">css</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.2px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/28/%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%8E%92%E5%BA%8F/" class="title">第八章排序</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-28T15:56:12.000Z" itemprop="datePublished">2022-05-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/20/%E7%AC%AC%E4%B8%83%E7%AB%A0%E6%9F%A5%E6%89%BE/" class="title">第七章查找</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-20T10:33:45.000Z" itemprop="datePublished">2022-05-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="title">17.Springboot之Mybatis注解开发单表操作与多表联查</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-15T13:34:22.000Z" itemprop="datePublished">2022-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/15/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/" class="title">16.Mysql常用语句</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-15T13:33:49.000Z" itemprop="datePublished">2022-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/12/Java%E8%BF%90%E8%A1%8C%E9%9D%9EWeb%E7%9A%84Springboot%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" class="title">15.Java运行非Web的Springboot项目的两种方法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-12T14:18:37.000Z" itemprop="datePublished">2022-05-12</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-第四章串、数组和广义表" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第四章串、数组和广义表
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/22/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" class="article-date">
+	  <time datetime="2022-04-22T04:15:40.000Z" itemprop="datePublished">2022-04-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/04/22/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" class="leancloud_visitors"  data-flag-title="第四章串、数组和广义表">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/22/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 15(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="第四章-串、数组和广义表"><a href="#第四章-串、数组和广义表" class="headerlink" title="第四章 串、数组和广义表"></a>第四章 串、数组和广义表</h4><p>​     本章对串、数组和广义表这几类特殊的线性表进行讨论，也可看做为线性表的扩充。串的特殊性体现在数据元素是一个字符，即是内容受限的线性表，数组与广义表的特殊性为线性表的数据元素自身又是一个数据结构。</p>
+<h2 id="一、串"><a href="#一、串" class="headerlink" title="一、串"></a>一、串</h2><h4 id="1-1-串的相关概念"><a href="#1-1-串的相关概念" class="headerlink" title="1.1  串的相关概念"></a>1.1  串的相关概念</h4><p>​       【定义】由零个或多个字符组成的有限序列， 一般记为 s&#x3D; “a1 a2 … an” (n≥O)</p>
+<pre><code>   【串名】s就是串的名字。
+   【串值】由双引号括起来的字符序列就是串的值
+   【串长】串中字符的数目n即为串长
+   【空串】零个字符的串，其长度为零。注意空格串与空串的区别。
+   【子串】串中任意个连续的字符组成的子序列称为该串的子串。
+   【主串】包含子串的串相应地称为主串。
+</code></pre>
+<h3 id="1-2-串的模式匹配算法"><a href="#1-2-串的模式匹配算法" class="headerlink" title="1.2  串的模式匹配算法"></a>1.2  串的模式匹配算法</h3><p>​       串的模式匹配也称为子串定位运算或串匹配，其目的在于确定主串中所含子串第一次出现的位置（定位）。在串匹配中，一般将主串称为目标串，子串称之为模式串。 </p>
+<pre><code>   同时，模式匹配不一定是从主串的第一个位置开始， 可以指定主串中查找的起始位置 pos。该算法主要分为两种：①BF算法（又称穷尽算法或暴力算法）；  ②KMP算法（拥有速度快的特点）。
+</code></pre>
+<h4 id="1-2-1-BF算法"><a href="#1-2-1-BF算法" class="headerlink" title="1.2.1 BF算法"></a>1.2.1 BF算法</h4><p>【算法思想】BF算法作为暴力算法，其特点为未比较失败，当出现不匹配时，主串返回到模式后移一位字符进行比较。具体过程如下：</p>
+<pre><code>  ①分别利用计数指针i 和j指示主串S和模式T中当前正待比较的字符位置,初值为pos, j初值为1。
+  ②如果两个串均未比较到串尾， 即i和j均分别小于等于S和T的长度时，则循环执行以下 操作：
+   ● S[i].ch和T[i].ch比较，若相等，则i和j分别指示串中下个位置，继续比较后续字符；
+   ●若不等，指针后退重新开始匹配， 从主串的下一个字符 (i=i-j+2) 起再重新和模式的第一个字符 (j=1) 比较。
+ ③如果j&gt; T.length, 说明模式T中的每个字符依次和主串S中的一个连续的字符序列相等， 则匹配成功，返回和模式T中第一个字符相等的字符在主串S中的序号(i-T.length); 否则称匹配不成功，返回0。
+</code></pre>
+<p>算法分析】    如下例：主串为“000000000002”，子串为“002”，i&#x3D;1开始比较，每趟都比较3次后发现不相等，指针都要回溯。</p>
+<p>因此，若n为主串长度，m为模式串长度， 最坏情况是主串前面n-m个位置都部分匹配到子串的最后一位，即这n-m位各比较了m次，最后m位也各比较了1次，总次数为：(n-m)*m+m＝(n-m+1)<em>m，若m&lt;&lt;n，则算法复杂度O(n</em>m)。</p>
+<h3 id="1-2-2-KMP算法（难）"><a href="#1-2-2-KMP算法（难）" class="headerlink" title="1.2.2 KMP算法（难）"></a>1.2.2 KMP算法（难）</h3><p>【算法思想】</p>
+<p>在BF算法中每次失败都是从模式后移一位再从头开始比较，这时就产生一个问题，某趟已匹配相等的字符序列是模式的某个前缀，这种重复比较相当于模式串在不断地进行自我比较，这种自我比较是非常低效的。</p>
+<p>KMP算法就是为解决此问题应运而生，其改进在千：每当一趟匹配过程中出现字符比较不等时，不需回溯i指针，而是利用已经得到的‘部分匹配’的结果将模式向右‘滑动’尽可能远的一段距离后，继续进行比较。即主串i指针无须回溯，并从该位置开始继续比较，而模式向后滑动位数的计算仅与模式本身的结构有关，与主串无关。</p>
+<p>【前缀后缀】①前缀：除去最后一个字符以外的子串</p>
+<p>​                 ②后缀：除去第一个字符以外的尾部子串</p>
+<p>​                 ③部分匹配值：前缀和后缀的最长相等前后缀长度。</p>
+<p>  eg：在字符串S&#x3D;{abab}中，前缀为{a}、{ab}、{abc}，后缀为{b}、{ab}、{bab}，其最长相等前后缀长度为2（即部分匹配值为2）。</p>
+<p>【next数组】根据上面的理论，不禁让人想到在比较不相同时，主串中第 i个字符应与模式中哪个字符再比较？此时就引出了next[j]函数来指导正确的右滑位置，计算当模式串中第j个字符与主串中相应字符“失配”时，在模式中需重新和主串中该字符进行比较的字符的位置 k 的值。next数组确定方法：</p>
+<p>①通过最长前后缀值确定；</p>
+<p>②将前一位元素与其next值所对应的字符进行比较；</p>
+<p>相等：前一位元素的next值+1，即为此字符的next值；</p>
+<p>不相等：继续向前寻找与next值对应的元素进行比较，直到某一位置的next值所对应的元素与此前一位字符相同，则此字符的next值为这个位置的next+1；若前移至第一位都没有相同的，则将其next&#x3D;1。&lt;注意&gt;初始状态下，默认next[1]&#x3D;0，next[2]&#x3D;1。</p>
+<p>（关于KMP算法不太好理解，具体计算过程例题可参考练习题中例子）</p>
+<h4 id="【算法优化】"><a href="#【算法优化】" class="headerlink" title="【算法优化】"></a>【算法优化】</h4><p>  前面定义的next 函数在某些情况下尚有缺陷；例如模式”aaaab” 在和主串”aaabaaaab”匹配 时，当i&#x3D;4、j&#x3D;4 时s.ch[4]≠t.ch[4],由next[j]的指示还需进行i&#x3D;4、j&#x3D;3, i&#x3D;4、j&#x3D;2,i&#x3D;4、j&#x3D;l这3次比较。实际上，因为模式中第1~3个字符和第4个字符都相等，因此不需要再和主串中第4个字符相比较，而可以将模式连续向右滑动4个字符的位置直接进行i&#x3D;5、j&#x3D;l时的字符比较。</p>
+<p>4.3.3 字符串哈希<br>就是将每一段字符串看作一个高进制的数字（哈希值），然后通过匹配哈希值的方式来查找相同子串，复杂度为O（n-m），但是有时出题人可能卡哈希（即两个不同的字符串，在经过取模后哈希值相同），因此经常需要用到双哈希（据wls说双哈希也有人卡，他曾用过三哈希）。</p>
+<p>4.4 注意<br>区分一下子串和子序列的概念：子串指的是串中连续的某一段；子序列则指的是需要按照串的序列但是不一定要连续的串。</p>
+<p>另外，在串中的比较我们通常说的是字典序比较。在字典中，我们查询一个单词或者一个字往往都要以它的单词（或拼音）在26个字母中的排序来查找，这也就是字典序的由来，当串中不仅仅包括字母时，它的比较往往遵循ACII表每个字符的对应值来进行比较。</p>
+<p>在串中，空串指的是长度为0的串，而不是有空格的串，在串中，空格也被看作一个符号。</p>
+<h2 id="二、数组"><a href="#二、数组" class="headerlink" title="二、数组"></a>二、数组</h2><p>1 数组的类型定义<br>数组是由类型相同的数据元素构成的有序集合，每个元素称为数组元素，每个元素受n个线性关系的约束（这里的n指的是数组的维度不是数组长度）。</p>
+<p>2 数组的存储<br>之前在第一章也说了，由于数组本身自带了这种一对一的逻辑关系（线性结构），且数组一般不发生插入和删除操作，所以都采用顺序存储的方式，这样可以更加直观的表达元素之间的关系。</p>
+<p>而正是因为这一种顺序存储的方式，我们可以在O（1）的时间内完成对数组内任意位置元素的访问（又称随机存取结构），具体完成方式即是第一章所说的计算地址的方式。</p>
+<h2 id="2-1-一维数组"><a href="#2-1-一维数组" class="headerlink" title="2.1 一维数组"></a><strong>2.1 一维数组</strong></h2><p>   一维数组可以看成是一个线性表，如图所示，假设数组起始地址为a（A[0]），则求第i个位置的地址为LOC(i) &#x3D; LOC(i-1) &#x3D; a+i*L（L指每个存储单元的大小）</p>
+<h2 id="2-2-二维数组"><a href="#2-2-二维数组" class="headerlink" title="2.2 二维数组"></a><strong>2.2 二维数组</strong></h2><p>   二维数组分为以行序优先进行存储和以列序优先进行存储</p>
+<p>①行序优先表示：</p>
+<p>设数组开始存放位置Loc(0,0) &#x3D;a ,每个数组元素所占存储单元为L，二维数组的行下标范围为[0,n],列下标为[0,m],则求某一数组元素的开始存储位置为Loc(i, j) &#x3D; a+ [ i*(m +1)+j ]*L</p>
+<p>②以列序优先存储：</p>
+<p>设数组开始存放位置Loc(0,0) &#x3D;a ,每个数组元素所占存储单元为L，二维数组的行下标范围为[0,n],列下标为[0,m],则求某一数组元素的开始存储位置为Loc(I,j) &#x3D; a+[ j*(n+1)+I ]*L。</p>
+<h2 id="2-3-三维数组"><a href="#2-3-三维数组" class="headerlink" title="2.3 三维数组"></a>2.3 三维数组</h2><p>   设数组开始存放位置Loc(0,0,0) &#x3D;a ,每个维度存储元素个数为m1, m2, m3,则求某一数组元素的开始存储位置为Loc( i1, i2, i3 ) &#x3D; a+i1<em>m2</em>m3+i2* m3+i3</p>
+<h2 id="2-4-矩阵的压缩存储"><a href="#2-4-矩阵的压缩存储" class="headerlink" title="2.4 矩阵的压缩存储"></a><strong>2.4 矩阵的压缩存储</strong></h2><p>   压缩存储的主要目的是若多个数据元素的值都相同，则只分配一个元素值的存储空间，且零元素不占存储空间，依次来减少空间的浪费。</p>
+<h2 id="2-4-1-对称矩阵"><a href="#2-4-1-对称矩阵" class="headerlink" title="2.4.1 对称矩阵"></a><strong>2.4.1 对称矩阵</strong></h2><p> <strong>【特点】</strong>在n´n的矩阵a中，满足如下aij&#x3D;aji (1 £ i, j £ n)，被称为对称矩阵。</p>
+<p><strong>【存储】</strong>只存储下(或者上)三角(包括主对角线)的数据元素。共占用n(n+1)&#x2F;2个元素空间。</p>
+<p><strong>【规律】</strong>求位置aji的位置k，满足以下规律：</p>
+<p><img src="/images4/20210729154242685.png" alt="img"></p>
+<h3 id="2-4-2-三角矩阵"><a href="#2-4-2-三角矩阵" class="headerlink" title="2.4.2 三角矩阵"></a><strong>2.4.2 三角矩阵</strong></h3><p><strong>【特点】</strong>对角线以下(或者以上)的数据元素(不包括对角线)全部为常数c。</p>
+<p><strong>【存储】</strong>重复元素c共享一个元素存储空间，共占用n(n+1)&#x2F;2+1个元素空间.</p>
+<p><strong>【规律】①</strong>上三角矩阵（行优先存储）中求位置aji的位置k，满足以下规律：</p>
+<p><img src="/images4/20210729151348946.png" alt="img"></p>
+<p>​      <strong>②</strong>下三角矩阵（行优先存储）中求位置aji的位置k，满足以下规律：</p>
+<p><img src="/images4/20210729154424538.png" alt="img"></p>
+<h3 id="2-4-3-对角矩阵（带状矩阵）"><a href="#2-4-3-对角矩阵（带状矩阵）" class="headerlink" title="2.4.3 对角矩阵（带状矩阵）"></a><strong>2.4.3 对角矩阵（带状矩阵）</strong></h3><p><strong>【特点】</strong>在n´n的方阵中，非零元素集中在主对角线及其两侧共L(奇数)条对角线的带状区域内 — L对角矩阵。</p>
+<p><strong>【存储方式】</strong>以对角线的顺序存储。</p>
+<p> <strong>【规律】</strong>求位置aji的位置k，满足以下规律：k&#x3D;(i1+2)*n+j1&#x3D;(i-j+2)*n+j</p>
+<h3 id="2-4-4-稀疏矩阵"><a href="#2-4-4-稀疏矩阵" class="headerlink" title="2.4.4 稀疏矩阵"></a><strong>2.4.4 稀疏矩阵</strong></h3><p><strong>【特点】</strong>一般情况下，将存储非零元素的个数较少的矩阵称为稀疏矩阵。</p>
+<p><strong>【存储方式】</strong>只记录每一非零元素(i,j,aij )，以此来节省空间，同时也会丧失随机存取功能。</p>
+<p>​     ①对于顺序存储常使用三元组表方式。三元组的表示方式（行标，列标，值）；</p>
+<p>​     ②对于链式存储常使用十字链表（正交链表法）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">1．选择题</span><br><span class="line">（1）串是一种特殊的线性表，其特殊性体现在（  ）。</span><br><span class="line">  A．可以顺序存储               B．数据元素是一个字符      </span><br><span class="line">  C．可以链式存储               D．数据元素可以是多个字符若</span><br><span class="line">答案：B</span><br><span class="line"></span><br><span class="line">（2）串下面关于串的的叙述中，（  ）是不正确的？ </span><br><span class="line">A．串是字符的有限序列          B．空串是由空格构成的串</span><br><span class="line">C．模式匹配是串的一种重要运算  D．串既可以采用顺序存储，也可以采用链式存储</span><br><span class="line">答案：B</span><br><span class="line">解释：空格常常是串的字符集合中的一个元素，有一个或多个空格组成的串成为空格串，零个字符的串成为空串，其长度为零。 </span><br><span class="line"></span><br><span class="line">（3）串“ababaaababaa”的next数组为（  ）。</span><br><span class="line">A．012345678999   B．012121111212   C．011234223456    D．0123012322345</span><br><span class="line">答案：C</span><br><span class="line"></span><br><span class="line">（4）串“ababaabab”的nextval为（  ）。</span><br><span class="line">A．010104101      B．010102101      C．010100011       D．010101011</span><br><span class="line">答案：A</span><br><span class="line"></span><br><span class="line">（5）串的长度是指（  ）。</span><br><span class="line">A．串中所含不同字母的个数       B．串中所含字符的个数</span><br><span class="line">C．串中所含不同字符的个数       D．串中所含非空格字符的个数</span><br><span class="line">答案：B</span><br><span class="line">解释：串中字符的数目称为串的长度。</span><br><span class="line"></span><br><span class="line">（6）假设以行序为主序存储二维数组A=array[1..100,1..100]，设每个数据元素占2个存储单元，基地址为10，则LOC[5,5]=（  ）。</span><br><span class="line"></span><br><span class="line">A．808            B．818             C．1010             D．1020</span><br><span class="line"></span><br><span class="line">答案：B</span><br><span class="line"></span><br><span class="line">解释：以行序为主，则LOC[5,5]=[（5-1）*100+（5-1）]*2+10=818。</span><br><span class="line"></span><br><span class="line">（7）设有数组A[i,j]，数组的每个元素长度为3字节，i的值为1到8，j的值为1到10，数组从内存首地址BA开始顺序存放，当用以列为主存放时，元素A[5,8]的存储首地址为（  ）。</span><br><span class="line"></span><br><span class="line">A．BA+141        B．BA+180         C．BA+222         D．BA+225</span><br><span class="line"></span><br><span class="line">答案：B</span><br><span class="line"></span><br><span class="line">解释：以列序为主，则LOC[5,8]=[（8-1）*8+（5-1）]*3+BA=BA+180。</span><br><span class="line"></span><br><span class="line">（8）设有一个10阶的对称矩阵A，采用压缩存储方式，以行序为主存储，a11为第一元素，其存储地址为1，每个元素占一个地址空间，则a85的地址为（  ）。</span><br><span class="line"></span><br><span class="line">A．13             B．32              C．33               D．40</span><br><span class="line"></span><br><span class="line">答案：C</span><br><span class="line"></span><br><span class="line">（9）若对n阶对称矩阵A以行序为主序方式将其下三角形的元素(包括主对角线上所有元素)依次存放于一维数组B[1..(n(n+1))/2]中，则在B中确定aij（i&lt;j）的位置k的关系为（  ）。</span><br><span class="line"></span><br><span class="line">A．i*(i-1)/2+j      B．j*(j-1)/2+i      C．i*(i+1)/2+j      D．j*(j+1)/2+i</span><br><span class="line"></span><br><span class="line">答案：B</span><br><span class="line"></span><br><span class="line">（10）二维数组A的每个元素是由10个字符组成的串，其行下标i=0,1,…,8,列下标j=1,2,…,10。若A按行先存储，元素A[8,5]的起始地址与当A按列先存储时的元素（    ）的起始地址相同。设每个字符占一个字节。</span><br><span class="line"></span><br><span class="line">A．A[8,5]         B．A[3,10]         C. A[5,8]          D．A[0,9]</span><br><span class="line"></span><br><span class="line">答案：B</span><br><span class="line"></span><br><span class="line">解释：设数组从内存首地址M开始顺序存放，若数组按行先存储，元素A[8,5]的起始地址为：M+[（8-0）*10+（5-1）]*1=M+84；若数组按列先存储，易计算出元素A[3,10]的起始地址为：M+[（10-1）*9+（3-0）]*1=M+84。故选B。</span><br><span class="line"></span><br><span class="line">（11）设二维数组A[1.. m，1.. n]（即m行n列）按行存储在数组B[1.. m*n]中，则二维数组元素A[i,j]在一维数组B中的下标为（  ）。</span><br><span class="line"></span><br><span class="line">A．(i-1)*n+j       B．(i-1)*n+j-1      C．i*(j-1)         D．j*m+i-1</span><br><span class="line"></span><br><span class="line">答案：A</span><br><span class="line"></span><br><span class="line">解释：特殊值法。取i=j=1，易知A[1,1]的的下标为1，四个选项中仅有A选项能确定的值为1，故选A。</span><br><span class="line"></span><br><span class="line">（12）数组A[0..4,-1..-3,5..7]中含有元素的个数（  ）。</span><br><span class="line"></span><br><span class="line">A．55            B．45             C．36            D．16</span><br><span class="line"></span><br><span class="line">答案：B</span><br><span class="line"></span><br><span class="line">解释：共有5*3*3=45个元素。</span><br><span class="line"></span><br><span class="line">（13）广义表A=(a,b,(c,d),(e,(f,g)))，则Head(Tail(Head(Tail(Tail(A)))))的值为（  ）。</span><br><span class="line"></span><br><span class="line">A．(g)            B．(d)             C．c            D．d</span><br><span class="line"></span><br><span class="line">答案：D</span><br><span class="line"></span><br><span class="line">解释：Tail(A)=(b,(c,d),(e,(f,g)))；Tail(Tail(A))=( (c,d),(e,(f,g)))； Head(Tail(Tail(A)))= (c,d)；Tail(Head(Tail(Tail(A))))=(d)；Head(Tail(Head(Tail(Tail(A)))))=d。</span><br><span class="line"></span><br><span class="line">（14）广义表((a,b,c,d))的表头是（  ），表尾是（  ）。</span><br><span class="line"></span><br><span class="line">A．a              B．( )             C．(a,b,c,d)      D．(b,c,d)</span><br><span class="line"></span><br><span class="line">答案：C、B</span><br><span class="line"></span><br><span class="line">解释：表头为非空广义表的第一个元素，可以是一个单原子，也可以是一个子表，((a,b,c,d))的表头为一个子表(a,b,c,d)；表尾为除去表头之外，由其余元素构成的表，表为一定是个广义表，((a,b,c,d))的表尾为空表( )。</span><br><span class="line"></span><br><span class="line">（15）设广义表L=((a,b,c))，则L的长度和深度分别为（  ）。</span><br><span class="line"></span><br><span class="line">A．1和1          B．1和3          C．1和2          D．2和3 </span><br><span class="line">答案：C</span><br><span class="line">解释：广义表的深度是指广义表中展开后所含括号的层数，广义表的长度是指广义表中所含元素的个数。根据定义易知L的长度为1，深度为2。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/04/22/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" title="第四章串、数组和广义表" target="_blank" rel="external">http://example.com/2022/04/22/第四章串、数组和广义表/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/04/22/java%E5%AF%B9%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86/" title="4.java对本地文件的处理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/04/22/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE/" title="稀疏矩阵的转置"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
