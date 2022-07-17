@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Netty的通讯与ESP8266（代码） | 星辰的博客</title>
+  <meta name="description" content="Netty的通讯与ESP8266（代码）12345NettyServer类NettyServerHandler类NettyClient类NettyClientHandler类ESP8266 通讯测试  NettyServer类 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty的通讯与ESP8266（代码）">
+<meta property="og:url" content="http://example.com/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="Netty的通讯与ESP8266（代码）12345NettyServer类NettyServerHandler类NettyClient类NettyClientHandler类ESP8266 通讯测试  NettyServer类 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-17T10:09:57.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:16:11.578Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.6px;">JavaScript</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/css/" style="font-size: 13.4px;">css</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.2px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.8px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" class="title">Netty的通讯与ESP8266（代码）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:57.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="title">原生IO模式与Reactor模式与Netty框架简介</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:35.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B/" class="title">计算机网络结构模型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:08.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/09/vue%E4%B8%ADaxios%E7%9A%84%E7%94%A8%E6%B3%95/" class="title">vue中axios的用法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-09T09:06:53.000Z" itemprop="datePublished">2022-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/09/Node-js-vue%E6%A6%82%E5%BF%B5/" class="title">Node.js-vue概念</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-09T09:06:31.000Z" itemprop="datePublished">2022-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Netty的通讯与ESP8266（代码）" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Netty的通讯与ESP8266（代码）
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" class="article-date">
+	  <time datetime="2022-07-17T10:09:57.000Z" itemprop="datePublished">2022-07-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Java/" rel="tag">Java</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" class="leancloud_visitors"  data-flag-title="Netty的通讯与ESP8266（代码）">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Netty的通讯与ESP8266（代码）"><a href="#Netty的通讯与ESP8266（代码）" class="headerlink" title="Netty的通讯与ESP8266（代码）"></a>Netty的通讯与ESP8266（代码）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NettyServer类</span><br><span class="line">NettyServerHandler类</span><br><span class="line">NettyClient类</span><br><span class="line">NettyClientHandler类</span><br><span class="line">ESP8266 通讯测试</span><br></pre></td></tr></table></figure>
+
+<p>NettyServer类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class NettyServer &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        //创建BossGroup 和 WorkerGroup</span><br><span class="line">        //说明</span><br><span class="line">        //1. 创建两个线程组 bossGroup 和 workerGroup</span><br><span class="line">        //2. bossGroup 只是处理连接请求 , 真正的和客户端业务处理，会交给 workerGroup完成</span><br><span class="line">        //3. 两个都是无限循环</span><br><span class="line">        //4. bossGroup 和 workerGroup 含有的子线程(NioEventLoop)的个数</span><br><span class="line">        //   默认实际 cpu核数 * 2</span><br><span class="line">        EventLoopGroup bossGroup = new NioEventLoopGroup(1);</span><br><span class="line">        EventLoopGroup workerGroup = new NioEventLoopGroup(8); //8</span><br><span class="line">        try &#123;</span><br><span class="line">            //创建服务器端的启动对象，配置参数</span><br><span class="line">            ServerBootstrap bootstrap = new ServerBootstrap();</span><br><span class="line">            //使用链式编程来进行设置</span><br><span class="line">            bootstrap.group(bossGroup, workerGroup) //设置两个线程组</span><br><span class="line">                    .channel(NioServerSocketChannel.class) //使用NioSocketChannel 作为服务器的通道实现</span><br><span class="line">                    .option(ChannelOption.SO_BACKLOG, 128) // 设置线程队列得到连接个数</span><br><span class="line">                    .childOption(ChannelOption.SO_KEEPALIVE, true) //设置保持活动连接状态</span><br><span class="line">//                    .handler(null) // 该 handler对应 bossGroup , childHandler 对应 workerGroup</span><br><span class="line">                    .childHandler(new ChannelInitializer&lt;SocketChannel&gt;() &#123;</span><br><span class="line">                        protected void initChannel(SocketChannel ch) throws Exception &#123;</span><br><span class="line">                            System.out.println(&quot;客户socketchannel hashcode=&quot; + ch.hashCode()); //可以使用一个集合管理 SocketChannel， 再推送消息时，可以将业务加入到各个channel 对应的 NIOEventLoop 的 taskQueue 或者 scheduleTaskQueue</span><br><span class="line">                            ch.pipeline().addLast(new NettyServerHandler());</span><br><span class="line">                        &#125;//创建一个通道初始化对象(匿名对象)</span><br><span class="line">                        //给pipeline 设置处理器</span><br><span class="line">                    &#125;); // 给我们的workerGroup 的 EventLoop 对应的管道设置处理器</span><br><span class="line">            System.out.println(&quot;.....服务器 is ready...&quot;);</span><br><span class="line">            //绑定一个端口并且同步, 生成了一个 ChannelFuture 对象</span><br><span class="line">            //启动服务器(并绑定端口)</span><br><span class="line">            ChannelFuture cf = bootstrap.bind(8087).sync();</span><br><span class="line">            //给cf 注册监听器，监控我们关心的事件</span><br><span class="line">            /*cf.addListener(new ChannelFutureListener() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void operationComplete(ChannelFuture future) throws Exception &#123;</span><br><span class="line">                    if (cf.isSuccess()) &#123;</span><br><span class="line">                        System.out.println(&quot;监听端口 6668 成功&quot;);</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        System.out.println(&quot;监听端口 6668 失败&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);*/</span><br><span class="line">            //对关闭通道进行监听</span><br><span class="line">            cf.channel().closeFuture().sync();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            bossGroup.shutdownGracefully();</span><br><span class="line">            workerGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>NettyServerHandler类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">说明</span><br><span class="line">1. 我们自定义一个Handler 需要继续netty 规定好的某个HandlerAdapter(规范)</span><br><span class="line">2. 这时我们自定义一个Handler , 才能称为一个handler</span><br><span class="line"> */</span><br><span class="line">public class NettyServerHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line">    //读取数据实际(这里我们可以读取客户端发送的消息)</span><br><span class="line">    /*</span><br><span class="line">    1. ChannelHandlerContext ctx:上下文对象, 含有 管道pipeline , 通道channel, 地址</span><br><span class="line">    2. Object msg: 就是客户端发送的数据 默认Object</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        //比如这里我们有一个非常耗时长的业务-&gt; 异步执行 -&gt; 提交该channel 对应的</span><br><span class="line">        //NIOEventLoop 的 taskQueue中,</span><br><span class="line">        //解决方案1 用户程序自定义的普通任务</span><br><span class="line">        //解决方案2 : 用户自定义定时任务 -》 该任务是提交到 scheduleTaskQueue中</span><br><span class="line">        /*ctx.channel().eventLoop().execute(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(5 * 1000);</span><br><span class="line">                    ctx.writeAndFlush(Unpooled.copiedBuffer(&quot;hello, 客户端~(&gt;^ω^&lt;)喵2&quot;, CharsetUtil.UTF_8));</span><br><span class="line">                    System.out.println(&quot;channel code=&quot; + ctx.channel().hashCode());</span><br><span class="line">                &#125; catch (Exception ex) &#123;</span><br><span class="line">                    System.out.println(&quot;发生异常&quot; + ex.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);*/</span><br><span class="line">        System.out.println(&quot;go on ...&quot;);</span><br><span class="line">        System.out.println(&quot;服务器读取线程 &quot; + Thread.currentThread().getName() + &quot; channle =&quot; + ctx.channel());</span><br><span class="line">        System.out.println(&quot;server ctx =&quot; + ctx);</span><br><span class="line">        System.out.println(&quot;看看channel 和 pipeline的关系&quot;);</span><br><span class="line">        Channel channel = ctx.channel();</span><br><span class="line">        ChannelPipeline pipeline = ctx.pipeline(); //本质是一个双向链接, 出站入站</span><br><span class="line">        //将 msg 转成一个 ByteBuf</span><br><span class="line">        //ByteBuf 是 Netty 提供的，不是 NIO 的 ByteBuffer.</span><br><span class="line">        ByteBuf buf = (ByteBuf) msg;</span><br><span class="line">        System.out.println(&quot;客户端发送消息是:&quot; + buf.toString(CharsetUtil.UTF_8));</span><br><span class="line">        System.out.println(&quot;客户端地址:&quot; + channel.remoteAddress());</span><br><span class="line">    &#125;</span><br><span class="line">    //数据读取完毕</span><br><span class="line">    @Override</span><br><span class="line">    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception &#123;</span><br><span class="line">        //writeAndFlush 是 write + flush</span><br><span class="line">        //将数据写入到缓存，并刷新</span><br><span class="line">        //一般讲，我们对这个发送的数据进行编码</span><br><span class="line">        ctx.writeAndFlush(Unpooled.copiedBuffer(&quot;hello, 客户端~(&gt;^ω^&lt;)喵1&quot;, CharsetUtil.UTF_8));</span><br><span class="line">    &#125;</span><br><span class="line">    //处理异常, 一般是需要关闭通道</span><br><span class="line">    @Override</span><br><span class="line">    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception &#123;</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>NettyClient类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class NettyClient &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        //客户端需要一个事件循环组</span><br><span class="line">        EventLoopGroup group = new NioEventLoopGroup();</span><br><span class="line">        try &#123;</span><br><span class="line">            //创建客户端启动对象</span><br><span class="line">            //注意客户端使用的不是 ServerBootstrap 而是 Bootstrap</span><br><span class="line">            Bootstrap bootstrap = new Bootstrap();</span><br><span class="line">            //Bootstrap bootstrap = new Bootstrap();</span><br><span class="line">            //设置相关参数</span><br><span class="line">            bootstrap.group(group) //设置线程组</span><br><span class="line">                    .channel(NioSocketChannel.class) // 设置客户端通道的实现类(反射)</span><br><span class="line">                    .handler(new ChannelInitializer&lt;SocketChannel&gt;() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        protected void initChannel(SocketChannel ch) throws Exception &#123;</span><br><span class="line">                            ch.pipeline().addLast(new NettyClientHandler()); //加入自己的处理器</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;客户端 ok..&quot;);</span><br><span class="line"></span><br><span class="line">            //启动客户端去连接服务器端</span><br><span class="line">            //关于 ChannelFuture 要分析，涉及到netty的异步模型</span><br><span class="line">            ChannelFuture channelFuture = bootstrap.connect(&quot;127.0.0.1&quot;, 8087).sync();</span><br><span class="line">            //给关闭通道进行监听</span><br><span class="line">            channelFuture.channel().closeFuture().sync();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line"></span><br><span class="line">            group.shutdownGracefully();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>NettyClientHandler类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class NettyClientHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    //当通道就绪就会触发该方法</span><br><span class="line">    @Override</span><br><span class="line">    public void channelActive(ChannelHandlerContext ctx) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;client &quot; + ctx);</span><br><span class="line">        ctx.writeAndFlush(Unpooled.copiedBuffer(&quot;hello, server: (&gt;^ω^&lt;)喵&quot;, CharsetUtil.UTF_8));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //当通道有读取事件时，会触发</span><br><span class="line">    @Override</span><br><span class="line">    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        ByteBuf buf = (ByteBuf) msg;</span><br><span class="line">        System.out.println(&quot;服务器回复的消息:&quot; + buf.toString(CharsetUtil.UTF_8));</span><br><span class="line">        System.out.println(&quot;服务器的地址： &quot;+ ctx.channel().remoteAddress());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception &#123;</span><br><span class="line">        cause.printStackTrace();</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与ESP8266 通讯测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;ESP8266WiFi.h&gt;        </span><br><span class="line">#include &lt;WiFiClient.h&gt; </span><br><span class="line">/*****************网络设置项 *****************/</span><br><span class="line">const char *STAssid =&quot;iQOOZ1&quot;;                   //需要连接路由器的名称</span><br><span class="line">const char *STApassword=&quot;chenbin123&quot;;      //路由器的密码</span><br><span class="line">const char *host= &quot;192.168.94.71&quot;;              //外网服务器ip</span><br><span class="line">const int httpPort = 8087;                    //外网服务器端口</span><br><span class="line">WiFiClient client;                            //声明客户端对象</span><br><span class="line">bool is=0;                                    //用来做连接到服务器后，仅发送一次问候语                             </span><br><span class="line">void setup() &#123;</span><br><span class="line">  Serial.begin(115200);</span><br><span class="line">  Serial.println(&quot;开始连接&quot;);</span><br><span class="line">  WiFi.mode(WIFI_STA);                       //设置为STA模式 </span><br><span class="line">  WiFi.begin(STAssid, STApassword);          //配置连接信息，开始连接</span><br><span class="line">  //运行自定义函数，在未连接到路由器的过程中，打印输出......，直到连接成功   </span><br><span class="line">  gotoWifi();  </span><br><span class="line">  Serial.println(&quot;连接路由器成功&quot;);</span><br><span class="line">  //此时已经连接到路由器，可以开始连接远程服务器   </span><br><span class="line">  lianjie();                                 </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop() &#123;  </span><br><span class="line"> </span><br><span class="line">/****************检测WiFi连接状态****************/ </span><br><span class="line">  if (WiFi.status() != WL_CONNECTED) &#123; </span><br><span class="line">    WiFi.disconnect();</span><br><span class="line">    WiFi.begin(STAssid, STApassword);</span><br><span class="line">    gotoWifi();  </span><br><span class="line">  &#125;</span><br><span class="line">  else&#123;</span><br><span class="line">    if (!client.connected()) &#123;            //如果没有连接到服务器</span><br><span class="line">      lianjie();</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;                                //否则，就是连接到服务器</span><br><span class="line">      if(is==0)&#123;</span><br><span class="line">        client.print(&quot;hello,server&quot;); </span><br><span class="line">        Serial.println(&quot;hello,client&quot;);</span><br><span class="line">        is=1;      </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  Tcp_Handler(Read_Tcp());              //读取服务器信息，并处理</span><br><span class="line">  Tcp_HandlerClient(Write_Tcp());</span><br><span class="line">&#125;</span><br><span class="line">//读取服务器信息，返回String类型</span><br><span class="line">String Read_Tcp()&#123;</span><br><span class="line">  String data = &quot;&quot;;          </span><br><span class="line">  while (client.available() &gt; 0)&#123;</span><br><span class="line">    data += char(client.read());</span><br><span class="line">    delay(2);    </span><br><span class="line">  &#125; </span><br><span class="line">  return data;</span><br><span class="line">&#125;</span><br><span class="line">//发送信息，返回String类型</span><br><span class="line">String Write_Tcp()&#123;</span><br><span class="line">  String data = &quot;&quot;;          </span><br><span class="line">  while (Serial.available() &gt; 0)&#123;</span><br><span class="line">    data += char(Serial.read());</span><br><span class="line">    delay(2);    </span><br><span class="line">  &#125; </span><br><span class="line">  return data;</span><br><span class="line">&#125;</span><br><span class="line">//处理服务器信息</span><br><span class="line">void Tcp_Handler(String data)&#123;</span><br><span class="line">  if(data!=&quot;&quot;)&#123;</span><br><span class="line">    Serial.print(&quot;收到服务器信息：&quot;);</span><br><span class="line">    Serial.println(data);</span><br><span class="line">   </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line">//处理客户端信息</span><br><span class="line">void Tcp_HandlerClient(String data)&#123;</span><br><span class="line">   /****************获取温度湿度****************/  </span><br><span class="line">  float temperature = getTemp(); //调用函数计算温度值</span><br><span class="line">  client.print(&quot;温度:&quot;);</span><br><span class="line">  client.println(temperature);</span><br><span class="line">  if(data!=&quot;&quot;)&#123;</span><br><span class="line">    client.print(&quot;client:&quot;);</span><br><span class="line">    client.println(data);</span><br><span class="line">   </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line">//连接路由器</span><br><span class="line">void gotoWifi()&#123;</span><br><span class="line">  while (WiFi.status() != WL_CONNECTED) &#123;</span><br><span class="line">    delay(500);    </span><br><span class="line">    Serial.print(&quot;.&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//连接服务器</span><br><span class="line">void lianjie() &#123;</span><br><span class="line">  Serial.println(&quot;开始连接服务器&quot;);</span><br><span class="line">  client.connect(host, httpPort);</span><br><span class="line">  delay(1000);</span><br><span class="line">&#125;</span><br><span class="line">//模拟温湿度</span><br><span class="line">float getTemp()&#123;</span><br><span class="line">  //returns the temperature from one DS18S20 in DEG Celsius</span><br><span class="line">  float temp[]=&#123;23.22,24.12,25.16,27.13,27.15,19.36,26.45&#125;;</span><br><span class="line">  float aa=0;</span><br><span class="line">  long randNumber = random(6);</span><br><span class="line">  delay(100); //延迟0.1S   </span><br><span class="line">  return temp[randNumber];   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" title="Netty的通讯与ESP8266（代码）" target="_blank" rel="external">http://example.com/2022/07/17/Netty的通讯与ESP8266（代码）/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" title="原生IO模式与Reactor模式与Netty框架简介"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

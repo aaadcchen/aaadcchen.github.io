@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>原生IO模式与Reactor模式与Netty框架简介 | 星辰的博客</title>
+  <meta name="description" content="原生IO模式与Reactor模式与Netty框架简介Netty 的介绍Netty 是由 JBOSS 提供的一个 Java 开源框架，现为 Github 上的独立项目。Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络 IO 程序。Netty 主要针对在 TCP 协议下，面向 Client 端的高并发应用，或者 Peer-to-Peer 场景下的大量数据持续传输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生IO模式与Reactor模式与Netty框架简介">
+<meta property="og:url" content="http://example.com/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="原生IO模式与Reactor模式与Netty框架简介Netty 的介绍Netty 是由 JBOSS 提供的一个 Java 开源框架，现为 Github 上的独立项目。Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络 IO 程序。Netty 主要针对在 TCP 协议下，面向 Client 端的高并发应用，或者 Peer-to-Peer 场景下的大量数据持续传输">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717171319212.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717171204477.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717165722768.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717165820712.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717165927312.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170036351.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170120890.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170245153.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170212830.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170338964.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170446707.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170537574.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170628818.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170743390.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717171029245.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717170945107.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717171319212.png">
+<meta property="og:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717171204477.png">
+<meta property="article:published_time" content="2022-07-17T10:09:35.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:14:33.371Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/26257/AppData/Roaming/Typora/typora-user-images/image-20220717171319212.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.6px;">JavaScript</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/css/" style="font-size: 13.4px;">css</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.2px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.8px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" class="title">Netty的通讯与ESP8266（代码）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:57.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="title">原生IO模式与Reactor模式与Netty框架简介</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:35.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B/" class="title">计算机网络结构模型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:08.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/09/vue%E4%B8%ADaxios%E7%9A%84%E7%94%A8%E6%B3%95/" class="title">vue中axios的用法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-09T09:06:53.000Z" itemprop="datePublished">2022-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/09/Node-js-vue%E6%A6%82%E5%BF%B5/" class="title">Node.js-vue概念</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-09T09:06:31.000Z" itemprop="datePublished">2022-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-原生IO模式与Reactor模式与Netty框架简介" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      原生IO模式与Reactor模式与Netty框架简介
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="article-date">
+	  <time datetime="2022-07-17T10:09:35.000Z" itemprop="datePublished">2022-07-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Java/" rel="tag">Java</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="leancloud_visitors"  data-flag-title="原生IO模式与Reactor模式与Netty框架简介">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="原生IO模式与Reactor模式与Netty框架简介"><a href="#原生IO模式与Reactor模式与Netty框架简介" class="headerlink" title="原生IO模式与Reactor模式与Netty框架简介"></a>原生IO模式与Reactor模式与Netty框架简介</h3><h4 id="Netty-的介绍"><a href="#Netty-的介绍" class="headerlink" title="Netty 的介绍"></a>Netty 的介绍</h4><p>Netty 是由 JBOSS 提供的一个 Java 开源框架，现为 Github 上的独立项目。<br>Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络 IO 程序。<br>Netty 主要针对在 TCP 协议下，面向 Client 端的高并发应用，或者 Peer-to-Peer 场景下的大量数据持续传输的应用。<br>Netty 本质是一个 NIO 框架，适用于服务器通讯相关的多种应用场景。<br>要透彻理解 Netty，需要先学习 NIO，这样我们才能阅读 Netty 的源码。</p>
+<p>详细内容参照：原文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Youth_lql/article/details/115524052">https://blog.csdn.net/Youth_lql/article/details/115524052</a></p>
+<p>本文简要介绍</p>
+<h4 id="Java-BIO编程"><a href="#Java-BIO编程" class="headerlink" title="Java BIO编程"></a>Java BIO编程</h4><h5 id="I-x2F-O-模型"><a href="#I-x2F-O-模型" class="headerlink" title="I&#x2F;O 模型"></a>I&#x2F;O 模型</h5><p>I&#x2F;O 模型简单的理解：就是用什么样的通道进行数据的发送和接收，很大程度上决定了程序通信的性能。<br>Java 共支持 3 种网络编程模型 I&#x2F;O 模式：BIO、NIO、AIO。</p>
+<h5 id="Java-BIO："><a href="#Java-BIO：" class="headerlink" title="Java BIO："></a>Java BIO：</h5><p>同步并阻塞（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销。（一个线程对一个事件）</p>
+<h5 id="Java-NIO："><a href="#Java-NIO：" class="headerlink" title="Java NIO："></a>Java NIO：</h5><p>同步非阻塞，服务器实现模式为一个线程处理多个请求（连接），即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 <code>I/O</code> 请求就进行处理。</p>
+<h5 id="Java-AIO-NIO-2-："><a href="#Java-AIO-NIO-2-：" class="headerlink" title="Java AIO(NIO.2)："></a>Java AIO(NIO.2)：</h5><p><code>异步非阻塞，</code>AIO<code>引入异步通道的概念，采用了</code>Proactor&#96; 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
+<h4 id="BIO、NIO、AIO-使用场景分析"><a href="#BIO、NIO、AIO-使用场景分析" class="headerlink" title="BIO、NIO、AIO 使用场景分析"></a>BIO、NIO、AIO 使用场景分析</h4><p>BIO 方式</p>
+<p>适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，但程序简单易理解。<br>NIO 方式</p>
+<p>适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，弹幕系统，服务器间通讯等。编程比较复杂，JDK1.4 开始支持。<br>AIO 方式</p>
+<p>使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 OS 参与并发操作，编程比较复杂，JDK7 开始支持。<br>Java BIO 基本介绍<br>Java BIO 就是传统的 Java I&#x2F;O 编程，其相关的类和接口在 java.io。<br>BIO(BlockingI&#x2F;O)：同步阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，可以通过线程池机制改善（实现多个客户连接服务器）。【后有应用实例】<br>BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，程序简单易理解。</p>
+<h5 id="Java-BIO-应用实例在以前的serversocketDome中"><a href="#Java-BIO-应用实例在以前的serversocketDome中" class="headerlink" title="Java BIO 应用实例在以前的serversocketDome中"></a>Java BIO 应用实例在以前的serversocketDome中</h5><h3 id="Java-NIO编程"><a href="#Java-NIO编程" class="headerlink" title="Java NIO编程"></a>Java NIO编程</h3><h5 id="Java-NIO-基本介绍"><a href="#Java-NIO-基本介绍" class="headerlink" title="Java NIO 基本介绍"></a>Java NIO 基本介绍</h5><p>Java NIO 全称 Java non-blocking IO，是指 JDK 提供的新 API。从 JDK1.4 开始，Java 提供了一系列改进的输入&#x2F;输出的新特性，被统称为 NIO（即 NewIO），是同步非阻塞的。<br>NIO 相关类都被放在 java.nio 包及子包下，并且对原 java.io 包中的很多类进行改写。【基本案例】<br>NIO 有三大核心部分：Channel（通道）、Buffer（缓冲区）、Selector（选择器） 。<br>NIO 是面向缓冲区，或者面向块编程的。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动，这就增加了处理过程中的灵活性，使用它可以提供非阻塞式的高伸缩性网络。<br>Java NIO 的非阻塞模式，使一个线程从某通道发送请求或者读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取，而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。非阻塞写也是如此，一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。<br>通俗理解：NIO 是可以做到用一个线程来处理多个操作的。假设有 10000 个请求过来,根据实际情况，可以分配 50 或者 100 个线程来处理。不像之前的阻塞 IO 那样，非得分配 10000 个。<br>HTTP 2.0 使用了多路复用的技术，做到同一个连接并发处理多个请求，而且并发请求的数量比 HTTP 1.1 大了好几个数量级。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">NIO 和 BIO 的比较</span><br><span class="line">BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 I/O 的效率比流 I/O 高很多。</span><br><span class="line">BIO 是阻塞的，NIO 则是非阻塞的。</span><br><span class="line">BIO 基于字节流和字符流进行操作，而 NIO 基于 Channel（通道）和 Buffer（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector（选择器）用于监听多个通道的事件（比如：连接请求，数据到达等），因此使用单个线程就可以监听多个客户端通道。</span><br><span class="line">Buffer和Channel之间的数据流向是双向的</span><br><span class="line">每个 Channel 都会对应一个 Buffer。</span><br><span class="line">Selector 对应一个线程，一个线程对应多个 Channel（连接）。</span><br><span class="line">该图反应了有三个 Channel 注册到该 Selector //程序</span><br><span class="line">程序切换到哪个 Channel 是由事件决定的，Event 就是一个重要的概念。</span><br><span class="line">Selector 会根据不同的事件，在各个通道上切换。</span><br><span class="line">Buffer 就是一个内存块，底层是有一个数组。</span><br><span class="line">数据的读取写入是通过 Buffer，这个和 BIO是不同的，BIO 中要么是输入流，或者是输出流，不能双向，但是 NIO 的 Buffer 是可以读也可以写，需要 flip 方法切换 Channel 是双向的，可以返回底层操作系统的情况，比如 Linux，底层的操作系统通道就是双向的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Netty框架完整流程</p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717171319212.png" alt="image-20220717171319212"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717171204477.png" alt="image-20220717171204477"></p>
+<h4 id="图片梳理"><a href="#图片梳理" class="headerlink" title="图片梳理"></a>图片梳理</h4><h5 id="传统阻塞IO模式"><a href="#传统阻塞IO模式" class="headerlink" title="传统阻塞IO模式"></a>传统阻塞IO模式</h5><p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717165722768.png" alt="image-20220717165722768"></p>
+<h5 id="传统阻塞IO模式的改进（Reactor模式）"><a href="#传统阻塞IO模式的改进（Reactor模式）" class="headerlink" title="传统阻塞IO模式的改进（Reactor模式）"></a>传统阻塞IO模式的改进（Reactor模式）</h5><p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717165820712.png" alt="image-20220717165820712"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717165927312.png" alt="image-20220717165927312"></p>
+<p>根据 <code>Reactor</code> 的数量和处理资源池线程的数量不同，有 <code>3</code> 种典型的实现</p>
+<ol>
+<li>单 <code>Reactor</code> 单线程</li>
+<li>单 <code>Reactor</code> 多线程</li>
+<li>主从 <code>Reactor</code> 多线程</li>
+</ol>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170036351.png" alt="image-20220717170036351"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170120890.png" alt="image-20220717170120890"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170245153.png" alt="image-20220717170245153"></p>
+<h4 id="单-Reactor-多线程"><a href="#单-Reactor-多线程" class="headerlink" title="单 Reactor 多线程"></a>单 <code>Reactor</code> 多线程</h4><p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170212830.png" alt="image-20220717170212830"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170338964.png" alt="image-20220717170338964"></p>
+<h4 id="主从-Reactor-多线程"><a href="#主从-Reactor-多线程" class="headerlink" title="主从 Reactor 多线程"></a>主从 <code>Reactor</code> 多线程</h4><p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170446707.png" alt="image-20220717170446707"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170537574.png" alt="image-20220717170537574"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170628818.png" alt="image-20220717170628818"></p>
+<h3 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h3><p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170743390.png" alt="image-20220717170743390"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717171029245.png" alt="image-20220717171029245"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717170945107.png" alt="image-20220717170945107"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717171319212.png" alt="image-20220717171319212"></p>
+<p><img src="C:\Users\26257\AppData\Roaming\Typora\typora-user-images\image-20220717171204477.png" alt="image-20220717171204477"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" title="原生IO模式与Reactor模式与Netty框架简介" target="_blank" rel="external">http://example.com/2022/07/17/原生IO模式与Reactor模式与Netty框架简介/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" title="Netty的通讯与ESP8266（代码）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B/" title="计算机网络结构模型"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
