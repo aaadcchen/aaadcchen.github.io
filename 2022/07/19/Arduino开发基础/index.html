@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Arduino开发基础 | 星辰的博客</title>
+  <meta name="description" content="数字端口与模拟端口数字口不区分输入和输出，因为它可以既当输入口用又当输出口用，只需要在使用之前做一个声明便可。数字口和模拟口最大的区别就是，数字口只能输入或输出一个数字0或1（也可以传数据二进制编码的形式），而模拟口可以输入或输出的数据范围为0到1023。例如控制灯的亮灭只需要用0、1控制，定义成数字输出端口。需要具体输出电压就必须使用模拟输出口。 板子数字端口是013，共14个，如果需要，可以将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arduino开发基础">
+<meta property="og:url" content="http://example.com/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="数字端口与模拟端口数字口不区分输入和输出，因为它可以既当输入口用又当输出口用，只需要在使用之前做一个声明便可。数字口和模拟口最大的区别就是，数字口只能输入或输出一个数字0或1（也可以传数据二进制编码的形式），而模拟口可以输入或输出的数据范围为0到1023。例如控制灯的亮灭只需要用0、1控制，定义成数字输出端口。需要具体输出电压就必须使用模拟输出口。 板子数字端口是013，共14个，如果需要，可以将">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.freesion.com/images/99/0ccdc13509e2acb8419b1d9dc1459cab.png">
+<meta property="article:published_time" content="2022-07-19T10:54:52.000Z">
+<meta property="article:modified_time" content="2022-07-19T10:56:16.776Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="嵌入式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.freesion.com/images/99/0ccdc13509e2acb8419b1d9dc1459cab.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.6px;">JavaScript</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/css/" style="font-size: 13.4px;">css</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.2px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.8px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" class="title">Arduino开发基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-19T10:54:52.000Z" itemprop="datePublished">2022-07-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" class="title">Netty的通讯与ESP8266（代码）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:57.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="title">原生IO模式与Reactor模式与Netty框架简介</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:35.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B/" class="title">计算机网络结构模型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:08.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/09/vue%E4%B8%ADaxios%E7%9A%84%E7%94%A8%E6%B3%95/" class="title">vue中axios的用法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-09T09:06:53.000Z" itemprop="datePublished">2022-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Arduino开发基础" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Arduino开发基础
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" class="article-date">
+	  <time datetime="2022-07-19T10:54:52.000Z" itemprop="datePublished">2022-07-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" class="leancloud_visitors"  data-flag-title="Arduino开发基础">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 13(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="数字端口与模拟端口"><a href="#数字端口与模拟端口" class="headerlink" title="数字端口与模拟端口"></a>数字端口与模拟端口</h4><p>数字口不区分输入和输出，因为它可以既当输入口用又当输出口用，只需要在使用之前做一个声明便可。数字口和模拟口最大的区别就是，数字口只能输入或输出一个数字0或1（也可以传数据二进制编码的形式），而模拟口可以输入或输出的数据范围为0到1023。例如控制灯的亮灭只需要用0、1控制，定义成数字输出端口。需要具体输出电压就必须使用模拟输出口。</p>
+<p>板子数字端口是0<del>13，共14个，如果需要，可以将A0</del>A5作为数字端口的14<del>19；A0</del>A5一般作为模拟输入使用~<br>定义模拟端口是 int xxpin&#x3D;A2; 如定义成int xxpin&#x3D;2；是数字端口的2号，只能做逻辑输入，不能做AD转换器信号输入。</p>
+<p>1）14个数字接口：数字接口从图上可以看到总共有14个（0～13号)，0号和1号口属于串口通信用的，一般我们不去占用；从2号口到13号口是我们可随意使用的数字接口数字接口可以读取数字信号，也可以输出数字信号，而在2到13号口中带有“～”符号的接口代表它不仅可以输出高电平和低电平信号，也可以输出调制的模拟信号，不带“～”符号的接口就只能输出5V高电平或者0V低电平（这里不深究高低电平的细节，因为事实上对于TTL型的接口高低电平并不严格等于5V和0V，而CMOS型的高低电平则是5V和0V，<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Arduino&spm=1001.2101.3001.7020">Arduino</a>上的数字引脚属于TTL型所以严格的讲它们输出的高低电平是有一个误差范围的只要在这个误差范围之内Arduino都认可而不会误判）。输出高电平和低电平很好理解，你可以理解为只能输出5V和0V。</p>
+<p>模拟输入口和输出口需要硬件支持，不能一口两用。A0-A5</p>
+<h4 id="SS引脚"><a href="#SS引脚" class="headerlink" title="SS引脚"></a>SS引脚</h4><p>SS是关机&#x2F;同步控制管脚，该引脚可用于同步的一部分，近两倍的基础频率。一个TTL将关闭部分低下来，投入低电流模式。如果不使用同步，该引脚应为正常运行或为正常运行的高或悬空。</p>
+<h4 id="VIN引脚"><a href="#VIN引脚" class="headerlink" title="VIN引脚"></a>VIN引脚</h4><p>●  VIN引脚 - 该引脚用于使用外部电源为Arduino Uno开发板供电。电压应控制在上述提到的范围内。</p>
+<h4 id="IIC（SCL，SDA）"><a href="#IIC（SCL，SDA）" class="headerlink" title="IIC（SCL，SDA）"></a>IIC（SCL，SDA）</h4><p>IIC全称为Inter-Integrated Circuit(集成电路总线)。IIC接口只有两根线：SCL，SDA。SCL为同步时钟线，SDA为数据线，通SPI不同的是，数据线为双向接口，也就是说，发送接收都走这根线。</p>
+<p>IIC是一种多向控制总线，也就是说多个芯片可以连接到同一总线结构下，同时每个芯片都可以作为实时数据传输的控制源。这种方式简化了信号传输总线接口。</p>
+<p>多数EEPROM芯片都是IIC接口，指令有所不同，但是传输格式都是一样的。</p>
+<h4 id="SCK、MISO、MOSI"><a href="#SCK、MISO、MOSI" class="headerlink" title="SCK、MISO、MOSI"></a>SCK、MISO、MOSI</h4><p>VCC代表的电源输入，GND是地，RST是复位脚，SCK、MISO、MOSI这三个引脚是SPI通讯需要的时钟和数据脚。<br>VCC、GND、RST怎么接需要去看单片机对应的用户手册，上面都有典型电路，不同型号的单片机接法是不同的，SCK、MISO、MOSI这三个接到你需要通信的芯片上对应的脚就可以了，但是要注意一点，单片机的MISO要接到芯片上的MOSI</p>
+<h4 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h4><p>SPI（Serial Peripheral Interface） 协议是由摩托罗拉公司提出的通讯协议，即串行外围设备接口，是一种高速全双工的通信总线。它被广泛地使用在 ADC、LCD 等设备与 MCU 间，要求通讯速率较高的场合。</p>
+<p>芯片的管脚上只占用四根线。（下面会讲到）</p>
+<p>MISO： 主器件数据输出，从器件数据输入。<br>MOSI：主器件数据输入，从器件数据输出。<br>SCK： 时钟信号，由主设备控制发出。<br>NSS（CS）： 从设备选择信号，由主设备控制。当NSS为低电平则选中 从器件。</p>
+<ul>
+<li>SCK（CK），Serial Clock<br>此引脚在主机模式下用于时钟输出，&#x3D;&#x3D;从机模式下用于时钟输入。<br>MISO（SDI），Master In &#x2F; Slave Out data<br>此引脚在从机模式下用于发送数据，主机模式下接收数据。<br>MOSI（SDO）, Master Out &#x2F; Slave In data<br>此引脚在从机模式下用于数据接收，主机模式下发送数据。<br>SS（WS）, Slave select pin<br>根据 SPI 和 SS 设置，此引脚可用于：<br>⌘. 选择从器件进行通信。<br>⌘. 允许多主模式（可以禁止 NSS 引脚输出）。</li>
+</ul>
+<h4 id="RX，TX（串口通讯）"><a href="#RX，TX（串口通讯）" class="headerlink" title="RX，TX（串口通讯）"></a>RX，TX（串口通讯）</h4><p>RX串口接收，TX串口发送实例在最后面</p>
+<p>认识Arduino Uno：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42645653/article/details/90205369">https://blog.csdn.net/weixin_42645653/article/details/90205369</a></p>
+<p>ESP8266 D1-UNO-R3开发板的初步测试：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuoqingjoking97298/article/details/117458338">https://blog.csdn.net/zhuoqingjoking97298/article/details/117458338</a></p>
+<p>SPI 理论知识（通信）：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_57818334/article/details/124884119">https://blog.csdn.net/m0_57818334/article/details/124884119</a></p>
+<p>ARDUINO UNO开发板介绍：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44940488/article/details/121432946">https://blog.csdn.net/weixin_44940488/article/details/121432946</a></p>
+<h4 id="代码理解部分"><a href="#代码理解部分" class="headerlink" title="代码理解部分"></a>代码理解部分</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/*************************************************</span><br><span class="line">#  说明：超声波传感器模块项目，直接运行即可。</span><br><span class="line">  ECHO  pin               4</span><br><span class="line">  TRING Pin               5</span><br><span class="line">**************************************************/</span><br><span class="line">#include &lt;NewPing.h&gt;</span><br><span class="line"></span><br><span class="line">#define TRIGGER_PIN  5  // Arduino销与超声波传感器上的触发销相连</span><br><span class="line">#define ECHO_PIN     4  // Arduino引脚与超声波传感器上的回波引脚相连。</span><br><span class="line">#define MAX_DISTANCE 400 // 我们要ping的最大距离（厘米）。最大传感器距离的额定值为400-500cm。</span><br><span class="line">NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // 相当于新建初始化实例化一个传感器对象，参数为前面三个变量，新建引脚设置和最大距离。</span><br><span class="line"></span><br><span class="line">setup()</span><br><span class="line">当程序开始执行时，将调用setup()函数，使用此函数</span><br><span class="line">①用来初始化变量</span><br><span class="line">②管脚模式</span><br><span class="line">③调用库函数</span><br><span class="line"></span><br><span class="line">注意：setup()函数将只运行一次。</span><br><span class="line">loop()功能：连续执行函数内的语句</span><br><span class="line"></span><br><span class="line">void setup() </span><br><span class="line">&#123;</span><br><span class="line">  Serial.begin(9600); //以9600波特打开串行监视器，查看ping结果。</span><br><span class="line">  //serial(串口通信)</span><br><span class="line">  //函数Serial.begin(9600)是设置串口通讯的波特率为9600;</span><br><span class="line">  //波特率表示单位时间内传送的码元符号的个数，它是对符号传输速率的一种度量，它用单位时间内载波调制状态改变的次数来表示，波特率即指一个单位时间内传输符号的个数。</span><br><span class="line">  //Serial.available() 的意思是：返回串口缓冲区中当前剩余的字符个数。一般用这个函数来判断串口的缓冲区有无数据，当Serial.available()&gt;0时，说明串口接收到了数据可以读取；</span><br><span class="line">  //Serial.read()指从串口的缓冲区取出并读取一个Byte的数据，比如有设备通过串口向Arduino发送数据了，我们就可以用Serial.read()来读取发送的数据。</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop() </span><br><span class="line">&#123;</span><br><span class="line">  delay(100);// 在两次ping之间等待50毫秒（大约20次ping/秒）。29ms应该是ping之间最短的延迟。//delay(ms)，毫秒级延时函数</span><br><span class="line">  unsigned int uS = sonar.ping(); // 发送ping，获取ping时间，单位为微秒（uS）。</span><br><span class="line">  Serial.print(&quot;Ping: &quot;);</span><br><span class="line">  Serial.print(uS / US_ROUNDTRIP_CM); // 将ping时间转换为以厘米为单位的距离，并打印结果（0=超出设置的距离范围）</span><br><span class="line">  Serial.println(&quot;cm&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="基础方法"><a href="#基础方法" class="headerlink" title="基础方法"></a>基础方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">pinMode(pin,mode)</span><br><span class="line">功能：配置一个端口为输入或输出端口，无返回值</span><br><span class="line">pin：所配引脚的标号，0~13</span><br><span class="line">mode：</span><br><span class="line">INPUT	输入模式</span><br><span class="line">OUTPUT	输出模式</span><br><span class="line">INPUT-PULLUP	输入上拉模式</span><br><span class="line">输入输出</span><br><span class="line">当引脚 13 输出高电平（1）时，LED 将被点亮；输出低电平（0）时，LED 将熄灭。</span><br><span class="line">digitalWrite(pin,value)</span><br><span class="line">功能：设置一个引脚的输出电压为低电平或高电平，无返回值，需要先将引脚设置为输出引脚</span><br><span class="line">pin：所配引脚的标号，0~13</span><br><span class="line">value：表示输出电压，LOW为低电平，HIGH为高电平</span><br><span class="line"></span><br><span class="line">digitalRead(pin)</span><br><span class="line">功能：读取外部输入的数字电压值，返回值为int型高电平或低电平的函数，使用前要定义引脚为输出引脚</span><br><span class="line">pin：所配引脚的标号，0~13</span><br><span class="line"></span><br><span class="line">delay(ms)</span><br><span class="line">功能：实现毫秒级别的延时</span><br><span class="line">ms：无符号长整型</span><br><span class="line"></span><br><span class="line">delayMicroseconds(us)</span><br><span class="line">功能：实现微秒级别的延时</span><br><span class="line">us：无符号长整型</span><br><span class="line"></span><br><span class="line">analogRead(pin)</span><br><span class="line">功能：读取指定引脚的模拟电压值</span><br><span class="line">pin：模拟电压值的输入引脚，A0~A5</span><br><span class="line">返回值为0~1023的整数</span><br><span class="line"></span><br><span class="line">map(value,fromlow,fromhigh,tolow,tohigh)</span><br><span class="line">功能：将一个数据从一个范围映射到另一个范围</span><br><span class="line">value：映射的数据</span><br><span class="line">[fromlow,fromhigh]：原范围</span><br><span class="line">[tolow,tohigh]：映射范围</span><br><span class="line"></span><br><span class="line">analogWrite(pin,value)</span><br><span class="line">功能：在指定引脚输出指定占空比的PWM信号，无返回值</span><br><span class="line">pin：输出PWM信号的引脚，仅限数字引脚（即带~的）</span><br><span class="line">value：占空比，取值范围为0-255对应0%-100%</span><br><span class="line"></span><br><span class="line">Serial.begin(speed)</span><br><span class="line">功能：串口初始化函数，用来设置串口的波特率。通常只设定一次，在setup函数中使用。</span><br><span class="line">speed：表示通信的波特率，通常有：9600、19200、57600、115200</span><br><span class="line">PC机默认为9600</span><br><span class="line"></span><br><span class="line">Serial.print(data)</span><br><span class="line">功能：从主板向计算机发送数据</span><br><span class="line">data：可发送变量、字符、字符串，默认为十进制</span><br><span class="line"></span><br><span class="line">Serial.println(data)</span><br><span class="line">功能：从主板向计算机发送数据，并在输出后换行</span><br><span class="line">data：可发送变量、字符、字符串，默认为十进制</span><br><span class="line"></span><br><span class="line">Serial.read()</span><br><span class="line">功能：读取外部计算机通过串口发给主板的数据</span><br><span class="line">该函数不带参数，返回值为串口数据，数据类型为int型</span><br><span class="line"></span><br><span class="line">Serial.available()</span><br><span class="line">功能：用来判断串口是否接收到数据</span><br><span class="line">函数返回值为尚未被read读取到的函数的字节数，函数返回值为int型</span><br><span class="line">若返回值为0，则说明没有已接收二未被读取的数据</span><br><span class="line">1.analogRead()函数读取引脚的模拟量电压值，返回一个0到1023的数值(int型)，表示对应的0到5的电压值。</span><br><span class="line">2.analogWrite(pinvalue)，将模拟值(PWM波)输出到引脚，PWM的信号频率约为490赫兹脚位通常会在3、5、6、9、10与11，Value变数范围0-255，而0-255对应的是0-5v电压</span><br><span class="line">3.map(value, fromLow,fromHigh,toLow,toHigh)，把一个数从一个范围变换到另一个范围就是将value变数依照fromLow与fromHigh范围，对等转换至toLow与toHigh范围</span><br></pre></td></tr></table></figure>
+
+<h4 id="RX，TX（串口通讯）Dome"><a href="#RX，TX（串口通讯）Dome" class="headerlink" title="RX，TX（串口通讯）Dome"></a>RX，TX（串口通讯）Dome</h4><p>参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/44641339692/">https://www.freesion.com/article/44641339692/</a></p>
+<p><img src="https://www.freesion.com/images/99/0ccdc13509e2acb8419b1d9dc1459cab.png" alt="image-20220719175038635"></p>
+<p><strong>Serial.begin()</strong></p>
+<ul>
+<li>描述：开启串口，通常置于setup()函数中。</li>
+<li>原型：<ul>
+<li><strong>Serial.begin(speed)</strong></li>
+<li><strong>Serial.begin(speed, config)</strong></li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>speed：波特率，一般取值9600,115200等。</li>
+<li>config：设置数据位、校验位和停止位。默认SERIAL_8N1表示8个数据位，无校验位，1个停止位。</li>
+</ul>
+</li>
+<li>返回值：无。</li>
+</ul>
+<p><strong>Serial.end()</strong></p>
+<ul>
+<li>描述：禁止串口传输。此时串口Rx和Tx可以作为数字IO引脚使用。</li>
+<li>原型：<strong>Serial.end()</strong></li>
+<li>参数：无。</li>
+<li>返回值：无。</li>
+</ul>
+<p><strong>Serial.print()</strong></p>
+<ul>
+<li>描述：串口输出数据，写入字符数据到串口。</li>
+<li>原型：<ul>
+<li><strong>Serial.print(val)</strong></li>
+<li><strong>Serial.print(val, format)</strong></li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>val：打印的值，任意数据类型。</li>
+<li>config：输出的数据格式。BIN(二进制)、OCT(八进制)、DEC(十进制)、HEX(十六进制)。对于浮点数，此参数指定要使用的小数位数。</li>
+</ul>
+</li>
+<li>示例：<ul>
+<li>Serial.print(78, BIN) 得到 “1001110”</li>
+<li>Serial.print(78, OCT) 得到 “116”</li>
+<li>Serial.print(78, DEC) 得到 “78”</li>
+<li>Serial.print(78, HEX) 得到 “4E”</li>
+<li>Serial.print(1.23456, 0) 得到 “1”</li>
+<li>Serial.print(1.23456, 2) 得到 “1.23”</li>
+<li>Serial.print(1.23456, 4) 得到 “1.2346”</li>
+<li>Serial.print(‘N’) 得到 “N”</li>
+<li>Serial.print(“Hello world.”) 得到 “Hello world.”</li>
+</ul>
+</li>
+<li>返回值：返回写入的字节数。</li>
+</ul>
+<p><strong>Serial.println()</strong></p>
+<ul>
+<li>描述：串口输出数据并换行。</li>
+<li>原型：<ul>
+<li><strong>Serial.println(val)</strong></li>
+<li><strong>Serial.println(val, format)</strong></li>
+</ul>
+</li>
+<li>参数：<ul>
+<li>val：打印的值，任意数据类型。</li>
+<li>config：输出的数据格式。</li>
+</ul>
+</li>
+<li>返回值：返回写入的字节数。</li>
+</ul>
+<p><strong>Serial.available()</strong></p>
+<ul>
+<li>描述：判断串口缓冲区的状态，返回从串口缓冲区读取的字节数。</li>
+<li>原型：<strong>Serial.available()</strong></li>
+<li>参数：无。</li>
+<li>返回值：可读取的字节数。</li>
+</ul>
+<p><strong>Serial.read()</strong></p>
+<ul>
+<li>描述：读取串口数据，一次读一个字符，读完后删除已读数据。</li>
+<li>原型：<strong>Serial.read()</strong></li>
+<li>参数：无。</li>
+<li>返回值：返回串口缓存中第一个可读字节，当没有可读数据时返回-1，整数类型。</li>
+</ul>
+<h5 id="发生数据方"><a href="#发生数据方" class="headerlink" title="发生数据方"></a>发生数据方</h5><p>参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/17421166048/">https://www.freesion.com/article/17421166048/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 串口通信-发送数据方</span><br><span class="line"> */</span><br><span class="line">int data = 52;</span><br><span class="line"></span><br><span class="line">void setup() &#123;</span><br><span class="line">  Serial.begin(9600); //初始化串口</span><br><span class="line">    while (!Serial) &#123; //等待串口正常工作</span><br><span class="line">    ; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop() &#123;</span><br><span class="line">  Serial.write(data);                   //发送数值信息</span><br><span class="line">  Serial.println(F(&quot;String test&quot;));     //发送字符信息,为什么加了一个F（），官方文档说的</span><br><span class="line">  delay(1000);                          //延时一下，不然发送的太频繁</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="接收数据方"><a href="#接收数据方" class="headerlink" title="接收数据方"></a>接收数据方</h5><h5 id="入门版"><a href="#入门版" class="headerlink" title="入门版"></a>入门版</h5><p>入门版没有将数值转换成对应的字符并连接起来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 串口通信-接受数据方</span><br><span class="line"> */</span><br><span class="line">String readdata = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">void setup() &#123;</span><br><span class="line">  Serial.begin(9600); //初始化串口</span><br><span class="line">    while (!Serial) &#123; //等待串口正常工作</span><br><span class="line">    ; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop() &#123;</span><br><span class="line">  while(Serial.available() &gt; 0)         //当串口有数据就读取数据</span><br><span class="line">  &#123;</span><br><span class="line">     Serial.print(&quot;Uno recieve: &quot;);Serial.println(Serial.read());</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">   delay(100);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h5><p>将Ascii数值转换成对应的字符并连接起来，并解决了重复读的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 串口通信-接受数据方</span><br><span class="line"> */</span><br><span class="line">String readdata = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">void setup() &#123;</span><br><span class="line">  Serial.begin(9600); //初始化串口</span><br><span class="line">    while (!Serial) &#123; //等待串口正常工作</span><br><span class="line">    ; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop() &#123;</span><br><span class="line">  while(Serial.available() &gt; 0)         //当串口有数据就读取数据</span><br><span class="line">  &#123;</span><br><span class="line">    readdata  =  readdata  +char(Serial.read());     //将分立的单个数据转化为字符后连接起来</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  if(readdata.length() &gt; 0)             //有数据才显示</span><br><span class="line">  &#123;</span><br><span class="line">     Serial.print(&quot;Uno recieve: &quot;);Serial.println(readdata);</span><br><span class="line">     readdata = &quot;&quot;;                     //清空数据缓存</span><br><span class="line">  &#125;  </span><br><span class="line">   delay(100);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" title="Arduino开发基础" target="_blank" rel="external">http://example.com/2022/07/19/Arduino开发基础/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" title="Netty的通讯与ESP8266（代码）"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
