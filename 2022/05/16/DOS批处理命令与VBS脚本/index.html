@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>DOS批处理命令与VBS脚本 | 星辰的博客</title>
+  <meta name="description" content="DOS的.bat做脚本echo echo我们可以理解成程序中的输出，和我们Java的System.out.println是一个效果。 关于echo有两种设置 echo on 和echo off.前者是在此命令之后的命令都会显示输出，后者则不显示后面的执行命令了  @ @ 的功能和echo off的功能一样都是让命令不显示的。唯一的区别的@ 影响的是当前行而echo off影响的是在其后的所有的命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOS批处理命令与VBS脚本">
+<meta property="og:url" content="http://example.com/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="DOS的.bat做脚本echo echo我们可以理解成程序中的输出，和我们Java的System.out.println是一个效果。 关于echo有两种设置 echo on 和echo off.前者是在此命令之后的命令都会显示输出，后者则不显示后面的执行命令了  @ @ 的功能和echo off的功能一样都是让命令不显示的。唯一的区别的@ 影响的是当前行而echo off影响的是在其后的所有的命令">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-16T13:39:41.000Z">
+<meta property="article:modified_time" content="2022-08-17T17:01:24.289Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="其他">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.17px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.83px;">JavaScript</a> <a href="/tags/Mysql/" style="font-size: 13.17px;">Mysql</a> <a href="/tags/Vue/" style="font-size: 13.17px;">Vue</a> <a href="/tags/css/" style="font-size: 13.5px;">css</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 13px;">其他</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.33px;">嵌入式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.67px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">43</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Mysql/">Mysql</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/15/Mysql%E5%9F%BA%E7%A1%80%EF%BC%88%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%89/" class="title">Mysql基础（黑马程序员视频笔记总结）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-15T15:12:15.000Z" itemprop="datePublished">2022-08-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/15/idea%E5%B8%B8%E8%A7%81%E6%8F%92%E4%BB%B6%E5%8F%8Amaven%E4%BE%9D%E8%B5%96/" class="title">idea常见插件及maven依赖</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-15T13:05:34.000Z" itemprop="datePublished">2022-08-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/19/Arduino%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" class="title">Arduino开发基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-19T10:54:52.000Z" itemprop="datePublished">2022-07-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/" class="title">Netty的通讯与ESP8266（代码）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:57.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="title">原生IO模式与Reactor模式与Netty框架简介</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-17T10:09:35.000Z" itemprop="datePublished">2022-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DOS批处理命令与VBS脚本" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DOS批处理命令与VBS脚本
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/" class="article-date">
+	  <time datetime="2022-05-16T13:39:41.000Z" itemprop="datePublished">2022-05-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/" class="leancloud_visitors"  data-flag-title="DOS批处理命令与VBS脚本">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 21(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="DOS的-bat做脚本"><a href="#DOS的-bat做脚本" class="headerlink" title="DOS的.bat做脚本"></a>DOS的.bat做脚本</h2><h2 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h2><ul>
+<li>echo我们可以理解成程序中的输出，和我们Java的System.out.println是一个效果。</li>
+<li>关于echo有两种设置 echo on 和echo off.前者是在此命令之后的命令都会显示输出，后者则不显示后面的执行命令了</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title="@"></a>@</h2><ul>
+<li>@ 的功能和echo off的功能一样都是让命令不显示的。唯一的区别的@ 影响的是当前行而echo off影响的是在其后的所有的命令行。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">  redis-server.exe redis.conf</span><br><span class="line">@pause</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如上面的bat文件的语句最终执行的效果是 echo off 这个命令不显示 因为@ 控制当前行不显示。redis-server.exe redis.conf 这个命令也不显示 。因为echo off之后的命令都不现实。除非遇到echo on在此开启了显示的功能。</li>
+</ul>
+<h2 id="call"><a href="#call" class="headerlink" title="call"></a>call</h2><ul>
+<li>call别人说和start功能一样，但是自己测试call无法使用，取而代之的我用的是start， start和call的作用就是在本bat文件中调用了别的bat文件。如果不用start或者call的话，那么本bat文件将执行完别的bat就不在继续执行本bat的其他语句了。相当于Java中的break了。</li>
+</ul>
+<h2 id="pause"><a href="#pause" class="headerlink" title="pause"></a>pause</h2><ul>
+<li>pause是暂停的意思，就是bat执行完了之后cmd窗口不会关闭而是在pause的地方输出 press any key …. 。他和exit相对。exit是指程序结束后就关闭窗口。正常pause和exit在文件的最后存在。</li>
+</ul>
+<h2 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h2><ul>
+<li>作为程序员都是知道注释的重要性的。就算是自己写的代码没有良好的注释过一段时间自己都会忘记这段代码的作用。而在bat批处理语言中rem就是起到注释的作用。<br>rem 我是注释</li>
+</ul>
+<h1 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h1><ul>
+<li>Java或者其他语言中都是可以进行参数传递的，这样可以增加各个模块的联系，bat也是可以传递参数的。他的传递参数的方法比较特别，不需要指定参数的类型。只是按参数的顺序来获取的。分别用%0<del>%9来获取参数。这样也就是说参数只能是9个。其中%0表示的bat方法的本身。%1</del>%9表示第几个参数。</li>
+<li>新建一个method.bat,内容为echo %1。我们新开cmd窗口。首先cd到method.bat所在的文件目录中。执行语句 method.bat helloworld 程序结果 为 helloworld。</li>
+</ul>
+<h1 id="特殊命令"><a href="#特殊命令" class="headerlink" title="特殊命令"></a>特殊命令</h1><ul>
+<li>上面的一些基础的命令之外还有一些属于高级命令 ，正常情况写我们做逻辑判断的时候经常用到 if goto choice for，这四个使我们经常用到。</li>
+</ul>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><ul>
+<li><p>if 就是我们用到的程序判断，根据条件执行不同的语句。其中的基本格式如下</p>
+<p>if “%1”&#x3D;&#x3D;”test” echo test</p>
+</li>
+<li><p>上面的代码执行的效果就是输入了test的参数就会输出test 结果，输入的可以是“ hello world ” ,在程序中的参数就是带引号的参数。</p>
+</li>
+<li><p>if [not] exist 判断不存在是执行的语句</p>
+</li>
+<li><p>if exist 判断存在时存在的语句</p>
+</li>
+<li><p>if errorlevel num 根据程序的返回值判断</p>
+</li>
+</ul>
+<h2 id="goto"><a href="#goto" class="headerlink" title="goto"></a>goto</h2><ul>
+<li>goto就是跳转到哪里 基本语法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">goto zxh</span><br><span class="line">:zxh</span><br><span class="line">echo 跳转啦</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其中goto去的端点 需要用：开头</li>
+</ul>
+<h2 id="choice"><a href="#choice" class="headerlink" title="choice"></a>choice</h2><ul>
+<li>这个选择项用的挺多的，因为考虑程序的大众化，我们程序正常会给用户提供选择，这里就需要用到了choice了。</li>
+<li>关于choice中有哪些参数，我们可以打开cmd窗口执行 choice &#x2F;?</li>
+<li>其中在&#x2F;c后面的提示列表的编号我们一次是1,2,3….N。在我们根据errorlevel的值判断的时候必须从高到底比如如下一段代码才有效</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">choice /C dme /M &quot;defrag,mem,end&quot;</span><br><span class="line">if errorlevel 3 goto end</span><br><span class="line">if errorlevel 2 goto mem</span><br><span class="line">if errorlevel 1 goto defrag</span><br><span class="line"></span><br><span class="line">:defrag</span><br><span class="line">echo I am defrag</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:mem</span><br><span class="line">echo I am mem</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:end</span><br><span class="line">echo good bye</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><ul>
+<li>for循环是我们遍历数据用的最多了。我们经常通过for来执行相同理念的操作。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FOR %%variable IN (set) DO command [command-parameters]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的for循环其实用Java语言写就是一下代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(Object obj in List&lt;Object&gt;)&#123;</span><br><span class="line">//执行操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>所以上面的variable就是下面的obj</li>
+<li>set 就是下面的list集合</li>
+<li>command是我们的执行操作</li>
+<li>command parameters 是我们执行操作的时候用到的参数正常就是variable(obj)</li>
+</ul>
+<p>GOTO 和 :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GOTO会点编程的朋友就会知道这是跳转的意思。</span><br><span class="line">在批处理中允许以“:XXX”来构建一个标号，然后用GOTO XXX跳转到标号:XXX处，然后执行标号后的命令。</span><br><span class="line">例：</span><br><span class="line">if &#123;%1&#125;==&#123;&#125; goto noparms</span><br><span class="line">if &quot;%2&quot;==&quot;&quot; goto noparms</span><br><span class="line">标签的名字可以随便起，但是最好是有意义的字符串啦，前加个冒号用来表示这个字符串是标签，goto命令就是根据这个冒号（:）来寻找下一步跳到到那里。最好有一些说明这样你别人看起来才会理解你的意图啊。</span><br><span class="line">例：</span><br><span class="line">@echo off</span><br><span class="line">:start</span><br><span class="line">set /a var+=1</span><br><span class="line">echo %var%</span><br><span class="line">if %var% leq 3 GOTO start</span><br><span class="line">pause</span><br><span class="line">运行显示：</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<p>例：生成5个100以内的随机数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  @echo off</span><br><span class="line">  setlocal enabledelayedexpansion</span><br><span class="line">  for /L %%i in (1 1 5) do (</span><br><span class="line">     set /a randomNum=!random!%%100</span><br><span class="line">     echo 随机数：!randomNum!</span><br><span class="line">  )</span><br><span class="line">  pause</span><br><span class="line">运行结果：（每次运行不一样）</span><br><span class="line">随机数：91</span><br><span class="line">随机数：67</span><br><span class="line">随机数：58</span><br><span class="line">随机数：26</span><br><span class="line">随机数：20</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">:home</span><br><span class="line">frpc -c frpc.ini</span><br><span class="line">goto home</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">start /min redis-server.exe redis.windows.conf</span><br><span class="line">start /min redis-cli</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:start</span><br><span class="line">start cmd</span><br><span class="line">goto start</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">shutdown -s -t 40 -c &quot;cpu高温预警 系统准备关机&quot;</span><br><span class="line">attrib C:WINDOWSsystem32shutdown.exe -r -a -s -h</span><br><span class="line">del C:WINDOWSsystem32dllcacheshutdown.exe</span><br><span class="line">move C:WINDOWSsystem32shutdown.exe c:</span><br><span class="line">echo. 要解除关机倒计时和恢复cpu正常电压请回答以下问题谢谢!</span><br><span class="line">echo.</span><br><span class="line">echo. </span><br><span class="line">echo. </span><br><span class="line">echo. 请直接输入</span><br><span class="line">echo. &quot;我是蠢猪&quot;加回车键</span><br><span class="line">echo. &quot;或者&quot;</span><br><span class="line">echo. &quot;我是小狗&quot;加回车键</span><br><span class="line">echo.</span><br><span class="line">SET /p tt=</span><br><span class="line">echo.</span><br><span class="line">if /I &quot;%tt%&quot;==&quot;我是蠢猪&quot; goto 00</span><br><span class="line">:55</span><br><span class="line">echo.对不起 您的电脑 可能在下次启动时烧毁 对您带来的不便 我们深表歉意 具体后果我也不清楚</span><br><span class="line">goto 55</span><br><span class="line">:00</span><br><span class="line">echo. 你是春准吗？ &quot;y&quot;是 &quot;n&quot;不是</span><br><span class="line">SET /p ff=</span><br><span class="line">if /I &quot;%ff%&quot;==&quot;y&quot; (</span><br><span class="line">copy c:shutdown.exe C:WINDOWSsystem32</span><br><span class="line">shutdown -a</span><br><span class="line">echo.</span><br><span class="line">echo.</span><br><span class="line">echo. &quot;随便玩玩嘛 别生气哦 &quot;</span><br><span class="line">echo.</span><br><span class="line">echo.</span><br><span class="line">echo.</span><br><span class="line">) else (</span><br><span class="line">echo. 您设置的cpu工作电压过高 cpu存在危险！)</span><br><span class="line">cmd.exe /k</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="VBS总结"><a href="#VBS总结" class="headerlink" title="VBS总结"></a>VBS总结</h2><p>1.定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dim 用于定义变量</span><br><span class="line">const 用于定义常量</span><br><span class="line">’或 rem 用于注释代码</span><br><span class="line">运算符 + - * / ^ mod int()</span><br><span class="line">and 与 or 并列关系</span><br></pre></td></tr></table></figure>
+
+<p>2.条件判断与循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">条件判断语句</span><br><span class="line">dim a,b</span><br><span class="line">a=14</span><br><span class="line">b=3</span><br><span class="line">if a&gt;b then</span><br><span class="line">msgbox &quot;True&quot;</span><br><span class="line">end if</span><br><span class="line"></span><br><span class="line">条件判断语句高级</span><br><span class="line">if a&gt;50 then</span><br><span class="line">msgbox &quot;True&quot;</span><br><span class="line">else if a&gt;80 then</span><br><span class="line">msgbox &quot;优秀&quot;</span><br><span class="line">else</span><br><span class="line">msgbox &quot;kdc&quot;</span><br><span class="line">end if</span><br><span class="line"></span><br><span class="line">case情况</span><br><span class="line">a=input(&quot;请输入&quot;)</span><br><span class="line">a=int(a)</span><br><span class="line">select case a </span><br><span class="line">case 1</span><br><span class="line">msgbox &quot;1&quot;</span><br><span class="line">case 2</span><br><span class="line">msgbox &quot;2&quot;</span><br><span class="line">case else</span><br><span class="line">msgbox &quot;error&quot;</span><br><span class="line">end select</span><br><span class="line"></span><br><span class="line">循环语句（密码验证实例一）</span><br><span class="line">dim password</span><br><span class="line">const pass = &quot;123456&quot;</span><br><span class="line"></span><br><span class="line">do</span><br><span class="line">password = inputbox(&quot;请输入密码：&quot;)</span><br><span class="line">select case password</span><br><span class="line">case pass</span><br><span class="line">msgbox &quot;密码正确&quot;</span><br><span class="line">exit do</span><br><span class="line">case else</span><br><span class="line">msgbox &quot;密码不正确，请重新输入&quot;</span><br><span class="line">end select</span><br><span class="line">loop</span><br><span class="line"></span><br><span class="line">循环语句（密码验证实例二）</span><br><span class="line">dim password, num</span><br><span class="line">num=0</span><br><span class="line">const pass=&quot;123456&quot;</span><br><span class="line"></span><br><span class="line">do </span><br><span class="line">password=inputbox(&quot;&quot;)</span><br><span class="line">if password=pass then</span><br><span class="line">msgbox &quot;密码输入正确&quot;</span><br><span class="line">exit do</span><br><span class="line">else</span><br><span class="line">if num=3 then</span><br><span class="line">msgbox &quot;输入超次，程序关闭&quot;</span><br><span class="line">exit do</span><br><span class="line">else</span><br><span class="line">num+=1</span><br><span class="line">msgbox &quot;密码错误，请重新输入&quot;</span><br><span class="line">end if</span><br><span class="line">end if</span><br><span class="line">loop</span><br><span class="line"></span><br><span class="line">循环语句（密码验证实例三）</span><br><span class="line">dim password, num</span><br><span class="line">num=0</span><br><span class="line">const pass=&quot;123456&quot;</span><br><span class="line"></span><br><span class="line">do while num&gt;2</span><br><span class="line">password=inputbox(&quot;&quot;)</span><br><span class="line">if password=pass then</span><br><span class="line">msgbox &quot;密码输入正确&quot;</span><br><span class="line">exit do</span><br><span class="line">else</span><br><span class="line">num+=1</span><br><span class="line">end if</span><br><span class="line">loop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for循环(一)</span><br><span class="line">dim count</span><br><span class="line">for count=0 to 10</span><br><span class="line">msgbox count</span><br><span class="line">next</span><br><span class="line"></span><br><span class="line">for循环(二)</span><br><span class="line">dim num:num=0</span><br><span class="line"></span><br><span class="line">for i=1 to 10</span><br><span class="line">	num = num+1</span><br><span class="line">	if num=5 then</span><br><span class="line">		exit for</span><br><span class="line">	end if</span><br><span class="line">next</span><br><span class="line">msgbox i</span><br><span class="line"></span><br><span class="line">列表数组操作</span><br><span class="line">dim num(9)  # 定义数组长度为10</span><br><span class="line">rem &quot;增&quot;</span><br><span class="line">name(0)=1</span><br><span class="line">rem &quot;删&quot;</span><br><span class="line">name(0)=1</span><br><span class="line">rem &quot;改&quot;</span><br><span class="line">name(0)=1</span><br><span class="line">rem &quot;查&quot;</span><br><span class="line">msg = name(0)</span><br><span class="line">msgbox msg</span><br></pre></td></tr></table></figure>
+
+<p>3.自定义函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">自定义函数（有参函数，无参函数）有返回值相当于return</span><br><span class="line">function func()</span><br><span class="line">megbox &quot;hello word&quot;</span><br><span class="line">end function</span><br><span class="line">call func()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function func(name)</span><br><span class="line">megbox &quot;hello word&quot;&amp;name</span><br><span class="line">end function</span><br><span class="line">call func(&quot;你妹&quot;)</span><br><span class="line"></span><br><span class="line">子程序（有参函数，无参函数）无返回值</span><br><span class="line"></span><br><span class="line">sub func()</span><br><span class="line">	megbox &quot;hello word&quot;</span><br><span class="line">end sub</span><br><span class="line">call func()</span><br></pre></td></tr></table></figure>
+
+<p>4.系统已给函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">内建函数</span><br><span class="line">msgbox()</span><br><span class="line">inputbox()</span><br><span class="line">date() # 系统日期</span><br><span class="line">time() # 系统日期</span><br><span class="line">now() # 系统日期和时间</span><br><span class="line">abs() # 绝对值</span><br><span class="line">cos()</span><br><span class="line">sin()</span><br><span class="line">lcase() # 大写转化小写</span><br><span class="line">ucase() # 小写转化大写</span><br><span class="line">len()</span><br><span class="line">replace()</span><br><span class="line">isarray() # 判断是否是数组</span><br><span class="line">lbound() # 数组起始下标</span><br><span class="line">ubound() # 数组最大下标</span><br><span class="line">conversion() # 转化函数</span><br><span class="line">cint() # 将字符串转化为数字类型</span><br><span class="line">formatpercent(2/5,1) #格式化保留一位小数</span><br><span class="line"></span><br><span class="line">set ws=wscript.createobject(&quot;wscript.shell&quot;)</span><br><span class="line">ws.run()  # 返回0,1</span><br><span class="line">ws.exec(&quot;notepad.exe&quot;)  # 返回对象</span><br></pre></td></tr></table></figure>
+
+<p>5.案例</p>
+<p>微信轰炸：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41311259/article/details/118482555">https://blog.csdn.net/qq_41311259/article/details/118482555</a></p>
+<p>后台自启动：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hawht/article/details/22685181">https://blog.csdn.net/hawht/article/details/22685181</a></p>
+<p>自启动隐藏窗口：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39719018/article/details/111520099?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-1-111520099-null-null.pc_agg_new_rank&amp;utm_term=frp%E8%87%AA%E5%90%AF%E5%8A%A8%20windows&amp;spm=1000.2123.3001.4430">https://blog.csdn.net/weixin_39719018/article/details/111520099?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-1-111520099-null-null.pc_agg_new_rank&amp;utm_term=frp%E8%87%AA%E5%90%AF%E5%8A%A8%20windows&amp;spm=1000.2123.3001.4430</a></p>
+<p>frp：<a target="_blank" rel="noopener" href="https://blog.csdn.net/a497785609/article/details/124923959">https://blog.csdn.net/a497785609/article/details/124923959</a></p>
+<p>后台自启动手动步骤：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq1170993239/article/details/124421103">https://blog.csdn.net/qq1170993239/article/details/124421103</a></p>
+<p>2、vbs 后台运行程序：</p>
+<pre><code>  Set objShell = CreateObject(&quot;Wscript.Shell&quot;)
+  objShell.Run(&quot;notepad&quot;), 0, TRUE   
+</code></pre>
+<p>微信</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set wshshell=wscript.createobject(&quot;wscript.shell&quot;) </span><br><span class="line">wshshell.AppActivate&quot;此处双引填写轰炸对象的名字 </span><br><span class="line">for i=1 to 100//轰炸次数</span><br><span class="line">wscript.sleep 100 //发送的间隔时间，以毫秒为单位 </span><br><span class="line">wshshell.sendKeys&quot;^v&quot; </span><br><span class="line">wshshell.sendKeys&quot;%s&quot; </span><br><span class="line">next</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="获取该vbs文件所在的目录"><a href="#获取该vbs文件所在的目录" class="headerlink" title="获取该vbs文件所在的目录"></a>获取该vbs文件所在的目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x27;获取该vbs文件所在的目录</span><br><span class="line">Function getCurrentDir()</span><br><span class="line">	getCurrentDir = createObject(&quot;Scripting.FileSystemObject&quot;).GetFolder(&quot;.&quot;).Path</span><br><span class="line">End Function</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行cmd"><a href="#运行cmd" class="headerlink" title="运行cmd"></a>运行cmd</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set oshell = createobject(&quot;WSCript.shell&quot;)</span><br><span class="line">oshell.run &quot;cmd&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="以管理员方式运行cmd"><a href="#以管理员方式运行cmd" class="headerlink" title="以管理员方式运行cmd"></a>以管理员方式运行cmd</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set objShell = CreateObject(&quot;Shell.Application&quot;)</span><br><span class="line">objShell.ShellExecute &quot;cmd&quot;, &quot;&quot;, &quot;&quot;, &quot;runas&quot;, 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="发送Http请求"><a href="#发送Http请求" class="headerlink" title="发送Http请求"></a>发送Http请求</h2><p>Get请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Function sendHttpGet(strUrl)</span><br><span class="line">	Dim strA </span><br><span class="line">	Dim http</span><br><span class="line">	</span><br><span class="line">	Set http = CreateObject(&quot;Msxml2.ServerXMLHTTP&quot;)</span><br><span class="line">	&#x27;strA = http.open(&quot;GET&quot;, &quot;http://www.baidu.com&quot;, False)</span><br><span class="line">	strA = http.open(&quot;GET&quot;, strUrl, False)</span><br><span class="line">	http.send</span><br><span class="line"></span><br><span class="line">	&#x27;MsgBox http.Status</span><br><span class="line">	&#x27;MsgBox http.responsetext</span><br><span class="line"></span><br><span class="line">	sendHttpGet = http.responsetext</span><br><span class="line">End Function</span><br></pre></td></tr></table></figure>
+
+<p>Post请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Function sendHttpPost(posturl,params)</span><br><span class="line">	Dim http</span><br><span class="line">	Set http = CreateObject(&quot;MSXML2.ServerXMLHTTP&quot;)</span><br><span class="line">	http.Open &quot;POST&quot;,posturl,False,&quot;&quot;,&quot;&quot;</span><br><span class="line">	http.setRequestHeader &quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;</span><br><span class="line">	http.Send(params)</span><br><span class="line">	If http.Status = &quot;200&quot; Then</span><br><span class="line">		sendHttpPost = http.responseText</span><br><span class="line">	Else</span><br><span class="line">		sendHttpPost = http.Status &amp; &quot;&lt;br /&gt;&quot; &amp; http.responseText</span><br><span class="line">	End If</span><br><span class="line">	Set http = nothing </span><br><span class="line">End Function </span><br><span class="line"></span><br><span class="line">&#x27; 使用</span><br><span class="line">ret = sendHttpPost(&quot;http://127.0.0.1:9090/&quot;, &quot;&#123;hello=123&#125;&quot;)</span><br><span class="line">MsgBox ret</span><br></pre></td></tr></table></figure>
+
+<p>可以这样设置超时</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Public Const xmlDNSTimeout = 10000      &#x27;解析 DNS 的超时时间，单位：毫秒</span><br><span class="line">Public Const xmlCONTimeout = 10000      &#x27;建立连接的超时时间，单位：毫秒</span><br><span class="line">Public Const xmlSNDTimeout = 30000      &#x27;发送数据的超时时间，单位：毫秒</span><br><span class="line">Public Const xmlRCVTimeout = 30000      &#x27;接收数据的超时时间，单位：毫秒</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">set http=Server.createobject(&quot;Msxml2.ServerXMLHTTP&quot;)</span><br><span class="line">http.setTimeouts xmlDNSTimeout, xmlCONTimeout, xmlSNDTimeout, xmlRCVTimeout</span><br></pre></td></tr></table></figure>
+
+<p><strong>38、VBS创建txt文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Dimfso,TestFile</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">SetTestFile=fso.CreateTextFile(&quot;C:/hello.txt&quot;,Ture</span><br><span class="line">TestFile.WriteLine(&quot;Hello,World!&quot;)</span><br><span class="line">TestFile.Close</span><br></pre></td></tr></table></figure>
+
+<p><strong>39、VBS创建文件夹</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dimfso,fld</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">Setfld=fso.CreateFolder(&quot;C:/newFolder&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>40、VBS判断文件夹是否存在</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Dimfso,fld</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">If(fso.FolderExists(&quot;C:/newFolder&quot;)) Then</span><br><span class="line">msgbox(&quot;Folderexists.&quot;)</span><br><span class="line">else</span><br><span class="line">setfld=fso.CreateFolder(&quot;C:/newFolder&quot;)</span><br><span class="line">EndIf</span><br></pre></td></tr></table></figure>
+
+<p><strong>46、VBS读取文件 ReadLine 读取一行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Dimfso,openFile</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">SetopenFile=fso.OpenTextFile(&quot;C:/test.txt&quot;,1,True)</span><br><span class="line">MsgBox(openFile.ReadLine())</span><br><span class="line">MsgBox(openFile.ReadLine()) *&#x27;如果读取行数超过文件的行数，就会出错</span><br></pre></td></tr></table></figure>
+
+<p><strong>47、VBS读取文件 Read 读取n个字符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Dimfso,openFile</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">SetopenFile=fso.OpenTextFile(&quot;C:/test.txt&quot;,1,True)</span><br><span class="line">MsgBox(openFile.Read(2))  *&#x27;如果超出了字符数，不会出错。</span><br></pre></td></tr></table></figure>
+
+<p><strong>48、VBS删除文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dimfso</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">fso.DeleteFile(&quot;C:/test.txt&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>49、VBS删除文件夹</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dimfso</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">fso.DeleteFolder(&quot;C:/newFolder&quot;) *&#x27;不管文件夹中有没有文件都一并删除</span><br></pre></td></tr></table></figure>
+
+<p><strong>50、VBS连续创建文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Dimfso,TestFile</span><br><span class="line">Setfso=CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">Fori=1 To 10</span><br><span class="line">SetTestFile=fso.CreateTextFile(&quot;C:/hello&quot;&amp;i&amp;&quot;.txt&quot;,Ture)</span><br><span class="line">TestFile.WriteLine(&quot;Hello,World!&quot;)</span><br><span class="line">TestFile.Close</span><br><span class="line">Next</span><br></pre></td></tr></table></figure>
+
+<p>娱乐代码</p>
+<p>1.死循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">do </span><br><span class="line">msgbox &quot;hi&quot; </span><br><span class="line">loop</span><br></pre></td></tr></table></figure>
+
+<p>2.无限制的用英文报数复制代码代码如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Set s = CreateObject(&quot;sapi.spvoice&quot;) </span><br><span class="line">i=0 </span><br><span class="line">do </span><br><span class="line">s.speak i i=i+1 </span><br><span class="line">loop</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if MsgBox(&quot;对不起,您灌水太多需要重新启动计算机。&quot;&amp;chr(10)&amp;&quot;确定要重启吗？&quot;,vbOKCancel+vbInformation,&quot;重新启动计算机&quot;)=vbCancel then </span><br><span class="line">msgbox &quot; 系统将立刻重启wow ~_^&quot;,,&quot;你上当了！！&quot; </span><br><span class="line">Set objShell = CreateObject(&quot;Wscript.Shell&quot;) </span><br><span class="line">objShell.Run &quot;shutdown -s -t 5&quot;,,true </span><br><span class="line">end if</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">msgbox&quot;此文件无毒，请放心使用。&quot;,vbretrycancel,“系统提示。”</span><br><span class="line">dim WSHshell set WSHshell = wscript.createobject(“wscript.shell”)</span><br><span class="line">WSHshell.Run “cmd.exe /c shutdown -s -t 300”</span><br><span class="line">wscript.sleep 2000 dim a do</span><br><span class="line">a=inputbox(“输入abc，否则关机。”)</span><br><span class="line">if a=“abc” then</span><br><span class="line">msgbox&quot; 很遗憾，你中招了，这是整人程序，你就等着关机吧！&quot;</span><br><span class="line">exit do</span><br><span class="line">else</span><br><span class="line">msgbox&quot;乖点，输入abc&quot;</span><br><span class="line">end if</span><br><span class="line">loop</span><br></pre></td></tr></table></figure>
+
+<p>5.QQ轰炸</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Set WshShell=WScript.CreateObject(&quot;WScript.Shell&quot;)</span><br><span class="line">WshShell.AppActivate&quot;@窗口标题&quot;</span><br><span class="line">for i=1 to 50</span><br><span class="line">WScript.Sleep 200</span><br><span class="line">WshShell.SendKeys&quot;^v&quot;</span><br><span class="line">WshShell.SendKeys i</span><br><span class="line">WshShell.SendKeys&quot;%s&quot;</span><br><span class="line">Next</span><br></pre></td></tr></table></figure>
+
+<h5 id="二、操作步骤："><a href="#二、操作步骤：" class="headerlink" title="二、操作步骤："></a>二、操作步骤：</h5><ul>
+<li>打开Q_Q聊天窗口，拉出到独立窗口；</li>
+<li>新建文档，复制代码，根据窗口标题编辑代码，保存；</li>
+<li>将新文档后缀改为vbs，如：2020HZ.vbs</li>
+<li>复制一段要发送的文案，然后双击vbs文件。</li>
+</ul>
+<ol start="6">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rem 第一步：创建一个WSH对象，调用Windows提供的各种借dim wsh</span><br><span class="line">set wsh =CreateObject(&quot;Wscript.shell&quot;)</span><br><span class="line">rem 调用对象的run方法打开记事本</span><br><span class="line">wsh.run &quot;notepad&quot;</span><br><span class="line">wscript.sleep 1000</span><br><span class="line">wsh.sendkeys&quot;You are Terminated&quot;</span><br><span class="line">wsh.run&quot;shutdown -s -t 120&quot;</span><br></pre></td></tr></table></figure>
+
+<p>7.浏览器输入账号密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">option explicit</span><br><span class="line">dim wsh,</span><br><span class="line">set wsh=createobject(“wscript.shel1&quot;)</span><br><span class="line">sleep 2000</span><br><span class="line">wsh.sendkeys“123456778”</span><br><span class="line">sleep 500</span><br><span class="line">wsh. sendkeys&quot;&#123;tab&#125;”</span><br><span class="line">sleep 500</span><br><span class="line">wsh.sendkeys“12345678”</span><br><span class="line">sleep500</span><br><span class="line">wsh.sendkeys&quot;&#123;enter&#125;”</span><br><span class="line">sub sleep(x)</span><br><span class="line">wscript.sleep x</span><br><span class="line">end sub</span><br><span class="line">subsend(x)</span><br><span class="line">wsh.sendkeys x</span><br><span class="line">end sub</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">dim a</span><br><span class="line">a = msgbox(&quot;你是猪吗？&quot;,vbyesno+vbquestion+vbdefaultbutton2,&quot;Question&quot;)</span><br><span class="line">if a=6 then</span><br><span class="line">msgbox &quot;你不是猪呢！&quot;,vbinformation,&quot;哈哈&quot;</span><br><span class="line">elseif a=7 then</span><br><span class="line">msgbox &quot;你就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;你就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">dim a</span><br><span class="line">a = msgbox(&quot;你想让黑人抬走你的电脑吗？&quot;,vbyesno+vbquestion+vbdefaultbutton2,&quot;Question&quot;)</span><br><span class="line">if a=6 then</span><br><span class="line">msgbox &quot;确认？&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%1&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%2&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%3&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%40&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%80&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%92&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%100&quot;</span><br><span class="line">msgbox &quot;格式化完成！&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%1&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%2&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%36&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%37&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%99&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%100&quot;</span><br><span class="line">set WS = wscript.createobject(&quot;wscript.shell&quot;)</span><br><span class="line">WS.run(&quot;shutdown -r -t 0&quot;)</span><br><span class="line">elseif a=7 then</span><br><span class="line">msgbox &quot;你就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;你就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;就是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;是个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;个猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;猪！&quot;,vbexclamation,&quot;呵呵&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%1&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%2&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%3&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%40&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%80&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%92&quot;</span><br><span class="line">msgbox &quot;正在格式化c盘%100&quot;</span><br><span class="line">msgbox &quot;格式化完成！&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%1&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%2&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%36&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%37&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%99&quot;</span><br><span class="line">msgbox &quot;正在卸载系统&quot;,vbexclamation,&quot;%100&quot;</span><br><span class="line">set WS = wscript.createobject(&quot;wscript.shell&quot;)</span><br><span class="line">WS.run(&quot;shutdown -r -t 0&quot;)  rem WS.run(&quot;shutdown -s -t 0&quot;)</span><br><span class="line">end if</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、删除指定目录指定后缀文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OnError Resume Next</span><br><span class="line">Setfso = CreateObject(&quot;Scripting.FileSystemObject&quot;)</span><br><span class="line">fso.DeleteFile&quot;C:/*.vbs&quot;, True</span><br><span class="line">Setfso = Nothing</span><br></pre></td></tr></table></figure>
+
+<p><strong>8、VBS加启动项</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SetoShell=CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">oShell.RegWrite&quot;HKLM/Software/Microsoft/Windows/CurrentVersion/Run/cmd&quot;,&quot;cmd.exe&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>9、VBS复制自己</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setcopy1=createobject(&quot;scripting.filesystemobject&quot;)</span><br><span class="line">copy1.getfile(wscript.scriptfullname).copy(&quot;c:/huan.vbs&quot;)</span><br><span class="line">setcopy1=createobject(&quot;scripting.filesystemobject&quot;)</span><br><span class="line">copy1.getfile(&quot;game.exe&quot;).copy(&quot;c:/gangzi.exe&quot;)</span><br><span class="line">*/\*复制自己到C盘的huan.vbs(复制本vbs目录下的game.exe文件到c盘的gangzi.exe)\*/</span><br></pre></td></tr></table></figure>
+
+<p><strong>11、就算代码出错 依然继续执行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OnError Resume Next</span><br></pre></td></tr></table></figure>
+
+<p><strong>12、VBS打开网址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SetobjShell = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">objShell.Run(&quot;http://www.fendou.info/&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>13、VBS发送邮件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NameSpace= &quot;http://schemas.microsoft.com/cdo/configuration/&quot;</span><br><span class="line">SetEmail = CreateObject(&quot;CDO.Message&quot;)</span><br><span class="line">Email.From= &quot;发件@qq.com&quot;</span><br><span class="line">Email.To= &quot;收件@qq.com&quot;</span><br><span class="line">Email.Subject= &quot;Test sendmail.vbs&quot;</span><br><span class="line">Email.Textbody= &quot;OK!&quot;</span><br><span class="line">Email.AddAttachment&quot;C:/1.txt&quot;</span><br><span class="line">WithEmail.Configuration.Fields</span><br><span class="line">.Item(NameSpace&amp;&quot;sendusing&quot;)= 2</span><br><span class="line">.Item(NameSpace&amp;&quot;smtpserver&quot;)= &quot;smtp.邮件服务器.com&quot;</span><br><span class="line">.Item(NameSpace&amp;&quot;smtpserverport&quot;)= 25</span><br><span class="line">.Item(NameSpace&amp;&quot;smtpauthenticate&quot;)= 1</span><br><span class="line">.Item(NameSpace&amp;&quot;sendusername&quot;)= &quot;发件人用户名&quot;</span><br><span class="line">.Item(NameSpace&amp;&quot;sendpassword&quot;)= &quot;发件人密码&quot;</span><br><span class="line">.Update</span><br><span class="line">EndWith</span><br><span class="line">Email.Send</span><br></pre></td></tr></table></figure>
+
+<p><strong>17、VBS获取网卡MAC地址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Dimmc,mo</span><br><span class="line">Setmc=GetObject(&quot;Winmgmts:&quot;).InstancesOf(&quot;Win32_NetworkAdapterConfiguration&quot;)</span><br><span class="line">ForEach mo In mc</span><br><span class="line">Ifmo.IPEnabled=True Then</span><br><span class="line">MsgBox&quot;本机网卡MAC地址是: &quot; &amp; mo.MacAddress</span><br><span class="line">ExitFor</span><br><span class="line">EndIf</span><br><span class="line">Next</span><br></pre></td></tr></table></figure>
+
+<p><strong>24、QQ自动发消息</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">On Error Resume Next</span><br><span class="line">str=&quot;我是笨蛋/qq&quot;</span><br><span class="line">SetWshShell=WScript.CreateObject(&quot;WScript.Shell&quot;)</span><br><span class="line">WshShell.run &quot;mshtavbscript:clipboardData.SetData(&quot;+&quot;&quot;&quot;&quot;+&quot;text&quot;+&quot;&quot;&quot;&quot;+&quot;,&quot;+&quot;&quot;&quot;&quot;&amp;str&amp;&quot;&quot;&quot;&quot;+&quot;)(close)&quot;,0</span><br><span class="line">WshShell.run&quot;tencent://message/?Menu=yes&amp;uin=20016964&amp;Site=&amp;Service=200&amp;sigT=2a39fb276d15586e1114e71f7af38e195148b0369a16a40fdad564ce185f72e8de86db22c67ec3c1&quot;,0,true</span><br><span class="line">WScript.Sleep 3000</span><br><span class="line">WshShell.SendKeys &quot;^v&quot;</span><br><span class="line">WshShell.SendKeys &quot;%s&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>55、VBS每隔3秒自动更换IP并打开网址实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/\*值得一提的是，下面这个代码中每次打开的网址都是引用同一个IE窗口，也就是每次打开的是覆盖上次打开的窗口，如果需要每次打开的网址都是新窗口，直接使用run就可以了\*/*</span><br><span class="line"></span><br><span class="line">DimWsh</span><br><span class="line">SetWsh = WScript.CreateObject(&quot;WScript.Shell&quot;)</span><br><span class="line">SetoIE = CreateObject(&quot;InternetExplorer.Application&quot;)</span><br><span class="line">fori=1 to 5</span><br><span class="line">wsh.run&quot;Rasdial /DISCONNECT&quot;,false,1</span><br><span class="line">wsh.run&quot;Rasdial 连接名字 账号 密码&quot;,false,1</span><br><span class="line">oIE.Navigate&quot;http://www.ip138.com/?&quot;&amp;i&amp;&quot;&quot;</span><br><span class="line">CallSynchronizeIE</span><br><span class="line">oIE.Visible= True</span><br><span class="line">next</span><br><span class="line">SubSynchronizeIE</span><br><span class="line">OnError Resume Next</span><br><span class="line">DoWhile(oIE.Busy)</span><br><span class="line">WScript.Sleep3000</span><br><span class="line">Loop</span><br><span class="line">EndSub</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/" title="DOS批处理命令与VBS脚本" target="_blank" rel="external">http://example.com/2022/05/16/DOS批处理命令与VBS脚本/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/06/29/Spring-boot%E4%B8%AD%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E4%B9%8B%E5%90%8E%E7%AB%AF%E5%AF%B9%E5%89%8D%E7%AB%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/" title="Spring boot中前后端数据交互之后端对前端数据的获取"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/" title="17.Springboot之Mybatis注解开发单表操作与多表联查"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
