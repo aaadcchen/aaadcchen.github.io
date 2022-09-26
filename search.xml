@@ -338,6 +338,41 @@
       </tags>
   </entry>
   <entry>
+    <title>C语言之动态数组</title>
+    <url>/2022/04/30/C%E8%AF%AD%E8%A8%80dome/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">目录</span><br><span class="line">一维动态数组</span><br><span class="line">二维动态数组</span><br></pre></td></tr></table></figure>
+
+<h1 id="一维动态数组"><a href="#一维动态数组" class="headerlink" title="一维动态数组"></a><strong>一维动态数组</strong></h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">头文件</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">方法</span><br><span class="line">malloc</span><br><span class="line">calloc</span><br><span class="line">realloc</span><br><span class="line">free</span><br></pre></td></tr></table></figure>
+
+<p>1：malloc是由程序员在堆栈动态开辟空间<br>2：返回值开辟空间的首地址，但是类型是void <em>，需要强制类型转换<br>3：分配的内存空间应该能整除类型所占的字节数<br>4：包含头文件malloc.h<br>5：只能用free（p）来释放p所指向的动态开辟的内存空间。<br>6：对动态内存空间的操作，用</em>p来操作。<br>7：可以用多个指针指向这个动态空间<br>8：当有多个指针只向这个动态空间时，只能用free一个指针，多次重复释放要被报错<br>9：可以将动态开辟的的内存指针作为函数参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int *parr=null;</span><br><span class="line">malloc();//开辟内存空间，malloc（int size）</span><br><span class="line">malloc(sizeof(int/char/doublie))</span><br><span class="line">parr=(int*)malloc(4);</span><br><span class="line">*parr=520;</span><br><span class="line">printf(&quot;%d&quot;,*parr); </span><br><span class="line">calloc(5,4);//开辟5个连续的空间，每个空间四个字节</span><br><span class="line">realloc()//调整内存大小</span><br><span class="line">parr1=(int*)realloc(parr1,28)//让parr1扩容到28字节</span><br><span class="line">free(p);//消除p所指向的地址的空间数据</span><br><span class="line">p中的存的地址不变</span><br></pre></td></tr></table></figure>
+
+<p>1.用户输入任意长度的纯数字字符串后，将字符串转成16进制字符数组，并在控制台打印16进制结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,temp,i=0,j=0;</span><br><span class="line">    long long int num=0,lenth=0,remainder,quotient;</span><br><span class="line">    //定义动态数组</span><br><span class="line">    char *str=(char *)malloc(5);</span><br><span class="line">    scanf(&quot;%s&quot;,str);</span><br><span class="line">    lenth=strlen(str);</span><br><span class="line">    //进行扩容</span><br><span class="line">    char *strplus=(char *)malloc(lenth+5);</span><br><span class="line">    //字符串拷贝</span><br><span class="line">    strcpy(strplus,str);</span><br><span class="line">    //释放动态数组</span><br><span class="line">    free(str);</span><br><span class="line">    //字符转数字</span><br><span class="line">    for( int i=0;strplus[i];i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        a=strplus[i]-48;</span><br><span class="line">        //printf(&quot;%d\n&quot;, a);</span><br><span class="line">        num=num*10+a;</span><br><span class="line">    &#125;</span><br><span class="line">    //printf(&quot;%d\n&quot;,num);</span><br><span class="line">    //释放动态数组,留下数字num</span><br><span class="line">    free(strplus);</span><br><span class="line">    //构造存储十六进制的动态数组</span><br><span class="line">    char *sixteenNumber=(char *)malloc(lenth+5);</span><br><span class="line">    quotient=num;</span><br><span class="line">    //十进制转十六进制</span><br><span class="line">    while(quotient!=0) &#123;</span><br><span class="line">        temp = quotient % 16;</span><br><span class="line">        if( temp &lt; 10)</span><br><span class="line">            temp =temp + 48;</span><br><span class="line">        else</span><br><span class="line">            temp = temp + 55;</span><br><span class="line">        sixteenNumber[j++]= temp;</span><br><span class="line">        quotient = quotient / 16;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%s&quot;,sixteenNumber);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    long long int num=0,lenth=0;</span><br><span class="line">    //定义动态数组</span><br><span class="line">    char *str=(char *)malloc(5);</span><br><span class="line">    scanf(&quot;%s&quot;,str);</span><br><span class="line">    lenth=strlen(str);</span><br><span class="line">    //进行扩容</span><br><span class="line">    char *strplus=(char *)malloc(lenth+5);</span><br><span class="line">    //字符串拷贝</span><br><span class="line">    strcpy(strplus,str);</span><br><span class="line">    //释放动态数组</span><br><span class="line">    free(str);</span><br><span class="line">    num = atoi(strplus);</span><br><span class="line">    free(strplus);</span><br><span class="line">    char *sixteenum=(char *)malloc(lenth);</span><br><span class="line">    //printf(&quot;%ld&quot;,num);</span><br><span class="line">    //itoa()不支持long long int 型参数，so行不通</span><br><span class="line">    itoa(num,sixteenum,16);</span><br><span class="line">    printf(&quot;%s&quot;, sixteenum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法三</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">long long int sum=0;</span><br><span class="line"></span><br><span class="line">char* getstr()</span><br><span class="line">&#123;    </span><br><span class="line">    char* str;    </span><br><span class="line">    char* _str;    </span><br><span class="line">    int i = 1;    </span><br><span class="line">    str = (char*)malloc(sizeof(char) * (i + 1));    </span><br><span class="line">    while(&#x27;\n&#x27; != (str[i - 1] = getchar()))        </span><br><span class="line">    &#123;        </span><br><span class="line">        i ++;        </span><br><span class="line">        _str = (char*)malloc(strlen(str) + 1);        </span><br><span class="line">        str[i - 1] = &#x27;\0&#x27;;        </span><br><span class="line">        strcpy(_str, str);        </span><br><span class="line">        free(str);        </span><br><span class="line">        str = (char*)malloc(sizeof(char) * (i + 1));        </span><br><span class="line">        if(NULL == str)            </span><br><span class="line">        &#123;            </span><br><span class="line">            free(_str);            </span><br><span class="line">            printf(&quot;No enough memory!&quot;);            </span><br><span class="line">            return NULL;            </span><br><span class="line">        &#125;        </span><br><span class="line">        strcpy(str, _str);        </span><br><span class="line">        free(_str);        </span><br><span class="line">    &#125;</span><br><span class="line">    sum=i-1;</span><br><span class="line">    str[i - 1] = &#x27;\0&#x27;;    </span><br><span class="line">    return str;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    char * d,*a;</span><br><span class="line">    long long int c=0;</span><br><span class="line">    int i;</span><br><span class="line">    d=getstr();</span><br><span class="line">    a = (char*)malloc(sizeof(char) * sum);</span><br><span class="line">    for(int i=0;i&lt;sum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c=d[i]-&#x27;0&#x27;+c*10;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0;c!=0;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(c%16&lt;=9) a[i]=c%16+&#x27;0&#x27;;</span><br><span class="line">        else a[i]=c%16-10+&#x27;A&#x27;;</span><br><span class="line">        c/=16;</span><br><span class="line">    &#125;</span><br><span class="line">    sum=i;</span><br><span class="line">    a[sum]=&#x27;\0&#x27;;</span><br><span class="line">    for(int j=sum-1;j&gt;=0;j--)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%c&quot;,a[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    free(d);</span><br><span class="line">    return 0;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二维动态数组"><a href="#二维动态数组" class="headerlink" title="二维动态数组"></a><strong>二维动态数组</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a.声明：int **a;</span><br><span class="line"> </span><br><span class="line">b.给内存：a=(int **)malloc(二维数的行数 * seizeof(int*));</span><br><span class="line"> </span><br><span class="line">      for(i=0;i&lt;二维数组的行数;i++) </span><br><span class="line"> </span><br><span class="line">            a[i]=(int *)malloc(每行有多少个元素 * sizeof(int));</span><br><span class="line"> </span><br><span class="line">c.即可以如常规的二维数组使用；</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;time.h&gt;</span><br><span class="line"> </span><br><span class="line">void InitArray(char** a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	int i, j;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		a[i] = (char*)malloc(sizeof(char) * n);</span><br><span class="line">		if (a[i] == NULL) //如果没有判空操作，上一行代码则会发出警告：“取消对NULL指针的引用”</span><br><span class="line">		&#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		for (j = 0; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i][j] = &#x27;a&#x27;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//释放二维动态数组内存</span><br><span class="line">void ReleaseArray(char** a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		free(*(a + i));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void ShowArray(char** a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	int i, j;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (j = 0; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%c &quot;, a[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;\n一行输出完了\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char** a;</span><br><span class="line">	int n = 100;</span><br><span class="line">	a = (char**)malloc(sizeof(char*) * n);</span><br><span class="line">	InitArray(a, n);</span><br><span class="line">	ShowArray(a, n);</span><br><span class="line">	ReleaseArray(a, n);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C语言基础题</title>
     <url>/2022/04/05/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E9%A2%98/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">目录</span><br><span class="line">1.阶乘</span><br><span class="line">2.最大数</span><br><span class="line">3.平行四边形</span><br><span class="line">4.素数</span><br><span class="line">5.最大公约数</span><br><span class="line">6.[m,n]区间的所有素数</span><br><span class="line">7.n行等边三角形</span><br><span class="line">8.回文数</span><br><span class="line">9.鸡兔同笼</span><br><span class="line">10.水仙花数</span><br><span class="line">11.求所有小于等于n(n&lt;100)的与7无关的正整数的平方和</span><br><span class="line">12.判断字符</span><br><span class="line">13.数字的顺序进行排列</span><br><span class="line">14.谁能出线</span><br><span class="line">15.n个数的平均值</span><br><span class="line">16.n个数的平均值</span><br><span class="line">17.字符串相连</span><br><span class="line">18.字符串回文</span><br><span class="line">函数</span><br><span class="line">19.四舍五入（保留2位小数）</span><br><span class="line">20.求两个整数的最大公约数和最小公倍数</span><br><span class="line">21.求出数组中所有素数之和</span><br><span class="line">22.将a的十位和个位依次存放在c数的十位和千位上，b的十位和个位依次存放在c数的个位和百位上</span><br><span class="line">结构体</span><br><span class="line">23.顺序输出总分最低的学生信息</span><br><span class="line">24.分别输出工资变化之前和之后的所有职工的信息</span><br><span class="line">25.按学号顺序排序输出后在输入要统计的院系名称</span><br><span class="line">26.将该学生的各科成绩都乘以一个系数a</span><br><span class="line">27.把指定分数范围内的学生数据放在h所指的数组中，分数范围内的学生人数由函数值返回</span><br></pre></td></tr></table></figure>
@@ -489,41 +524,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C语言之动态数组</title>
-    <url>/2022/04/30/C%E8%AF%AD%E8%A8%80dome/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">目录</span><br><span class="line">一维动态数组</span><br><span class="line">二维动态数组</span><br></pre></td></tr></table></figure>
-
-<h1 id="一维动态数组"><a href="#一维动态数组" class="headerlink" title="一维动态数组"></a><strong>一维动态数组</strong></h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">头文件</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">方法</span><br><span class="line">malloc</span><br><span class="line">calloc</span><br><span class="line">realloc</span><br><span class="line">free</span><br></pre></td></tr></table></figure>
-
-<p>1：malloc是由程序员在堆栈动态开辟空间<br>2：返回值开辟空间的首地址，但是类型是void <em>，需要强制类型转换<br>3：分配的内存空间应该能整除类型所占的字节数<br>4：包含头文件malloc.h<br>5：只能用free（p）来释放p所指向的动态开辟的内存空间。<br>6：对动态内存空间的操作，用</em>p来操作。<br>7：可以用多个指针指向这个动态空间<br>8：当有多个指针只向这个动态空间时，只能用free一个指针，多次重复释放要被报错<br>9：可以将动态开辟的的内存指针作为函数参数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int *parr=null;</span><br><span class="line">malloc();//开辟内存空间，malloc（int size）</span><br><span class="line">malloc(sizeof(int/char/doublie))</span><br><span class="line">parr=(int*)malloc(4);</span><br><span class="line">*parr=520;</span><br><span class="line">printf(&quot;%d&quot;,*parr); </span><br><span class="line">calloc(5,4);//开辟5个连续的空间，每个空间四个字节</span><br><span class="line">realloc()//调整内存大小</span><br><span class="line">parr1=(int*)realloc(parr1,28)//让parr1扩容到28字节</span><br><span class="line">free(p);//消除p所指向的地址的空间数据</span><br><span class="line">p中的存的地址不变</span><br></pre></td></tr></table></figure>
-
-<p>1.用户输入任意长度的纯数字字符串后，将字符串转成16进制字符数组，并在控制台打印16进制结果。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,temp,i=0,j=0;</span><br><span class="line">    long long int num=0,lenth=0,remainder,quotient;</span><br><span class="line">    //定义动态数组</span><br><span class="line">    char *str=(char *)malloc(5);</span><br><span class="line">    scanf(&quot;%s&quot;,str);</span><br><span class="line">    lenth=strlen(str);</span><br><span class="line">    //进行扩容</span><br><span class="line">    char *strplus=(char *)malloc(lenth+5);</span><br><span class="line">    //字符串拷贝</span><br><span class="line">    strcpy(strplus,str);</span><br><span class="line">    //释放动态数组</span><br><span class="line">    free(str);</span><br><span class="line">    //字符转数字</span><br><span class="line">    for( int i=0;strplus[i];i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        a=strplus[i]-48;</span><br><span class="line">        //printf(&quot;%d\n&quot;, a);</span><br><span class="line">        num=num*10+a;</span><br><span class="line">    &#125;</span><br><span class="line">    //printf(&quot;%d\n&quot;,num);</span><br><span class="line">    //释放动态数组,留下数字num</span><br><span class="line">    free(strplus);</span><br><span class="line">    //构造存储十六进制的动态数组</span><br><span class="line">    char *sixteenNumber=(char *)malloc(lenth+5);</span><br><span class="line">    quotient=num;</span><br><span class="line">    //十进制转十六进制</span><br><span class="line">    while(quotient!=0) &#123;</span><br><span class="line">        temp = quotient % 16;</span><br><span class="line">        if( temp &lt; 10)</span><br><span class="line">            temp =temp + 48;</span><br><span class="line">        else</span><br><span class="line">            temp = temp + 55;</span><br><span class="line">        sixteenNumber[j++]= temp;</span><br><span class="line">        quotient = quotient / 16;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%s&quot;,sixteenNumber);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>方法二</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    long long int num=0,lenth=0;</span><br><span class="line">    //定义动态数组</span><br><span class="line">    char *str=(char *)malloc(5);</span><br><span class="line">    scanf(&quot;%s&quot;,str);</span><br><span class="line">    lenth=strlen(str);</span><br><span class="line">    //进行扩容</span><br><span class="line">    char *strplus=(char *)malloc(lenth+5);</span><br><span class="line">    //字符串拷贝</span><br><span class="line">    strcpy(strplus,str);</span><br><span class="line">    //释放动态数组</span><br><span class="line">    free(str);</span><br><span class="line">    num = atoi(strplus);</span><br><span class="line">    free(strplus);</span><br><span class="line">    char *sixteenum=(char *)malloc(lenth);</span><br><span class="line">    //printf(&quot;%ld&quot;,num);</span><br><span class="line">    //itoa()不支持long long int 型参数，so行不通</span><br><span class="line">    itoa(num,sixteenum,16);</span><br><span class="line">    printf(&quot;%s&quot;, sixteenum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>方法三</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">long long int sum=0;</span><br><span class="line"></span><br><span class="line">char* getstr()</span><br><span class="line">&#123;    </span><br><span class="line">    char* str;    </span><br><span class="line">    char* _str;    </span><br><span class="line">    int i = 1;    </span><br><span class="line">    str = (char*)malloc(sizeof(char) * (i + 1));    </span><br><span class="line">    while(&#x27;\n&#x27; != (str[i - 1] = getchar()))        </span><br><span class="line">    &#123;        </span><br><span class="line">        i ++;        </span><br><span class="line">        _str = (char*)malloc(strlen(str) + 1);        </span><br><span class="line">        str[i - 1] = &#x27;\0&#x27;;        </span><br><span class="line">        strcpy(_str, str);        </span><br><span class="line">        free(str);        </span><br><span class="line">        str = (char*)malloc(sizeof(char) * (i + 1));        </span><br><span class="line">        if(NULL == str)            </span><br><span class="line">        &#123;            </span><br><span class="line">            free(_str);            </span><br><span class="line">            printf(&quot;No enough memory!&quot;);            </span><br><span class="line">            return NULL;            </span><br><span class="line">        &#125;        </span><br><span class="line">        strcpy(str, _str);        </span><br><span class="line">        free(_str);        </span><br><span class="line">    &#125;</span><br><span class="line">    sum=i-1;</span><br><span class="line">    str[i - 1] = &#x27;\0&#x27;;    </span><br><span class="line">    return str;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    char * d,*a;</span><br><span class="line">    long long int c=0;</span><br><span class="line">    int i;</span><br><span class="line">    d=getstr();</span><br><span class="line">    a = (char*)malloc(sizeof(char) * sum);</span><br><span class="line">    for(int i=0;i&lt;sum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c=d[i]-&#x27;0&#x27;+c*10;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0;c!=0;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(c%16&lt;=9) a[i]=c%16+&#x27;0&#x27;;</span><br><span class="line">        else a[i]=c%16-10+&#x27;A&#x27;;</span><br><span class="line">        c/=16;</span><br><span class="line">    &#125;</span><br><span class="line">    sum=i;</span><br><span class="line">    a[sum]=&#x27;\0&#x27;;</span><br><span class="line">    for(int j=sum-1;j&gt;=0;j--)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%c&quot;,a[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    free(d);</span><br><span class="line">    return 0;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="二维动态数组"><a href="#二维动态数组" class="headerlink" title="二维动态数组"></a><strong>二维动态数组</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a.声明：int **a;</span><br><span class="line"> </span><br><span class="line">b.给内存：a=(int **)malloc(二维数的行数 * seizeof(int*));</span><br><span class="line"> </span><br><span class="line">      for(i=0;i&lt;二维数组的行数;i++) </span><br><span class="line"> </span><br><span class="line">            a[i]=(int *)malloc(每行有多少个元素 * sizeof(int));</span><br><span class="line"> </span><br><span class="line">c.即可以如常规的二维数组使用；</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;time.h&gt;</span><br><span class="line"> </span><br><span class="line">void InitArray(char** a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	int i, j;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		a[i] = (char*)malloc(sizeof(char) * n);</span><br><span class="line">		if (a[i] == NULL) //如果没有判空操作，上一行代码则会发出警告：“取消对NULL指针的引用”</span><br><span class="line">		&#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		for (j = 0; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i][j] = &#x27;a&#x27;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//释放二维动态数组内存</span><br><span class="line">void ReleaseArray(char** a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		free(*(a + i));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void ShowArray(char** a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	int i, j;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (j = 0; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%c &quot;, a[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;\n一行输出完了\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char** a;</span><br><span class="line">	int n = 100;</span><br><span class="line">	a = (char**)malloc(sizeof(char*) * n);</span><br><span class="line">	InitArray(a, n);</span><br><span class="line">	ShowArray(a, n);</span><br><span class="line">	ReleaseArray(a, n);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>嵌入式</tag>
       </tags>
   </entry>
   <entry>
@@ -777,6 +777,92 @@
       </tags>
   </entry>
   <entry>
+    <title>HTML入门基础笔记(一)</title>
+    <url>/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>##HTML第一天<br>###我们接下来是进行的网页开发网页的相关概念:</p>
+<ul>
+<li>什么是网页?</li>
+<li>什么是HTML?</li>
+<li>网页的形成?<br>##什么是网页：<br> 1.网站是指在因特网上根据一定的规则，使用 HTML 等制作的用于展示特定内容相关的网页集合。<br> 2.网页是网站中的一“页”，通常是 HTML 格式的文件，它要通过浏览器来阅读。<br>###网页的组成：<br> 1.网页是构成网站的基本元素，它通常由图片、链接、文字、声音、视频等元素组成。通常我们看到的网页，常见以 .htm 或 .html 后缀结尾的文件，因此将其俗称为 HTML 文件。</li>
+<li><img src="/images/%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BB%84%E6%88%90.png"><br>###什么是HTML：<br> 1.HTML 指的是超文本标记语言 (Hyper Text Markup Language) ，它是用来描述网页的一种语言。<br> 2.HTML 不是一种编程语言，而是一种标记语言 (markup language)。<br> 标记语言是一套标记标签 (markup tag)。<br>###网页的总结：<br> 1.网页是图片、链接、文字、声音、视频等元素组成, 其实就是一个html文件(后缀名为html)<br> 2.网页生成制作:  有前端人员书写 HTML 文件, 然后浏览器打开,就能看到了网页.<br> 3.HTML: 超文本标记语言, 用来制作网页的一门语言. 有标签组成的. 比如 图片标签 链接标签 视频标签等…<br>###浏览器：<br><strong>常用的浏览器</strong></li>
+<li>IE</li>
+<li>火狐</li>
+<li>谷歌</li>
+<li>苹果</li>
+<li>欧朋</li>
+</ul>
+<ul>
+<li>浏览器是网页显示、运行的平台。常用的浏览器有 IE、火狐（Firefox）、谷歌（Chrome）、Safari和Opera等。平时称为五大浏览器。</li>
+<li>查看浏览器市场份额：<a href="http://tongji.baidu.com/data/browser">http://tongji.baidu.com/data/browser</a><br><img src="/images/%E6%B5%8F%E8%A7%88%E5%99%A8.png"><br><strong>浏览器内核（渲染引擎)</strong></li>
+</ul>
+<ul>
+<li><p>负责读取网页内容，整理讯息，计算网页的显示方式并显示页面<br><img src="/images/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8.png"></p>
+</li>
+<li><p>目前国内一般浏览器都会采用 Webkit&#x2F;Blink 内核，如 360、UC、QQ、搜狗等。<br>##web标准：</p>
+</li>
+<li><p>Web 标准是由 W3C 组织和其他标准化组织制定的一系列标准的集合。W3C（万维网联盟）是国际最著名的标准化组织。<br>###为什么需要Web标准：</p>
+</li>
+<li><p>浏览器不同，它们显示页面或者排版就有些许差异<br><img src="/images/web%E6%A0%87%E5%87%86.png"></p>
+</li>
+<li><p>遵循 Web 标准除了可以让不同的开发人员写出的页面更标准、更统一外，还有以下优点：<br>1.让 Web 的发展前景更广阔。<br>2.内容能被更广泛的设备访问。<br>3.更容易被搜寻引擎搜索。<br>4.降低网站流量费用。<br>5.使网站更易于维护。<br>6.提高页面浏览速度。<br>##web标准的构成：<br>主要包括 《结构Structure》 、《表现（Presentation）》和《行为（Behavior）》三个方面。<br><img src="F:/D盘/javadocument/web/01-阶段一：前端开发基础资料/01-阶段一：前端开发基础资料/01-HTML资料/01-前端基础第一天-HTML（1-4小节）/笔记/images/图片45.png"><br>Web 标准提出的最佳体验方案：<strong>结构、样式、行为相分离</strong>。<br>简单理解：<strong>结构写到 HTML 文件中， 表现写到 CSS 文件中， 行为写到 JavaScript 文件中</strong><br><img src="/images/%E9%B8%9F.png"></p>
+</li>
+</ul>
+<p>1.结构类似身体</p>
+<p>2.表现类似外观装饰</p>
+<p>3.行为类似行为动作</p>
+<p>4.相比较而言, 三者中结构最重要.<br>##HTML标签的导读：<br>###HTML语法规则：<br>    1.HTML 标签是由尖括号包围的关键词，例如 <html>。<br>    2.HTML 标签通常是成对出现的，例如 <html> 和 </html> ，我们称为<strong>双标签</strong>。<br>    3.签。标签对中的第一个标签是开始标签，第二个标签是结束标签。<br>有些特殊的标签必须是单个标签（极少情况），例如 <br />，我们称为<strong>单标签</strong>。<br>###标签的关系：<br>    双标签关系可以分为两类：包含关系和并列关系<br>    包含标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;  </span><br><span class="line">            &lt;title&gt; &lt;/title&gt; </span><br><span class="line">        &lt;/head&gt;</span><br><span class="line">![](/images/大头儿子.png) </span><br><span class="line">    并列关系：</span><br></pre></td></tr></table></figure>
+
+<pre><code>     &lt;head&gt; &lt;/head&gt;
+     &lt;body&gt; &lt;/body&gt;
+</code></pre>
+<p><img src="/images/%E7%86%8A%E5%A4%A7.png"><br>###基本结构标签：<br>​    每个网页都会有一个基本的结构标签（也称为骨架标签），页面内容也是在这些基本标签上书写<br><img src="/images/%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png"><br>###开发工具：<br>   <img src="/images/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7.png"><br>   <img src="/images/%E5%89%AA%E5%A4%B4.png"><br><strong>VSCode的使用：</strong></p>
+<pre><code>1. 双击打开软件。
+    2. 新建文件（Ctrl + N ）。
+    3. 保存（Ctrl + S ）, 注意移动要保存为 .html 文件
+    4. Ctrl + 加号键 ，Ctrl + 减号键  可以放大缩小视图 
+    5. 生成页面骨架结构。 输入! 按下 Tab 键。
+    6. 利用插件在浏览器中预览页面：单击鼠标右键，在弹出窗口中点击“Open In Default Browser”。
+        **DOCTYPE**
+
+&lt;!DOCTYPE html&gt;  文档类型声明标签,告诉浏览器这个页面采取html5版本来显示页面.
+</code></pre>
+<p><strong>lang 语言种类</strong><br>    用来定义当前文档显示的语言。<br>    en定义语言为英语<br>    zh-CN定义语言为中文<br>    简单来说,定义为en 就是英文网页, 定义为 zh-CN 就是中文网页<br>    其实对于文档显示来说，定义成en的文档也可以显示中文，定义成zh-CN的文档也可以显示英文<br>    这个属性对浏览器和搜索引擎(百度.谷歌等)还是有作用的<br><strong>字符集</strong><br>    1.字符集 (Character set)是多个字符的集合。以便计算机能够识别和存储各种文字。<br>    2.在<head>标签内，可以通过<meta> 标签的 charset 属性来规定 HTML 文档应该使用哪种字符编码。<br>    3.<meta charset=" UTF-8" /><br>    4.charset 常用的值有：GB2312 、BIG5 、GBK 和 UTF-8，其中 UTF-8 也被称为万国码，基本包含了全世界所有国家需要用到的字符.<br>    5.注意：上面语法是必须要写的代码，否则可能引起乱码的情况。一般情况下，统一使用“UTF-8”编码，尽量统一写成标准的 “UTF-8”，不要写成  “utf8” 或 “UTF8”。<br>###语义化标签：<br>    学习标签是有技巧的，重点是记住每个标签的语义。简单理解就是指标签的含义，即这个标签是用来干嘛的。<br>###什么是语义化标签：<br>    根据标签的语义，在合适的地方给一个最为合理的标签，可以让页面结构更清晰。<br>    下图没有语义化标签：<br><img src="/images/%E6%B2%A1%E6%9C%89%E8%AF%AD%E4%B9%89.png"><br>###添加语义标签：<br><img src="/images/%E8%AF%AD%E4%B9%89%E5%8C%96.png"><br>###常用的标签：<br>###标题标签<br>    <strong>标题标签 <h1> - <h6>（重要)</strong><br>    为了使网页更具有语义化，我们经常会在页面中用到标题标签。HTML 提供了 6 个等级的网页标题，即</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;h1&gt; - &lt;h6&gt; 。</span><br><span class="line">    具体实现：</span><br><span class="line">          &lt;h1&gt; 我是一级标题 &lt;/h1&gt;</span><br><span class="line"> 特点：</span><br><span class="line">​    1.加了标题的文字会变的加粗，字号也会依次变大。</span><br><span class="line">    2. 一个标题独占一行。</span><br><span class="line">        来！！！左边。。。右边。。。中间：</span><br><span class="line">        &lt;h1&gt;标题一共六级选,&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;文字加粗一行显。&lt;/h2&gt;</span><br><span class="line">        &lt;h3&gt;由大到小依次减，&lt;/h3&gt;</span><br><span class="line">        &lt;h4&gt;从重到轻随之变。&lt;/h4&gt;</span><br><span class="line">        &lt;h5&gt;语法规范书写后，&lt;/h5&gt;</span><br><span class="line">        &lt;h6&gt;具体效果刷新见。&lt;/h6&gt;</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<p>###段落标签：<br>    在网页中，要把文字有条理地显示出来，就需要将这些文字分段显示。在 HTML 标签中，<p>标签用于定义段落，它可以将整个网页分为若干个段落。<br>    具体实现：</p>
+<pre><code>     &lt;p&gt; 我是一个段落标签 &lt;/p&gt;
+</code></pre>
+<p>​    特点：<br>​        1. 文本在一个段落中会根据浏览器窗口的大小自动换行。<br>​                2. 段落和段落之间保有空隙。<br>​        ###换行标签<br>​                在 HTML 中，一个段落中的文字会从左到右依次排列，直到浏览器窗口的右端，然后才自动换行。如果希望某段文本强制换行显示，就需要使用换行标签 <br />。<br>​<br>​        <code>​         具体实现： ​                            &lt;br /&gt; ​                特点： ​                        1. &lt;br /&gt; 是个单标签。 ​                                2. &lt;br /&gt; ​       </code><br>​<br>         标签只是简单地开始新的一行，跟段落不一样，段落之间会插入一些垂直的间距。<br>        ###文本格式化标签：<br>                    在网页中，有时需要为文字设置粗体、斜体 或下划线等效果，这时就需要用到 HTML 中的文本格式化标签，使文字以特殊的方式显示。<br>        <img src="/images/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE.png"><br>        ###div和span标签<br>            <div> 和 <span> 是没有语义的，它们就是一个盒子，用来装内容的。<br>            具体实现：<br>                 <div> 这是头部 </div><br>                 <span> 今日价格 </span><br>            特点：<br>                1. <div> 标签用来布局，但是现在一行只能放一个<div>。 大盒子<br>                2. <span> 标签用来布局，一行上可以多个 <span>。小盒子<br>        ###图片标签：<br>            在 HTML 标签中，<img> 标签用于定义 HTML 页面中的图像。<br>            具体实现：<br>                  <img src="" /><br>            解释：<br>                src 是<img>标签的必须属性，它用于指定图像文件的路径和文件名。<br>                所谓属性：简单理解就是属于这个图像标签的特性。<br>            图像标签的其他属性：<br>        <img src="/images/%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7.png"><br>        ​<br>            图像标签注意点：<br>                1.图像标签可以拥有多个属性，必须写在标签名的后面。<br>                2.属性之间不分先后顺序，标签名与属性、属性与属性之间均以空格分开。<br>                3.属性采取键值对的格式，即 key&#x3D;“value” 的格式，属性 &#x3D;“属性值”。<br>        ###路径：<br>            分为相对路径和绝对路径：<br>                <strong>路径之相对路径</strong><br>                相对路径：以引用文件所在位置为参考基础，而建立出的目录路径。<br>                这里简单来说，图片相对于 HTML 页面的位置<br>        <img src="/images/%E8%B7%AF%E5%BE%84.png"><br>            特点：<br>                相对路径是从代码所在的这个文件出发，去寻找目标文件的，而我们这里所说的上一级 、下一级和同一级就是 图片相对于 HTML 页面的位置。<br>                路径之绝对路径：<br>                    绝对路径：<br>                    1.是指目录下的绝对位置，直接到达目标位置，通常是从盘符开始的路径。<br>                    例如，“D:\web\img\logo.gif”或完整的网络地址“<a href="http://www.i”/">http://www.i”</a><br>        ###链接标签：<br>             链接的语法格式<br>                <a href="跳转目标" target="目标窗口的弹出方式"> 文本或图像 </a><br>            属性：<br>                1.href：用于指定链接目标的url地址<br>                2.target:用于指定链接页面的打开方式_self默认值 _blank新窗口打开<br>                3.#：空链接<br>        链接分类：<br>            1.外部链接: 例如 &lt; a href&#x3D;”http:&#x2F;&#x2F; <a href="http://www.baidu.com/">www.baidu.com</a> “&gt; 百度</a >。<br>            2.内部链接:网站内部页面之间的相互链接. 直接链接内部页面名称即可，例如 &lt; a href&#x3D;”index.html”&gt; 首页 </a >。<br>            3.空链接: 如果当时没有确定链接目标时，&lt; a href&#x3D;”#”&gt; 首页 </a > 。<br>            4.下载链接: 如果 href 里面地址是一个文件或者压缩包，会下载这个文件。<br>            5.网页元素链接: 在网页中的各种网页元素，如文本、图像、表格、音频、视频等都可以添加超链接.<br>            6.锚点链接:  点我们点击链接,可以快速定位到页面中的某个位置. </p>
+<ul>
+<li><pre><code>   在链接文本的 href 属性中，设置属性值为 #名字 的形式，如&lt;a href=&quot;#two&quot;&gt; 第2集 &lt;/a&gt; 
+</code></pre>
+</li>
+<li><pre><code>   找到目标位置标签，里面添加一个 id 属性 = 刚才的名字 ，如：&lt;h3 id=&quot;two&quot;&gt;第2集介绍&lt;/h3&gt;
+   ###注释
+   如果需要在 HTML 文档中添加一些便于阅读和理解但又不需要显示在页面中的注释文字，就需要使用注释标签。
+   HTML中的注释以“&lt;!--”开头，以“ --&gt;”结束。
+   具体实现：
+        &lt;!-- 注释语句 --&gt;      快捷键: ctrl +  / 
+   一句话: 注释标签里面的内容是给程序猿看的, 这个代码是不执行不显示到页面中的.
+   添加注释是为了更好地解释代码的功能，便于相关开发人员理解和阅读代码，程序是不会执行注释内容的
+   ###特殊字符：
+   在 HTML 页面中，一些特殊的符号很难或者不方便直接使用，此时我们就可以使用下面的字符来替代。
+   ![](/images/特殊字符.png) 
+   重点记住：空格 、大于号、 小于号 这三个， 其余的使用很少，如果需要回头查阅即可。
+</code></pre>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTML入门基础笔记(二)</title>
     <url>/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p>##第二天<br>##表格<br>###表格的主要作用<br>    1.表格主要用于显示、展示数据，因为它可以让数据显示的非常的规整，可读性非常好。特别是后台展示数据的时候，能够熟练运用表格就显得很重要。一个清爽简约的表格能够把繁杂的数据表现得很有条理</p>
@@ -870,92 +956,6 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">###&lt;textarea&gt; 表单元素</span><br><span class="line"></span><br><span class="line">1. 使用场景: 当用户输入内容较多的情况下，我们就不能使用文本框表单了，此时我们可以使用 &lt;textarea&gt; 标签。</span><br><span class="line">2. 在表单元素中，&lt;textarea&gt; 标签是用于定义多行文本输入的控件。</span><br><span class="line">3. 使用多行文本输入控件，可以输入更多的文字，该控件常见于留言板，评论。</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line"></span><br><span class="line">​	&lt;textarea rows=&quot;3&quot; cols=&quot;20&quot;&gt;   文本内容 &lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">通过 &lt;textarea&gt; 标签可以轻松地创建多行文本输入框。cols=“每行中的字符数” ，rows=“显示的行数”，</span><br><span class="line"></span><br><span class="line">我们在实际开发中不会使用，都是用 CSS 来改变大小。</span><br><span class="line"></span><br><span class="line">表单元素我们学习了三大组  input 输入表单元素  select 下拉表单元素  textarea 文本域表单元素.这三组表单元素都应该包含在form表单域里面,并且有 name 属性.</span><br><span class="line"></span><br><span class="line">具体代码：</span><br><span class="line"></span><br><span class="line">​	&lt;form&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;input type=“text &quot; name=“username”&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;select name=&quot;jiguan&quot;&gt;  </span><br><span class="line"></span><br><span class="line">​		 &lt;option&gt;北京&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;/select&gt; </span><br><span class="line"></span><br><span class="line">​		&lt;textarea name= &quot;message&quot;&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">​	&lt;/form&gt;</span><br></pre></td></tr></table></figure>
 
 <p>有三个名字非常相似的标签:表单域   form    使用场景:  提交区域内表单元素给后台服务器文件域   file      是input type 属性值   使用场景: 上传文件文本域   textarea    使用场景:  可以输入多行文字, 比如留言板  网站介绍等…4. 我们当前阶段不需要提交表单元素,所以我们只负责表单元素的外观形态即可.</p>
-]]></content>
-      <categories>
-        <category>HTML</category>
-      </categories>
-      <tags>
-        <tag>HTML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTML入门基础笔记(一)</title>
-    <url>/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<p>##HTML第一天<br>###我们接下来是进行的网页开发网页的相关概念:</p>
-<ul>
-<li>什么是网页?</li>
-<li>什么是HTML?</li>
-<li>网页的形成?<br>##什么是网页：<br> 1.网站是指在因特网上根据一定的规则，使用 HTML 等制作的用于展示特定内容相关的网页集合。<br> 2.网页是网站中的一“页”，通常是 HTML 格式的文件，它要通过浏览器来阅读。<br>###网页的组成：<br> 1.网页是构成网站的基本元素，它通常由图片、链接、文字、声音、视频等元素组成。通常我们看到的网页，常见以 .htm 或 .html 后缀结尾的文件，因此将其俗称为 HTML 文件。</li>
-<li><img src="/images/%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BB%84%E6%88%90.png"><br>###什么是HTML：<br> 1.HTML 指的是超文本标记语言 (Hyper Text Markup Language) ，它是用来描述网页的一种语言。<br> 2.HTML 不是一种编程语言，而是一种标记语言 (markup language)。<br> 标记语言是一套标记标签 (markup tag)。<br>###网页的总结：<br> 1.网页是图片、链接、文字、声音、视频等元素组成, 其实就是一个html文件(后缀名为html)<br> 2.网页生成制作:  有前端人员书写 HTML 文件, 然后浏览器打开,就能看到了网页.<br> 3.HTML: 超文本标记语言, 用来制作网页的一门语言. 有标签组成的. 比如 图片标签 链接标签 视频标签等…<br>###浏览器：<br><strong>常用的浏览器</strong></li>
-<li>IE</li>
-<li>火狐</li>
-<li>谷歌</li>
-<li>苹果</li>
-<li>欧朋</li>
-</ul>
-<ul>
-<li>浏览器是网页显示、运行的平台。常用的浏览器有 IE、火狐（Firefox）、谷歌（Chrome）、Safari和Opera等。平时称为五大浏览器。</li>
-<li>查看浏览器市场份额：<a href="http://tongji.baidu.com/data/browser">http://tongji.baidu.com/data/browser</a><br><img src="/images/%E6%B5%8F%E8%A7%88%E5%99%A8.png"><br><strong>浏览器内核（渲染引擎)</strong></li>
-</ul>
-<ul>
-<li><p>负责读取网页内容，整理讯息，计算网页的显示方式并显示页面<br><img src="/images/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8.png"></p>
-</li>
-<li><p>目前国内一般浏览器都会采用 Webkit&#x2F;Blink 内核，如 360、UC、QQ、搜狗等。<br>##web标准：</p>
-</li>
-<li><p>Web 标准是由 W3C 组织和其他标准化组织制定的一系列标准的集合。W3C（万维网联盟）是国际最著名的标准化组织。<br>###为什么需要Web标准：</p>
-</li>
-<li><p>浏览器不同，它们显示页面或者排版就有些许差异<br><img src="/images/web%E6%A0%87%E5%87%86.png"></p>
-</li>
-<li><p>遵循 Web 标准除了可以让不同的开发人员写出的页面更标准、更统一外，还有以下优点：<br>1.让 Web 的发展前景更广阔。<br>2.内容能被更广泛的设备访问。<br>3.更容易被搜寻引擎搜索。<br>4.降低网站流量费用。<br>5.使网站更易于维护。<br>6.提高页面浏览速度。<br>##web标准的构成：<br>主要包括 《结构Structure》 、《表现（Presentation）》和《行为（Behavior）》三个方面。<br><img src="F:/D盘/javadocument/web/01-阶段一：前端开发基础资料/01-阶段一：前端开发基础资料/01-HTML资料/01-前端基础第一天-HTML（1-4小节）/笔记/images/图片45.png"><br>Web 标准提出的最佳体验方案：<strong>结构、样式、行为相分离</strong>。<br>简单理解：<strong>结构写到 HTML 文件中， 表现写到 CSS 文件中， 行为写到 JavaScript 文件中</strong><br><img src="/images/%E9%B8%9F.png"></p>
-</li>
-</ul>
-<p>1.结构类似身体</p>
-<p>2.表现类似外观装饰</p>
-<p>3.行为类似行为动作</p>
-<p>4.相比较而言, 三者中结构最重要.<br>##HTML标签的导读：<br>###HTML语法规则：<br>    1.HTML 标签是由尖括号包围的关键词，例如 <html>。<br>    2.HTML 标签通常是成对出现的，例如 <html> 和 </html> ，我们称为<strong>双标签</strong>。<br>    3.签。标签对中的第一个标签是开始标签，第二个标签是结束标签。<br>有些特殊的标签必须是单个标签（极少情况），例如 <br />，我们称为<strong>单标签</strong>。<br>###标签的关系：<br>    双标签关系可以分为两类：包含关系和并列关系<br>    包含标签：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;  </span><br><span class="line">            &lt;title&gt; &lt;/title&gt; </span><br><span class="line">        &lt;/head&gt;</span><br><span class="line">![](/images/大头儿子.png) </span><br><span class="line">    并列关系：</span><br></pre></td></tr></table></figure>
-
-<pre><code>     &lt;head&gt; &lt;/head&gt;
-     &lt;body&gt; &lt;/body&gt;
-</code></pre>
-<p><img src="/images/%E7%86%8A%E5%A4%A7.png"><br>###基本结构标签：<br>​    每个网页都会有一个基本的结构标签（也称为骨架标签），页面内容也是在这些基本标签上书写<br><img src="/images/%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png"><br>###开发工具：<br>   <img src="/images/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7.png"><br>   <img src="/images/%E5%89%AA%E5%A4%B4.png"><br><strong>VSCode的使用：</strong></p>
-<pre><code>1. 双击打开软件。
-    2. 新建文件（Ctrl + N ）。
-    3. 保存（Ctrl + S ）, 注意移动要保存为 .html 文件
-    4. Ctrl + 加号键 ，Ctrl + 减号键  可以放大缩小视图 
-    5. 生成页面骨架结构。 输入! 按下 Tab 键。
-    6. 利用插件在浏览器中预览页面：单击鼠标右键，在弹出窗口中点击“Open In Default Browser”。
-        **DOCTYPE**
-
-&lt;!DOCTYPE html&gt;  文档类型声明标签,告诉浏览器这个页面采取html5版本来显示页面.
-</code></pre>
-<p><strong>lang 语言种类</strong><br>    用来定义当前文档显示的语言。<br>    en定义语言为英语<br>    zh-CN定义语言为中文<br>    简单来说,定义为en 就是英文网页, 定义为 zh-CN 就是中文网页<br>    其实对于文档显示来说，定义成en的文档也可以显示中文，定义成zh-CN的文档也可以显示英文<br>    这个属性对浏览器和搜索引擎(百度.谷歌等)还是有作用的<br><strong>字符集</strong><br>    1.字符集 (Character set)是多个字符的集合。以便计算机能够识别和存储各种文字。<br>    2.在<head>标签内，可以通过<meta> 标签的 charset 属性来规定 HTML 文档应该使用哪种字符编码。<br>    3.<meta charset=" UTF-8" /><br>    4.charset 常用的值有：GB2312 、BIG5 、GBK 和 UTF-8，其中 UTF-8 也被称为万国码，基本包含了全世界所有国家需要用到的字符.<br>    5.注意：上面语法是必须要写的代码，否则可能引起乱码的情况。一般情况下，统一使用“UTF-8”编码，尽量统一写成标准的 “UTF-8”，不要写成  “utf8” 或 “UTF8”。<br>###语义化标签：<br>    学习标签是有技巧的，重点是记住每个标签的语义。简单理解就是指标签的含义，即这个标签是用来干嘛的。<br>###什么是语义化标签：<br>    根据标签的语义，在合适的地方给一个最为合理的标签，可以让页面结构更清晰。<br>    下图没有语义化标签：<br><img src="/images/%E6%B2%A1%E6%9C%89%E8%AF%AD%E4%B9%89.png"><br>###添加语义标签：<br><img src="/images/%E8%AF%AD%E4%B9%89%E5%8C%96.png"><br>###常用的标签：<br>###标题标签<br>    <strong>标题标签 <h1> - <h6>（重要)</strong><br>    为了使网页更具有语义化，我们经常会在页面中用到标题标签。HTML 提供了 6 个等级的网页标题，即</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;h1&gt; - &lt;h6&gt; 。</span><br><span class="line">    具体实现：</span><br><span class="line">          &lt;h1&gt; 我是一级标题 &lt;/h1&gt;</span><br><span class="line"> 特点：</span><br><span class="line">​    1.加了标题的文字会变的加粗，字号也会依次变大。</span><br><span class="line">    2. 一个标题独占一行。</span><br><span class="line">        来！！！左边。。。右边。。。中间：</span><br><span class="line">        &lt;h1&gt;标题一共六级选,&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;文字加粗一行显。&lt;/h2&gt;</span><br><span class="line">        &lt;h3&gt;由大到小依次减，&lt;/h3&gt;</span><br><span class="line">        &lt;h4&gt;从重到轻随之变。&lt;/h4&gt;</span><br><span class="line">        &lt;h5&gt;语法规范书写后，&lt;/h5&gt;</span><br><span class="line">        &lt;h6&gt;具体效果刷新见。&lt;/h6&gt;</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<p>###段落标签：<br>    在网页中，要把文字有条理地显示出来，就需要将这些文字分段显示。在 HTML 标签中，<p>标签用于定义段落，它可以将整个网页分为若干个段落。<br>    具体实现：</p>
-<pre><code>     &lt;p&gt; 我是一个段落标签 &lt;/p&gt;
-</code></pre>
-<p>​    特点：<br>​        1. 文本在一个段落中会根据浏览器窗口的大小自动换行。<br>​                2. 段落和段落之间保有空隙。<br>​        ###换行标签<br>​                在 HTML 中，一个段落中的文字会从左到右依次排列，直到浏览器窗口的右端，然后才自动换行。如果希望某段文本强制换行显示，就需要使用换行标签 <br />。<br>​<br>​        <code>​         具体实现： ​                            &lt;br /&gt; ​                特点： ​                        1. &lt;br /&gt; 是个单标签。 ​                                2. &lt;br /&gt; ​       </code><br>​<br>         标签只是简单地开始新的一行，跟段落不一样，段落之间会插入一些垂直的间距。<br>        ###文本格式化标签：<br>                    在网页中，有时需要为文字设置粗体、斜体 或下划线等效果，这时就需要用到 HTML 中的文本格式化标签，使文字以特殊的方式显示。<br>        <img src="/images/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE.png"><br>        ###div和span标签<br>            <div> 和 <span> 是没有语义的，它们就是一个盒子，用来装内容的。<br>            具体实现：<br>                 <div> 这是头部 </div><br>                 <span> 今日价格 </span><br>            特点：<br>                1. <div> 标签用来布局，但是现在一行只能放一个<div>。 大盒子<br>                2. <span> 标签用来布局，一行上可以多个 <span>。小盒子<br>        ###图片标签：<br>            在 HTML 标签中，<img> 标签用于定义 HTML 页面中的图像。<br>            具体实现：<br>                  <img src="" /><br>            解释：<br>                src 是<img>标签的必须属性，它用于指定图像文件的路径和文件名。<br>                所谓属性：简单理解就是属于这个图像标签的特性。<br>            图像标签的其他属性：<br>        <img src="/images/%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7.png"><br>        ​<br>            图像标签注意点：<br>                1.图像标签可以拥有多个属性，必须写在标签名的后面。<br>                2.属性之间不分先后顺序，标签名与属性、属性与属性之间均以空格分开。<br>                3.属性采取键值对的格式，即 key&#x3D;“value” 的格式，属性 &#x3D;“属性值”。<br>        ###路径：<br>            分为相对路径和绝对路径：<br>                <strong>路径之相对路径</strong><br>                相对路径：以引用文件所在位置为参考基础，而建立出的目录路径。<br>                这里简单来说，图片相对于 HTML 页面的位置<br>        <img src="/images/%E8%B7%AF%E5%BE%84.png"><br>            特点：<br>                相对路径是从代码所在的这个文件出发，去寻找目标文件的，而我们这里所说的上一级 、下一级和同一级就是 图片相对于 HTML 页面的位置。<br>                路径之绝对路径：<br>                    绝对路径：<br>                    1.是指目录下的绝对位置，直接到达目标位置，通常是从盘符开始的路径。<br>                    例如，“D:\web\img\logo.gif”或完整的网络地址“<a href="http://www.i”/">http://www.i”</a><br>        ###链接标签：<br>             链接的语法格式<br>                <a href="跳转目标" target="目标窗口的弹出方式"> 文本或图像 </a><br>            属性：<br>                1.href：用于指定链接目标的url地址<br>                2.target:用于指定链接页面的打开方式_self默认值 _blank新窗口打开<br>                3.#：空链接<br>        链接分类：<br>            1.外部链接: 例如 &lt; a href&#x3D;”http:&#x2F;&#x2F; <a href="http://www.baidu.com/">www.baidu.com</a> “&gt; 百度</a >。<br>            2.内部链接:网站内部页面之间的相互链接. 直接链接内部页面名称即可，例如 &lt; a href&#x3D;”index.html”&gt; 首页 </a >。<br>            3.空链接: 如果当时没有确定链接目标时，&lt; a href&#x3D;”#”&gt; 首页 </a > 。<br>            4.下载链接: 如果 href 里面地址是一个文件或者压缩包，会下载这个文件。<br>            5.网页元素链接: 在网页中的各种网页元素，如文本、图像、表格、音频、视频等都可以添加超链接.<br>            6.锚点链接:  点我们点击链接,可以快速定位到页面中的某个位置. </p>
-<ul>
-<li><pre><code>   在链接文本的 href 属性中，设置属性值为 #名字 的形式，如&lt;a href=&quot;#two&quot;&gt; 第2集 &lt;/a&gt; 
-</code></pre>
-</li>
-<li><pre><code>   找到目标位置标签，里面添加一个 id 属性 = 刚才的名字 ，如：&lt;h3 id=&quot;two&quot;&gt;第2集介绍&lt;/h3&gt;
-   ###注释
-   如果需要在 HTML 文档中添加一些便于阅读和理解但又不需要显示在页面中的注释文字，就需要使用注释标签。
-   HTML中的注释以“&lt;!--”开头，以“ --&gt;”结束。
-   具体实现：
-        &lt;!-- 注释语句 --&gt;      快捷键: ctrl +  / 
-   一句话: 注释标签里面的内容是给程序猿看的, 这个代码是不执行不显示到页面中的.
-   添加注释是为了更好地解释代码的功能，便于相关开发人员理解和阅读代码，程序是不会执行注释内容的
-   ###特殊字符：
-   在 HTML 页面中，一些特殊的符号很难或者不方便直接使用，此时我们就可以使用下面的字符来替代。
-   ![](/images/特殊字符.png) 
-   重点记住：空格 、大于号、 小于号 这三个， 其余的使用很少，如果需要回头查阅即可。
-</code></pre>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>HTML</category>
@@ -2834,34 +2834,6 @@ JS中的注释主要有两种，分别是 单行注释 和 多行注释。
       </tags>
   </entry>
   <entry>
-    <title>15.Java运行非Web的Springboot项目的两种方法</title>
-    <url>/2022/05/12/Java%E8%BF%90%E8%A1%8C%E9%9D%9EWeb%E7%9A%84Springboot%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="Java运行非Web的Springboot项目的两种方法"><a href="#Java运行非Web的Springboot项目的两种方法" class="headerlink" title="Java运行非Web的Springboot项目的两种方法"></a>Java运行非Web的Springboot项目的两种方法</h3><h4 id="一、创建打开一个Springboot项目"><a href="#一、创建打开一个Springboot项目" class="headerlink" title="一、创建打开一个Springboot项目"></a>一、创建打开一个Springboot项目</h4><p>使用idea，选择Spring Initializr进行创建</p>
-<p>next，这一步不要勾选 Spring Web 依赖，不然就是个 Web 项目了</p>
-<h4 id="1-用测试类"><a href="#1-用测试类" class="headerlink" title="1.用测试类"></a>1.用测试类</h4><p>先新建一个Server类</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Server &#123;</span><br><span class="line"></span><br><span class="line">    public void dome() &#123;</span><br><span class="line">        System.out.println(&quot;hello,world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后，在包test里有一个ApplicationTests</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootTest</span><br><span class="line">class MybatisApplicationTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Server server;</span><br><span class="line">    @Test</span><br><span class="line">    void contextLoads() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    @Test</span><br><span class="line">    void dome1()&#123;</span><br><span class="line">        server.dome();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>运行测试类就可</p>
-<h4 id="2-持续运行不停止（定时任务、自动执行）"><a href="#2-持续运行不停止（定时任务、自动执行）" class="headerlink" title="2.持续运行不停止（定时任务、自动执行）"></a>2.持续运行不停止（定时任务、自动执行）</h4><p>如果想要让项目不停止，一直打印HelloWorld，可以在启动类 UseToTestApplication 上添加注解 @EnableScheduling ，意思为开启定时任务，这个时候启动类就不能修改成上面的getBean那样了，要改回原来的样子</p>
-<p>然后在 controller 层的DemoControlelr里面加上注解 @Component 可以确保这个类会被定时任务扫描到，然后在下面的 demo 方法上加上 @Scheduled(fixedRate &#x3D; 1000)，意思为每1000毫秒执行一次 demo 方法<br>1.设置启动类（加@EnableScheduling注解）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableScheduling</span><br><span class="line">public class MybatisApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(MybatisApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>2.在controller类中，设置定时时间（可以设置的久一点）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class Controler &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Server server;</span><br><span class="line">    @Scheduled(fixedRate = 100000)</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        server.dome();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>运行启动类就可</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>12.Java用反射获取jar包中的属性和方法</title>
     <url>/2022/05/09/Java%E7%94%A8%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96jar%E5%8C%85%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h4 id="1-使用概要："><a href="#1-使用概要：" class="headerlink" title="1.使用概要："></a>1.使用概要：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">File file =new File(jar文件全路径);  </span><br><span class="line">URL url = file.toURI().toURL();</span><br><span class="line">URLClassLoader loader = new URLClassLoader(new URL[] &#123;url&#125;);  </span><br><span class="line">Class tidyClazz = loader.loadClass(所需class的含包名的全名); </span><br></pre></td></tr></table></figure>
@@ -2885,6 +2857,34 @@ JS中的注释主要有两种，分别是 单行注释 和 多行注释。
 <p>无论是在打<code>jar</code>或<code>war</code>包时，都会生成<code>META-INFO</code>这个文件夹。我们需要了解这个路径，丰富自己的知识框架。</p>
 <p>官方一点的说法：META-INF 相当于一个信息包，目录中的文件和目录获得 Java 2 平台的认可与解释，用来配置应用程序、扩展程序、类加载器和服务<code>manifest.mf</code>文件，在打包时自动生成。</p>
 <p>简单的说法：就是存储了项目的元信息，其中文件<code>manifest.mf</code>仅此一份，描述了程序的基本信息、<code>Main-Class</code>的入口、<code>jar</code>依赖路径<code>Class-Path</code>。</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>15.Java运行非Web的Springboot项目的两种方法</title>
+    <url>/2022/05/12/Java%E8%BF%90%E8%A1%8C%E9%9D%9EWeb%E7%9A%84Springboot%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="Java运行非Web的Springboot项目的两种方法"><a href="#Java运行非Web的Springboot项目的两种方法" class="headerlink" title="Java运行非Web的Springboot项目的两种方法"></a>Java运行非Web的Springboot项目的两种方法</h3><h4 id="一、创建打开一个Springboot项目"><a href="#一、创建打开一个Springboot项目" class="headerlink" title="一、创建打开一个Springboot项目"></a>一、创建打开一个Springboot项目</h4><p>使用idea，选择Spring Initializr进行创建</p>
+<p>next，这一步不要勾选 Spring Web 依赖，不然就是个 Web 项目了</p>
+<h4 id="1-用测试类"><a href="#1-用测试类" class="headerlink" title="1.用测试类"></a>1.用测试类</h4><p>先新建一个Server类</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Server &#123;</span><br><span class="line"></span><br><span class="line">    public void dome() &#123;</span><br><span class="line">        System.out.println(&quot;hello,world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后，在包test里有一个ApplicationTests</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootTest</span><br><span class="line">class MybatisApplicationTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Server server;</span><br><span class="line">    @Test</span><br><span class="line">    void contextLoads() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    @Test</span><br><span class="line">    void dome1()&#123;</span><br><span class="line">        server.dome();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行测试类就可</p>
+<h4 id="2-持续运行不停止（定时任务、自动执行）"><a href="#2-持续运行不停止（定时任务、自动执行）" class="headerlink" title="2.持续运行不停止（定时任务、自动执行）"></a>2.持续运行不停止（定时任务、自动执行）</h4><p>如果想要让项目不停止，一直打印HelloWorld，可以在启动类 UseToTestApplication 上添加注解 @EnableScheduling ，意思为开启定时任务，这个时候启动类就不能修改成上面的getBean那样了，要改回原来的样子</p>
+<p>然后在 controller 层的DemoControlelr里面加上注解 @Component 可以确保这个类会被定时任务扫描到，然后在下面的 demo 方法上加上 @Scheduled(fixedRate &#x3D; 1000)，意思为每1000毫秒执行一次 demo 方法<br>1.设置启动类（加@EnableScheduling注解）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableScheduling</span><br><span class="line">public class MybatisApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(MybatisApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.在controller类中，设置定时时间（可以设置的久一点）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class Controler &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Server server;</span><br><span class="line">    @Scheduled(fixedRate = 100000)</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        server.dome();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行启动类就可</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -5812,9 +5812,44 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
       </tags>
   </entry>
   <entry>
+    <title>Python数据分析</title>
+    <url>/2022/09/26/Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="Python数据分析"><a href="#Python数据分析" class="headerlink" title="Python数据分析"></a>Python数据分析</h2><h3 id="1-机器学习库sklearn（分类问题）"><a href="#1-机器学习库sklearn（分类问题）" class="headerlink" title="1.机器学习库sklearn（分类问题）"></a>1.机器学习库sklearn（分类问题）</h3><p>1、请分析iris.data文件中的鸢尾花特征<br></p>
+<p>编写一个判断鸢尾花种类的程序（输入萼片长、萼片宽、花瓣长、花瓣宽，输出鸢尾花种类）</p>
+<p>将iris.data中的150条数据，输入程序，输出准确率（做对的数量&#x2F;150）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import csv</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line"></span><br><span class="line">iris_data = []</span><br><span class="line">with open(&quot;iris.data&quot;) as csvfile:</span><br><span class="line">    csv_reader = csv.reader(csvfile)</span><br><span class="line">    for row in csv_reader:</span><br><span class="line">        iris_data.append(row)</span><br><span class="line">iris_data = np.array (iris_data)</span><br><span class="line">#将数据存入iris_data列表</span><br><span class="line">x=iris_data[:,:-1].astype(float)</span><br><span class="line">#数据去取四列去掉类型列</span><br><span class="line">#print(x)</span><br><span class="line">#setosa-0 versicolor-1 virginica-2</span><br><span class="line">y=[i//50 for i in range(150)]</span><br><span class="line">#得三种类型0,1,2</span><br><span class="line">print(y)</span><br><span class="line">clf = DecisionTreeClassifier()      # 所以参数均置为默认状态</span><br><span class="line">clf.fit(x, y)</span><br><span class="line">#将数据与y进行绑定</span><br><span class="line">pred = clf.predict(x)</span><br><span class="line">print(pred)</span><br><span class="line">print(&quot;准确率：&quot;+str(np.sum(y==pred)/150))</span><br></pre></td></tr></table></figure>
+
+<p>2.函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PetalLength = iris_data[:,2].astype(float)</span><br><span class="line">#取第三列</span><br><span class="line"></span><br><span class="line">np.sort(PetalLength)</span><br><span class="line">#将数据从小到大排列</span><br><span class="line"></span><br><span class="line">np.unique(PetalLength)</span><br><span class="line">#去掉相同项，将数据从小到大排列</span><br><span class="line"></span><br><span class="line">np.sum(PetalLength)#求和</span><br><span class="line">np.mean(PetalLength)#求均值</span><br><span class="line">np.std(PetalLength)#求标准差</span><br><span class="line">np.var(PetalLength)#求方差</span><br><span class="line">np.min(PetalLength)#求最小值</span><br><span class="line">np.max(PetalLength)#求最大值</span><br><span class="line"></span><br><span class="line">#切片</span><br><span class="line">setosa=iris_data[0:50,0:4]</span><br><span class="line">versicolor=iris_data[50:100,0:4]</span><br><span class="line">virginica=iris_data[100:150,0:4]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.ServerSocket与Socket之间的通讯Dome</title>
+    <url>/2022/05/07/ServerSocket%E4%B8%8ESocket%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E8%AE%AFDome/</url>
+    <content><![CDATA[<p>1.ServerSocket</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.net.ServerSocket;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            ServerSocket server=null;</span><br><span class="line">            try&#123;</span><br><span class="line">                //创建一个ServerSocket在端口2105监听客户请求</span><br><span class="line">                server=new ServerSocket(2105);</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();//出错，打印出错信息</span><br><span class="line">            &#125;</span><br><span class="line">            Socket socket=null;</span><br><span class="line">            try&#123;</span><br><span class="line">                //使用accept()阻塞等待客户请求，有客户</span><br><span class="line">                socket=server.accept();//请求到来则产生一个Socket对象，并继续执行</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();//出错，打印出错信息</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            BufferedReader is=new BufferedReader(new InputStreamReader(socket.getInputStream()));</span><br><span class="line">            //由Socket对象得到输出流，并构造PrintWriter对象</span><br><span class="line">            PrintWriter os=new PrintWriter(socket.getOutputStream());</span><br><span class="line">            //由系统标准输入设备构造BufferedReader对象</span><br><span class="line">            while(true)&#123;</span><br><span class="line">                String s = is.readLine();</span><br><span class="line">                System.out.println(&quot;Client:&quot;+s);</span><br><span class="line">                os.println(&quot;收到！&quot;);</span><br><span class="line">                os.flush();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;catch(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();//出错，打印出错信息</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.Socket</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.net.Socket;</span><br><span class="line">public class Socket01 &#123;</span><br><span class="line">        public static void main(String[] args) throws IOException &#123;</span><br><span class="line">            try&#123;</span><br><span class="line">                //向本机的2105端口发出客户请求</span><br><span class="line">                Socket socket=new Socket(&quot;192.168.31.162&quot;,2105);</span><br><span class="line">                //由系统标准输入设备构造BufferedReader对象</span><br><span class="line">                BufferedReader sin=new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                //由Socket对象得到输出流，并构造PrintWriter对象</span><br><span class="line">                PrintWriter os=new PrintWriter(socket.getOutputStream());</span><br><span class="line">                //由Socket对象得到输入流，并构造相应的BufferedReader对象</span><br><span class="line">                BufferedReader is=new BufferedReader(new InputStreamReader(socket.getInputStream()));</span><br><span class="line">                String readline;</span><br><span class="line">                readline=sin.readLine(); //从系统标准输入读入一字符串</span><br><span class="line">                //若从标准输入读入的字符串为 &quot;bye&quot;则停止循环</span><br><span class="line">                while(!readline.equals(&quot;bye&quot;))&#123;</span><br><span class="line">                    //将从系统标准输入读入的字符串输出到Server</span><br><span class="line"></span><br><span class="line">                    os.println(readline);</span><br><span class="line">                    //刷新输出流，使Server马上收到该字符串</span><br><span class="line">                    os.flush();</span><br><span class="line">                    //在系统标准输出上打印读入的字符串</span><br><span class="line">                    System.out.println(&quot;Client:&quot;+readline);</span><br><span class="line">                    //从Server读入一字符串，并打印到标准输出上</span><br><span class="line">                    System.out.println(&quot;Server:&quot;+is.readLine());</span><br><span class="line">                    readline=sin.readLine(); //从系统标准输入读入一字符串</span><br><span class="line">                &#125;</span><br><span class="line">                os.close(); //关闭Socket输出流</span><br><span class="line">                is.close(); //关闭Socket输入流</span><br><span class="line">                socket.close(); //关闭Socket</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();//出错，打印出错信息</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python语法补充讲解，老师课件</title>
     <url>/2022/09/05/Python%E8%AF%AD%E6%B3%95%E8%A1%A5%E5%85%85%EF%BC%8C%E8%80%81%E5%B8%88%E8%AF%BE%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h4 id="Python语法补充讲解，老师课件"><a href="#Python语法补充讲解，老师课件" class="headerlink" title="Python语法补充讲解，老师课件"></a>Python语法补充讲解，老师课件</h4><h4 id="1-输出hello-world-语句"><a href="#1-输出hello-world-语句" class="headerlink" title="1. 输出hello world 语句"></a>1. 输出hello world 语句</h4><p>In [1]:</p>
+    <content><![CDATA[<h4 id="Python语法补充讲解，老师课件"><a href="#Python语法补充讲解，老师课件" class="headerlink" title="Python语法补充讲解，老师课件"></a>Python语法补充讲解，老师课件</h4><h4 id="1-输出hello-world-语句"><a href="#1-输出hello-world-语句" class="headerlink" title="1. 输出hello world 语句"></a>1. 输出hello world 语句</h4><p>In [1]:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">print(&quot;hello world&quot;)</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
 
 <p>In [2]:</p>
@@ -5911,22 +5946,6 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
       </categories>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.ServerSocket与Socket之间的通讯Dome</title>
-    <url>/2022/05/07/ServerSocket%E4%B8%8ESocket%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E8%AE%AFDome/</url>
-    <content><![CDATA[<p>1.ServerSocket</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.net.ServerSocket;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            ServerSocket server=null;</span><br><span class="line">            try&#123;</span><br><span class="line">                //创建一个ServerSocket在端口2105监听客户请求</span><br><span class="line">                server=new ServerSocket(2105);</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();//出错，打印出错信息</span><br><span class="line">            &#125;</span><br><span class="line">            Socket socket=null;</span><br><span class="line">            try&#123;</span><br><span class="line">                //使用accept()阻塞等待客户请求，有客户</span><br><span class="line">                socket=server.accept();//请求到来则产生一个Socket对象，并继续执行</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();//出错，打印出错信息</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            BufferedReader is=new BufferedReader(new InputStreamReader(socket.getInputStream()));</span><br><span class="line">            //由Socket对象得到输出流，并构造PrintWriter对象</span><br><span class="line">            PrintWriter os=new PrintWriter(socket.getOutputStream());</span><br><span class="line">            //由系统标准输入设备构造BufferedReader对象</span><br><span class="line">            while(true)&#123;</span><br><span class="line">                String s = is.readLine();</span><br><span class="line">                System.out.println(&quot;Client:&quot;+s);</span><br><span class="line">                os.println(&quot;收到！&quot;);</span><br><span class="line">                os.flush();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;catch(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();//出错，打印出错信息</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>2.Socket</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.net.Socket;</span><br><span class="line">public class Socket01 &#123;</span><br><span class="line">        public static void main(String[] args) throws IOException &#123;</span><br><span class="line">            try&#123;</span><br><span class="line">                //向本机的2105端口发出客户请求</span><br><span class="line">                Socket socket=new Socket(&quot;192.168.31.162&quot;,2105);</span><br><span class="line">                //由系统标准输入设备构造BufferedReader对象</span><br><span class="line">                BufferedReader sin=new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                //由Socket对象得到输出流，并构造PrintWriter对象</span><br><span class="line">                PrintWriter os=new PrintWriter(socket.getOutputStream());</span><br><span class="line">                //由Socket对象得到输入流，并构造相应的BufferedReader对象</span><br><span class="line">                BufferedReader is=new BufferedReader(new InputStreamReader(socket.getInputStream()));</span><br><span class="line">                String readline;</span><br><span class="line">                readline=sin.readLine(); //从系统标准输入读入一字符串</span><br><span class="line">                //若从标准输入读入的字符串为 &quot;bye&quot;则停止循环</span><br><span class="line">                while(!readline.equals(&quot;bye&quot;))&#123;</span><br><span class="line">                    //将从系统标准输入读入的字符串输出到Server</span><br><span class="line"></span><br><span class="line">                    os.println(readline);</span><br><span class="line">                    //刷新输出流，使Server马上收到该字符串</span><br><span class="line">                    os.flush();</span><br><span class="line">                    //在系统标准输出上打印读入的字符串</span><br><span class="line">                    System.out.println(&quot;Client:&quot;+readline);</span><br><span class="line">                    //从Server读入一字符串，并打印到标准输出上</span><br><span class="line">                    System.out.println(&quot;Server:&quot;+is.readLine());</span><br><span class="line">                    readline=sin.readLine(); //从系统标准输入读入一字符串</span><br><span class="line">                &#125;</span><br><span class="line">                os.close(); //关闭Socket输出流</span><br><span class="line">                is.close(); //关闭Socket输入流</span><br><span class="line">                socket.close(); //关闭Socket</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();//出错，打印出错信息</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -6459,137 +6478,6 @@ public class NodeController &#123;
 <p>指出该类是 Bean 配置的信息源，相当于XML中的<beans></beans>，一般加在主类上。</p>
 <p><strong>@Bean</strong></p>
 <p>相当于XML中的<bean></bean>,放在方法的上面，而不是类，意思是产生一个bean,并交给spring管理。</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>17.Springboot之Mybatis注解开发单表操作与多表联查</title>
-    <url>/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="一-Springboot之Mybatis注解开发单表操作"><a href="#一-Springboot之Mybatis注解开发单表操作" class="headerlink" title="一.Springboot之Mybatis注解开发单表操作"></a>一.Springboot之Mybatis注解开发单表操作</h3><h4 id="1-1-MyBatis的常用注解"><a href="#1-1-MyBatis的常用注解" class="headerlink" title="1.1 MyBatis的常用注解"></a>1.1 MyBatis的常用注解</h4><p>这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样更加便利了操作。</p>
-<p>@Insert：实现新增</p>
-<p>@Update：实现更新</p>
-<p>@Delete：实现删除</p>
-<p>@Select：实现查询</p>
-<p>@Result：实现结果集封装</p>
-<p>@Results：可以与@Result 一起使用，封装多个结果集</p>
-<p>@One：实现一对一结果集封装</p>
-<p>@Many：实现一对多结果集封装</p>
-<h4 id="1-2-MyBatis的增删改查"><a href="#1-2-MyBatis的增删改查" class="headerlink" title="1.2 MyBatis的增删改查"></a>1.2 MyBatis的增删改查</h4><p>我们完成简单的student表的增删改查的操作</p>
-<ul>
-<li><p>步骤一:持久层，在dao中创建mapper接口，Student对象类省略</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM student&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//新增操作</span></span><br><span class="line">    <span class="meta">@Insert(&quot;INSERT INTO student VALUES (#&#123;id&#125;,#&#123;name&#125;,#&#123;age&#125;)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">insert</span><span class="params">(Student stu)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//修改操作</span></span><br><span class="line">    <span class="meta">@Update(&quot;UPDATE student SET name=#&#123;name&#125;,age=#&#123;age&#125; WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">update</span><span class="params">(Student stu)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除操作</span></span><br><span class="line">    <span class="meta">@Delete(&quot;DELETE FROM student WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>步骤二：业务层，Server类</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Server&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentMapper studentMapper; </span><br><span class="line">    </span><br><span class="line">	//查询全部</span><br><span class="line">    public List&lt;Student&gt; selectstu() &#123;</span><br><span class="line">        return studentMapper.selectAll();</span><br><span class="line">    &#125;</span><br><span class="line">    //新增操作</span><br><span class="line">    public Integer insertstu(Student stu)&#123;</span><br><span class="line">    	return studentMapper.insert(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    //修改操作</span><br><span class="line">    public Integer updatestu(Student stu)&#123;</span><br><span class="line">    	return studentMapper.update(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    //删除操作</span><br><span class="line">    public Integer delete(Integer id)&#123;</span><br><span class="line">    	return studentMapper.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><p>步骤三：打开springboot测试类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MybatisApplicationTests</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Server server;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//添加测试方法</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">selectdome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        List&lt;Student&gt; list = server.selectstu();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        <span class="keyword">for</span> (Student student : list) &#123;</span><br><span class="line">            System.out.println(student);</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">insertdome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;赵六&quot;</span>,<span class="number">26</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.insertstu(stu);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">updatedome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;赵六&quot;</span>,<span class="number">26</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.updatestu(stu);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">deletedome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.deletestu(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="1-3-注解开发总结"><a href="#1-3-注解开发总结" class="headerlink" title="1.3 注解开发总结"></a>1.3 注解开发总结</h4><p>注解可以简化开发操作，省略映射配置文件的编写。 </p>
-<ul>
-<li><p>常用注解 </p>
-<p>@Select(“查询的 SQL 语句”)：执行查询操作注解</p>
-<p> @Insert(“查询的 SQL 语句”)：执行新增操作注解</p>
-<p> @Update(“查询的 SQL 语句”)：执行修改操作注解</p>
-<p> @Delete(“查询的 SQL 语句”)：执行删除操作注解</p>
-</li>
-</ul>
-<h3 id="二-MyBatis注解开发的多表操作"><a href="#二-MyBatis注解开发的多表操作" class="headerlink" title="二.MyBatis注解开发的多表操作"></a>二.MyBatis注解开发的多表操作</h3><h4 id="2-1-MyBatis的注解实现复杂映射开发"><a href="#2-1-MyBatis的注解实现复杂映射开发" class="headerlink" title="2.1  MyBatis的注解实现复杂映射开发"></a>2.1  MyBatis的注解实现复杂映射开发</h4><p>实现复杂关系映射之前我们可以在映射文件中通过配置<resultMap>来实现，使用注解开发后，我们可以使用@Results注解，@Result注解，@One注解，@Many注解组合完成复杂关系的配置</p>
-<p><img src="/images3/%E5%9B%BE%E7%89%8710.png"></p>
-<p><img src="/images3/%E5%9B%BE%E7%89%8711.png"></p>
-<p>通常在@Results(………,fetchType&#x3D; FetchType.EAGER)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Select(&quot;select * from test where level = 1&quot;)</span><br><span class="line">    @Results(value = &#123;</span><br><span class="line">            @Result(id = true,column = &quot;pid0&quot;,property = &quot;pid0&quot;),</span><br><span class="line">            @Result(column = &quot;pid0&quot;, property = &quot;child&quot;, many = @Many(select = &quot;com.example.demo.Database.Dataselect.getpid&quot;,fetchType= FetchType.EAGER))</span><br><span class="line">    &#125;)</span><br><span class="line">    List&lt;Classdify&gt; getclassification();</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-2-一对一查询"><a href="#2-2-一对一查询" class="headerlink" title="2.2  一对一查询"></a>2.2  一对一查询</h4><h5 id="2-2-1-一对一查询的模型"><a href="#2-2-1-一对一查询的模型" class="headerlink" title="2.2.1 一对一查询的模型"></a>2.2.1 一对一查询的模型</h5><p>一对一查询的需求：查询一个用户信息，与此同时查询出该用户对应的身份证信息</p>
-<p><img src="/images3/1590942011460.png" alt="picture"></p>
-<h5 id="2-2-2-一对一查询的语句"><a href="#2-2-2-一对一查询的语句" class="headerlink" title="2.2.2 一对一查询的语句"></a>2.2.2 一对一查询的语句</h5><p>对应的sql语句：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> card；</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> person <span class="keyword">WHERE</span> id<span class="operator">=</span>#&#123;id&#125;;</span><br></pre></td></tr></table></figure>
-
-<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h5 id="2-2-3-创建PersonMapper接口"><a href="#2-2-3-创建PersonMapper接口" class="headerlink" title="2.2.3 创建PersonMapper接口"></a>2.2.3 创建PersonMapper接口</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PersonMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据id查询</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM person WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Person <span class="title function_">selectById</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="2-2-4-使用注解配置Mapper"><a href="#2-2-4-使用注解配置Mapper" class="headerlink" title="2.2.4 使用注解配置Mapper"></a>2.2.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CardMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM card&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;number&quot;,property = &quot;number&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;p&quot;,             // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = Person.class,    // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;pid&quot;,             // 根据查询出的card表中的pid字段来查询person表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        one、@One 一对一固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    one = @One(select = &quot;com.itheima.one_to_one.PersonMapper.selectById&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Card&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-2-5-测试类省略"><a href="#2-2-5-测试类省略" class="headerlink" title="2.2.5 测试类省略"></a>2.2.5 测试类省略</h5><h5 id="2-2-6-一对一配置总结"><a href="#2-2-6-一对一配置总结" class="headerlink" title="2.2.6  一对一配置总结"></a>2.2.6  一对一配置总结</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	one 属性：一对一查询固定属性</span><br><span class="line"> @One：一对一查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-3-一对多查询"><a href="#2-3-一对多查询" class="headerlink" title="2.3 一对多查询"></a>2.3 一对多查询</h4><h5 id="2-3-1-一对多查询的模型"><a href="#2-3-1-一对多查询的模型" class="headerlink" title="2.3.1 一对多查询的模型"></a>2.3.1 一对多查询的模型</h5><p>一对多查询的需求：查询一个课程，与此同时查询出该该课程对应的学生信息</p>
-<p><img src="/images3/1590942772892.png" alt="picture"></p>
-<h5 id="2-3-2-一对多查询的语句"><a href="#2-3-2-一对多查询的语句" class="headerlink" title="2.3.2 一对多查询的语句"></a>2.3.2 一对多查询的语句</h5><p>对应的sql语句：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> classes</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> cid<span class="operator">=</span>#&#123;cid&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="-1"><a href="#-1" class="headerlink" title=""></a></h5><h5 id="2-3-3-创建StudentMapper接口"><a href="#2-3-3-创建StudentMapper接口" class="headerlink" title="2.3.3 创建StudentMapper接口"></a>2.3.3 创建StudentMapper接口</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据cid查询student表</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM student WHERE cid=#&#123;cid&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Student&gt; <span class="title function_">selectByCid</span><span class="params">(Integer cid)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="2-3-4-使用注解配置Mapper"><a href="#2-3-4-使用注解配置Mapper" class="headerlink" title="2.3.4 使用注解配置Mapper"></a>2.3.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ClassesMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM classes&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;students&quot;,  // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = List.class,  // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;id&quot;,          // 根据查询出的classes表的id字段来查询student表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        many、@Many 一对多查询的固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个查询方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.itheima.one_to_many.StudentMapper.selectByCid&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Classes&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-3-5-测试类省略"><a href="#2-3-5-测试类省略" class="headerlink" title="2.3.5 测试类省略"></a>2.3.5 测试类省略</h5><h5 id="2-3-6-一对多配置总结"><a href="#2-3-6-一对多配置总结" class="headerlink" title="2.3.6 一对多配置总结"></a>2.3.6 一对多配置总结</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	many 属性：一对多查询固定属性</span><br><span class="line">@Many：一对多查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-4-多对多查询"><a href="#2-4-多对多查询" class="headerlink" title="2.4  多对多查询"></a>2.4  多对多查询</h4><h5 id="2-4-1-多对多查询的模型"><a href="#2-4-1-多对多查询的模型" class="headerlink" title="2.4.1 多对多查询的模型"></a>2.4.1 多对多查询的模型</h5><p>多对多查询的需求：查询学生以及所对应的课程信息</p>
-<p><img src="/images3/1590943489827.png" alt="picture"></p>
-<h5 id="2-4-2-多对多查询的语句"><a href="#2-4-2-多对多查询的语句" class="headerlink" title="2.4.2 多对多查询的语句"></a>2.4.2 多对多查询的语句</h5><p>对应的sql语句：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> s.id,s.name,s.age <span class="keyword">FROM</span> student s,stu_cr sc <span class="keyword">WHERE</span> sc.sid<span class="operator">=</span>s.id</span><br><span class="line"><span class="keyword">SELECT</span> c.id,c.name <span class="keyword">FROM</span> stu_cr sc,course c <span class="keyword">WHERE</span> sc.cid<span class="operator">=</span>c.id <span class="keyword">AND</span> sc.sid<span class="operator">=</span>#&#123;id&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="2-4-3-添加CourseMapper-接口方法"><a href="#2-4-3-添加CourseMapper-接口方法" class="headerlink" title="2.4.3  添加CourseMapper 接口方法"></a>2.4.3  添加CourseMapper 接口方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CourseMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据学生id查询所选课程</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT c.id,c.name FROM stu_cr sc,course c WHERE sc.cid=c.id AND sc.sid=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Course&gt; <span class="title function_">selectBySid</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="2-4-4-使用注解配置Mapper"><a href="#2-4-4-使用注解配置Mapper" class="headerlink" title="2.4.4 使用注解配置Mapper"></a>2.4.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT DISTINCT s.id,s.name,s.age FROM student s,stu_cr sc WHERE sc.sid=s.id&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;age&quot;,property = &quot;age&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;courses&quot;,   // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = List.class,  // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;id&quot;,          // 根据查询出student表的id来作为关联条件，去查询中间表和课程表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        many、@Many 一对多查询的固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个查询方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.itheima.many_to_many.CourseMapper.selectBySid&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Student&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="2-4-5-测试类省略"><a href="#2-4-5-测试类省略" class="headerlink" title="2.4.5 测试类省略"></a>2.4.5 测试类省略</h5><h5 id="2-4-6-多对多配置总结"><a href="#2-4-6-多对多配置总结" class="headerlink" title="2.4.6 多对多配置总结"></a>2.4.6 多对多配置总结</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	many 属性：一对多查询固定属性</span><br><span class="line">@Many：一对多查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="三-构建sql"><a href="#三-构建sql" class="headerlink" title="三.构建sql"></a>三.构建sql</h3><h4 id="3-1-SQL-构建对象介绍"><a href="#3-1-SQL-构建对象介绍" class="headerlink" title="3.1 SQL 构建对象介绍"></a>3.1 SQL 构建对象介绍</h4><ul>
-<li>我们之前通过注解开发时，相关 SQL 语句都是自己直接拼写的。一些关键字写起来比较麻烦、而且容易出错。 </li>
-<li>MyBatis 给我们提供了 org.apache.ibatis.jdbc.SQL 功能类，专门用于构建 SQL 语句    </li>
-<li><img src="/images3/1590943921472.png" alt="picture"></li>
-</ul>
-<h4 id="3-2-查询功能的实现"><a href="#3-2-查询功能的实现" class="headerlink" title="3.2  查询功能的实现"></a>3.2  查询功能的实现</h4><ul>
-<li><p>定义功能类并提供获取查询的 SQL 语句的方法。 </p>
-</li>
-<li><p>@SelectProvider：生成查询用的 SQL 语句注解。</p>
-<p>type 属性：生成 SQL 语句功能类对象 </p>
-<p>method 属性：指定调用方法</p>
-</li>
-</ul>
-<h4 id="3-3-新增功能的实现"><a href="#3-3-新增功能的实现" class="headerlink" title="3.3  新增功能的实现"></a>3.3  新增功能的实现</h4><ul>
-<li><p>定义功能类并提供获取新增的 SQL 语句的方法。 </p>
-</li>
-<li><p>@InsertProvider：生成新增用的 SQL 语句注解。 </p>
-<p>type 属性：生成 SQL 语句功能类对象 </p>
-<p>method 属性：指定调用方法</p>
-</li>
-</ul>
-<h4 id="3-4-修改功能的实现"><a href="#3-4-修改功能的实现" class="headerlink" title="3.4  修改功能的实现"></a>3.4  修改功能的实现</h4><ul>
-<li><p>定义功能类并提供获取修改的 SQL 语句的方法。 </p>
-</li>
-<li><p>@UpdateProvider：生成修改用的 SQL 语句注解。 </p>
-<p>type 属性：生成 SQL 语句功能类对象</p>
-<p> method 属性：指定调用方法</p>
-</li>
-</ul>
-<h4 id="3-5-删除功能的实现"><a href="#3-5-删除功能的实现" class="headerlink" title="3.5  删除功能的实现"></a>3.5  删除功能的实现</h4><ul>
-<li><p>定义功能类并提供获取删除的 SQL 语句的方法。 </p>
-</li>
-<li><p>@DeleteProvider：生成删除用的 SQL 语句注解。</p>
-<p>type 属性：生成 SQL 语句功能类对象 </p>
-<p>method 属性：指定调用方法</p>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -7163,6 +7051,137 @@ public class NodeController &#123;
       </categories>
       <tags>
         <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>17.Springboot之Mybatis注解开发单表操作与多表联查</title>
+    <url>/2022/05/15/Springboot%E4%B9%8BMybatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E5%8D%95%E8%A1%A8%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="一-Springboot之Mybatis注解开发单表操作"><a href="#一-Springboot之Mybatis注解开发单表操作" class="headerlink" title="一.Springboot之Mybatis注解开发单表操作"></a>一.Springboot之Mybatis注解开发单表操作</h3><h4 id="1-1-MyBatis的常用注解"><a href="#1-1-MyBatis的常用注解" class="headerlink" title="1.1 MyBatis的常用注解"></a>1.1 MyBatis的常用注解</h4><p>这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样更加便利了操作。</p>
+<p>@Insert：实现新增</p>
+<p>@Update：实现更新</p>
+<p>@Delete：实现删除</p>
+<p>@Select：实现查询</p>
+<p>@Result：实现结果集封装</p>
+<p>@Results：可以与@Result 一起使用，封装多个结果集</p>
+<p>@One：实现一对一结果集封装</p>
+<p>@Many：实现一对多结果集封装</p>
+<h4 id="1-2-MyBatis的增删改查"><a href="#1-2-MyBatis的增删改查" class="headerlink" title="1.2 MyBatis的增删改查"></a>1.2 MyBatis的增删改查</h4><p>我们完成简单的student表的增删改查的操作</p>
+<ul>
+<li><p>步骤一:持久层，在dao中创建mapper接口，Student对象类省略</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM student&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//新增操作</span></span><br><span class="line">    <span class="meta">@Insert(&quot;INSERT INTO student VALUES (#&#123;id&#125;,#&#123;name&#125;,#&#123;age&#125;)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">insert</span><span class="params">(Student stu)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//修改操作</span></span><br><span class="line">    <span class="meta">@Update(&quot;UPDATE student SET name=#&#123;name&#125;,age=#&#123;age&#125; WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">update</span><span class="params">(Student stu)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除操作</span></span><br><span class="line">    <span class="meta">@Delete(&quot;DELETE FROM student WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤二：业务层，Server类</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Server&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentMapper studentMapper; </span><br><span class="line">    </span><br><span class="line">	//查询全部</span><br><span class="line">    public List&lt;Student&gt; selectstu() &#123;</span><br><span class="line">        return studentMapper.selectAll();</span><br><span class="line">    &#125;</span><br><span class="line">    //新增操作</span><br><span class="line">    public Integer insertstu(Student stu)&#123;</span><br><span class="line">    	return studentMapper.insert(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    //修改操作</span><br><span class="line">    public Integer updatestu(Student stu)&#123;</span><br><span class="line">    	return studentMapper.update(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    //删除操作</span><br><span class="line">    public Integer delete(Integer id)&#123;</span><br><span class="line">    	return studentMapper.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>步骤三：打开springboot测试类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MybatisApplicationTests</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Server server;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//添加测试方法</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">selectdome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        List&lt;Student&gt; list = server.selectstu();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        <span class="keyword">for</span> (Student student : list) &#123;</span><br><span class="line">            System.out.println(student);</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">insertdome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;赵六&quot;</span>,<span class="number">26</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.insertstu(stu);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">updatedome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;赵六&quot;</span>,<span class="number">26</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.updatestu(stu);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">deletedome</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//1.调用实现类对象中的方法，接收结果</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> server.deletestu(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.处理结果</span></span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="1-3-注解开发总结"><a href="#1-3-注解开发总结" class="headerlink" title="1.3 注解开发总结"></a>1.3 注解开发总结</h4><p>注解可以简化开发操作，省略映射配置文件的编写。 </p>
+<ul>
+<li><p>常用注解 </p>
+<p>@Select(“查询的 SQL 语句”)：执行查询操作注解</p>
+<p> @Insert(“查询的 SQL 语句”)：执行新增操作注解</p>
+<p> @Update(“查询的 SQL 语句”)：执行修改操作注解</p>
+<p> @Delete(“查询的 SQL 语句”)：执行删除操作注解</p>
+</li>
+</ul>
+<h3 id="二-MyBatis注解开发的多表操作"><a href="#二-MyBatis注解开发的多表操作" class="headerlink" title="二.MyBatis注解开发的多表操作"></a>二.MyBatis注解开发的多表操作</h3><h4 id="2-1-MyBatis的注解实现复杂映射开发"><a href="#2-1-MyBatis的注解实现复杂映射开发" class="headerlink" title="2.1  MyBatis的注解实现复杂映射开发"></a>2.1  MyBatis的注解实现复杂映射开发</h4><p>实现复杂关系映射之前我们可以在映射文件中通过配置<resultMap>来实现，使用注解开发后，我们可以使用@Results注解，@Result注解，@One注解，@Many注解组合完成复杂关系的配置</p>
+<p><img src="/images3/%E5%9B%BE%E7%89%8710.png"></p>
+<p><img src="/images3/%E5%9B%BE%E7%89%8711.png"></p>
+<p>通常在@Results(………,fetchType&#x3D; FetchType.EAGER)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Select(&quot;select * from test where level = 1&quot;)</span><br><span class="line">    @Results(value = &#123;</span><br><span class="line">            @Result(id = true,column = &quot;pid0&quot;,property = &quot;pid0&quot;),</span><br><span class="line">            @Result(column = &quot;pid0&quot;, property = &quot;child&quot;, many = @Many(select = &quot;com.example.demo.Database.Dataselect.getpid&quot;,fetchType= FetchType.EAGER))</span><br><span class="line">    &#125;)</span><br><span class="line">    List&lt;Classdify&gt; getclassification();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-一对一查询"><a href="#2-2-一对一查询" class="headerlink" title="2.2  一对一查询"></a>2.2  一对一查询</h4><h5 id="2-2-1-一对一查询的模型"><a href="#2-2-1-一对一查询的模型" class="headerlink" title="2.2.1 一对一查询的模型"></a>2.2.1 一对一查询的模型</h5><p>一对一查询的需求：查询一个用户信息，与此同时查询出该用户对应的身份证信息</p>
+<p><img src="/images3/1590942011460.png" alt="picture"></p>
+<h5 id="2-2-2-一对一查询的语句"><a href="#2-2-2-一对一查询的语句" class="headerlink" title="2.2.2 一对一查询的语句"></a>2.2.2 一对一查询的语句</h5><p>对应的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> card；</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> person <span class="keyword">WHERE</span> id<span class="operator">=</span>#&#123;id&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h5 id="2-2-3-创建PersonMapper接口"><a href="#2-2-3-创建PersonMapper接口" class="headerlink" title="2.2.3 创建PersonMapper接口"></a>2.2.3 创建PersonMapper接口</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PersonMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据id查询</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM person WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Person <span class="title function_">selectById</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-4-使用注解配置Mapper"><a href="#2-2-4-使用注解配置Mapper" class="headerlink" title="2.2.4 使用注解配置Mapper"></a>2.2.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CardMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM card&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;number&quot;,property = &quot;number&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;p&quot;,             // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = Person.class,    // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;pid&quot;,             // 根据查询出的card表中的pid字段来查询person表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        one、@One 一对一固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    one = @One(select = &quot;com.itheima.one_to_one.PersonMapper.selectById&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Card&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-5-测试类省略"><a href="#2-2-5-测试类省略" class="headerlink" title="2.2.5 测试类省略"></a>2.2.5 测试类省略</h5><h5 id="2-2-6-一对一配置总结"><a href="#2-2-6-一对一配置总结" class="headerlink" title="2.2.6  一对一配置总结"></a>2.2.6  一对一配置总结</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	one 属性：一对一查询固定属性</span><br><span class="line"> @One：一对一查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-3-一对多查询"><a href="#2-3-一对多查询" class="headerlink" title="2.3 一对多查询"></a>2.3 一对多查询</h4><h5 id="2-3-1-一对多查询的模型"><a href="#2-3-1-一对多查询的模型" class="headerlink" title="2.3.1 一对多查询的模型"></a>2.3.1 一对多查询的模型</h5><p>一对多查询的需求：查询一个课程，与此同时查询出该该课程对应的学生信息</p>
+<p><img src="/images3/1590942772892.png" alt="picture"></p>
+<h5 id="2-3-2-一对多查询的语句"><a href="#2-3-2-一对多查询的语句" class="headerlink" title="2.3.2 一对多查询的语句"></a>2.3.2 一对多查询的语句</h5><p>对应的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> classes</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> cid<span class="operator">=</span>#&#123;cid&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="-1"><a href="#-1" class="headerlink" title=""></a></h5><h5 id="2-3-3-创建StudentMapper接口"><a href="#2-3-3-创建StudentMapper接口" class="headerlink" title="2.3.3 创建StudentMapper接口"></a>2.3.3 创建StudentMapper接口</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据cid查询student表</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM student WHERE cid=#&#123;cid&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Student&gt; <span class="title function_">selectByCid</span><span class="params">(Integer cid)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-4-使用注解配置Mapper"><a href="#2-3-4-使用注解配置Mapper" class="headerlink" title="2.3.4 使用注解配置Mapper"></a>2.3.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ClassesMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM classes&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;students&quot;,  // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = List.class,  // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;id&quot;,          // 根据查询出的classes表的id字段来查询student表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        many、@Many 一对多查询的固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个查询方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.itheima.one_to_many.StudentMapper.selectByCid&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Classes&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-5-测试类省略"><a href="#2-3-5-测试类省略" class="headerlink" title="2.3.5 测试类省略"></a>2.3.5 测试类省略</h5><h5 id="2-3-6-一对多配置总结"><a href="#2-3-6-一对多配置总结" class="headerlink" title="2.3.6 一对多配置总结"></a>2.3.6 一对多配置总结</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	many 属性：一对多查询固定属性</span><br><span class="line">@Many：一对多查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4-多对多查询"><a href="#2-4-多对多查询" class="headerlink" title="2.4  多对多查询"></a>2.4  多对多查询</h4><h5 id="2-4-1-多对多查询的模型"><a href="#2-4-1-多对多查询的模型" class="headerlink" title="2.4.1 多对多查询的模型"></a>2.4.1 多对多查询的模型</h5><p>多对多查询的需求：查询学生以及所对应的课程信息</p>
+<p><img src="/images3/1590943489827.png" alt="picture"></p>
+<h5 id="2-4-2-多对多查询的语句"><a href="#2-4-2-多对多查询的语句" class="headerlink" title="2.4.2 多对多查询的语句"></a>2.4.2 多对多查询的语句</h5><p>对应的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> s.id,s.name,s.age <span class="keyword">FROM</span> student s,stu_cr sc <span class="keyword">WHERE</span> sc.sid<span class="operator">=</span>s.id</span><br><span class="line"><span class="keyword">SELECT</span> c.id,c.name <span class="keyword">FROM</span> stu_cr sc,course c <span class="keyword">WHERE</span> sc.cid<span class="operator">=</span>c.id <span class="keyword">AND</span> sc.sid<span class="operator">=</span>#&#123;id&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-4-3-添加CourseMapper-接口方法"><a href="#2-4-3-添加CourseMapper-接口方法" class="headerlink" title="2.4.3  添加CourseMapper 接口方法"></a>2.4.3  添加CourseMapper 接口方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CourseMapper</span> &#123;</span><br><span class="line">    <span class="comment">//根据学生id查询所选课程</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT c.id,c.name FROM stu_cr sc,course c WHERE sc.cid=c.id AND sc.sid=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Course&gt; <span class="title function_">selectBySid</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4-4-使用注解配置Mapper"><a href="#2-4-4-使用注解配置Mapper" class="headerlink" title="2.4.4 使用注解配置Mapper"></a>2.4.4 使用注解配置Mapper</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StudentMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT DISTINCT s.id,s.name,s.age FROM student s,stu_cr sc WHERE sc.sid=s.id&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;id&quot;,property = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;age&quot;,property = &quot;age&quot;),</span></span><br><span class="line"><span class="meta">            @Result(</span></span><br><span class="line"><span class="meta">                    property = &quot;courses&quot;,   // 被包含对象的变量名</span></span><br><span class="line"><span class="meta">                    javaType = List.class,  // 被包含对象的实际数据类型</span></span><br><span class="line"><span class="meta">                    column = &quot;id&quot;,          // 根据查询出student表的id来作为关联条件，去查询中间表和课程表</span></span><br><span class="line"><span class="meta">                    /*</span></span><br><span class="line"><span class="meta">                        many、@Many 一对多查询的固定写法</span></span><br><span class="line"><span class="meta">                        select属性：指定调用哪个接口中的哪个查询方法</span></span><br><span class="line"><span class="meta">                     */</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.itheima.many_to_many.CourseMapper.selectBySid&quot;)</span></span><br><span class="line"><span class="meta">            )</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> List&lt;Student&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4-5-测试类省略"><a href="#2-4-5-测试类省略" class="headerlink" title="2.4.5 测试类省略"></a>2.4.5 测试类省略</h5><h5 id="2-4-6-多对多配置总结"><a href="#2-4-6-多对多配置总结" class="headerlink" title="2.4.6 多对多配置总结"></a>2.4.6 多对多配置总结</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Results：封装映射关系的父注解。</span><br><span class="line">	Result[] value()：定义了 Result 数组</span><br><span class="line">@Result：封装映射关系的子注解。</span><br><span class="line">	column 属性：查询出的表中字段名称</span><br><span class="line">	property 属性：实体对象中的属性名称</span><br><span class="line">	javaType 属性：被包含对象的数据类型</span><br><span class="line">	many 属性：一对多查询固定属性</span><br><span class="line">@Many：一对多查询的注解。</span><br><span class="line">	select 属性：指定调用某个接口中的方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三-构建sql"><a href="#三-构建sql" class="headerlink" title="三.构建sql"></a>三.构建sql</h3><h4 id="3-1-SQL-构建对象介绍"><a href="#3-1-SQL-构建对象介绍" class="headerlink" title="3.1 SQL 构建对象介绍"></a>3.1 SQL 构建对象介绍</h4><ul>
+<li>我们之前通过注解开发时，相关 SQL 语句都是自己直接拼写的。一些关键字写起来比较麻烦、而且容易出错。 </li>
+<li>MyBatis 给我们提供了 org.apache.ibatis.jdbc.SQL 功能类，专门用于构建 SQL 语句    </li>
+<li><img src="/images3/1590943921472.png" alt="picture"></li>
+</ul>
+<h4 id="3-2-查询功能的实现"><a href="#3-2-查询功能的实现" class="headerlink" title="3.2  查询功能的实现"></a>3.2  查询功能的实现</h4><ul>
+<li><p>定义功能类并提供获取查询的 SQL 语句的方法。 </p>
+</li>
+<li><p>@SelectProvider：生成查询用的 SQL 语句注解。</p>
+<p>type 属性：生成 SQL 语句功能类对象 </p>
+<p>method 属性：指定调用方法</p>
+</li>
+</ul>
+<h4 id="3-3-新增功能的实现"><a href="#3-3-新增功能的实现" class="headerlink" title="3.3  新增功能的实现"></a>3.3  新增功能的实现</h4><ul>
+<li><p>定义功能类并提供获取新增的 SQL 语句的方法。 </p>
+</li>
+<li><p>@InsertProvider：生成新增用的 SQL 语句注解。 </p>
+<p>type 属性：生成 SQL 语句功能类对象 </p>
+<p>method 属性：指定调用方法</p>
+</li>
+</ul>
+<h4 id="3-4-修改功能的实现"><a href="#3-4-修改功能的实现" class="headerlink" title="3.4  修改功能的实现"></a>3.4  修改功能的实现</h4><ul>
+<li><p>定义功能类并提供获取修改的 SQL 语句的方法。 </p>
+</li>
+<li><p>@UpdateProvider：生成修改用的 SQL 语句注解。 </p>
+<p>type 属性：生成 SQL 语句功能类对象</p>
+<p> method 属性：指定调用方法</p>
+</li>
+</ul>
+<h4 id="3-5-删除功能的实现"><a href="#3-5-删除功能的实现" class="headerlink" title="3.5  删除功能的实现"></a>3.5  删除功能的实现</h4><ul>
+<li><p>定义功能类并提供获取删除的 SQL 语句的方法。 </p>
+</li>
+<li><p>@DeleteProvider：生成删除用的 SQL 语句注解。</p>
+<p>type 属性：生成 SQL 语句功能类对象 </p>
+<p>method 属性：指定调用方法</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -8910,6 +8929,56 @@ public class NodeController &#123;
       </tags>
   </entry>
   <entry>
+    <title>原生IO模式与Reactor模式与Netty框架简介</title>
+    <url>/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h3 id="原生IO模式与Reactor模式与Netty框架简介"><a href="#原生IO模式与Reactor模式与Netty框架简介" class="headerlink" title="原生IO模式与Reactor模式与Netty框架简介"></a>原生IO模式与Reactor模式与Netty框架简介</h3><h4 id="Netty-的介绍"><a href="#Netty-的介绍" class="headerlink" title="Netty 的介绍"></a>Netty 的介绍</h4><p>Netty 是由 JBOSS 提供的一个 Java 开源框架，现为 Github 上的独立项目。<br>Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络 IO 程序。<br>Netty 主要针对在 TCP 协议下，面向 Client 端的高并发应用，或者 Peer-to-Peer 场景下的大量数据持续传输的应用。<br>Netty 本质是一个 NIO 框架，适用于服务器通讯相关的多种应用场景。<br>要透彻理解 Netty，需要先学习 NIO，这样我们才能阅读 Netty 的源码。</p>
+<p>详细内容参照：原文：<a href="https://blog.csdn.net/Youth_lql/article/details/115524052">https://blog.csdn.net/Youth_lql/article/details/115524052</a></p>
+<p>本文简要介绍</p>
+<h4 id="Java-BIO编程"><a href="#Java-BIO编程" class="headerlink" title="Java BIO编程"></a>Java BIO编程</h4><h5 id="I-x2F-O-模型"><a href="#I-x2F-O-模型" class="headerlink" title="I&#x2F;O 模型"></a>I&#x2F;O 模型</h5><p>I&#x2F;O 模型简单的理解：就是用什么样的通道进行数据的发送和接收，很大程度上决定了程序通信的性能。<br>Java 共支持 3 种网络编程模型 I&#x2F;O 模式：BIO、NIO、AIO。</p>
+<h5 id="Java-BIO："><a href="#Java-BIO：" class="headerlink" title="Java BIO："></a>Java BIO：</h5><p>同步并阻塞（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销。（一个线程对一个事件）</p>
+<h5 id="Java-NIO："><a href="#Java-NIO：" class="headerlink" title="Java NIO："></a>Java NIO：</h5><p>同步非阻塞，服务器实现模式为一个线程处理多个请求（连接），即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 <code>I/O</code> 请求就进行处理。</p>
+<h5 id="Java-AIO-NIO-2-："><a href="#Java-AIO-NIO-2-：" class="headerlink" title="Java AIO(NIO.2)："></a>Java AIO(NIO.2)：</h5><p><code>异步非阻塞，</code>AIO<code>引入异步通道的概念，采用了</code>Proactor&#96; 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
+<h4 id="BIO、NIO、AIO-使用场景分析"><a href="#BIO、NIO、AIO-使用场景分析" class="headerlink" title="BIO、NIO、AIO 使用场景分析"></a>BIO、NIO、AIO 使用场景分析</h4><p>BIO 方式</p>
+<p>适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，但程序简单易理解。<br>NIO 方式</p>
+<p>适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，弹幕系统，服务器间通讯等。编程比较复杂，JDK1.4 开始支持。<br>AIO 方式</p>
+<p>使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 OS 参与并发操作，编程比较复杂，JDK7 开始支持。<br>Java BIO 基本介绍<br>Java BIO 就是传统的 Java I&#x2F;O 编程，其相关的类和接口在 java.io。<br>BIO(BlockingI&#x2F;O)：同步阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，可以通过线程池机制改善（实现多个客户连接服务器）。【后有应用实例】<br>BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，程序简单易理解。</p>
+<h5 id="Java-BIO-应用实例在以前的serversocketDome中"><a href="#Java-BIO-应用实例在以前的serversocketDome中" class="headerlink" title="Java BIO 应用实例在以前的serversocketDome中"></a>Java BIO 应用实例在以前的serversocketDome中</h5><h3 id="Java-NIO编程"><a href="#Java-NIO编程" class="headerlink" title="Java NIO编程"></a>Java NIO编程</h3><h5 id="Java-NIO-基本介绍"><a href="#Java-NIO-基本介绍" class="headerlink" title="Java NIO 基本介绍"></a>Java NIO 基本介绍</h5><p>Java NIO 全称 Java non-blocking IO，是指 JDK 提供的新 API。从 JDK1.4 开始，Java 提供了一系列改进的输入&#x2F;输出的新特性，被统称为 NIO（即 NewIO），是同步非阻塞的。<br>NIO 相关类都被放在 java.nio 包及子包下，并且对原 java.io 包中的很多类进行改写。【基本案例】<br>NIO 有三大核心部分：Channel（通道）、Buffer（缓冲区）、Selector（选择器） 。<br>NIO 是面向缓冲区，或者面向块编程的。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动，这就增加了处理过程中的灵活性，使用它可以提供非阻塞式的高伸缩性网络。<br>Java NIO 的非阻塞模式，使一个线程从某通道发送请求或者读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取，而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。非阻塞写也是如此，一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。<br>通俗理解：NIO 是可以做到用一个线程来处理多个操作的。假设有 10000 个请求过来,根据实际情况，可以分配 50 或者 100 个线程来处理。不像之前的阻塞 IO 那样，非得分配 10000 个。<br>HTTP 2.0 使用了多路复用的技术，做到同一个连接并发处理多个请求，而且并发请求的数量比 HTTP 1.1 大了好几个数量级。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NIO 和 BIO 的比较</span><br><span class="line">BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 I/O 的效率比流 I/O 高很多。</span><br><span class="line">BIO 是阻塞的，NIO 则是非阻塞的。</span><br><span class="line">BIO 基于字节流和字符流进行操作，而 NIO 基于 Channel（通道）和 Buffer（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector（选择器）用于监听多个通道的事件（比如：连接请求，数据到达等），因此使用单个线程就可以监听多个客户端通道。</span><br><span class="line">Buffer和Channel之间的数据流向是双向的</span><br><span class="line">每个 Channel 都会对应一个 Buffer。</span><br><span class="line">Selector 对应一个线程，一个线程对应多个 Channel（连接）。</span><br><span class="line">该图反应了有三个 Channel 注册到该 Selector //程序</span><br><span class="line">程序切换到哪个 Channel 是由事件决定的，Event 就是一个重要的概念。</span><br><span class="line">Selector 会根据不同的事件，在各个通道上切换。</span><br><span class="line">Buffer 就是一个内存块，底层是有一个数组。</span><br><span class="line">数据的读取写入是通过 Buffer，这个和 BIO是不同的，BIO 中要么是输入流，或者是输出流，不能双向，但是 NIO 的 Buffer 是可以读也可以写，需要 flip 方法切换 Channel 是双向的，可以返回底层操作系统的情况，比如 Linux，底层的操作系统通道就是双向的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Netty框架完整流程</p>
+<p><img src="/images3/image-20220717171319212.png" alt="image-20220717171319212"></p>
+<p><img src="/images3/image-20220717171204477.png" alt="image-20220717171204477"></p>
+<h4 id="图片梳理"><a href="#图片梳理" class="headerlink" title="图片梳理"></a>图片梳理</h4><h5 id="传统阻塞IO模式"><a href="#传统阻塞IO模式" class="headerlink" title="传统阻塞IO模式"></a>传统阻塞IO模式</h5><p><img src="/images3/image-20220717165722768.png" alt="image-20220717165722768"></p>
+<h5 id="传统阻塞IO模式的改进（Reactor模式）"><a href="#传统阻塞IO模式的改进（Reactor模式）" class="headerlink" title="传统阻塞IO模式的改进（Reactor模式）"></a>传统阻塞IO模式的改进（Reactor模式）</h5><p><img src="/images3/image-20220717165820712.png" alt="image-20220717165820712"></p>
+<p><img src="/images3/image-20220717165927312.png" alt="image-20220717165927312"></p>
+<p>根据 <code>Reactor</code> 的数量和处理资源池线程的数量不同，有 <code>3</code> 种典型的实现</p>
+<ol>
+<li>单 <code>Reactor</code> 单线程</li>
+<li>单 <code>Reactor</code> 多线程</li>
+<li>主从 <code>Reactor</code> 多线程</li>
+</ol>
+<p><img src="/images3/image-20220717170036351.png" alt="image-20220717170036351"></p>
+<p><img src="/images3/image-20220717170120890.png" alt="image-20220717170120890"></p>
+<p><img src="/images3/image-20220717170245153.png" alt="image-20220717170245153"></p>
+<h4 id="单-Reactor-多线程"><a href="#单-Reactor-多线程" class="headerlink" title="单 Reactor 多线程"></a>单 <code>Reactor</code> 多线程</h4><p><img src="/images3/image-20220717170212830.png" alt="image-20220717170212830"></p>
+<p><img src="/images3/image-20220717170338964.png" alt="image-20220717170338964"></p>
+<h4 id="主从-Reactor-多线程"><a href="#主从-Reactor-多线程" class="headerlink" title="主从 Reactor 多线程"></a>主从 <code>Reactor</code> 多线程</h4><p><img src="/images3/image-20220717170446707.png" alt="image-20220717170446707"></p>
+<p><img src="/images3/image-20220717170537574.png" alt="image-20220717170537574"></p>
+<p><img src="/images3/image-20220717170628818.png" alt="image-20220717170628818"></p>
+<h3 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h3><p><img src="/images3/image-20220717170743390.png" alt="image-20220717170743390"></p>
+<p><img src="/images3/image-20220717171029245.png" alt="image-20220717171029245"></p>
+<p><img src="/images3/image-20220717170945107.png" alt="image-20220717170945107"></p>
+<p><img src="/images3/image-20220717164751092.png" alt="image-20220717171319212"></p>
+<p><img src="/images3/image-20220717171204477.png" alt="image-20220717171204477"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>10.反射机制</title>
     <url>/2022/05/07/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
     <content><![CDATA[<h2 id="1-反射"><a href="#1-反射" class="headerlink" title="1.反射"></a>1.反射</h2><h3 id="1-1反射的概述"><a href="#1-1反射的概述" class="headerlink" title="1.1反射的概述"></a>1.1反射的概述</h3><ul>
@@ -9120,53 +9189,35 @@ getDeclaredConstructor (Class<?>… parameterTypes)</p>
       </tags>
   </entry>
   <entry>
-    <title>原生IO模式与Reactor模式与Netty框架简介</title>
-    <url>/2022/07/17/%E5%8E%9F%E7%94%9FIO%E6%A8%A1%E5%BC%8F%E4%B8%8EReactor%E6%A8%A1%E5%BC%8F%E4%B8%8ENetty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<h3 id="原生IO模式与Reactor模式与Netty框架简介"><a href="#原生IO模式与Reactor模式与Netty框架简介" class="headerlink" title="原生IO模式与Reactor模式与Netty框架简介"></a>原生IO模式与Reactor模式与Netty框架简介</h3><h4 id="Netty-的介绍"><a href="#Netty-的介绍" class="headerlink" title="Netty 的介绍"></a>Netty 的介绍</h4><p>Netty 是由 JBOSS 提供的一个 Java 开源框架，现为 Github 上的独立项目。<br>Netty 是一个异步的、基于事件驱动的网络应用框架，用以快速开发高性能、高可靠性的网络 IO 程序。<br>Netty 主要针对在 TCP 协议下，面向 Client 端的高并发应用，或者 Peer-to-Peer 场景下的大量数据持续传输的应用。<br>Netty 本质是一个 NIO 框架，适用于服务器通讯相关的多种应用场景。<br>要透彻理解 Netty，需要先学习 NIO，这样我们才能阅读 Netty 的源码。</p>
-<p>详细内容参照：原文：<a href="https://blog.csdn.net/Youth_lql/article/details/115524052">https://blog.csdn.net/Youth_lql/article/details/115524052</a></p>
-<p>本文简要介绍</p>
-<h4 id="Java-BIO编程"><a href="#Java-BIO编程" class="headerlink" title="Java BIO编程"></a>Java BIO编程</h4><h5 id="I-x2F-O-模型"><a href="#I-x2F-O-模型" class="headerlink" title="I&#x2F;O 模型"></a>I&#x2F;O 模型</h5><p>I&#x2F;O 模型简单的理解：就是用什么样的通道进行数据的发送和接收，很大程度上决定了程序通信的性能。<br>Java 共支持 3 种网络编程模型 I&#x2F;O 模式：BIO、NIO、AIO。</p>
-<h5 id="Java-BIO："><a href="#Java-BIO：" class="headerlink" title="Java BIO："></a>Java BIO：</h5><p>同步并阻塞（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销。（一个线程对一个事件）</p>
-<h5 id="Java-NIO："><a href="#Java-NIO：" class="headerlink" title="Java NIO："></a>Java NIO：</h5><p>同步非阻塞，服务器实现模式为一个线程处理多个请求（连接），即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 <code>I/O</code> 请求就进行处理。</p>
-<h5 id="Java-AIO-NIO-2-："><a href="#Java-AIO-NIO-2-：" class="headerlink" title="Java AIO(NIO.2)："></a>Java AIO(NIO.2)：</h5><p><code>异步非阻塞，</code>AIO<code>引入异步通道的概念，采用了</code>Proactor&#96; 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
-<h4 id="BIO、NIO、AIO-使用场景分析"><a href="#BIO、NIO、AIO-使用场景分析" class="headerlink" title="BIO、NIO、AIO 使用场景分析"></a>BIO、NIO、AIO 使用场景分析</h4><p>BIO 方式</p>
-<p>适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，但程序简单易理解。<br>NIO 方式</p>
-<p>适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，弹幕系统，服务器间通讯等。编程比较复杂，JDK1.4 开始支持。<br>AIO 方式</p>
-<p>使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 OS 参与并发操作，编程比较复杂，JDK7 开始支持。<br>Java BIO 基本介绍<br>Java BIO 就是传统的 Java I&#x2F;O 编程，其相关的类和接口在 java.io。<br>BIO(BlockingI&#x2F;O)：同步阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，可以通过线程池机制改善（实现多个客户连接服务器）。【后有应用实例】<br>BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，程序简单易理解。</p>
-<h5 id="Java-BIO-应用实例在以前的serversocketDome中"><a href="#Java-BIO-应用实例在以前的serversocketDome中" class="headerlink" title="Java BIO 应用实例在以前的serversocketDome中"></a>Java BIO 应用实例在以前的serversocketDome中</h5><h3 id="Java-NIO编程"><a href="#Java-NIO编程" class="headerlink" title="Java NIO编程"></a>Java NIO编程</h3><h5 id="Java-NIO-基本介绍"><a href="#Java-NIO-基本介绍" class="headerlink" title="Java NIO 基本介绍"></a>Java NIO 基本介绍</h5><p>Java NIO 全称 Java non-blocking IO，是指 JDK 提供的新 API。从 JDK1.4 开始，Java 提供了一系列改进的输入&#x2F;输出的新特性，被统称为 NIO（即 NewIO），是同步非阻塞的。<br>NIO 相关类都被放在 java.nio 包及子包下，并且对原 java.io 包中的很多类进行改写。【基本案例】<br>NIO 有三大核心部分：Channel（通道）、Buffer（缓冲区）、Selector（选择器） 。<br>NIO 是面向缓冲区，或者面向块编程的。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动，这就增加了处理过程中的灵活性，使用它可以提供非阻塞式的高伸缩性网络。<br>Java NIO 的非阻塞模式，使一个线程从某通道发送请求或者读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取，而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。非阻塞写也是如此，一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。<br>通俗理解：NIO 是可以做到用一个线程来处理多个操作的。假设有 10000 个请求过来,根据实际情况，可以分配 50 或者 100 个线程来处理。不像之前的阻塞 IO 那样，非得分配 10000 个。<br>HTTP 2.0 使用了多路复用的技术，做到同一个连接并发处理多个请求，而且并发请求的数量比 HTTP 1.1 大了好几个数量级。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NIO 和 BIO 的比较</span><br><span class="line">BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 I/O 的效率比流 I/O 高很多。</span><br><span class="line">BIO 是阻塞的，NIO 则是非阻塞的。</span><br><span class="line">BIO 基于字节流和字符流进行操作，而 NIO 基于 Channel（通道）和 Buffer（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector（选择器）用于监听多个通道的事件（比如：连接请求，数据到达等），因此使用单个线程就可以监听多个客户端通道。</span><br><span class="line">Buffer和Channel之间的数据流向是双向的</span><br><span class="line">每个 Channel 都会对应一个 Buffer。</span><br><span class="line">Selector 对应一个线程，一个线程对应多个 Channel（连接）。</span><br><span class="line">该图反应了有三个 Channel 注册到该 Selector //程序</span><br><span class="line">程序切换到哪个 Channel 是由事件决定的，Event 就是一个重要的概念。</span><br><span class="line">Selector 会根据不同的事件，在各个通道上切换。</span><br><span class="line">Buffer 就是一个内存块，底层是有一个数组。</span><br><span class="line">数据的读取写入是通过 Buffer，这个和 BIO是不同的，BIO 中要么是输入流，或者是输出流，不能双向，但是 NIO 的 Buffer 是可以读也可以写，需要 flip 方法切换 Channel 是双向的，可以返回底层操作系统的情况，比如 Linux，底层的操作系统通道就是双向的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>C语言指针函数</title>
+    <url>/2022/05/03/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>函数指针就是指向函数首地址的函数变量</p>
+<p>定义函数指针</p>
+<p>方法：用（*标识符）替换 函数名，剩下照抄</p>
+<p>一般会去掉形参名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Max(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line">int (*p)(int ,int )=NULL;</span><br></pre></td></tr></table></figure>
 
-<p>Netty框架完整流程</p>
-<p><img src="/images3/image-20220717171319212.png" alt="image-20220717171319212"></p>
-<p><img src="/images3/image-20220717171204477.png" alt="image-20220717171204477"></p>
-<h4 id="图片梳理"><a href="#图片梳理" class="headerlink" title="图片梳理"></a>图片梳理</h4><h5 id="传统阻塞IO模式"><a href="#传统阻塞IO模式" class="headerlink" title="传统阻塞IO模式"></a>传统阻塞IO模式</h5><p><img src="/images3/image-20220717165722768.png" alt="image-20220717165722768"></p>
-<h5 id="传统阻塞IO模式的改进（Reactor模式）"><a href="#传统阻塞IO模式的改进（Reactor模式）" class="headerlink" title="传统阻塞IO模式的改进（Reactor模式）"></a>传统阻塞IO模式的改进（Reactor模式）</h5><p><img src="/images3/image-20220717165820712.png" alt="image-20220717165820712"></p>
-<p><img src="/images3/image-20220717165927312.png" alt="image-20220717165927312"></p>
-<p>根据 <code>Reactor</code> 的数量和处理资源池线程的数量不同，有 <code>3</code> 种典型的实现</p>
-<ol>
-<li>单 <code>Reactor</code> 单线程</li>
-<li>单 <code>Reactor</code> 多线程</li>
-<li>主从 <code>Reactor</code> 多线程</li>
-</ol>
-<p><img src="/images3/image-20220717170036351.png" alt="image-20220717170036351"></p>
-<p><img src="/images3/image-20220717170120890.png" alt="image-20220717170120890"></p>
-<p><img src="/images3/image-20220717170245153.png" alt="image-20220717170245153"></p>
-<h4 id="单-Reactor-多线程"><a href="#单-Reactor-多线程" class="headerlink" title="单 Reactor 多线程"></a>单 <code>Reactor</code> 多线程</h4><p><img src="/images3/image-20220717170212830.png" alt="image-20220717170212830"></p>
-<p><img src="/images3/image-20220717170338964.png" alt="image-20220717170338964"></p>
-<h4 id="主从-Reactor-多线程"><a href="#主从-Reactor-多线程" class="headerlink" title="主从 Reactor 多线程"></a>主从 <code>Reactor</code> 多线程</h4><p><img src="/images3/image-20220717170446707.png" alt="image-20220717170446707"></p>
-<p><img src="/images3/image-20220717170537574.png" alt="image-20220717170537574"></p>
-<p><img src="/images3/image-20220717170628818.png" alt="image-20220717170628818"></p>
-<h3 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h3><p><img src="/images3/image-20220717170743390.png" alt="image-20220717170743390"></p>
-<p><img src="/images3/image-20220717171029245.png" alt="image-20220717171029245"></p>
-<p><img src="/images3/image-20220717170945107.png" alt="image-20220717170945107"></p>
-<p><img src="/images3/image-20220717164751092.png" alt="image-20220717171319212"></p>
-<p><img src="/images3/image-20220717171204477.png" alt="image-20220717171204477"></p>
+<p>实例</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int Max(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line">int Min(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return a&gt;b?b:a;</span><br><span class="line">&#125;</span><br><span class="line">int Sum(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">    return a+b;</span><br><span class="line">&#125;</span><br><span class="line">void printData(int (*pp)(int ,int ),int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;%d\n&quot;,pp(a,b));</span><br><span class="line">&#125;</span><br><span class="line">void testFuntionPoint()</span><br><span class="line">&#123;</span><br><span class="line">    void (*pD)(int (*)(int,int),int,int)=printData;</span><br><span class="line">    pD(Max,1,2);</span><br><span class="line">    pD(Min,1,2);</span><br><span class="line">    pD(Sum,1,2);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    testFuntionPoint();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>与Java多线程相似，具体详见</p>
+<p>设计一个指针函数，其功能：传入一个字符串参数，以及一套算法，使得源字符串经过算法进行加密后，函数返回一个字符串数组，数组第一个元素是原文，第二个元素是密文。要求加密算法是实现过程由该方法的调用者给出，算法要求传入一个字符串类型的参数，返回值也是字符串类型。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">char modify(char a)</span><br><span class="line">&#123;</span><br><span class="line">    return a=a+2;</span><br><span class="line">&#125;</span><br><span class="line">char returnData(char (*pp)(char ),char b)</span><br><span class="line">&#123;</span><br><span class="line">    return pp(b);</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    char *parameter = (char *) malloc(5);</span><br><span class="line">    printf(&quot;请输入原文\n&quot;);</span><br><span class="line">    /*</span><br><span class="line">     * 开辟5字节空间，如果不足自动扩容1000</span><br><span class="line">     */</span><br><span class="line">    long long int parameterSize=5,i;</span><br><span class="line">    for (i=0;parameter[i-1]!=&#x27;\n&#x27;;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (i==parameterSize)</span><br><span class="line">        &#123;</span><br><span class="line">            realloc(parameter, parameterSize);</span><br><span class="line">            parameterSize += 1000;</span><br><span class="line">        &#125;</span><br><span class="line">        /*</span><br><span class="line">         * 动态分配空间</span><br><span class="line">         */</span><br><span class="line">        parameter[i]=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    parameter[i]=&#x27;\0&#x27;;</span><br><span class="line">    char (*pD)(char (*)(char),char)=returnData;</span><br><span class="line">    parameter[1]=pD(modify,parameter[1]);</span><br><span class="line">    printf(&quot;%s&quot;,parameter);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方式2</p>
+<p>头文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#ifndef SMART_HELMET_ALGOR_H</span><br><span class="line">#define SMART_HELMET_ALGOR_H</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">char *Algor(const char *parameter, char **passwd) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while (parameter[i] != &#x27;\0&#x27;) &#123;</span><br><span class="line">        passwd[1][i] = (char)(parameter[i] + 3);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    passwd[1][i] = &#x27;\0&#x27;;</span><br><span class="line">    return passwd[1];</span><br><span class="line">&#125;</span><br><span class="line">#endif //SMART_HELMET_ALGOR_H</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;malloc.h&gt;</span><br><span class="line">#include &quot;Algor.h&quot; //导入算法代码头文件</span><br><span class="line"></span><br><span class="line">char **Fun(char *parameter, char *(*ptr)(char *, char **)) &#123;</span><br><span class="line">    char **passwd = (char **) malloc(2);</span><br><span class="line">    passwd[0] = (char *) malloc(strlen(parameter)*sizeof (char));</span><br><span class="line">    passwd[1] = (char *) malloc(strlen(parameter)*sizeof (char));</span><br><span class="line">    passwd[0] = parameter;</span><br><span class="line">    passwd[1] = (*ptr)(parameter, passwd); //将加密算法传入</span><br><span class="line">    return passwd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    char *parameter = (char *) malloc(5);</span><br><span class="line">    printf(&quot;请输入原文&quot;);</span><br><span class="line">    //scanf(&quot;%s&quot;, parameter);</span><br><span class="line">    /*</span><br><span class="line">     * 开辟1001空间，如果不足自动扩容1001</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    int i=0;</span><br><span class="line">    for (int parameterSize=5;parameter[i-1]!=&#x27;\n&#x27;;i++)&#123;</span><br><span class="line">        if (i==5) &#123;</span><br><span class="line">            realloc(parameter, 5);</span><br><span class="line">            parameterSize += 5;</span><br><span class="line">        &#125;</span><br><span class="line">        /*</span><br><span class="line">         * 动态分配空间</span><br><span class="line">         */</span><br><span class="line">        parameter[i]=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    parameter[i]=&#x27;\0&#x27;;</span><br><span class="line">    /*</span><br><span class="line">     * parameter 原码</span><br><span class="line">     */</span><br><span class="line">    char *((*ptr)(char *, char **)) = (char *(*)(char *, char **)) Algor;</span><br><span class="line">    char **ans = Fun(parameter, ptr);</span><br><span class="line"></span><br><span class="line">    printf(&quot;%s\n%s\n&quot;, ans[0], ans[1]);</span><br><span class="line">    /*</span><br><span class="line">     * ans[0]为原码</span><br><span class="line">     * ans[1]为密码</span><br><span class="line">     */</span><br><span class="line">    free(parameter);</span><br><span class="line">    free(ans);</span><br><span class="line">    //释放空间</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>嵌入式</category>
       </categories>
       <tags>
-        <tag>Java</tag>
+        <tag>嵌入式</tag>
       </tags>
   </entry>
   <entry>
@@ -9208,38 +9259,6 @@ getDeclaredConstructor (Class<?>… parameterTypes)</p>
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C语言指针函数</title>
-    <url>/2022/05/03/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>函数指针就是指向函数首地址的函数变量</p>
-<p>定义函数指针</p>
-<p>方法：用（*标识符）替换 函数名，剩下照抄</p>
-<p>一般会去掉形参名</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Max(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line">int (*p)(int ,int )=NULL;</span><br></pre></td></tr></table></figure>
-
-<p>实例</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int Max(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line">int Min(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return a&gt;b?b:a;</span><br><span class="line">&#125;</span><br><span class="line">int Sum(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">    return a+b;</span><br><span class="line">&#125;</span><br><span class="line">void printData(int (*pp)(int ,int ),int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;%d\n&quot;,pp(a,b));</span><br><span class="line">&#125;</span><br><span class="line">void testFuntionPoint()</span><br><span class="line">&#123;</span><br><span class="line">    void (*pD)(int (*)(int,int),int,int)=printData;</span><br><span class="line">    pD(Max,1,2);</span><br><span class="line">    pD(Min,1,2);</span><br><span class="line">    pD(Sum,1,2);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    testFuntionPoint();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>与Java多线程相似，具体详见</p>
-<p>设计一个指针函数，其功能：传入一个字符串参数，以及一套算法，使得源字符串经过算法进行加密后，函数返回一个字符串数组，数组第一个元素是原文，第二个元素是密文。要求加密算法是实现过程由该方法的调用者给出，算法要求传入一个字符串类型的参数，返回值也是字符串类型。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">char modify(char a)</span><br><span class="line">&#123;</span><br><span class="line">    return a=a+2;</span><br><span class="line">&#125;</span><br><span class="line">char returnData(char (*pp)(char ),char b)</span><br><span class="line">&#123;</span><br><span class="line">    return pp(b);</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    char *parameter = (char *) malloc(5);</span><br><span class="line">    printf(&quot;请输入原文\n&quot;);</span><br><span class="line">    /*</span><br><span class="line">     * 开辟5字节空间，如果不足自动扩容1000</span><br><span class="line">     */</span><br><span class="line">    long long int parameterSize=5,i;</span><br><span class="line">    for (i=0;parameter[i-1]!=&#x27;\n&#x27;;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (i==parameterSize)</span><br><span class="line">        &#123;</span><br><span class="line">            realloc(parameter, parameterSize);</span><br><span class="line">            parameterSize += 1000;</span><br><span class="line">        &#125;</span><br><span class="line">        /*</span><br><span class="line">         * 动态分配空间</span><br><span class="line">         */</span><br><span class="line">        parameter[i]=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    parameter[i]=&#x27;\0&#x27;;</span><br><span class="line">    char (*pD)(char (*)(char),char)=returnData;</span><br><span class="line">    parameter[1]=pD(modify,parameter[1]);</span><br><span class="line">    printf(&quot;%s&quot;,parameter);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>方式2</p>
-<p>头文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#ifndef SMART_HELMET_ALGOR_H</span><br><span class="line">#define SMART_HELMET_ALGOR_H</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">char *Algor(const char *parameter, char **passwd) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while (parameter[i] != &#x27;\0&#x27;) &#123;</span><br><span class="line">        passwd[1][i] = (char)(parameter[i] + 3);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    passwd[1][i] = &#x27;\0&#x27;;</span><br><span class="line">    return passwd[1];</span><br><span class="line">&#125;</span><br><span class="line">#endif //SMART_HELMET_ALGOR_H</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;malloc.h&gt;</span><br><span class="line">#include &quot;Algor.h&quot; //导入算法代码头文件</span><br><span class="line"></span><br><span class="line">char **Fun(char *parameter, char *(*ptr)(char *, char **)) &#123;</span><br><span class="line">    char **passwd = (char **) malloc(2);</span><br><span class="line">    passwd[0] = (char *) malloc(strlen(parameter)*sizeof (char));</span><br><span class="line">    passwd[1] = (char *) malloc(strlen(parameter)*sizeof (char));</span><br><span class="line">    passwd[0] = parameter;</span><br><span class="line">    passwd[1] = (*ptr)(parameter, passwd); //将加密算法传入</span><br><span class="line">    return passwd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    char *parameter = (char *) malloc(5);</span><br><span class="line">    printf(&quot;请输入原文&quot;);</span><br><span class="line">    //scanf(&quot;%s&quot;, parameter);</span><br><span class="line">    /*</span><br><span class="line">     * 开辟1001空间，如果不足自动扩容1001</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    int i=0;</span><br><span class="line">    for (int parameterSize=5;parameter[i-1]!=&#x27;\n&#x27;;i++)&#123;</span><br><span class="line">        if (i==5) &#123;</span><br><span class="line">            realloc(parameter, 5);</span><br><span class="line">            parameterSize += 5;</span><br><span class="line">        &#125;</span><br><span class="line">        /*</span><br><span class="line">         * 动态分配空间</span><br><span class="line">         */</span><br><span class="line">        parameter[i]=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    parameter[i]=&#x27;\0&#x27;;</span><br><span class="line">    /*</span><br><span class="line">     * parameter 原码</span><br><span class="line">     */</span><br><span class="line">    char *((*ptr)(char *, char **)) = (char *(*)(char *, char **)) Algor;</span><br><span class="line">    char **ans = Fun(parameter, ptr);</span><br><span class="line"></span><br><span class="line">    printf(&quot;%s\n%s\n&quot;, ans[0], ans[1]);</span><br><span class="line">    /*</span><br><span class="line">     * ans[0]为原码</span><br><span class="line">     * ans[1]为密码</span><br><span class="line">     */</span><br><span class="line">    free(parameter);</span><br><span class="line">    free(ans);</span><br><span class="line">    //释放空间</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>嵌入式</tag>
       </tags>
   </entry>
   <entry>
@@ -9514,34 +9533,6 @@ getDeclaredConstructor (Class<?>… parameterTypes)</p>
       </tags>
   </entry>
   <entry>
-    <title>自定义头文件格式</title>
-    <url>/2022/05/03/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<p>#ifndef…#endif属于预处理功能中三种(<a href="https://so.csdn.net/so/search?q=%E5%AE%8F%E5%AE%9A%E4%B9%89&spm=1001.2101.3001.7020">宏定义</a>，文件包含和条件编译)中的第三种—-条件编译</p>
-<h5 id="1-一般格式"><a href="#1-一般格式" class="headerlink" title="1.一般格式"></a>1.一般格式</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#ifndef _STDIO_H</span><br><span class="line">\#define _STDIO_H</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
-
-<p>在理论上来说可以是自由命名的，但每个头文件的这个“标识”都应该是唯一的。标识的命名规则一般是头文件名全大写，前面加下划线，并把文件名中的“.”也变成下划线，如：stdio.h</p>
-<h5 id="2-作用-重复引用的两种情况"><a href="#2-作用-重复引用的两种情况" class="headerlink" title="2.作用(重复引用的两种情况)"></a>2.作用(重复引用的两种情况)</h5><p>如果h文件里只是进行了声明工作，即使不使用#ifndef宏定义，一个c文件多次包含同一个h文件也不会报错。例如：一个工程里面，同时有a.cpp,b.h,c.h,d.h。其中，a.cpp包含了b.h和c.h的头文件，b.h和c.h又都包含了d.h的头文件，那么编译过程就会造成c.h头文件的重复引用(头文件重复引用只是增加了编译工作的工作量，不会引起太大的问题，仅仅是编译效率低一些)。这种情况下，如果头文件加了#ifndef，会避免重复编译，但不加的话也仍旧是不会报错的。</p>
-<p>如果在h文件中定义了全局变量，一个c文件包含同一个h文件多次，例如：一个工程里面，同时有a.cpp,b.h,c.h,d.h。其中，a.cpp包含了b.h和c.h的头文件，b.h和c.h又都定义了int m(虽然这种方式不被推荐，但确实是C规范允许的)，这样m变量会被编译两次，如果头文件不加#ifndef，那么编译过程会出现变量重复定义的错误。如果头文件加了#ifndef，则不会出现这种错.</p>
-<h5 id="3-条件编译的几种形式-百度"><a href="#3-条件编译的几种形式-百度" class="headerlink" title="3.条件编译的几种形式(百度)"></a>3.条件编译的几种形式(百度)</h5><p>“ 条件编译”命令允许对程序中的内容选择性地编译，即可以根据一定的条件选择是否编译。条件编译的命令主要有以下几种 ：</p>
-<p>形式1</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#ifndef 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#else</span><br><span class="line">程序段 2</span><br><span class="line">\#endif</span><br><span class="line">它的作用是当 “ 标识符”没有由# define定义过了。则编译“ 程序段 1 ” 。 否则编译“ 程序段 2 ” 。其中如果不需要编译“ 程序段 2 ”。则上述形式可以变换为：</span><br><span class="line">\#ifndef 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
-
-<p>形式2：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#ifndef 标识符</span><br><span class="line">\# define 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#else</span><br><span class="line">程序段 2</span><br><span class="line">\#endif</span><br><span class="line">它的作用是当 “ 标识符 没有由# define定义过。 则编译“程序段 1”。否则编译“程序段 2” 。同样当无“ 程序段2 ”时。(作用与形式1完全相同)则上述形式变换为：</span><br><span class="line">\# ifndef 标识符</span><br><span class="line">\# define 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
-
-<p>形式3：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#if 表达式</span><br><span class="line">程序段 1</span><br><span class="line">\#else</span><br><span class="line">程序段 2</span><br><span class="line">\#endif</span><br><span class="line">它的作用是 当“表达式”值为真时。编译程序段1。否则则编译程序段2。同样 当无程序段 2时，则上述形式变换为 ：</span><br><span class="line">\#if 表达式</span><br><span class="line">程序段 1</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
-
-<p>以上三种形式的条件编译预处理结构都可以嵌套使用。 当#else后嵌套 #if 时,可以使用预处理命令 # elif ， 它相当于 #else#if。在程序中使用条件编译主要是为了方便程序的调试和移植。</p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>嵌入式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算机网络结构模型</title>
     <url>/2022/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<h1 id="计算机网络结构模型"><a href="#计算机网络结构模型" class="headerlink" title="计算机网络结构模型"></a>计算机网络结构模型</h1><h3 id="OSI七层参考模型"><a href="#OSI七层参考模型" class="headerlink" title="OSI七层参考模型"></a>OSI七层参考模型</h3><p>国际标准化组织（ISO）1984年颁布了开放系统互连参考模型（OSI），一个开放式体系结构，将架构分为7层。</p>
@@ -9787,6 +9778,34 @@ getDeclaredConstructor (Class<?>… parameterTypes)</p>
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自定义头文件格式</title>
+    <url>/2022/05/03/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<p>#ifndef…#endif属于预处理功能中三种(<a href="https://so.csdn.net/so/search?q=%E5%AE%8F%E5%AE%9A%E4%B9%89&spm=1001.2101.3001.7020">宏定义</a>，文件包含和条件编译)中的第三种—-条件编译</p>
+<h5 id="1-一般格式"><a href="#1-一般格式" class="headerlink" title="1.一般格式"></a>1.一般格式</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#ifndef _STDIO_H</span><br><span class="line">\#define _STDIO_H</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
+
+<p>在理论上来说可以是自由命名的，但每个头文件的这个“标识”都应该是唯一的。标识的命名规则一般是头文件名全大写，前面加下划线，并把文件名中的“.”也变成下划线，如：stdio.h</p>
+<h5 id="2-作用-重复引用的两种情况"><a href="#2-作用-重复引用的两种情况" class="headerlink" title="2.作用(重复引用的两种情况)"></a>2.作用(重复引用的两种情况)</h5><p>如果h文件里只是进行了声明工作，即使不使用#ifndef宏定义，一个c文件多次包含同一个h文件也不会报错。例如：一个工程里面，同时有a.cpp,b.h,c.h,d.h。其中，a.cpp包含了b.h和c.h的头文件，b.h和c.h又都包含了d.h的头文件，那么编译过程就会造成c.h头文件的重复引用(头文件重复引用只是增加了编译工作的工作量，不会引起太大的问题，仅仅是编译效率低一些)。这种情况下，如果头文件加了#ifndef，会避免重复编译，但不加的话也仍旧是不会报错的。</p>
+<p>如果在h文件中定义了全局变量，一个c文件包含同一个h文件多次，例如：一个工程里面，同时有a.cpp,b.h,c.h,d.h。其中，a.cpp包含了b.h和c.h的头文件，b.h和c.h又都定义了int m(虽然这种方式不被推荐，但确实是C规范允许的)，这样m变量会被编译两次，如果头文件不加#ifndef，那么编译过程会出现变量重复定义的错误。如果头文件加了#ifndef，则不会出现这种错.</p>
+<h5 id="3-条件编译的几种形式-百度"><a href="#3-条件编译的几种形式-百度" class="headerlink" title="3.条件编译的几种形式(百度)"></a>3.条件编译的几种形式(百度)</h5><p>“ 条件编译”命令允许对程序中的内容选择性地编译，即可以根据一定的条件选择是否编译。条件编译的命令主要有以下几种 ：</p>
+<p>形式1</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#ifndef 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#else</span><br><span class="line">程序段 2</span><br><span class="line">\#endif</span><br><span class="line">它的作用是当 “ 标识符”没有由# define定义过了。则编译“ 程序段 1 ” 。 否则编译“ 程序段 2 ” 。其中如果不需要编译“ 程序段 2 ”。则上述形式可以变换为：</span><br><span class="line">\#ifndef 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
+
+<p>形式2：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#ifndef 标识符</span><br><span class="line">\# define 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#else</span><br><span class="line">程序段 2</span><br><span class="line">\#endif</span><br><span class="line">它的作用是当 “ 标识符 没有由# define定义过。 则编译“程序段 1”。否则编译“程序段 2” 。同样当无“ 程序段2 ”时。(作用与形式1完全相同)则上述形式变换为：</span><br><span class="line">\# ifndef 标识符</span><br><span class="line">\# define 标识符</span><br><span class="line">程序段 1</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
+
+<p>形式3：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#if 表达式</span><br><span class="line">程序段 1</span><br><span class="line">\#else</span><br><span class="line">程序段 2</span><br><span class="line">\#endif</span><br><span class="line">它的作用是 当“表达式”值为真时。编译程序段1。否则则编译程序段2。同样 当无程序段 2时，则上述形式变换为 ：</span><br><span class="line">\#if 表达式</span><br><span class="line">程序段 1</span><br><span class="line">\#endif</span><br></pre></td></tr></table></figure>
+
+<p>以上三种形式的条件编译预处理结构都可以嵌套使用。 当#else后嵌套 #if 时,可以使用预处理命令 # elif ， 它相当于 #else#if。在程序中使用条件编译主要是为了方便程序的调试和移植。</p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
       </tags>
   </entry>
   <entry>
