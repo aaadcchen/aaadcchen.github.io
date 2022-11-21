@@ -613,108 +613,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HTML入门基础笔记(二)</title>
-    <url>/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<p>##第二天<br>##表格<br>###表格的主要作用<br>    1.表格主要用于显示、展示数据，因为它可以让数据显示的非常的规整，可读性非常好。特别是后台展示数据的时候，能够熟练运用表格就显得很重要。一个清爽简约的表格能够把繁杂的数据表现得很有条理</p>
-<pre><code>2.表格不是用来布局页面的,而是用来展示数据的。
-</code></pre>
-<p>​    <img src="/images/%E8%A1%A8%E6%A0%BC1.png"><br>​    3.表格的具体用法：<br>​        </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;table&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;单元格内的文字&lt;/td&gt;</span><br><span class="line">                ...</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            ...</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">​        1.&lt;table&gt; &lt;/table&gt; 是用于定义表格的标签。</span><br><span class="line">​        2.&lt;tr&gt; &lt;/tr&gt; 标签用于定义表格中的行，必须嵌套在 &lt;table&gt; &lt;/table&gt;标签中。</span><br><span class="line">​        3.&lt;td&gt; &lt;/td&gt; 用于定义表格中的单元格，必须嵌套在&lt;tr&gt;&lt;/tr&gt;标签中。</span><br><span class="line">​        4.字母 td 指表格数据（table data），即数据单元格的内容。</span><br><span class="line">###表头单元格标签：</span><br><span class="line">​        表头标签的具体实现：</span><br><span class="line">         &lt;table&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;th&gt;姓名&lt;/th&gt;</span><br><span class="line">                ...</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            ...</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">​        1.一般表头单元格位于表格的第一行或第一列，表头单元格里面的文本内容加粗居中显示.</span><br><span class="line">​            &lt;th&gt; 标签表示 HTML 表格的表头部分(table head 的缩写)</span><br><span class="line">​        2.一般表头单元格位于表格的第一行或第一列，表头单元格里面的文本内容加粗居中显示.</span><br><span class="line">​            &lt;th&gt; 标签表示 HTML 表格的表头部分(table head 的缩写)</span><br></pre></td></tr></table></figure>
-
-<p>​    5.表头单元格也是单元格，常用于表格第一行突出重要性，表头单元格里面的文字会加粗居中<br>###表格属性：<br>​    1.表格标签这部分属性我们实际开发我们不常用，后面通过 CSS 来设置.<br>​        <img src="/images/%E8%A1%A8%E6%A0%BC%E5%B1%9E%E6%80%A7.png"><br>​    完成下面综合案例：</p>
-<p>​    <img src="/images/%E8%A1%A8%E6%A0%BC%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.png"></p>
-<p>​    <strong>思路：</strong></p>
-<p><strong>先制作表格的结构.</strong>  </p>
-<p>1.第一行里面是 th 表头单元格</p>
-<p>2.第二行开始里面是 td 普通单元格单元格里面可以放任何元素</p>
-<p>3.文字链接图片等都可以</p>
-<p><strong>后书写表格属性</strong></p>
-<p>1.用到宽度高度边框cellpadding 和 cellspacing</p>
-<p>2.表格浏览器中对齐 align<br>###表格结构标签：<br>    使用场景:<br>        因为表格可能很长,为了更好的表示表格的语义，可以将表格分割成 表格头部和表格主体两大部分.<br>    在表格标签中，分别用：<thead>标签 表格的头部区域、<tbody>标签 表格的主体区域. 这样可以更好的分清表格结构。</p>
-<p><img src="/images/%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84%E6%A0%87%E7%AD%BE.png"></p>
-<p><strong>总结:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. &lt;thead&gt;&lt;/thead&gt;：用于定义表格的头部。&lt;thead&gt; 内部必须拥有 &lt;tr&gt; 标签。 一般是位于第一行。</span><br><span class="line">        2. &lt;tbody&gt;&lt;/tbody&gt;：用于定义表格的主体，主要用于放数据本体 。</span><br><span class="line">        3.  以上标签都是放在 &lt;table&gt;&lt;/table&gt; 标签中。</span><br></pre></td></tr></table></figure>
-
-<p>​        ###合并单元格：<br>​        特殊情况下,可以把多个单元格合并为一个单元格,  这里同学们会最简单的合并单元格即可.<br>​        1.合并单元格方式<br>​        2.目标单元格<br>​        3.合并单元格的步骤<br>​        如下图：</p>
-<p><img src="/images/%E5%90%88%E5%B9%B6%E5%8D%95%E5%85%83%E6%A0%BC.png"></p>
-<p><strong>合并单元格方式：</strong></p>
-<p><strong>跨行合并</strong>：rowspan&#x3D;”合并单元格的个数”     </p>
-<p>​    最上侧单元格为目标单元格, 写合并代码</p>
-<p> <strong>跨列合并</strong>：colspan&#x3D;”合并单元格的个数”</p>
-<p>​    最左侧单元格为目标单元格, 写合并代码</p>
-<p><strong>合并单元格三步曲：</strong></p>
-<p>先确定是跨行还是跨列合并。</p>
-<p>找到目标单元格. 写上合并方式 &#x3D; 合并的单元格数量。</p>
-<p>比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;。删除多余的单元格。</span><br></pre></td></tr></table></figure>
-
-<p><strong>表格总结</strong></p>
-<p>​    表格学习整体可以分为三大部分:</p>
-<p><strong>表格的相关标签</strong></p>
-<p>​    table   thead  body  tr  th  td </p>
-<p><strong>表格的相关属性</strong></p>
-<p>​    cellspacing    cellpadding     width  height  border </p>
-<p><strong>合并单元格</strong></p>
-<p>​      rowspan   collspan<br>##列表<br>​    表格是用来显示数据的，那么列表就是用来布局的。<br>​    列表最大的特点就是整齐、整洁、有序，它作为布局会更加自由和方便。<br>​    根据使用情景不同，列表可以分为三大类：无序列表、有序列表和自定义列表。<br>###无序：</p>
-<p>​    <img src="/images/%E6%97%A0%E5%BA%8F.png"></p>
-<p><code>&lt;ul&gt;</code> 标签表示 HTML 页面中项目的无序列表，一般会以项目符号呈现列表项，而列表项使用 <li> 标签定义。无序列表的基本语法格式如下：</p>
-   <ul> 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;li&gt;列表项1&lt;/li&gt;   &lt;li&gt;列表项2&lt;/li&gt;   &lt;li&gt;列表项3&lt;/li&gt;   ... </span><br><span class="line"></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li><p>无序列表的各个列表项之间没有顺序级别之分，是并列的。</p>
-</li>
-<li><ul></ul> 中只能嵌套 <li></li>，直接在 <ul></ul> 标签中输入其他标签或者文字的做法是不被允许的。
-</li>
-<li><pre><code>&lt;li&gt; 与 &lt;/li&gt; 之间相当于一个容器，可以容纳所有元素。
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. 无序列表会带有自己的样式属性，但在实际使用时，我们会使用 CSS 来设置。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###有序：</span><br><span class="line"></span><br><span class="line">​	![](/images/有序.png)</span><br><span class="line"></span><br><span class="line">有序列表即为有排列顺序的列表，其各个列表项会按照一定的顺序排列定义。在 HTML 标签中，&lt;ol&gt; 标签用于定义有序列表，列表排序以数字来显示，并且使用 &lt;li&gt; 标签来定义列表项。有序列表的基本语法格式如下：</span><br><span class="line"></span><br><span class="line">&lt;ol&gt;   &lt;li&gt;列表项1&lt;/li&gt;   &lt;li&gt;列表项2&lt;/li&gt;   &lt;li&gt;列表项3&lt;/li&gt;   ... &lt;/ol&gt;</span><br><span class="line"></span><br><span class="line">1. &lt;ol&gt;&lt;/ol&gt;中只能嵌套&lt;li&gt;&lt;/li&gt;，直接在&lt;ol&gt;&lt;/ol&gt;标签中输入其他标签或者文字的做法是不被允许的。</span><br><span class="line"></span><br><span class="line">2. ```</span><br><span class="line">   &lt;li&gt; 与 &lt;/li&gt;之间相当于一个容器，可以容纳所有元素。</span><br></pre></td></tr></table></figure>
-
-</code></pre>
-</li>
-<li><p>有序列表会带有自己样式属性，但在实际使用时，我们会使用 CSS 来设置。</p>
-</li>
-</ol>
-<p>###自定义：</p>
-<p><img src="/images/%E8%87%AA%E5%AE%9A%E4%B9%89.png"></p>
-<p>自定义列表的使用场景:自定义列表常用于对术语或名词进行解释和描述，定义列表的列表项前没有任何项目符号。在 HTML 标签中，<dl> 标签用于定义描述列表（或定义列表），该标签会与 <dt>（定义项目&#x2F;名字）和 <dd>（描述每一个项目&#x2F;名字）一起使用。语法如下：</p>
- <dl>   <dt>名词1</dt>   <dd>名词1解释1</dd>   <dd>名词1解释2</dd> </dl>
-
-<p>###列表总结</p>
-<p><img src="/images/%E5%88%97%E8%A1%A8%E6%80%BB%E7%BB%93.png"></p>
-<p>##表单<br>现实中的表单：<br><img src="/images/%E8%A1%A8%E5%8D%95%E9%A1%B5%E9%9D%A2.png"></p>
-<p>###为什么需要表单：<br>    使用表单目的是为了收集用户信息。<br>    在我们网页中， 我们也需要跟用户进行交互，收集用户资料，此时就需要表单。<br>###表单的组成：<br>    在 HTML 中，一个完整的表单通常由表单域、表单控件（也称为表单元素）和 提示信息3个部分构成。<br>###表单域：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 表单域是一个包含表单元素的区域。</span><br><span class="line">    在 HTML 标签中， &lt;form&gt; 标签用于定义表单域，以实现用户信息的收集和传递。</span><br><span class="line">    &lt;form&gt; 会把它范围内的表单元素信息提交给服务器.</span><br><span class="line">    实现代码：</span><br><span class="line">    &lt;form action=“url地址” method=“提交方式” name=“表单域名称&quot;&gt;各种表单元素控件&lt;/form&gt;</span><br><span class="line">###表单域的常用属性：</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/%E8%A1%A8%E5%8D%95%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7.png"></p>
-<p>基础班来说,我们暂时不用表单域提交数据,只需要写上 form 标签即可.  就业班等学习服务器编程阶段会重新讲解.<br>这里只需要记住两点:<br>1.在我们写表单元素之前,应该有个表单域把他们进行包含.<br>2.表单域是 form标签.</p>
-<p>###表单控件(表单元素)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;input&gt; 表单元素</span><br><span class="line"></span><br><span class="line">在英文单词中，input 是输入的意思，而在表单元素中 &lt;input&gt; 标签用于收集用户信息。在 &lt;input&gt; 标签中，包含一个 type 属性，根据不同的 type 属性值，输入字段拥有很多种形式（可以是文本字段、复选框、掩码后的文本控件、单选按钮、按钮等）。</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;属性值&quot;  /&gt;</span><br><span class="line"></span><br><span class="line">&lt;input /&gt; 标签为单标签 type 属性设置不同的属性值用来指定不同的控件类型</span><br></pre></td></tr></table></figure>
-
-<p>type 属性的属性值及其描述如下：</p>
-<p><img src="/images/%E8%A1%A8%E5%8D%95%E6%A0%87%E7%AD%BE.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">除 type 属性外，&lt;input&gt;标签还有其他很多属性，其常用属性如下：</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/%E8%A1%A8%E5%8D%95%E5%85%B6%E4%BB%96%E5%B1%9E%E6%80%A7.png"></p>
-<p>###<label> 标签</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;label&gt; 标签为 input 元素定义标注（标签）。</span><br><span class="line">&lt;label&gt; 标签用于绑定一个表单元素, 当点击&lt;label&gt; 标签内的文本时，浏览器就会自动将焦点(光标)转到或者选择对应的表单元素上,用来增加用户体验.</span><br><span class="line">语法：</span><br><span class="line">     &lt;label for=&quot;sex&quot;&gt;男&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot;  id=&quot;sex&quot; /&gt;</span><br><span class="line">    核心： &lt;label&gt; 标签的 for 属性应当与相关元素的 id 属性相同。</span><br><span class="line"></span><br><span class="line">###&lt;select&gt; 表单元素</span><br><span class="line">使用场景: 在页面中，如果有多个选项让用户选择，并且想要节约页面空间时，我们可以使用&lt;select&gt;标签控件定义下拉列表。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法： </span><br><span class="line"></span><br><span class="line">&lt;select&gt;</span><br><span class="line">   &lt;option&gt;选项1&lt;/option&gt;</span><br><span class="line">   &lt;option&gt;选项2&lt;/option&gt;</span><br><span class="line">   &lt;option&gt;选项3&lt;/option&gt;</span><br><span class="line">   ...</span><br><span class="line"> &lt;/select&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">###&lt;textarea&gt; 表单元素</span><br><span class="line"></span><br><span class="line">1. 使用场景: 当用户输入内容较多的情况下，我们就不能使用文本框表单了，此时我们可以使用 &lt;textarea&gt; 标签。</span><br><span class="line">2. 在表单元素中，&lt;textarea&gt; 标签是用于定义多行文本输入的控件。</span><br><span class="line">3. 使用多行文本输入控件，可以输入更多的文字，该控件常见于留言板，评论。</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line"></span><br><span class="line">​	&lt;textarea rows=&quot;3&quot; cols=&quot;20&quot;&gt;   文本内容 &lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">通过 &lt;textarea&gt; 标签可以轻松地创建多行文本输入框。cols=“每行中的字符数” ，rows=“显示的行数”，</span><br><span class="line"></span><br><span class="line">我们在实际开发中不会使用，都是用 CSS 来改变大小。</span><br><span class="line"></span><br><span class="line">表单元素我们学习了三大组  input 输入表单元素  select 下拉表单元素  textarea 文本域表单元素.这三组表单元素都应该包含在form表单域里面,并且有 name 属性.</span><br><span class="line"></span><br><span class="line">具体代码：</span><br><span class="line"></span><br><span class="line">​	&lt;form&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;input type=“text &quot; name=“username”&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;select name=&quot;jiguan&quot;&gt;  </span><br><span class="line"></span><br><span class="line">​		 &lt;option&gt;北京&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;/select&gt; </span><br><span class="line"></span><br><span class="line">​		&lt;textarea name= &quot;message&quot;&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">​	&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-
-<p>有三个名字非常相似的标签:表单域   form    使用场景:  提交区域内表单元素给后台服务器文件域   file      是input type 属性值   使用场景: 上传文件文本域   textarea    使用场景:  可以输入多行文字, 比如留言板  网站介绍等…4. 我们当前阶段不需要提交表单元素,所以我们只负责表单元素的外观形态即可.</p>
-]]></content>
-      <categories>
-        <category>HTML</category>
-      </categories>
-      <tags>
-        <tag>HTML</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DOS批处理命令与VBS脚本</title>
     <url>/2022/05/16/DOS%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E4%B8%8EVBS%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<h2 id="DOS的-bat做脚本"><a href="#DOS的-bat做脚本" class="headerlink" title="DOS的.bat做脚本"></a>DOS的.bat做脚本</h2><h2 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h2><ul>
@@ -962,6 +860,108 @@
       </categories>
       <tags>
         <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML入门基础笔记(二)</title>
+    <url>/2022/04/02/HTML%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p>##第二天<br>##表格<br>###表格的主要作用<br>    1.表格主要用于显示、展示数据，因为它可以让数据显示的非常的规整，可读性非常好。特别是后台展示数据的时候，能够熟练运用表格就显得很重要。一个清爽简约的表格能够把繁杂的数据表现得很有条理</p>
+<pre><code>2.表格不是用来布局页面的,而是用来展示数据的。
+</code></pre>
+<p>​    <img src="/images/%E8%A1%A8%E6%A0%BC1.png"><br>​    3.表格的具体用法：<br>​        </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;table&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;单元格内的文字&lt;/td&gt;</span><br><span class="line">                ...</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            ...</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">​        1.&lt;table&gt; &lt;/table&gt; 是用于定义表格的标签。</span><br><span class="line">​        2.&lt;tr&gt; &lt;/tr&gt; 标签用于定义表格中的行，必须嵌套在 &lt;table&gt; &lt;/table&gt;标签中。</span><br><span class="line">​        3.&lt;td&gt; &lt;/td&gt; 用于定义表格中的单元格，必须嵌套在&lt;tr&gt;&lt;/tr&gt;标签中。</span><br><span class="line">​        4.字母 td 指表格数据（table data），即数据单元格的内容。</span><br><span class="line">###表头单元格标签：</span><br><span class="line">​        表头标签的具体实现：</span><br><span class="line">         &lt;table&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;th&gt;姓名&lt;/th&gt;</span><br><span class="line">                ...</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            ...</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">​        1.一般表头单元格位于表格的第一行或第一列，表头单元格里面的文本内容加粗居中显示.</span><br><span class="line">​            &lt;th&gt; 标签表示 HTML 表格的表头部分(table head 的缩写)</span><br><span class="line">​        2.一般表头单元格位于表格的第一行或第一列，表头单元格里面的文本内容加粗居中显示.</span><br><span class="line">​            &lt;th&gt; 标签表示 HTML 表格的表头部分(table head 的缩写)</span><br></pre></td></tr></table></figure>
+
+<p>​    5.表头单元格也是单元格，常用于表格第一行突出重要性，表头单元格里面的文字会加粗居中<br>###表格属性：<br>​    1.表格标签这部分属性我们实际开发我们不常用，后面通过 CSS 来设置.<br>​        <img src="/images/%E8%A1%A8%E6%A0%BC%E5%B1%9E%E6%80%A7.png"><br>​    完成下面综合案例：</p>
+<p>​    <img src="/images/%E8%A1%A8%E6%A0%BC%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.png"></p>
+<p>​    <strong>思路：</strong></p>
+<p><strong>先制作表格的结构.</strong>  </p>
+<p>1.第一行里面是 th 表头单元格</p>
+<p>2.第二行开始里面是 td 普通单元格单元格里面可以放任何元素</p>
+<p>3.文字链接图片等都可以</p>
+<p><strong>后书写表格属性</strong></p>
+<p>1.用到宽度高度边框cellpadding 和 cellspacing</p>
+<p>2.表格浏览器中对齐 align<br>###表格结构标签：<br>    使用场景:<br>        因为表格可能很长,为了更好的表示表格的语义，可以将表格分割成 表格头部和表格主体两大部分.<br>    在表格标签中，分别用：<thead>标签 表格的头部区域、<tbody>标签 表格的主体区域. 这样可以更好的分清表格结构。</p>
+<p><img src="/images/%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84%E6%A0%87%E7%AD%BE.png"></p>
+<p><strong>总结:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. &lt;thead&gt;&lt;/thead&gt;：用于定义表格的头部。&lt;thead&gt; 内部必须拥有 &lt;tr&gt; 标签。 一般是位于第一行。</span><br><span class="line">        2. &lt;tbody&gt;&lt;/tbody&gt;：用于定义表格的主体，主要用于放数据本体 。</span><br><span class="line">        3.  以上标签都是放在 &lt;table&gt;&lt;/table&gt; 标签中。</span><br></pre></td></tr></table></figure>
+
+<p>​        ###合并单元格：<br>​        特殊情况下,可以把多个单元格合并为一个单元格,  这里同学们会最简单的合并单元格即可.<br>​        1.合并单元格方式<br>​        2.目标单元格<br>​        3.合并单元格的步骤<br>​        如下图：</p>
+<p><img src="/images/%E5%90%88%E5%B9%B6%E5%8D%95%E5%85%83%E6%A0%BC.png"></p>
+<p><strong>合并单元格方式：</strong></p>
+<p><strong>跨行合并</strong>：rowspan&#x3D;”合并单元格的个数”     </p>
+<p>​    最上侧单元格为目标单元格, 写合并代码</p>
+<p> <strong>跨列合并</strong>：colspan&#x3D;”合并单元格的个数”</p>
+<p>​    最左侧单元格为目标单元格, 写合并代码</p>
+<p><strong>合并单元格三步曲：</strong></p>
+<p>先确定是跨行还是跨列合并。</p>
+<p>找到目标单元格. 写上合并方式 &#x3D; 合并的单元格数量。</p>
+<p>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;。删除多余的单元格。</span><br></pre></td></tr></table></figure>
+
+<p><strong>表格总结</strong></p>
+<p>​    表格学习整体可以分为三大部分:</p>
+<p><strong>表格的相关标签</strong></p>
+<p>​    table   thead  body  tr  th  td </p>
+<p><strong>表格的相关属性</strong></p>
+<p>​    cellspacing    cellpadding     width  height  border </p>
+<p><strong>合并单元格</strong></p>
+<p>​      rowspan   collspan<br>##列表<br>​    表格是用来显示数据的，那么列表就是用来布局的。<br>​    列表最大的特点就是整齐、整洁、有序，它作为布局会更加自由和方便。<br>​    根据使用情景不同，列表可以分为三大类：无序列表、有序列表和自定义列表。<br>###无序：</p>
+<p>​    <img src="/images/%E6%97%A0%E5%BA%8F.png"></p>
+<p><code>&lt;ul&gt;</code> 标签表示 HTML 页面中项目的无序列表，一般会以项目符号呈现列表项，而列表项使用 <li> 标签定义。无序列表的基本语法格式如下：</p>
+   <ul> 
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;li&gt;列表项1&lt;/li&gt;   &lt;li&gt;列表项2&lt;/li&gt;   &lt;li&gt;列表项3&lt;/li&gt;   ... </span><br><span class="line"></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li><p>无序列表的各个列表项之间没有顺序级别之分，是并列的。</p>
+</li>
+<li><ul></ul> 中只能嵌套 <li></li>，直接在 <ul></ul> 标签中输入其他标签或者文字的做法是不被允许的。
+</li>
+<li><pre><code>&lt;li&gt; 与 &lt;/li&gt; 之间相当于一个容器，可以容纳所有元素。
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. 无序列表会带有自己的样式属性，但在实际使用时，我们会使用 CSS 来设置。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###有序：</span><br><span class="line"></span><br><span class="line">​	![](/images/有序.png)</span><br><span class="line"></span><br><span class="line">有序列表即为有排列顺序的列表，其各个列表项会按照一定的顺序排列定义。在 HTML 标签中，&lt;ol&gt; 标签用于定义有序列表，列表排序以数字来显示，并且使用 &lt;li&gt; 标签来定义列表项。有序列表的基本语法格式如下：</span><br><span class="line"></span><br><span class="line">&lt;ol&gt;   &lt;li&gt;列表项1&lt;/li&gt;   &lt;li&gt;列表项2&lt;/li&gt;   &lt;li&gt;列表项3&lt;/li&gt;   ... &lt;/ol&gt;</span><br><span class="line"></span><br><span class="line">1. &lt;ol&gt;&lt;/ol&gt;中只能嵌套&lt;li&gt;&lt;/li&gt;，直接在&lt;ol&gt;&lt;/ol&gt;标签中输入其他标签或者文字的做法是不被允许的。</span><br><span class="line"></span><br><span class="line">2. ```</span><br><span class="line">   &lt;li&gt; 与 &lt;/li&gt;之间相当于一个容器，可以容纳所有元素。</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+<li><p>有序列表会带有自己样式属性，但在实际使用时，我们会使用 CSS 来设置。</p>
+</li>
+</ol>
+<p>###自定义：</p>
+<p><img src="/images/%E8%87%AA%E5%AE%9A%E4%B9%89.png"></p>
+<p>自定义列表的使用场景:自定义列表常用于对术语或名词进行解释和描述，定义列表的列表项前没有任何项目符号。在 HTML 标签中，<dl> 标签用于定义描述列表（或定义列表），该标签会与 <dt>（定义项目&#x2F;名字）和 <dd>（描述每一个项目&#x2F;名字）一起使用。语法如下：</p>
+ <dl>   <dt>名词1</dt>   <dd>名词1解释1</dd>   <dd>名词1解释2</dd> </dl>
+
+<p>###列表总结</p>
+<p><img src="/images/%E5%88%97%E8%A1%A8%E6%80%BB%E7%BB%93.png"></p>
+<p>##表单<br>现实中的表单：<br><img src="/images/%E8%A1%A8%E5%8D%95%E9%A1%B5%E9%9D%A2.png"></p>
+<p>###为什么需要表单：<br>    使用表单目的是为了收集用户信息。<br>    在我们网页中， 我们也需要跟用户进行交互，收集用户资料，此时就需要表单。<br>###表单的组成：<br>    在 HTML 中，一个完整的表单通常由表单域、表单控件（也称为表单元素）和 提示信息3个部分构成。<br>###表单域：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 表单域是一个包含表单元素的区域。</span><br><span class="line">    在 HTML 标签中， &lt;form&gt; 标签用于定义表单域，以实现用户信息的收集和传递。</span><br><span class="line">    &lt;form&gt; 会把它范围内的表单元素信息提交给服务器.</span><br><span class="line">    实现代码：</span><br><span class="line">    &lt;form action=“url地址” method=“提交方式” name=“表单域名称&quot;&gt;各种表单元素控件&lt;/form&gt;</span><br><span class="line">###表单域的常用属性：</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/%E8%A1%A8%E5%8D%95%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7.png"></p>
+<p>基础班来说,我们暂时不用表单域提交数据,只需要写上 form 标签即可.  就业班等学习服务器编程阶段会重新讲解.<br>这里只需要记住两点:<br>1.在我们写表单元素之前,应该有个表单域把他们进行包含.<br>2.表单域是 form标签.</p>
+<p>###表单控件(表单元素)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;input&gt; 表单元素</span><br><span class="line"></span><br><span class="line">在英文单词中，input 是输入的意思，而在表单元素中 &lt;input&gt; 标签用于收集用户信息。在 &lt;input&gt; 标签中，包含一个 type 属性，根据不同的 type 属性值，输入字段拥有很多种形式（可以是文本字段、复选框、掩码后的文本控件、单选按钮、按钮等）。</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;属性值&quot;  /&gt;</span><br><span class="line"></span><br><span class="line">&lt;input /&gt; 标签为单标签 type 属性设置不同的属性值用来指定不同的控件类型</span><br></pre></td></tr></table></figure>
+
+<p>type 属性的属性值及其描述如下：</p>
+<p><img src="/images/%E8%A1%A8%E5%8D%95%E6%A0%87%E7%AD%BE.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">除 type 属性外，&lt;input&gt;标签还有其他很多属性，其常用属性如下：</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/%E8%A1%A8%E5%8D%95%E5%85%B6%E4%BB%96%E5%B1%9E%E6%80%A7.png"></p>
+<p>###<label> 标签</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;label&gt; 标签为 input 元素定义标注（标签）。</span><br><span class="line">&lt;label&gt; 标签用于绑定一个表单元素, 当点击&lt;label&gt; 标签内的文本时，浏览器就会自动将焦点(光标)转到或者选择对应的表单元素上,用来增加用户体验.</span><br><span class="line">语法：</span><br><span class="line">     &lt;label for=&quot;sex&quot;&gt;男&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot;  id=&quot;sex&quot; /&gt;</span><br><span class="line">    核心： &lt;label&gt; 标签的 for 属性应当与相关元素的 id 属性相同。</span><br><span class="line"></span><br><span class="line">###&lt;select&gt; 表单元素</span><br><span class="line">使用场景: 在页面中，如果有多个选项让用户选择，并且想要节约页面空间时，我们可以使用&lt;select&gt;标签控件定义下拉列表。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法： </span><br><span class="line"></span><br><span class="line">&lt;select&gt;</span><br><span class="line">   &lt;option&gt;选项1&lt;/option&gt;</span><br><span class="line">   &lt;option&gt;选项2&lt;/option&gt;</span><br><span class="line">   &lt;option&gt;选项3&lt;/option&gt;</span><br><span class="line">   ...</span><br><span class="line"> &lt;/select&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">###&lt;textarea&gt; 表单元素</span><br><span class="line"></span><br><span class="line">1. 使用场景: 当用户输入内容较多的情况下，我们就不能使用文本框表单了，此时我们可以使用 &lt;textarea&gt; 标签。</span><br><span class="line">2. 在表单元素中，&lt;textarea&gt; 标签是用于定义多行文本输入的控件。</span><br><span class="line">3. 使用多行文本输入控件，可以输入更多的文字，该控件常见于留言板，评论。</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line"></span><br><span class="line">​	&lt;textarea rows=&quot;3&quot; cols=&quot;20&quot;&gt;   文本内容 &lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">通过 &lt;textarea&gt; 标签可以轻松地创建多行文本输入框。cols=“每行中的字符数” ，rows=“显示的行数”，</span><br><span class="line"></span><br><span class="line">我们在实际开发中不会使用，都是用 CSS 来改变大小。</span><br><span class="line"></span><br><span class="line">表单元素我们学习了三大组  input 输入表单元素  select 下拉表单元素  textarea 文本域表单元素.这三组表单元素都应该包含在form表单域里面,并且有 name 属性.</span><br><span class="line"></span><br><span class="line">具体代码：</span><br><span class="line"></span><br><span class="line">​	&lt;form&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;input type=“text &quot; name=“username”&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;select name=&quot;jiguan&quot;&gt;  </span><br><span class="line"></span><br><span class="line">​		 &lt;option&gt;北京&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;/select&gt; </span><br><span class="line"></span><br><span class="line">​		&lt;textarea name= &quot;message&quot;&gt;</span><br><span class="line"></span><br><span class="line">​		&lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">​	&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>有三个名字非常相似的标签:表单域   form    使用场景:  提交区域内表单元素给后台服务器文件域   file      是input type 属性值   使用场景: 上传文件文本域   textarea    使用场景:  可以输入多行文字, 比如留言板  网站介绍等…4. 我们当前阶段不需要提交表单元素,所以我们只负责表单元素的外观形态即可.</p>
+]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -2206,6 +2206,180 @@ JS中的注释主要有两种，分别是 单行注释 和 多行注释。
       </tags>
   </entry>
   <entry>
+    <title>JavaScript之数组与函数笔记（四）</title>
+    <url>/2022/04/03/JavaScript%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1 - 数组"></a>1 - 数组</h2><h3 id="1-1-数组的概念"><a href="#1-1-数组的概念" class="headerlink" title="1.1 数组的概念"></a>1.1 数组的概念</h3><ul>
+<li>数组可以把一组相关的数据一起存放，并提供方便的访问(获取）方式。</li>
+<li>数组是指<strong>一组数据的集合</strong>，其中的每个数据被称作<strong>元素</strong>，在数组中可以<strong>存放任意类型的元素</strong>。数组是一种将一组数据存储在单个变量名下的优雅方式。</li>
+</ul>
+<h3 id="1-2-创建数组"><a href="#1-2-创建数组" class="headerlink" title="1.2 创建数组"></a>1.2 创建数组</h3><p>JS 中创建数组有两种方式：</p>
+<ul>
+<li><p>利用  new 创建数组  </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> 数组名 = <span class="keyword">new</span> <span class="title class_">Array</span>() ；</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="title class_">Array</span>();   <span class="comment">// 创建一个新的空数组</span></span><br></pre></td></tr></table></figure>
+
+<p>注意 Array () ，A 要大写    </p>
+</li>
+<li><p>利用数组字面量创建数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 使用数组字面量方式创建空的数组</span></span><br><span class="line"><span class="keyword">var</span>  数组名 = []；</span><br><span class="line"><span class="comment">//2. 使用数组字面量方式创建带初始值的数组</span></span><br><span class="line"><span class="keyword">var</span>  数组名 = [<span class="string">&#x27;小白&#x27;</span>,<span class="string">&#x27;小黑&#x27;</span>,<span class="string">&#x27;大黄&#x27;</span>,<span class="string">&#x27;瑞奇&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数组的字面量是方括号 [ ] </li>
+<li>声明数组并赋值称为数组的初始化</li>
+<li>这种字面量方式也是我们以后最多使用的方式</li>
+</ul>
+</li>
+<li><p>数组元素的类型</p>
+<p>数组中可以存放任意类型的数据，例如字符串，数字，布尔值等。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arrStus = [<span class="string">&#x27;小白&#x27;</span>,<span class="number">12</span>,<span class="literal">true</span>,<span class="number">28.9</span>];</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="1-3-获取数组中的元素"><a href="#1-3-获取数组中的元素" class="headerlink" title="1.3 获取数组中的元素"></a>1.3 获取数组中的元素</h3><p>​        索引 (下标) ：用来访问数组元素的序号（数组下标从 0 开始）。</p>
+<p><img src="/images1/%E5%9B%BE%E7%89%871b.png"></p>
+<p>​        数组可以通过索引来访问、设置、修改对应的数组元素，可以通过“数组名[索引]”的形式来获取数组中的元素。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义数组</span></span><br><span class="line"><span class="keyword">var</span> arrStus = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// 获取数组中的第2个元素</span></span><br><span class="line"><span class="title function_">alert</span>(arrStus[<span class="number">1</span>]);    </span><br></pre></td></tr></table></figure>
+
+<p>注意：如果访问时数组没有和索引值对应的元素，则得到的值是undefined</p>
+<h3 id="1-4-遍历数组"><a href="#1-4-遍历数组" class="headerlink" title="1.4 遍历数组"></a>1.4 遍历数组</h3><ul>
+<li><p>数组遍历</p>
+<p>​        把数组中的每个元素从头到尾都访问一次（类似学生的点名），可以通过 for 循环索引遍历数组中的每一项</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arrStus[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>数组的长度</p>
+<p>数组的长度：默认情况下表示数组中元素的个数</p>
+<p>使用“数组名.length”可以访问数组元素的数量（数组长度）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arrStus = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="title function_">alert</span>(arrStus.<span class="property">length</span>);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>注意</strong>：</p>
+<ul>
+<li>此处数组的长度是数组元素的个数 ，不要和数组的索引号混淆。</li>
+</ul>
+</li>
+<li><p>当我们数组里面的元素个数发生了变化，这个 length 属性跟着一起变化</p>
+<ul>
+<li>数组的length属性可以被修改：</li>
+</ul>
+</li>
+<li><p>如果设置的length属性值大于数组的元素个数，则会在数组末尾出现空白元素；</p>
+<ul>
+<li>如果设置的length属性值小于数组的元素个数，则会把超过该值的数组元素删除</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-5-数组中新增元素"><a href="#1-5-数组中新增元素" class="headerlink" title="1.5 数组中新增元素"></a>1.5 数组中新增元素</h3><p>​        数组中可以通过以下方式在数组的末尾插入新元素：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">数组[ 数组.<span class="property">length</span> ] = 新数据;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-函数"><a href="#2-函数" class="headerlink" title="2 - 函数"></a>2 - 函数</h2><h3 id="2-1-函数的概念"><a href="#2-1-函数的概念" class="headerlink" title="2.1 函数的概念"></a>2.1 函数的概念</h3><p>​        在 JS 里面，可能会定义非常多的相同代码或者功能相似的代码，这些代码可能需要大量重复使用。虽然 for循环语句也能实现一些简单的重复操作，但是比较具有局限性，此时我们就可以使用 JS 中的函数。</p>
+<p>​        函数：就是<strong>封装了一段可被重复调用执行的代码块</strong>。通过此代码块可以<strong>实现大量代码的重复使用</strong>。  </p>
+<h3 id="2-2-函数的使用"><a href="#2-2-函数的使用" class="headerlink" title="2.2 函数的使用"></a>2.2 函数的使用</h3><h4 id="声明函数"><a href="#声明函数" class="headerlink" title="声明函数"></a>声明函数</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明函数</span></span><br><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">    <span class="comment">//函数体代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>function 是声明函数的关键字,必须小写</p>
+</li>
+<li><p>由于函数一般是为了实现某个功能才定义的， 所以通常我们将函数名命名为动词，比如 getSum</p>
+</li>
+</ul>
+<h4 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">函数名();  <span class="comment">// 通过调用函数名来执行函数体代码</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>调用的时候千万不要忘记添加小括号</p>
+</li>
+<li><p>口诀：函数不调用，自己不执行</p>
+<p>注意：声明函数本身并不会执行代码，只有调用函数时才会执行函数体代码。</p>
+</li>
+</ul>
+<h4 id="函数的封装"><a href="#函数的封装" class="headerlink" title="函数的封装"></a>函数的封装</h4><ul>
+<li><p>函数的封装是把一个或者多个功能通过函数的方式封装起来，对外只提供一个简单的函数接口</p>
+</li>
+<li><p>简单理解：封装类似于将电脑配件整合组装到机箱中 ( 类似快递打包）  </p>
+<p><img src="/images1/%E5%9B%BE%E7%89%872b.png"></p>
+<p>例子：封装计算1-100累加和</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">   计算1-100之间值的函数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 声明函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getSum</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> sumNum = <span class="number">0</span>;<span class="comment">// 准备一个变量，保存数字和</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">    sumNum += i;<span class="comment">// 把每个数值 都累加 到变量中</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">alert</span>(sumNum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line"><span class="title function_">getSum</span>();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-3-函数的参数"><a href="#2-3-函数的参数" class="headerlink" title="2.3 函数的参数"></a>2.3 函数的参数</h3><h4 id="函数参数语法"><a href="#函数参数语法" class="headerlink" title="函数参数语法"></a>函数参数语法</h4><ul>
+<li><p>形参：函数定义时设置接收调用时传入</p>
+</li>
+<li><p>实参：函数调用时传入小括号内的真实数据</p>
+<p><img src="/images1/%E5%9B%BE%E7%89%873b.png"></p>
+<p>​    参数的作用 : 在函数内部某些值不能固定，我们可以通过参数在调用函数时传递不同的值进去。</p>
+<p>函数参数的运用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 带参数的函数声明</span></span><br><span class="line"><span class="keyword">function</span> 函数名(形参<span class="number">1</span>, 形参<span class="number">2</span> , 形参<span class="number">3.</span>..) &#123; <span class="comment">// 可以定义任意多的参数，用逗号分隔</span></span><br><span class="line">  <span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 带参数的函数调用</span></span><br><span class="line">函数名(实参<span class="number">1</span>, 实参<span class="number">2</span>, 实参<span class="number">3.</span>..); </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>调用的时候实参值是传递给形参的</li>
+<li>形参简单理解为：不用声明的变量</li>
+<li>实参和形参的多个参数之间用逗号（,）分隔</li>
+</ol>
+</li>
+</ul>
+<h4 id="函数形参和实参数量不匹配时"><a href="#函数形参和实参数量不匹配时" class="headerlink" title="函数形参和实参数量不匹配时"></a>函数形参和实参数量不匹配时</h4><p><img src="/images1/%E5%9B%BE%E7%89%874b.png"></p>
+<pre><code>注意：在JavaScript中，形参的默认值是undefined。
+</code></pre>
+<p>小结：</p>
+<ul>
+<li>函数可以带参数也可以不带参数</li>
+<li>声明函数的时候，函数名括号里面的是形参，形参的默认值为 undefined</li>
+<li>调用函数的时候，函数名括号里面的是实参</li>
+<li>多个参数中间用逗号分隔</li>
+<li>形参的个数可以和实参个数不匹配，但是结果不可预计，我们尽量要匹配</li>
+</ul>
+<h3 id="2-4-函数的返回值"><a href="#2-4-函数的返回值" class="headerlink" title="2.4 函数的返回值"></a>2.4 函数的返回值</h3><h4 id="return-语句"><a href="#return-语句" class="headerlink" title="return 语句"></a>return 语句</h4><pre><code>返回值：函数调用整体代表的数据；函数执行完成后可以通过return语句将指定数据返回 。
+</code></pre>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明函数</span></span><br><span class="line"><span class="keyword">function</span> 函数名（）&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span>  需要返回的值；</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">函数名();    <span class="comment">// 此时调用函数就可以得到函数体内return 后面的值</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在使用 return 语句时，函数会停止执行，并返回指定的值</li>
+<li>如果函数没有 return ，返回的值是 undefined</li>
+</ul>
+<h4 id="break-continue-return-的区别"><a href="#break-continue-return-的区别" class="headerlink" title="break ,continue ,return 的区别"></a>break ,continue ,return 的区别</h4><ul>
+<li>break ：结束当前的循环体（如 for、while）</li>
+<li>continue ：跳出本次循环，继续执行下次循环（如 for、while）</li>
+<li>return ：不仅可以退出循环，还能够返回 return 语句中的值，同时还可以结束当前的函数体内的代码</li>
+</ul>
+<h3 id="2-5-arguments的使用"><a href="#2-5-arguments的使用" class="headerlink" title="2.5 arguments的使用"></a>2.5 arguments的使用</h3><p>​        当不确定有多少个参数传递的时候，可以用 arguments 来获取。JavaScript 中，arguments实际上它是当前函数的一个内置对象。所有函数都内置了一个 arguments 对象，arguments 对象中存储了传递的所有实参。arguments展示形式是一个伪数组，因此可以进行遍历。伪数组具有以下特点：</p>
+<ul>
+<li><p>具有 length 属性</p>
+</li>
+<li><p>按索引方式储存数据</p>
+</li>
+<li><p>不具有数组的 push , pop 等方法</p>
+<p>注意：在函数内部使用该对象，用此对象获取函数调用时传的实参。</p>
+</li>
+</ul>
+<h3 id="2-6-函数案例"><a href="#2-6-函数案例" class="headerlink" title="2.6 函数案例"></a>2.6 函数案例</h3><pre><code>    函数内部可以调用另一个函数，在同一作用域代码中，函数名即代表封装的操作，使用函数名加括号即可以将封装的操作执行。
+</code></pre>
+<h3 id="2-7-函数的两种声明方式"><a href="#2-7-函数的两种声明方式" class="headerlink" title="2.7 函数的两种声明方式"></a>2.7 函数的两种声明方式</h3><ul>
+<li><p>自定义函数方式(命名函数)</p>
+<p>利用函数关键字 function 自定义函数方式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明定义方式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;...&#125;</span><br><span class="line"><span class="comment">// 调用  </span></span><br><span class="line"><span class="title function_">fn</span>();  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因为有名字，所以也被称为命名函数</li>
+<li>调用函数的代码既可以放到声明函数的前面，也可以放在声明函数的后面</li>
+</ul>
+</li>
+<li><p>函数表达式方式(匿名函数）</p>
+<p>利用函数表达式方式的写法如下： </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这是函数表达式写法，匿名函数后面跟分号结束</span></span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span>(<span class="params"></span>)&#123;...&#125;；</span><br><span class="line"><span class="comment">// 调用的方式，函数调用必须写到函数体下面</span></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因为函数没有名字，所以也被称为匿名函数</li>
+<li>这个fn 里面存储的是一个函数  </li>
+<li>函数表达式方式原理跟声明变量方式是一致的</li>
+<li>函数调用的代码必须写到函数体后面</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript笔记（六）</title>
     <url>/2022/04/03/JavaScript%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/</url>
     <content><![CDATA[<h2 id="1-内置对象"><a href="#1-内置对象" class="headerlink" title="1 - 内置对象"></a>1 - 内置对象</h2><h3 id="1-1-内置对象"><a href="#1-1-内置对象" class="headerlink" title="1.1 内置对象"></a>1.1 内置对象</h3><p>​         JavaScript 中的对象分为3种：<strong>自定义对象 、内置对象、 浏览器对象</strong><br>​        前面两种对象是JS 基础 内容，属于 ECMAScript；  第三个浏览器对象属于 JS 独有的， JS API 讲解内置对象就是指 JS 语言自带的一些对象，这些对象供开发者使用，并提供了一些常用的或是<strong>最基本而必要的功能</strong>（属性和方法），内置对象最大的优点就是帮助我们快速开发</p>
@@ -2422,180 +2596,6 @@ JS中的注释主要有两种，分别是 单行注释 和 多行注释。
 
 <p>​        运行结果如下：</p>
 <p><img src="/images/%E5%9B%BE%E7%89%8715.png"></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript之数组与函数笔记（四）</title>
-    <url>/2022/04/03/JavaScript%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1 - 数组"></a>1 - 数组</h2><h3 id="1-1-数组的概念"><a href="#1-1-数组的概念" class="headerlink" title="1.1 数组的概念"></a>1.1 数组的概念</h3><ul>
-<li>数组可以把一组相关的数据一起存放，并提供方便的访问(获取）方式。</li>
-<li>数组是指<strong>一组数据的集合</strong>，其中的每个数据被称作<strong>元素</strong>，在数组中可以<strong>存放任意类型的元素</strong>。数组是一种将一组数据存储在单个变量名下的优雅方式。</li>
-</ul>
-<h3 id="1-2-创建数组"><a href="#1-2-创建数组" class="headerlink" title="1.2 创建数组"></a>1.2 创建数组</h3><p>JS 中创建数组有两种方式：</p>
-<ul>
-<li><p>利用  new 创建数组  </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> 数组名 = <span class="keyword">new</span> <span class="title class_">Array</span>() ；</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="title class_">Array</span>();   <span class="comment">// 创建一个新的空数组</span></span><br></pre></td></tr></table></figure>
-
-<p>注意 Array () ，A 要大写    </p>
-</li>
-<li><p>利用数组字面量创建数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 使用数组字面量方式创建空的数组</span></span><br><span class="line"><span class="keyword">var</span>  数组名 = []；</span><br><span class="line"><span class="comment">//2. 使用数组字面量方式创建带初始值的数组</span></span><br><span class="line"><span class="keyword">var</span>  数组名 = [<span class="string">&#x27;小白&#x27;</span>,<span class="string">&#x27;小黑&#x27;</span>,<span class="string">&#x27;大黄&#x27;</span>,<span class="string">&#x27;瑞奇&#x27;</span>];</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>数组的字面量是方括号 [ ] </li>
-<li>声明数组并赋值称为数组的初始化</li>
-<li>这种字面量方式也是我们以后最多使用的方式</li>
-</ul>
-</li>
-<li><p>数组元素的类型</p>
-<p>数组中可以存放任意类型的数据，例如字符串，数字，布尔值等。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arrStus = [<span class="string">&#x27;小白&#x27;</span>,<span class="number">12</span>,<span class="literal">true</span>,<span class="number">28.9</span>];</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="1-3-获取数组中的元素"><a href="#1-3-获取数组中的元素" class="headerlink" title="1.3 获取数组中的元素"></a>1.3 获取数组中的元素</h3><p>​        索引 (下标) ：用来访问数组元素的序号（数组下标从 0 开始）。</p>
-<p><img src="/images1/%E5%9B%BE%E7%89%871b.png"></p>
-<p>​        数组可以通过索引来访问、设置、修改对应的数组元素，可以通过“数组名[索引]”的形式来获取数组中的元素。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义数组</span></span><br><span class="line"><span class="keyword">var</span> arrStus = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// 获取数组中的第2个元素</span></span><br><span class="line"><span class="title function_">alert</span>(arrStus[<span class="number">1</span>]);    </span><br></pre></td></tr></table></figure>
-
-<p>注意：如果访问时数组没有和索引值对应的元素，则得到的值是undefined</p>
-<h3 id="1-4-遍历数组"><a href="#1-4-遍历数组" class="headerlink" title="1.4 遍历数组"></a>1.4 遍历数组</h3><ul>
-<li><p>数组遍历</p>
-<p>​        把数组中的每个元素从头到尾都访问一次（类似学生的点名），可以通过 for 循环索引遍历数组中的每一项</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arrStus[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>数组的长度</p>
-<p>数组的长度：默认情况下表示数组中元素的个数</p>
-<p>使用“数组名.length”可以访问数组元素的数量（数组长度）。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arrStus = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="title function_">alert</span>(arrStus.<span class="property">length</span>);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>  <strong>注意</strong>：</p>
-<ul>
-<li>此处数组的长度是数组元素的个数 ，不要和数组的索引号混淆。</li>
-</ul>
-</li>
-<li><p>当我们数组里面的元素个数发生了变化，这个 length 属性跟着一起变化</p>
-<ul>
-<li>数组的length属性可以被修改：</li>
-</ul>
-</li>
-<li><p>如果设置的length属性值大于数组的元素个数，则会在数组末尾出现空白元素；</p>
-<ul>
-<li>如果设置的length属性值小于数组的元素个数，则会把超过该值的数组元素删除</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-5-数组中新增元素"><a href="#1-5-数组中新增元素" class="headerlink" title="1.5 数组中新增元素"></a>1.5 数组中新增元素</h3><p>​        数组中可以通过以下方式在数组的末尾插入新元素：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">数组[ 数组.<span class="property">length</span> ] = 新数据;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-函数"><a href="#2-函数" class="headerlink" title="2 - 函数"></a>2 - 函数</h2><h3 id="2-1-函数的概念"><a href="#2-1-函数的概念" class="headerlink" title="2.1 函数的概念"></a>2.1 函数的概念</h3><p>​        在 JS 里面，可能会定义非常多的相同代码或者功能相似的代码，这些代码可能需要大量重复使用。虽然 for循环语句也能实现一些简单的重复操作，但是比较具有局限性，此时我们就可以使用 JS 中的函数。</p>
-<p>​        函数：就是<strong>封装了一段可被重复调用执行的代码块</strong>。通过此代码块可以<strong>实现大量代码的重复使用</strong>。  </p>
-<h3 id="2-2-函数的使用"><a href="#2-2-函数的使用" class="headerlink" title="2.2 函数的使用"></a>2.2 函数的使用</h3><h4 id="声明函数"><a href="#声明函数" class="headerlink" title="声明函数"></a>声明函数</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明函数</span></span><br><span class="line"><span class="keyword">function</span> 函数名() &#123;</span><br><span class="line">    <span class="comment">//函数体代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>function 是声明函数的关键字,必须小写</p>
-</li>
-<li><p>由于函数一般是为了实现某个功能才定义的， 所以通常我们将函数名命名为动词，比如 getSum</p>
-</li>
-</ul>
-<h4 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">函数名();  <span class="comment">// 通过调用函数名来执行函数体代码</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>调用的时候千万不要忘记添加小括号</p>
-</li>
-<li><p>口诀：函数不调用，自己不执行</p>
-<p>注意：声明函数本身并不会执行代码，只有调用函数时才会执行函数体代码。</p>
-</li>
-</ul>
-<h4 id="函数的封装"><a href="#函数的封装" class="headerlink" title="函数的封装"></a>函数的封装</h4><ul>
-<li><p>函数的封装是把一个或者多个功能通过函数的方式封装起来，对外只提供一个简单的函数接口</p>
-</li>
-<li><p>简单理解：封装类似于将电脑配件整合组装到机箱中 ( 类似快递打包）  </p>
-<p><img src="/images1/%E5%9B%BE%E7%89%872b.png"></p>
-<p>例子：封装计算1-100累加和</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">   计算1-100之间值的函数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 声明函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getSum</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> sumNum = <span class="number">0</span>;<span class="comment">// 准备一个变量，保存数字和</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">    sumNum += i;<span class="comment">// 把每个数值 都累加 到变量中</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">alert</span>(sumNum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line"><span class="title function_">getSum</span>();</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="2-3-函数的参数"><a href="#2-3-函数的参数" class="headerlink" title="2.3 函数的参数"></a>2.3 函数的参数</h3><h4 id="函数参数语法"><a href="#函数参数语法" class="headerlink" title="函数参数语法"></a>函数参数语法</h4><ul>
-<li><p>形参：函数定义时设置接收调用时传入</p>
-</li>
-<li><p>实参：函数调用时传入小括号内的真实数据</p>
-<p><img src="/images1/%E5%9B%BE%E7%89%873b.png"></p>
-<p>​    参数的作用 : 在函数内部某些值不能固定，我们可以通过参数在调用函数时传递不同的值进去。</p>
-<p>函数参数的运用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 带参数的函数声明</span></span><br><span class="line"><span class="keyword">function</span> 函数名(形参<span class="number">1</span>, 形参<span class="number">2</span> , 形参<span class="number">3.</span>..) &#123; <span class="comment">// 可以定义任意多的参数，用逗号分隔</span></span><br><span class="line">  <span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 带参数的函数调用</span></span><br><span class="line">函数名(实参<span class="number">1</span>, 实参<span class="number">2</span>, 实参<span class="number">3.</span>..); </span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>调用的时候实参值是传递给形参的</li>
-<li>形参简单理解为：不用声明的变量</li>
-<li>实参和形参的多个参数之间用逗号（,）分隔</li>
-</ol>
-</li>
-</ul>
-<h4 id="函数形参和实参数量不匹配时"><a href="#函数形参和实参数量不匹配时" class="headerlink" title="函数形参和实参数量不匹配时"></a>函数形参和实参数量不匹配时</h4><p><img src="/images1/%E5%9B%BE%E7%89%874b.png"></p>
-<pre><code>注意：在JavaScript中，形参的默认值是undefined。
-</code></pre>
-<p>小结：</p>
-<ul>
-<li>函数可以带参数也可以不带参数</li>
-<li>声明函数的时候，函数名括号里面的是形参，形参的默认值为 undefined</li>
-<li>调用函数的时候，函数名括号里面的是实参</li>
-<li>多个参数中间用逗号分隔</li>
-<li>形参的个数可以和实参个数不匹配，但是结果不可预计，我们尽量要匹配</li>
-</ul>
-<h3 id="2-4-函数的返回值"><a href="#2-4-函数的返回值" class="headerlink" title="2.4 函数的返回值"></a>2.4 函数的返回值</h3><h4 id="return-语句"><a href="#return-语句" class="headerlink" title="return 语句"></a>return 语句</h4><pre><code>返回值：函数调用整体代表的数据；函数执行完成后可以通过return语句将指定数据返回 。
-</code></pre>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明函数</span></span><br><span class="line"><span class="keyword">function</span> 函数名（）&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span>  需要返回的值；</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">函数名();    <span class="comment">// 此时调用函数就可以得到函数体内return 后面的值</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在使用 return 语句时，函数会停止执行，并返回指定的值</li>
-<li>如果函数没有 return ，返回的值是 undefined</li>
-</ul>
-<h4 id="break-continue-return-的区别"><a href="#break-continue-return-的区别" class="headerlink" title="break ,continue ,return 的区别"></a>break ,continue ,return 的区别</h4><ul>
-<li>break ：结束当前的循环体（如 for、while）</li>
-<li>continue ：跳出本次循环，继续执行下次循环（如 for、while）</li>
-<li>return ：不仅可以退出循环，还能够返回 return 语句中的值，同时还可以结束当前的函数体内的代码</li>
-</ul>
-<h3 id="2-5-arguments的使用"><a href="#2-5-arguments的使用" class="headerlink" title="2.5 arguments的使用"></a>2.5 arguments的使用</h3><p>​        当不确定有多少个参数传递的时候，可以用 arguments 来获取。JavaScript 中，arguments实际上它是当前函数的一个内置对象。所有函数都内置了一个 arguments 对象，arguments 对象中存储了传递的所有实参。arguments展示形式是一个伪数组，因此可以进行遍历。伪数组具有以下特点：</p>
-<ul>
-<li><p>具有 length 属性</p>
-</li>
-<li><p>按索引方式储存数据</p>
-</li>
-<li><p>不具有数组的 push , pop 等方法</p>
-<p>注意：在函数内部使用该对象，用此对象获取函数调用时传的实参。</p>
-</li>
-</ul>
-<h3 id="2-6-函数案例"><a href="#2-6-函数案例" class="headerlink" title="2.6 函数案例"></a>2.6 函数案例</h3><pre><code>    函数内部可以调用另一个函数，在同一作用域代码中，函数名即代表封装的操作，使用函数名加括号即可以将封装的操作执行。
-</code></pre>
-<h3 id="2-7-函数的两种声明方式"><a href="#2-7-函数的两种声明方式" class="headerlink" title="2.7 函数的两种声明方式"></a>2.7 函数的两种声明方式</h3><ul>
-<li><p>自定义函数方式(命名函数)</p>
-<p>利用函数关键字 function 自定义函数方式</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明定义方式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;...&#125;</span><br><span class="line"><span class="comment">// 调用  </span></span><br><span class="line"><span class="title function_">fn</span>();  </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>因为有名字，所以也被称为命名函数</li>
-<li>调用函数的代码既可以放到声明函数的前面，也可以放在声明函数的后面</li>
-</ul>
-</li>
-<li><p>函数表达式方式(匿名函数）</p>
-<p>利用函数表达式方式的写法如下： </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这是函数表达式写法，匿名函数后面跟分号结束</span></span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span>(<span class="params"></span>)&#123;...&#125;；</span><br><span class="line"><span class="comment">// 调用的方式，函数调用必须写到函数体下面</span></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>因为函数没有名字，所以也被称为匿名函数</li>
-<li>这个fn 里面存储的是一个函数  </li>
-<li>函数表达式方式原理跟声明变量方式是一致的</li>
-<li>函数调用的代码必须写到函数体后面</li>
-</ul>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -4826,6 +4826,78 @@ JS中的注释主要有两种，分别是 单行注释 和 多行注释。
       </tags>
   </entry>
   <entry>
+    <title>16.Mysql常用语句</title>
+    <url>/2022/05/15/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[<h3 id="Mysql数据基础语句"><a href="#Mysql数据基础语句" class="headerlink" title="Mysql数据基础语句"></a>Mysql数据基础语句</h3><h3 id="一，基础语句"><a href="#一，基础语句" class="headerlink" title="一，基础语句"></a>一，基础语句</h3><p>1.创建数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE 数据库名;</span><br></pre></td></tr></table></figure>
+
+<p>2.创建数据库表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `webdome`(</span><br><span class="line">   `id` VARCHAR(100) NOT NULL,</span><br><span class="line">   `name` VARCHAR(100),</span><br><span class="line">   `url` VARCHAR(40),</span><br><span class="line">   `pid` VARCHAR(100),</span><br><span class="line">   `path` VARCHAR(100),</span><br><span class="line">   `createtime` VARCHAR(100),</span><br><span class="line">   PRIMARY KEY ( `id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+
+<p>实例解析：</p>
+<ul>
+<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
+<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
+<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
+<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
+</ul>
+<p>3.删除数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop database &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>4.选择数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>5.删除MySQL数据表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop table table_name</span><br></pre></td></tr></table></figure>
+
+<p>6.显示某个数据库所有表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure>
+
+<p>7.删除 MySQL 数据表中的记录。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">delete from table_name [where clause]</span><br></pre></td></tr></table></figure>
+
+<p>8.插入数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
+
+<p>9.查询数据通用的 SELECT 语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<p>查询某张表某列所有数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from dept;</span><br></pre></td></tr></table></figure>
+
+<p>having,用于过滤分组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select swjg_dm , sum(se) se</span><br><span class="line">  from sb_zsxx</span><br><span class="line">  group by swjg_dm</span><br><span class="line">  having sum(se)&gt;500000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from 队员表</span><br><span class="line">select 姓名, 所在城市 as 球队所在城市 </span><br><span class="line">from 队员表,球队表</span><br><span class="line">where 队员表.球队名 = (select 反方球队 from 比赛表 where 比赛编号=&#x27;比赛001&#x27;)</span><br><span class="line">and 球队表.球队名 = (select 反方球队 from 比赛表 where 比赛编号=&#x27;比赛001&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>10.修改表中的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名称 set 列名称=新值 where 更新条件;</span><br></pre></td></tr></table></figure>
+
+<p>以下是在表 students 中的实例:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将 id 为 5 的手机号改为默认的: </span><br><span class="line">update students settel=default where id=5;</span><br><span class="line"></span><br><span class="line">将所有人的年龄增加 1: </span><br><span class="line">update students set age=age+1;</span><br><span class="line"></span><br><span class="line">将手机号为 13288097888 的姓名改为 &quot;小明&quot;, 年龄改为 19:</span><br><span class="line">update students setname=&quot;小明&quot;, age=19 wheretel=&quot;13288097888&quot;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二，连接Join"><a href="#二，连接Join" class="headerlink" title="二，连接Join"></a>二，连接Join</h3><p><strong>1、join</strong><br>join，其实就是“inner join”，为了简写才写成join，两个是表示一个的，内连接，表示以两个表的交集为主，查出来是两个表有交集的部分，其余没有关联就不额外显示出来，这个用的情况也是挺多的，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from kemu</span><br><span class="line">join score on kemu.id = score.id</span><br></pre></td></tr></table></figure>
+
+<p>在kemu中加入score表</p>
+<p><strong>2、left join</strong><br>顾名思义，就是“左连接”，表1左连接表2，以左为主，表示以表1为主，关联上表2的数据，查出来的结果显示左边的所有数据，然后右边显示的是和左边有交集部分的数据。如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from kemu</span><br><span class="line">left join score on kemu.id = score.id</span><br></pre></td></tr></table></figure>
+
+<p>完全显示kemu表的内容，score表仅展示交集部分</p>
+<p><strong>2、right join</strong></p>
+<p>“右连接”，表1右连接表2，以右为主，表示以表2为主，关联查询表1的数据，查出表2所有数据以及表1和表2有交集的数据，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from kemu</span><br><span class="line">right join score on kemu.id = score.id</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mysql基础（黑马程序员视频笔记总结）</title>
     <url>/2022/08/15/Mysql%E5%9F%BA%E7%A1%80%EF%BC%88%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%89/</url>
     <content><![CDATA[<h1 id="Mysql基础（黑马程序员视频笔记总结）"><a href="#Mysql基础（黑马程序员视频笔记总结）" class="headerlink" title="Mysql基础（黑马程序员视频笔记总结）"></a>Mysql基础（黑马程序员视频笔记总结）</h1><h2 id="通用语法及分类"><a href="#通用语法及分类" class="headerlink" title="通用语法及分类"></a>通用语法及分类</h2><ul>
@@ -5490,78 +5562,6 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
       </tags>
   </entry>
   <entry>
-    <title>16.Mysql常用语句</title>
-    <url>/2022/05/15/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</url>
-    <content><![CDATA[<h3 id="Mysql数据基础语句"><a href="#Mysql数据基础语句" class="headerlink" title="Mysql数据基础语句"></a>Mysql数据基础语句</h3><h3 id="一，基础语句"><a href="#一，基础语句" class="headerlink" title="一，基础语句"></a>一，基础语句</h3><p>1.创建数据库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE 数据库名;</span><br></pre></td></tr></table></figure>
-
-<p>2.创建数据库表</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `webdome`(</span><br><span class="line">   `id` VARCHAR(100) NOT NULL,</span><br><span class="line">   `name` VARCHAR(100),</span><br><span class="line">   `url` VARCHAR(40),</span><br><span class="line">   `pid` VARCHAR(100),</span><br><span class="line">   `path` VARCHAR(100),</span><br><span class="line">   `createtime` VARCHAR(100),</span><br><span class="line">   PRIMARY KEY ( `id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
-
-<p>实例解析：</p>
-<ul>
-<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
-<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
-<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
-<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
-</ul>
-<p>3.删除数据库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop database &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
-
-<p>4.选择数据库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
-
-<p>5.删除MySQL数据表</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop table table_name</span><br></pre></td></tr></table></figure>
-
-<p>6.显示某个数据库所有表</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure>
-
-<p>7.删除 MySQL 数据表中的记录。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">delete from table_name [where clause]</span><br></pre></td></tr></table></figure>
-
-<p>8.插入数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
-
-<p>9.查询数据通用的 SELECT 语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
-
-<p>实例：</p>
-<p>查询某张表某列所有数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from dept;</span><br></pre></td></tr></table></figure>
-
-<p>having,用于过滤分组</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select swjg_dm , sum(se) se</span><br><span class="line">  from sb_zsxx</span><br><span class="line">  group by swjg_dm</span><br><span class="line">  having sum(se)&gt;500000</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from 队员表</span><br><span class="line">select 姓名, 所在城市 as 球队所在城市 </span><br><span class="line">from 队员表,球队表</span><br><span class="line">where 队员表.球队名 = (select 反方球队 from 比赛表 where 比赛编号=&#x27;比赛001&#x27;)</span><br><span class="line">and 球队表.球队名 = (select 反方球队 from 比赛表 where 比赛编号=&#x27;比赛001&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>10.修改表中的数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名称 set 列名称=新值 where 更新条件;</span><br></pre></td></tr></table></figure>
-
-<p>以下是在表 students 中的实例:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将 id 为 5 的手机号改为默认的: </span><br><span class="line">update students settel=default where id=5;</span><br><span class="line"></span><br><span class="line">将所有人的年龄增加 1: </span><br><span class="line">update students set age=age+1;</span><br><span class="line"></span><br><span class="line">将手机号为 13288097888 的姓名改为 &quot;小明&quot;, 年龄改为 19:</span><br><span class="line">update students setname=&quot;小明&quot;, age=19 wheretel=&quot;13288097888&quot;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="二，连接Join"><a href="#二，连接Join" class="headerlink" title="二，连接Join"></a>二，连接Join</h3><p><strong>1、join</strong><br>join，其实就是“inner join”，为了简写才写成join，两个是表示一个的，内连接，表示以两个表的交集为主，查出来是两个表有交集的部分，其余没有关联就不额外显示出来，这个用的情况也是挺多的，如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from kemu</span><br><span class="line">join score on kemu.id = score.id</span><br></pre></td></tr></table></figure>
-
-<p>在kemu中加入score表</p>
-<p><strong>2、left join</strong><br>顾名思义，就是“左连接”，表1左连接表2，以左为主，表示以表1为主，关联上表2的数据，查出来的结果显示左边的所有数据，然后右边显示的是和左边有交集部分的数据。如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from kemu</span><br><span class="line">left join score on kemu.id = score.id</span><br></pre></td></tr></table></figure>
-
-<p>完全显示kemu表的内容，score表仅展示交集部分</p>
-<p><strong>2、right join</strong></p>
-<p>“右连接”，表1右连接表2，以右为主，表示以表2为主，关联查询表1的数据，查出表2所有数据以及表1和表2有交集的数据，如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from kemu</span><br><span class="line">right join score on kemu.id = score.id</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Netty的通讯与ESP8266（代码）</title>
     <url>/2022/07/17/Netty%E7%9A%84%E9%80%9A%E8%AE%AF%E4%B8%8EESP8266%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/</url>
     <content><![CDATA[<h2 id="Netty的通讯与ESP8266（代码）"><a href="#Netty的通讯与ESP8266（代码）" class="headerlink" title="Netty的通讯与ESP8266（代码）"></a>Netty的通讯与ESP8266（代码）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NettyServer类</span><br><span class="line">NettyServerHandler类</span><br><span class="line">NettyClient类</span><br><span class="line">NettyClientHandler类</span><br><span class="line">ESP8266 通讯测试</span><br></pre></td></tr></table></figure>
@@ -5587,6 +5587,55 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js-vue概念</title>
+    <url>/2022/07/09/Node-js-vue%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I&#x2F;O 的模型，使其轻量又高效。 </p>
+<p>Node 是一个让 JavaScript 运行在服务端的开发平台，它让 JavaScript 成为与PHP、Python、Perl、Ruby 等服务端语言平起平坐的脚本语言。 发布于2009年5月，由Ryan Dahl开发，实质是对Chrome V8引擎进行了封装。Node 使用事件驱动， 非阻塞I&#x2F;O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。</p>
+<p>官网上对其特点描述为：</p>
+<p>它是一个Javascript运行环境</p>
+<p>依赖于Chrome V8引擎进行代码解释</p>
+<p>事件驱动</p>
+<p>非阻塞I&#x2F;O</p>
+<p>轻量、可伸缩，适于实时数据交互应用</p>
+<p>单进程，单线程</p>
+<p>相对于传统的JavaScript来说，Node.js 是一个运行在服务端的框架，它的底层就使用了 V8 引擎。我们知道 Apache + PHP 以及 Java 的 Servlet 都可以用来开发动态网页，Node.js 的作用与他们类似，只不过是使用 JavaScript 来开发，它大大提升了开发的性能以及便利。</p>
+<h3 id="nmp"><a href="#nmp" class="headerlink" title="nmp"></a>nmp</h3><p>npm（包管理工具）是基于 Node.js的前端项目包管理工具，是项目中对各种程序包的依赖管理，传统的开发项目主要是后端，现在技术在更新，前端有了框架的开发模式管理，也需要用包管理工具的思想去管理，目的是简化第三方程序包在项目中引用复杂化。前端的ｊｓ包是全世界JavaScript 天才开发共享的各种代码模块，把这些代码模块都按照一个独立的软件功能统一在一个库中，一个代码模块是一个程序包（package，即代码模块）。它是世界上最大的软件注册表，每星期大约有 30 亿次的下载量，包含超过 600000 个 包（package） （即，代码模块），使用包的结构使您能够轻松跟踪依赖项和版本。<br>npm是node官方的包管理器。cnpm是个中国版的npm，是淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 创建一个文件包</span><br><span class="line">2. npm init</span><br><span class="line">3. 创建一个index.js 文件，并写入一些要实现的代码</span><br><span class="line">4.npm install –D xxx  项目依赖安装，并写入package.json的devDependencies中</span><br><span class="line">5.npm install -g xxx  # 安装最新版本</span><br><span class="line">6.npm install -g xxx@1.0.0   # 安装指定版本</span><br><span class="line">7.npm install xxx  本地安装（当前文件夹） </span><br><span class="line">8.npm install –S xxx  # 和上面效果一样</span><br><span class="line">--save 安装并添加条目到 package.json 文件的 dependencies。</span><br><span class="line">--save-dev 安装并添加条目到 package.json 文件的 devDependencies。</span><br><span class="line">9.npm install --registry=https://registry.npmmirror.com 项目本次安装依赖，临时使用淘宝镜像</span><br><span class="line">9.npm get registry  查询当前源配置</span><br><span class="line">10.npm config set reg istry https://registry.npmmirror.com 设置淘宝镜像源</span><br><span class="line">11.npm info 查看每个模块的具体信息</span><br><span class="line">12.npm list 命令以树型结构列出当前项目安装的所有模块，以及它们依赖的模块。</span><br><span class="line">13.npm list -global 会列出全局安装的模块。</span><br><span class="line">5. npm link 本地调试</span><br><span class="line">6. npm login 登录</span><br><span class="line">7. npm publish 发布</span><br><span class="line">8. npm version patch // 更新版本</span><br><span class="line">9. npm update gulp            //可以把当前目录下node_modules子目录里边的对应模块更新至最新版本 </span><br><span class="line">10. npm unpublish npmhswcommonwei@1.0.2 // 可以撤销发布自己发布过的某个版本代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bower："><a href="#Bower：" class="headerlink" title="Bower："></a><strong>Bower：</strong></h3><p>Bower是一个客户端技术的软件包管理器，它可用于搜索、安装和卸载如JavaScript、HTML、CSS之类的网络资源。<br>其他还有一些建立在Bower基础之上的开发工具，如YeoMan和Grunt。</p>
+<p>为了安装bower，你首先需要安装如下文件：</p>
+<ul>
+<li><p>Node：下载最新版本的node.js</p>
+</li>
+<li><p>NPM：NPM是node程序包管理器。它是捆绑在nodejs的安装程序上的，所以一旦你已经安装了node，NPM也就安装好了。</p>
+</li>
+<li><p>Git：你需要从git仓库获取一些代码包。</p>
+</li>
+<li><p>下载</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>npm install -g bower</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### yarn</span><br><span class="line"></span><br><span class="line">Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 ，正如[官方文档](https://link.jianshu.com/?t=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fcode.facebook.com%2Fposts%2F1840075619545360)中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>1、速度快<br>速度快主要来自以下两个方面：</p>
+</li>
+</ul>
+<p>1.1、并行安装：无论 npm 还是 Yarn 在执行包的安装时，都会执行一系列任务。npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。<br>1.2、离线模式：如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了。<br>2、安装版本统一<br>为了防止拉取到不同的版本，Yarn 有一个锁定文件 (lock file) 记录了被确切安装上的模块的版本号。每次只要新增了一个模块，Yarn 就会创建（或更新）yarn.lock 这个文件。这么做就保证了，每一次拉取同一个项目依赖时，使用的都是一样的模块版本。npm 其实也有办法实现处处使用相同版本的 packages，但需要开发者执行 npm shrinkwrap 命令。这个命令将会生成一个锁定文件，在执行 npm install 的时候，该锁定文件会先被读取，和 Yarn 读取 yarn.lock 文件一个道理。npm 和 Yarn 两者的不同之处在于，Yarn 默认会生成这样的锁定文件，而 npm 要通过 shrinkwrap 命令生成 npm-shrinkwrap.json 文件，只有当这个文件存在的时候，packages 版本信息才会被记录和更新。<br>3、更简洁的输出<br>npm 的输出信息比较冗长。在执行 npm install 的时候，命令行里会不断地打印出所有被安装上的依赖。相比之下，Yarn 简洁太多：默认情况下，结合了 emoji直观且直接地打印出必要的信息，也提供了一些命令供开发者查询额外的安装信息。<br>4、多注册来源处理<br>所有的依赖包，不管他被不同的库间接关联引用多少次，安装这个包时，只会从一个注册来源去装，要么是 npm 要么是 bower, 防止出现混乱不一致。<br>5、更好的语义化<br>yarn改变了一些npm命令的名称，比如 yarn add&#x2F;remove，感觉上比 npm 原本的 install&#x2F;uninstall 要更清晰。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>三、Yarn安装<br>npm install -g yarn<br>四、Yarn命令<br>1、查看版本<br>yarn -v<br>2、创建工程<br>yarn init<br>3、安装依赖<br>yarn 或者 yarn install<br>4、运行脚本<br>yarn run<br>5、打包构建<br>yarn build<br>6、显示某个包信息<br>yarn info<br>7、列出当前项目的依赖<br>yarn list<br>8、显示当前配置<br>yarn config list<br>9、列出已缓存的每个包<br>sudo yarn cache list<br>10、清除缓存<br>sudo yarn cache clean</p>
+<p>&#96;&#96;&#96;</p>
+<p>五、NPM对比<br>npm install react –save            yarn add react<br>npm uninstall react –save       yarn remove react<br>npm install react –save-dev    yarn add react –dev<br>npm update –save                    yarn upgrade</p>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>首先vue.js 是库，不是框架，不是框架，不是框架。</p>
+<p>Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。</p>
+<p>Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统。</p>
+<p>vue.js 支持路由功能开发的 叫vue-route.js，vue.js支持数据请求功能开发的 叫vue-resource.js。<br>原文链接：<a href="https://blog.csdn.net/u013182960/article/details/110189159">https://blog.csdn.net/u013182960/article/details/110189159</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -5651,6 +5700,75 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
       </categories>
       <tags>
         <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python爬虫基础汇总</title>
+    <url>/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/</url>
+    <content><![CDATA[<h2 id="Python-自动化工具的改进"><a href="#Python-自动化工具的改进" class="headerlink" title="Python 自动化工具的改进"></a>Python 自动化工具的改进</h2><p>Selenium 启动的浏览器，有几十个特征可以被网站通过 JavaScript 探测到。Puppeteer 启动的浏览器，也有很多特征能够被网站探测。</p>
+<p>爬虫都会碰到某些网站刚刚打开页面就被判定为：非人类行为</p>
+<p>因为很多网站有对selenium的js监测机制。比如：navigator.webdriver，navigator.languages，navigator.plugins.length……</p>
+<p>具体解决方案：</p>
+<p>第一种：使用mitmproxy用中间人的方式截取服务器发送来的js，修改js里面函数的参值方式发送给服务器。相当于在browser和server之间做一层中介的拦截。不过此方法要对js非常熟悉的人才好实施。</p>
+<p>第二种方法依旧通过selenium，不过是在服务器在第一次发送js并在本地验证的时候，做好‘第一次’的伪装，从而实现‘第一次登陆’有效。。方法简单，适合小白。</p>
+<p>第三种，最新版，Playwright规避检测。入门教程：<a href="https://www.ngui.cc/article/show-529806.html?action=onClick">https://www.ngui.cc/article/show-529806.html?action=onClick</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/487281255">https://zhuanlan.zhihu.com/p/487281255</a></p>
+<h3 id="1-使用pyppeteer"><a href="#1-使用pyppeteer" class="headerlink" title="1.使用pyppeteer"></a>1.使用pyppeteer</h3><p>pyppeteer 加 asyncio 绕过selenium检测，实现鼠标滑动后自动登陆（代码很简单。主要熟悉异步模块及pyppeteer模块。pyppeteer模块看不懂就去看puppeteer文档，pyppeteer只是在puppeteer之上稍微包装了下而已 ）。</p>
+<p>首先是main.py</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import asyncio</span><br><span class="line">import time,random</span><br><span class="line">from pyppeteer.launcher import launch # 控制模拟浏览器用</span><br><span class="line">from retrying import retry #设置重试次数用的</span><br><span class="line"> </span><br><span class="line">async def main(username, pwd, url):# 定义main协程函数，</span><br><span class="line">    #以下使用await 可以针对耗时的操作进行挂起</span><br><span class="line">    browser = await launch(&#123;&#x27;headless&#x27;: False, &#x27;args&#x27;: [&#x27;--no-sandbox&#x27;], &#125;) # 启动pyppeteer 属于内存中实现交互的模拟器</span><br><span class="line">    page = await browser.newPage()  # 启动个新的浏览器页面</span><br><span class="line">    await page.setUserAgent(</span><br><span class="line">        &#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36&#x27;)</span><br><span class="line"> </span><br><span class="line">    await page.goto(url) # 访问登录页面</span><br><span class="line">    # 替换淘宝在检测浏览时采集的一些参数。</span><br><span class="line">    # 就是在浏览器运行的时候，始终让window.navigator.webdriver=false</span><br><span class="line">    # navigator是windiw对象的一个属性，同时修改plugins，languages，navigator 且让</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; Object.defineProperties(navigator,&#123; webdriver:&#123; get: () =&gt; false &#125; &#125;) &#125;&#x27;&#x27;&#x27;) #以下为插入中间js，将淘宝会为了检测浏览器而调用的js修改其结果。</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; window.navigator.chrome = &#123; runtime: &#123;&#125;,  &#125;; &#125;&#x27;&#x27;&#x27;)</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; Object.defineProperty(navigator, &#x27;languages&#x27;, &#123; get: () =&gt; [&#x27;en-US&#x27;, &#x27;en&#x27;] &#125;); &#125;&#x27;&#x27;&#x27;)</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; Object.defineProperty(navigator, &#x27;plugins&#x27;, &#123; get: () =&gt; [1, 2, 3, 4, 5,6], &#125;); &#125;&#x27;&#x27;&#x27;)</span><br><span class="line"> </span><br><span class="line">    # 使用type选定页面元素，并修改其数值，用于输入账号密码，修改的速度仿人类操作，因为有个输入速度的检测机制</span><br><span class="line">    # 因为 pyppeteer 框架需要转换为js操作，而js和python的类型定义不同，所以写法与参数要用字典，类型导入</span><br><span class="line">    await page.type(&#x27;.J_UserName&#x27;, username, &#123;&#x27;delay&#x27;: input_time_random() - 50&#125;)</span><br><span class="line">    await page.type(&#x27;#J_StandardPwd input&#x27;, pwd, &#123;&#x27;delay&#x27;: input_time_random()&#125;)</span><br><span class="line"> </span><br><span class="line">    #await page.screenshot(&#123;&#x27;path&#x27;: &#x27;./headless-test-result.png&#x27;&#125;)    # 截图测试</span><br><span class="line">    time.sleep(2)</span><br><span class="line"> </span><br><span class="line">    # 检测页面是否有滑块。原理是检测页面元素。</span><br><span class="line">    slider = await page.Jeval(&#x27;#nocaptcha&#x27;, &#x27;node =&gt; node.style&#x27;)  # 是否有滑块</span><br><span class="line"> </span><br><span class="line">    if slider:</span><br><span class="line">        print(&#x27;当前页面出现滑块&#x27;)</span><br><span class="line">        #await page.screenshot(&#123;&#x27;path&#x27;: &#x27;./headless-login-slide.png&#x27;&#125;) # 截图测试</span><br><span class="line">        flag,page = await mouse_slide(page=page) #js拉动滑块过去。</span><br><span class="line">        if flag:</span><br><span class="line">            await page.keyboard.press(&#x27;Enter&#x27;) # 确保内容输入完毕，少数页面会自动完成按钮点击</span><br><span class="line">            print(&quot;print enter&quot;,flag)</span><br><span class="line">            await page.evaluate(&#x27;&#x27;&#x27;document.getElementById(&quot;J_SubmitStatic&quot;).click()&#x27;&#x27;&#x27;) # 如果无法通过回车键完成点击，就调用js模拟点击登录按钮。</span><br><span class="line"> </span><br><span class="line">            time.sleep(2)</span><br><span class="line">            #cookies_list = await page.cookies()</span><br><span class="line">            #print(cookies_list)</span><br><span class="line">            await get_cookie(page) # 导出cookie 完成登陆后就可以拿着cookie玩各种各样的事情了。</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;&quot;)</span><br><span class="line">        await page.keyboard.press(&#x27;Enter&#x27;)</span><br><span class="line">        print(&quot;print enter&quot;)</span><br><span class="line">        await page.evaluate(&#x27;&#x27;&#x27;document.getElementById(&quot;J_SubmitStatic&quot;).click()&#x27;&#x27;&#x27;)</span><br><span class="line">        await page.waitFor(20)</span><br><span class="line">        await page.waitForNavigation()</span><br><span class="line"> </span><br><span class="line">        try:</span><br><span class="line">            global error # 检测是否是账号密码错误</span><br><span class="line">            print(&quot;error_1:&quot;,error)</span><br><span class="line">            error = await page.Jeval(&#x27;.error&#x27;, &#x27;node =&gt; node.textContent&#x27;)</span><br><span class="line">            print(&quot;error_2:&quot;,error)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            error = None</span><br><span class="line">        finally:</span><br><span class="line">            if error:</span><br><span class="line">                print(&#x27;确保账户安全重新入输入&#x27;)</span><br><span class="line">                # 程序退出。</span><br><span class="line">                loop.close()</span><br><span class="line">              else:</span><br><span class="line">                print(page.url)</span><br><span class="line">                await get_cookie(page)</span><br><span class="line">    #time.sleep(100)</span><br><span class="line"># 获取登录后cookie</span><br><span class="line">async def get_cookie(page):</span><br><span class="line">    #res = await page.content()</span><br><span class="line">    cookies_list = await page.cookies()</span><br><span class="line">    cookies = &#x27;&#x27;</span><br><span class="line">    for cookie in cookies_list:</span><br><span class="line">        str_cookie = &#x27;&#123;0&#125;=&#123;1&#125;;&#x27;</span><br><span class="line">        str_cookie = str_cookie.format(cookie.get(&#x27;name&#x27;), cookie.get(&#x27;value&#x27;))</span><br><span class="line">        cookies += str_cookie</span><br><span class="line">    print(cookies)</span><br><span class="line">    return cookies</span><br><span class="line"> </span><br><span class="line">def retry_if_result_none(result):</span><br><span class="line">    return result is None</span><br><span class="line"> </span><br><span class="line">@retry(retry_on_result=retry_if_result_none,)</span><br><span class="line">async def mouse_slide(page=None):</span><br><span class="line">    await asyncio.sleep(2)</span><br><span class="line">    try :</span><br><span class="line">        #鼠标移动到滑块，按下，滑动到头（然后延时处理），松开按键</span><br><span class="line">        await page.hover(&#x27;#nc_1_n1z&#x27;) # 不同场景的验证码模块能名字不同。</span><br><span class="line">        await page.mouse.down()</span><br><span class="line">        await page.mouse.move(2000, 0, &#123;&#x27;delay&#x27;: random.randint(1000, 2000)&#125;)</span><br><span class="line">        await page.mouse.up()</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(e, &#x27;:验证失败&#x27;)</span><br><span class="line">        return None,page</span><br><span class="line">    else:</span><br><span class="line">        await asyncio.sleep(2)</span><br><span class="line">        # 判断是否通过</span><br><span class="line">        slider_again = await page.Jeval(&#x27;.nc-lang-cnt&#x27;, &#x27;node =&gt; node.textContent&#x27;)</span><br><span class="line">        if slider_again != &#x27;验证通过&#x27;:</span><br><span class="line">            return None,page</span><br><span class="line">        else:</span><br><span class="line">            #await page.screenshot(&#123;&#x27;path&#x27;: &#x27;./headless-slide-result.png&#x27;&#125;) # 截图测试</span><br><span class="line">            print(&#x27;验证通过&#x27;)</span><br><span class="line">            return 1,page</span><br><span class="line"> </span><br><span class="line">def input_time_random():</span><br><span class="line">    return random.randint(100, 151)</span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    username = &#x27;xxxxxxxxx&#x27; # 淘宝用户名</span><br><span class="line">    pwd = &#x27;xxxxxxxxxxx&#x27; #密码</span><br><span class="line">    url = &#x27;https://login.taobao.com/member/login.jhtml?style=mini&amp;css_style=b2b&amp;from=b2b&amp;full_redirect=true&amp;redirect_url=https://login.1688.com/member/jump.htm?target=https://login.1688.com/member/marketSigninJump.htm?Done=http://login.1688.com/member/taobaoSellerLoginDispatch.htm&amp;reg= http://member.1688.com/member/join/enterprise_join.htm?lead=http://login.1688.com/member/taobaoSellerLoginDispatch.htm&amp;leadUrl=http://login.1688.com/member/&#x27;</span><br><span class="line">    loop = asyncio.get_event_loop()  #协程，开启个无限循环的程序流程，把一些函数注册到事件循环上。当满足事件发生的时候，调用相应的协程函数。</span><br><span class="line">    loop.run_until_complete(main(username, pwd, url))  #将协程注册到事件循环，并启动事件循环</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Playwright规避检测"><a href="#2-Playwright规避检测" class="headerlink" title="2.Playwright规避检测"></a>2.Playwright规避检测</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from playwright.sync_api import sync_playwright</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">p = sync_playwright().start()</span><br><span class="line">browser = p.chromium.launch(headless=False) #关闭无头模式，方便看到页面加载情况</span><br><span class="line">page = browser.new_page() #创建page对象</span><br><span class="line"></span><br><span class="line">js=&quot;&quot;&quot;</span><br><span class="line">Object.defineProperties(navigator, &#123;webdriver:&#123;get:()=&gt;undefined&#125;&#125;);</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    page.add_init_script(js);</span><br><span class="line">    page.goto(&quot;https://antispider1.scrape.center/&quot;)</span><br><span class="line">    print(page.title())</span><br><span class="line">except Exception as err:</span><br><span class="line">    print(err)</span><br><span class="line">finally:</span><br><span class="line">    time.sleep(1000) #等待1000s防止看不到页面</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首先上一个被拷贝的惨不忍睹 上一个是滑块验证[<a href="https://www.cnblogs.com/carl-/p/15761861.html]">https://www.cnblogs.com/carl-/p/15761861.html]</a></p>
+<p>还是前两天做一个商城后台爬虫，限制用户缓存，不能用谷歌开发版本，同时需要下载文件。</p>
+<p>话不多说上代码[<a href="https://www.cnblogs.com/carl-/p/15762714.html]">https://www.cnblogs.com/carl-/p/15762714.html]</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import getpass</span><br><span class="line">from playwright.sync_api import sync_playwright</span><br><span class="line"># 不出意外这个可以获取到你google的本地缓存文件</span><br><span class="line">__USER_DATE_DIR_PATH__ = f&quot;C:\\Users\\&#123;getpass.getuser()&#125;\\AppData\Local\Google\Chrome\\User Data&quot;</span><br><span class="line">playwright = sync_playwright().start()</span><br><span class="line">browser = playwright.chromium.launch_persistent_context(</span><br><span class="line">                    # 指定本机用户缓存地址</span><br><span class="line">                    user_data_dir=__USER_DATE_DIR_PATH__,</span><br><span class="line">                    # 指定本机google客户端exe的路径</span><br><span class="line">                    executable_path=__EXECUTABLE_PATH__,</span><br><span class="line">                    # 要想通过这个下载文件这个必然要开  默认是False</span><br><span class="line">                    accept_downloads=True,</span><br><span class="line">                    # 设置不是无头模式</span><br><span class="line">                    headless=False,</span><br><span class="line">                    bypass_csp=True,</span><br><span class="line">                    slow_mo=10，</span><br><span class="line">                    #跳过检测</span><br><span class="line">                    args=[&#x27;--disable-blink-features=AutomationControlled&#x27;]</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+
+<p>注意用这个方法启动的浏览器会自带一个页面存在，当然你还是可以重新再起一个</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 打开新页</span><br><span class="line">page = browser.new_page()</span><br><span class="line"># 访问谷歌首页</span><br><span class="line">page.goto(&#x27;https://www.google.com&#x27;,wait_until=&#x27;networkidle&#x27;,timeout=90000)</span><br></pre></td></tr></table></figure>
+
+<h6 id="wait-until-x3D-’networkidle’-意思是-跳转过后再一定时间内没有网络请求链接"><a href="#wait-until-x3D-’networkidle’-意思是-跳转过后再一定时间内没有网络请求链接" class="headerlink" title="wait_until&#x3D;’networkidle’ 意思是 跳转过后再一定时间内没有网络请求链接"></a>wait_until&#x3D;’networkidle’ 意思是 跳转过后再一定时间内没有网络请求链接</h6><h6 id="timeout-很好理解-超时时间90秒"><a href="#timeout-很好理解-超时时间90秒" class="headerlink" title="timeout 很好理解 超时时间90秒"></a>timeout 很好理解 超时时间90秒</h6><p>js注入（用途的话是选择器选择元素用的，具体的js 你们自己写）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 算是获得句柄吧</span><br><span class="line">window_handle = page.evaluate_handle(&quot;window&quot;)</span><br><span class="line"># 选择元素</span><br><span class="line">window_handle.evaluate(&quot;document.querySelectorAll(&#x27;#drrReportRangeTypeRadioMonthly&#x27;)[0].checked=true&quot;)</span><br><span class="line"># 自带select选择 data自行补充</span><br><span class="line">drrMonthlySelect = page.wait_for_selector(&#x27;//select[@id=&quot;drrMonthlySelect&quot;]&#x27;)</span><br><span class="line">drrMonthlySelect.select_option(date)</span><br></pre></td></tr></table></figure>
+
+<h4 id="接下来是下载操作"><a href="#接下来是下载操作" class="headerlink" title="接下来是下载操作"></a>接下来是下载操作</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 打开下载器</span><br><span class="line">with page.expect_download() as download_info:</span><br><span class="line">  #找到你要下载的东西，找到点击的元素，点击</span><br><span class="line">  page.wait_for_selector(&#x27;//a[@id=&quot;sspa-reports:report-settings-page:-download-button&quot;]&#x27;).click()</span><br><span class="line"># 下载的东西</span><br><span class="line">download = download_info.value</span><br><span class="line"># 下载的路径</span><br><span class="line">download.path()</span><br><span class="line"># 下载的文件名</span><br><span class="line">download.suggested_filename</span><br><span class="line"># 关闭页面</span><br><span class="line">page.close()</span><br><span class="line"># 关闭浏览器</span><br><span class="line">browser.stop()</span><br></pre></td></tr></table></figure>
+
+<h4 id="剩下的操作-你想干啥干啥"><a href="#剩下的操作-你想干啥干啥" class="headerlink" title="剩下的操作 你想干啥干啥"></a>剩下的操作 你想干啥干啥</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 补充几个</span><br><span class="line"># 点击</span><br><span class="line">page.click(&#x27;//input[@id=&quot;signInSubmit&quot;]&#x27;)</span><br><span class="line"># 等待完成</span><br><span class="line">self.page.wait_for_load_state(&quot;domcontentloaded&quot;)</span><br><span class="line"># 输入</span><br><span class="line">page.fill(&#x27;//input[@id=&quot;ap_email&quot;]&#x27;, user_str)</span><br><span class="line"># 查找元素</span><br><span class="line">page.wait_for_selector(&#x27;//select[@id=&quot;drrMonthlySelect&quot;]&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>原文地址：<a href="https://www.cnblogs.com/carl-/p/15762714.html">https://www.cnblogs.com/carl-/p/15762714.html</a></p>
+<p><a href="https://www.pianshen.com/article/3395153606/">https://www.pianshen.com/article/3395153606/</a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python爬虫基础汇总</title>
+    <url>/2022/11/22/Python%20%E7%88%AC%E8%99%AB%E6%9C%80%E4%BD%B3%E7%BB%84%E5%90%88/</url>
+    <content><![CDATA[<h2 id="Python-爬虫最佳组合"><a href="#Python-爬虫最佳组合" class="headerlink" title="Python 爬虫最佳组合"></a>Python 爬虫最佳组合</h2><ul>
+<li>请求库： HTTPX。</li>
+<li>框架：Scrapy</li>
+<li>模拟爬取： Playwright</li>
+<li>JS 引擎 for Python：PyMiniRacer。</li>
+<li>抓包工具：Fiddler 和浏览器。</li>
+</ul>
+<p>本文只介绍，请求库： HTTPX。框架：Scrapy，模拟爬取： Playwright</p>
+<h3 id="1-HTTPX"><a href="#1-HTTPX" class="headerlink" title="1.HTTPX"></a>1.HTTPX</h3><p>HTTPX 的 slogan 是“Python 的下一代 HTTP 客户端”，从出生开始就只支持 Python 3.6 及更高版本。使用了 Type Hint，同时支持同步和异步接口，同时支持 HTTP&#x2F;1.1 和 HTTP&#x2F;2，还提供了命令行工具，可以在命令行中直接发送 HTTP 请求。HTTPX 站在 Requests 的肩膀上，Requests 支持的功能它都支持，Requests 不支持的功能它也支持，比 Requests 更现代，没有历史包袱。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import httpx</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    &#x27;User-Agent&#x27;: &#x27;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&#x27;</span><br><span class="line">&#125;</span><br><span class="line">response =httpx.get(&#x27;https://www.baidu.com&#x27;, headers=headers)</span><br><span class="line">print(response.text)</span><br><span class="line"></span><br><span class="line">#SSL验证</span><br><span class="line"></span><br><span class="line"># 自带ca证书</span><br><span class="line">response = httpx.get(&#x27;https://www.baidu.com&#x27;, verify=&quot;path/cert/client.pem&quot;)</span><br><span class="line"></span><br><span class="line"># 完全禁用SSL验证</span><br><span class="line">response = httpx.get(&#x27;https://www.baidu.com&#x27;, verify=False)</span><br></pre></td></tr></table></figure>
+
+<p>使用client发送请求</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import httpx</span><br><span class="line"></span><br><span class="line">with httpx.Client() as client:</span><br><span class="line">    response = client.get(&#x27;https://www.baidu.com&#x27;)</span><br><span class="line">    print(response.text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import httpx</span><br><span class="line"></span><br><span class="line">proxies= &#123;</span><br><span class="line">    &#x27;http&#x27;: &#x27;http://127.0.0.1:9999&#x27;,</span><br><span class="line">    &#x27;https&#x27;: &#x27;http://127.0.0.1:8888&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">with httpx.Client(proxies=proxies) as client:</span><br><span class="line">    response = client.get(&#x27;https://www.baidu.com&#x27;)</span><br><span class="line">    print(response)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Scrapy"><a href="#2-Scrapy" class="headerlink" title="2.Scrapy"></a>2.Scrapy</h3>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -5760,55 +5878,6 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
       </categories>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js-vue概念</title>
-    <url>/2022/07/09/Node-js-vue%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I&#x2F;O 的模型，使其轻量又高效。 </p>
-<p>Node 是一个让 JavaScript 运行在服务端的开发平台，它让 JavaScript 成为与PHP、Python、Perl、Ruby 等服务端语言平起平坐的脚本语言。 发布于2009年5月，由Ryan Dahl开发，实质是对Chrome V8引擎进行了封装。Node 使用事件驱动， 非阻塞I&#x2F;O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。</p>
-<p>官网上对其特点描述为：</p>
-<p>它是一个Javascript运行环境</p>
-<p>依赖于Chrome V8引擎进行代码解释</p>
-<p>事件驱动</p>
-<p>非阻塞I&#x2F;O</p>
-<p>轻量、可伸缩，适于实时数据交互应用</p>
-<p>单进程，单线程</p>
-<p>相对于传统的JavaScript来说，Node.js 是一个运行在服务端的框架，它的底层就使用了 V8 引擎。我们知道 Apache + PHP 以及 Java 的 Servlet 都可以用来开发动态网页，Node.js 的作用与他们类似，只不过是使用 JavaScript 来开发，它大大提升了开发的性能以及便利。</p>
-<h3 id="nmp"><a href="#nmp" class="headerlink" title="nmp"></a>nmp</h3><p>npm（包管理工具）是基于 Node.js的前端项目包管理工具，是项目中对各种程序包的依赖管理，传统的开发项目主要是后端，现在技术在更新，前端有了框架的开发模式管理，也需要用包管理工具的思想去管理，目的是简化第三方程序包在项目中引用复杂化。前端的ｊｓ包是全世界JavaScript 天才开发共享的各种代码模块，把这些代码模块都按照一个独立的软件功能统一在一个库中，一个代码模块是一个程序包（package，即代码模块）。它是世界上最大的软件注册表，每星期大约有 30 亿次的下载量，包含超过 600000 个 包（package） （即，代码模块），使用包的结构使您能够轻松跟踪依赖项和版本。<br>npm是node官方的包管理器。cnpm是个中国版的npm，是淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 创建一个文件包</span><br><span class="line">2. npm init</span><br><span class="line">3. 创建一个index.js 文件，并写入一些要实现的代码</span><br><span class="line">4.npm install –D xxx  项目依赖安装，并写入package.json的devDependencies中</span><br><span class="line">5.npm install -g xxx  # 安装最新版本</span><br><span class="line">6.npm install -g xxx@1.0.0   # 安装指定版本</span><br><span class="line">7.npm install xxx  本地安装（当前文件夹） </span><br><span class="line">8.npm install –S xxx  # 和上面效果一样</span><br><span class="line">--save 安装并添加条目到 package.json 文件的 dependencies。</span><br><span class="line">--save-dev 安装并添加条目到 package.json 文件的 devDependencies。</span><br><span class="line">9.npm install --registry=https://registry.npmmirror.com 项目本次安装依赖，临时使用淘宝镜像</span><br><span class="line">9.npm get registry  查询当前源配置</span><br><span class="line">10.npm config set reg istry https://registry.npmmirror.com 设置淘宝镜像源</span><br><span class="line">11.npm info 查看每个模块的具体信息</span><br><span class="line">12.npm list 命令以树型结构列出当前项目安装的所有模块，以及它们依赖的模块。</span><br><span class="line">13.npm list -global 会列出全局安装的模块。</span><br><span class="line">5. npm link 本地调试</span><br><span class="line">6. npm login 登录</span><br><span class="line">7. npm publish 发布</span><br><span class="line">8. npm version patch // 更新版本</span><br><span class="line">9. npm update gulp            //可以把当前目录下node_modules子目录里边的对应模块更新至最新版本 </span><br><span class="line">10. npm unpublish npmhswcommonwei@1.0.2 // 可以撤销发布自己发布过的某个版本代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="Bower："><a href="#Bower：" class="headerlink" title="Bower："></a><strong>Bower：</strong></h3><p>Bower是一个客户端技术的软件包管理器，它可用于搜索、安装和卸载如JavaScript、HTML、CSS之类的网络资源。<br>其他还有一些建立在Bower基础之上的开发工具，如YeoMan和Grunt。</p>
-<p>为了安装bower，你首先需要安装如下文件：</p>
-<ul>
-<li><p>Node：下载最新版本的node.js</p>
-</li>
-<li><p>NPM：NPM是node程序包管理器。它是捆绑在nodejs的安装程序上的，所以一旦你已经安装了node，NPM也就安装好了。</p>
-</li>
-<li><p>Git：你需要从git仓库获取一些代码包。</p>
-</li>
-<li><p>下载</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>npm install -g bower</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### yarn</span><br><span class="line"></span><br><span class="line">Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 ，正如[官方文档](https://link.jianshu.com/?t=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fcode.facebook.com%2Fposts%2F1840075619545360)中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>1、速度快<br>速度快主要来自以下两个方面：</p>
-</li>
-</ul>
-<p>1.1、并行安装：无论 npm 还是 Yarn 在执行包的安装时，都会执行一系列任务。npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。<br>1.2、离线模式：如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了。<br>2、安装版本统一<br>为了防止拉取到不同的版本，Yarn 有一个锁定文件 (lock file) 记录了被确切安装上的模块的版本号。每次只要新增了一个模块，Yarn 就会创建（或更新）yarn.lock 这个文件。这么做就保证了，每一次拉取同一个项目依赖时，使用的都是一样的模块版本。npm 其实也有办法实现处处使用相同版本的 packages，但需要开发者执行 npm shrinkwrap 命令。这个命令将会生成一个锁定文件，在执行 npm install 的时候，该锁定文件会先被读取，和 Yarn 读取 yarn.lock 文件一个道理。npm 和 Yarn 两者的不同之处在于，Yarn 默认会生成这样的锁定文件，而 npm 要通过 shrinkwrap 命令生成 npm-shrinkwrap.json 文件，只有当这个文件存在的时候，packages 版本信息才会被记录和更新。<br>3、更简洁的输出<br>npm 的输出信息比较冗长。在执行 npm install 的时候，命令行里会不断地打印出所有被安装上的依赖。相比之下，Yarn 简洁太多：默认情况下，结合了 emoji直观且直接地打印出必要的信息，也提供了一些命令供开发者查询额外的安装信息。<br>4、多注册来源处理<br>所有的依赖包，不管他被不同的库间接关联引用多少次，安装这个包时，只会从一个注册来源去装，要么是 npm 要么是 bower, 防止出现混乱不一致。<br>5、更好的语义化<br>yarn改变了一些npm命令的名称，比如 yarn add&#x2F;remove，感觉上比 npm 原本的 install&#x2F;uninstall 要更清晰。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<p>三、Yarn安装<br>npm install -g yarn<br>四、Yarn命令<br>1、查看版本<br>yarn -v<br>2、创建工程<br>yarn init<br>3、安装依赖<br>yarn 或者 yarn install<br>4、运行脚本<br>yarn run<br>5、打包构建<br>yarn build<br>6、显示某个包信息<br>yarn info<br>7、列出当前项目的依赖<br>yarn list<br>8、显示当前配置<br>yarn config list<br>9、列出已缓存的每个包<br>sudo yarn cache list<br>10、清除缓存<br>sudo yarn cache clean</p>
-<p>&#96;&#96;&#96;</p>
-<p>五、NPM对比<br>npm install react –save            yarn add react<br>npm uninstall react –save       yarn remove react<br>npm install react –save-dev    yarn add react –dev<br>npm update –save                    yarn upgrade</p>
-<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>首先vue.js 是库，不是框架，不是框架，不是框架。</p>
-<p>Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。</p>
-<p>Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统。</p>
-<p>vue.js 支持路由功能开发的 叫vue-route.js，vue.js支持数据请求功能开发的 叫vue-resource.js。<br>原文链接：<a href="https://blog.csdn.net/u013182960/article/details/110189159">https://blog.csdn.net/u013182960/article/details/110189159</a></p>
-]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -6337,76 +6406,6 @@ public class NodeController &#123;
       </tags>
   </entry>
   <entry>
-    <title>Spring boot中前后端数据交互之后端对前端数据的获取</title>
-    <url>/2022/06/29/Spring-boot%E4%B8%AD%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E4%B9%8B%E5%90%8E%E7%AB%AF%E5%AF%B9%E5%89%8D%E7%AB%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/</url>
-    <content><![CDATA[<h3 id="1-Springboot前后台数据传输"><a href="#1-Springboot前后台数据传输" class="headerlink" title="1.Springboot前后台数据传输"></a>1.Springboot前后台数据传输</h3><p>类似于</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;/qing&quot;)</span><br><span class="line">public class Controler &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private Server mus;</span><br><span class="line">    </span><br><span class="line">@GetMapping(&quot;/login&quot;)</span><br><span class="line">    public String Login(Model model,HttpServletRequest request) throws Exception &#123;</span><br><span class="line">    //oneclass,twoclass分别代表着一级分类与二级分类</span><br><span class="line">        String oneclass=request.getParameter(&quot;oneclass&quot;);//从前端请求到输入的数据</span><br><span class="line">        String twoclass=request.getParameter(&quot;twoclass&quot;);//从前端请求到输入的数据</span><br><span class="line">        //request.getSession().setAttribute(&quot;oneclass&quot;,oneclass);</span><br><span class="line">        //request.getSession().setAttribute(&quot;twoclass&quot;,twoclass);</span><br><span class="line">        //调用的业务层（server）进行处理</span><br><span class="line">        ArrayList&lt;Music&gt; music=mus.data(Integer.parseInt(oneclass));</span><br><span class="line">        //数据会存放到Model对象中，当需要生成HTML的时候，模板引擎会根据名字来定位数据</span><br><span class="line">        model.addAttribute(&quot;music&quot;,music);</span><br><span class="line">        return &quot;Index02.html&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>前端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;login&quot; method=&quot;get&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;text&quot; placeholder=&quot;一级分类（0-12）&quot; name=&quot;oneclass&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;text&quot; placeholder=&quot;二级分类（名字）&quot;name=&quot;twoclass&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;submit&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>也可以</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">用户触发点击事件</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;一级分类&quot; onclick=&quot;creationRanking(&#x27;content&#x27;)&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;二级分类&quot; onclick=&quot;cloudWorld(&#x27;content&#x27;)&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">去执行JS代码</span><br><span class="line">function creationRanking(id) &#123;</span><br><span class="line">    $.get(&#123;</span><br><span class="line">        url: &quot;/analyze/creation/ranking&quot;,</span><br><span class="line">        dataType: &quot;json&quot;,</span><br><span class="line">        method: &quot;get&quot;,</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        &#125;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取前端参数的方式"><a href="#获取前端参数的方式" class="headerlink" title="获取前端参数的方式"></a>获取前端参数的方式</h3><h4 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h4><p>在控制器中，数据会存放到Model对象中，当需要生成HTML的时候，模板引擎会根据名字来定位数据</p>
-<p>Attribute特征，特性，属性;</p>
-<p>Parameter界限;参数</p>
-<p>从广义上来说，Model指的是MVC中的M，即Model(模型)。从狭义上讲，Model就是个key-value集合。实际上，上图home方法得到的model对象就是一个 <code>java.util.Map</code> ，你可以将Model类型替换为<code>Map&lt;String, Object&gt;</code> ，或者ModelMap——一个实现了Model接口的<code>java.util.HashMap</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Model &#123;</span><br><span class="line">    Model addAttribute(String attributeName, @Nullable Object attributeValue);</span><br><span class="line">    Model addAttribute(Object attributeValue);</span><br><span class="line">    Model addAllAttributes(Collection&lt;?&gt; attributeValues);</span><br><span class="line">    Model addAllAttributes(Map&lt;String, ?&gt; attributes);</span><br><span class="line">    Model mergeAttributes(Map&lt;String, ?&gt; attributes);</span><br><span class="line">    boolean containsAttribute(String attributeName);</span><br><span class="line">    @Nullable</span><br><span class="line">    Object getAttribute(String attributeName);</span><br><span class="line">    Map&lt;String, Object&gt; asMap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>意味着model.addattribute可以往前台传数据，可以传对象，可以传List，通过表达式 ${}可以获取到</p>
-<p>ModelAndView的用法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RequestMapping(&quot;model&quot;)</span><br><span class="line">public ModelAndView testModel(String name) &#123;</span><br><span class="line">    //构建ModelAndView实例，并设置跳转地址</span><br><span class="line">    ModelAndView view = new ModelAndView(&quot;test&quot;);</span><br><span class="line">    //将数据放置到ModelAndView对象view中,第二个参数可以是任何java类型</span><br><span class="line">    view.addObject(&quot;name&quot;,name);</span><br><span class="line">    //返回ModelAndView对象view</span><br><span class="line">    return view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当然还可以这样设置跳转地址</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ModelAndView view = new ModelAndView();</span><br><span class="line">view.setViewName(&quot;test&quot;);</span><br><span class="line">//其中的test表示templates中的test.html，springboot默认的模版文件一般都在resources/templates下</span><br></pre></td></tr></table></figure>
-
-<h3 id="后端获取前端数据三种方式"><a href="#后端获取前端数据三种方式" class="headerlink" title="后端获取前端数据三种方式"></a>后端获取前端数据三种方式</h3><p>Param参数;Variable变量;</p>
-<p>参考：<a href="http://www.javashuo.com/article/p-kkkebbuc-mv.html">http://www.javashuo.com/article/p-kkkebbuc-mv.html</a></p>
-<h4 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a>@RequestParam</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">前端发出的请求：path?id=1;</span><br><span class="line">@RequestMapper(value=&quot;path&quot;)</span><br><span class="line">public void test(@RequestParam(&quot;id&quot;) int id)&#123;</span><br><span class="line">	System.out.println(id);</span><br><span class="line">&#125;</span><br><span class="line">获取前端传来的非json格式的数据</span><br><span class="line">// 单个数据,@RequestParam中的值必定要与前端属性名一致</span><br><span class="line">public void test(@RequestParam(&quot;name)&quot; String name)&#123;</span><br><span class="line">	System.out.println(params);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 数组数据</span><br><span class="line">@RequestMapper(value=&quot;path&quot;)</span><br><span class="line">public void test(@RequestParam Map&lt;String,Object&gt; params)&#123;</span><br><span class="line">	System.out.println(params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable"></a>@PathVariable</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">前端发出的请求：path/&#123;id&#125;;</span><br><span class="line">@RequestMapper(value=&quot;path/&#123;id&#125;&quot;)</span><br><span class="line">public void test(@PathVariable(&quot;id&quot;) int id)&#123;</span><br><span class="line">	System.out.println(id);</span><br><span class="line">&#125;</span><br><span class="line">@GetMapping(&quot;/ting&quot;)</span><br><span class="line">    public String homePageController(Model model,@PathVariable(&quot;currentIndex&quot;) int currentIndex) throws Exception&#123;</span><br><span class="line">        ArrayList&lt;Music&gt; music=mus.data(currentIndex);</span><br><span class="line">        model.addAttribute(&quot;music&quot;,music);</span><br><span class="line">        // model.addAttribute(&quot;index&quot;,currentIndex);</span><br><span class="line">        return &quot;Index01.html&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h4><p>获取前台出来的json格式的数据javascript</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">        type: &#x27;POST&#x27;,//方法类型</span><br><span class="line">        url: url,</span><br><span class="line">        contentType: &#x27;application/json&#x27;,</span><br><span class="line">        data: &#123;</span><br><span class="line">        	&quot;username&quot;:&quot;小明&quot;,</span><br><span class="line">        	&quot;sex&quot;:&quot;男&quot;,</span><br><span class="line">        	&quot;age&quot;:&quot;18&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        success: function (result) &#123;</span><br><span class="line">            if (result == 200) &#123;</span><br><span class="line">                $(&#x27;#goodsModal&#x27;).modal(&#x27;hide&#x27;);</span><br><span class="line">                swal(&#123;</span><br><span class="line">                    title: swlMessage,</span><br><span class="line">                    type: &#x27;success&#x27;,</span><br><span class="line">                    showCancelButton: false,</span><br><span class="line">                    confirmButtonColor: &#x27;#1baeae&#x27;,</span><br><span class="line">                    confirmButtonText: &#x27;返回商品列表&#x27;,</span><br><span class="line">                    confirmButtonClass: &#x27;btn btn-success&#x27;,</span><br><span class="line">                    buttonsStyling: false</span><br><span class="line">                &#125;).then(function () &#123;</span><br><span class="line">                    window.location.href = &quot;/admin/goods&quot;;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                $(&#x27;#goodsModal&#x27;).modal(&#x27;hide&#x27;);</span><br><span class="line">                swal(result.message, &#123;</span><br><span class="line">                    icon: &quot;error&quot;,</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">// bean</span><br><span class="line">public class User&#123;</span><br><span class="line">	private String username;</span><br><span class="line">	private String sex;</span><br><span class="line">		..</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Controller中代码片断</span><br><span class="line">@RequestMapper(value=&quot;path/&#123;id&#125;&quot;,method = RequestMethod.POST)</span><br><span class="line">public void test(@RequestBody User user)&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-HttpServletRequest方法"><a href="#2-HttpServletRequest方法" class="headerlink" title="2 HttpServletRequest方法"></a>2 HttpServletRequest方法</h4><p>原文链接：<a href="https://blog.csdn.net/qq_43656233/article/details/103000794">https://blog.csdn.net/qq_43656233/article/details/103000794</a></p>
-<p>很古老的方法，简单来说就是通过调用request的getParameter方法来获取参数，不建议使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   @Controller</span><br><span class="line">public class indexController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/login&quot;)</span><br><span class="line">    public String Login(HttpServletRequest request)&#123;</span><br><span class="line">        String username=request.getParameter(&quot;username&quot;);</span><br><span class="line">        String password=request.getParameter(&quot;password&quot;);</span><br><span class="line">        Student student = new Student(username,password);</span><br><span class="line">        request.getSession().setAttribute(&quot;username&quot;,username);</span><br><span class="line">        request.getSession().setAttribute(&quot;password&quot;,password);</span><br><span class="line">        return &quot;Result&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&quot;)</span><br><span class="line">    public String index()&#123;</span><br><span class="line">        return &quot;Login&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">①getParameter()获取的是客户端设置的数据。</span><br><span class="line">getAttribute()获取的是服务器设置的数据。</span><br><span class="line">②getParameter()永远返回字符串</span><br><span class="line">getAttribute()返回值是任意类型</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-
-<p>login页面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">        &lt;title&gt;Getting Started: Handling Form Submission&lt;/title&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action=&quot;login&quot; method=&quot;get&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;passwod&quot; name=&quot;password&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Result页面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">        &lt;title&gt;Getting Started: Handling Form Submission&lt;/title&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    123</span><br><span class="line">    &lt;p th:text=&quot;$&#123;session.username&#125;&quot;/&gt;</span><br><span class="line">    &lt;p th:text=&quot;$&#123;session.password&#125;&quot;/&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="HttpServletRequest与Model的区别"><a href="#HttpServletRequest与Model的区别" class="headerlink" title="HttpServletRequest与Model的区别"></a>HttpServletRequest与Model的区别</h3><p>原文链接：<a href="https://blog.csdn.net/weixin_47872288/article/details/122362891">https://blog.csdn.net/weixin_47872288/article/details/122362891</a></p>
-<p>1.1 HttpServletRequest<br>HttpServletRequest对象代表客户端的请求，当客户端通过HTTP协议访问服务器时，HTTP请求头中的所有信息都封装在这个对象中，通过这个对象提供的方法，可以获得客户端请求的所有信息</p>
-<p>具体其功能函数有如下：</p>
-<ul>
-<li><p>函数                        功能<br>getRequestURL     返回客户端请求时的完整URL<br>getQueryString     返回请求行中的参数部分<br>getPathInfo           返回请求URL中的额外路径信息<br>getRemoteAddr    返回发出请求的客户机的IP地址<br>getRemoteHost    返回发出请求的客户机的完整主机名<br>getRemotePort     返回客户机所使用的网络端口号<br>getLocalAddr        返回WEB服务器的IP地址<br>getLocalName      返回WEB服务器的主机名</p>
-</li>
-<li><h4 id="model"><a href="#model" class="headerlink" title="model"></a>model</h4></li>
-<li><p>关于model的这个类</p>
-</li>
-</ul>
-<p>只传输数据而不会自动寻址，由于model的每次请求会自动创建对象，所以不用new<br>ModelAndView会自动寻址，就会链接到WebCotent下的view，modelandview请求不会自动创建对象，每次使用都要new</p>
-<p>srpingMVC内部机制决定的,请求处理方法执行完成后，最终返回一个 ModelAndView 对象。</p>
-<p>model数据最终还是写到HttpServletRequest属性中，只是model的写法更体现了MVC思想减少各层间耦合</p>
-<ol start="2">
-<li>总结<br>Model是每次请求中都存在的默认参数，利用其addAttribute()方法即可将服务器的值传递到jsp页面中；<br>ModelAndView包含model和view两部分，使用时需要自己实例化，利用ModelMap用来传值，也可以设置view的名称<br>关于其写法的具体展示<br>具体如下：</li>
-</ol>
-<p>1.request.setAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;把值存到request<br>其取值具体是通过request.getAttribute(“manongyanjiuseng”)<br>2.modelMap.addAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;把值存到modelMap<br>其取值具体是通过${manongyanjiuseng}<br>3.model.addAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;把值存到model<br>其取值具体是通过${manongyanjiuseng}<br>4.request.getSession.setAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;先获取，在把值存到Session<br>其取值具体是通过request.getSession().getAttribute(“manongyanjiuseng”)</p>
-<p>以上取值中${manongyanjiuseng}这种方式是最快的</p>
-<h4 id="也就是model和HttpServletRequest，model的取值比较快"><a href="#也就是model和HttpServletRequest，model的取值比较快" class="headerlink" title="也就是model和HttpServletRequest，model的取值比较快"></a>也就是model和HttpServletRequest，model的取值比较快</h4>]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>14.SpringBoot 常用的基础注解</title>
     <url>/2022/05/12/SpringBoot-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9F%BA%E7%A1%80%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="SpringBoot-常用的基础注解"><a href="#SpringBoot-常用的基础注解" class="headerlink" title="SpringBoot 常用的基础注解"></a>SpringBoot 常用的基础注解</h1><h3 id="什么是-Spring-Boot"><a href="#什么是-Spring-Boot" class="headerlink" title="什么是 Spring Boot"></a>什么是 Spring Boot</h3><p><strong>1. Spring Boot 入门</strong>（一个简单上手的微服务框架）</p>
@@ -6479,6 +6478,76 @@ public class NodeController &#123;
 <p><strong>@Bean</strong></p>
 <p>相当于XML中的<bean></bean>,放在方法的上面，而不是类，意思是产生一个bean,并交给spring管理。</p>
 ]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring boot中前后端数据交互之后端对前端数据的获取</title>
+    <url>/2022/06/29/Spring-boot%E4%B8%AD%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E4%B9%8B%E5%90%8E%E7%AB%AF%E5%AF%B9%E5%89%8D%E7%AB%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/</url>
+    <content><![CDATA[<h3 id="1-Springboot前后台数据传输"><a href="#1-Springboot前后台数据传输" class="headerlink" title="1.Springboot前后台数据传输"></a>1.Springboot前后台数据传输</h3><p>类似于</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;/qing&quot;)</span><br><span class="line">public class Controler &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private Server mus;</span><br><span class="line">    </span><br><span class="line">@GetMapping(&quot;/login&quot;)</span><br><span class="line">    public String Login(Model model,HttpServletRequest request) throws Exception &#123;</span><br><span class="line">    //oneclass,twoclass分别代表着一级分类与二级分类</span><br><span class="line">        String oneclass=request.getParameter(&quot;oneclass&quot;);//从前端请求到输入的数据</span><br><span class="line">        String twoclass=request.getParameter(&quot;twoclass&quot;);//从前端请求到输入的数据</span><br><span class="line">        //request.getSession().setAttribute(&quot;oneclass&quot;,oneclass);</span><br><span class="line">        //request.getSession().setAttribute(&quot;twoclass&quot;,twoclass);</span><br><span class="line">        //调用的业务层（server）进行处理</span><br><span class="line">        ArrayList&lt;Music&gt; music=mus.data(Integer.parseInt(oneclass));</span><br><span class="line">        //数据会存放到Model对象中，当需要生成HTML的时候，模板引擎会根据名字来定位数据</span><br><span class="line">        model.addAttribute(&quot;music&quot;,music);</span><br><span class="line">        return &quot;Index02.html&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>前端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;login&quot; method=&quot;get&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;text&quot; placeholder=&quot;一级分类（0-12）&quot; name=&quot;oneclass&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;text&quot; placeholder=&quot;二级分类（名字）&quot;name=&quot;twoclass&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;submit&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也可以</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">用户触发点击事件</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;一级分类&quot; onclick=&quot;creationRanking(&#x27;content&#x27;)&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;二级分类&quot; onclick=&quot;cloudWorld(&#x27;content&#x27;)&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">去执行JS代码</span><br><span class="line">function creationRanking(id) &#123;</span><br><span class="line">    $.get(&#123;</span><br><span class="line">        url: &quot;/analyze/creation/ranking&quot;,</span><br><span class="line">        dataType: &quot;json&quot;,</span><br><span class="line">        method: &quot;get&quot;,</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        &#125;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取前端参数的方式"><a href="#获取前端参数的方式" class="headerlink" title="获取前端参数的方式"></a>获取前端参数的方式</h3><h4 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h4><p>在控制器中，数据会存放到Model对象中，当需要生成HTML的时候，模板引擎会根据名字来定位数据</p>
+<p>Attribute特征，特性，属性;</p>
+<p>Parameter界限;参数</p>
+<p>从广义上来说，Model指的是MVC中的M，即Model(模型)。从狭义上讲，Model就是个key-value集合。实际上，上图home方法得到的model对象就是一个 <code>java.util.Map</code> ，你可以将Model类型替换为<code>Map&lt;String, Object&gt;</code> ，或者ModelMap——一个实现了Model接口的<code>java.util.HashMap</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Model &#123;</span><br><span class="line">    Model addAttribute(String attributeName, @Nullable Object attributeValue);</span><br><span class="line">    Model addAttribute(Object attributeValue);</span><br><span class="line">    Model addAllAttributes(Collection&lt;?&gt; attributeValues);</span><br><span class="line">    Model addAllAttributes(Map&lt;String, ?&gt; attributes);</span><br><span class="line">    Model mergeAttributes(Map&lt;String, ?&gt; attributes);</span><br><span class="line">    boolean containsAttribute(String attributeName);</span><br><span class="line">    @Nullable</span><br><span class="line">    Object getAttribute(String attributeName);</span><br><span class="line">    Map&lt;String, Object&gt; asMap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>意味着model.addattribute可以往前台传数据，可以传对象，可以传List，通过表达式 ${}可以获取到</p>
+<p>ModelAndView的用法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RequestMapping(&quot;model&quot;)</span><br><span class="line">public ModelAndView testModel(String name) &#123;</span><br><span class="line">    //构建ModelAndView实例，并设置跳转地址</span><br><span class="line">    ModelAndView view = new ModelAndView(&quot;test&quot;);</span><br><span class="line">    //将数据放置到ModelAndView对象view中,第二个参数可以是任何java类型</span><br><span class="line">    view.addObject(&quot;name&quot;,name);</span><br><span class="line">    //返回ModelAndView对象view</span><br><span class="line">    return view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然还可以这样设置跳转地址</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ModelAndView view = new ModelAndView();</span><br><span class="line">view.setViewName(&quot;test&quot;);</span><br><span class="line">//其中的test表示templates中的test.html，springboot默认的模版文件一般都在resources/templates下</span><br></pre></td></tr></table></figure>
+
+<h3 id="后端获取前端数据三种方式"><a href="#后端获取前端数据三种方式" class="headerlink" title="后端获取前端数据三种方式"></a>后端获取前端数据三种方式</h3><p>Param参数;Variable变量;</p>
+<p>参考：<a href="http://www.javashuo.com/article/p-kkkebbuc-mv.html">http://www.javashuo.com/article/p-kkkebbuc-mv.html</a></p>
+<h4 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a>@RequestParam</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">前端发出的请求：path?id=1;</span><br><span class="line">@RequestMapper(value=&quot;path&quot;)</span><br><span class="line">public void test(@RequestParam(&quot;id&quot;) int id)&#123;</span><br><span class="line">	System.out.println(id);</span><br><span class="line">&#125;</span><br><span class="line">获取前端传来的非json格式的数据</span><br><span class="line">// 单个数据,@RequestParam中的值必定要与前端属性名一致</span><br><span class="line">public void test(@RequestParam(&quot;name)&quot; String name)&#123;</span><br><span class="line">	System.out.println(params);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 数组数据</span><br><span class="line">@RequestMapper(value=&quot;path&quot;)</span><br><span class="line">public void test(@RequestParam Map&lt;String,Object&gt; params)&#123;</span><br><span class="line">	System.out.println(params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable"></a>@PathVariable</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">前端发出的请求：path/&#123;id&#125;;</span><br><span class="line">@RequestMapper(value=&quot;path/&#123;id&#125;&quot;)</span><br><span class="line">public void test(@PathVariable(&quot;id&quot;) int id)&#123;</span><br><span class="line">	System.out.println(id);</span><br><span class="line">&#125;</span><br><span class="line">@GetMapping(&quot;/ting&quot;)</span><br><span class="line">    public String homePageController(Model model,@PathVariable(&quot;currentIndex&quot;) int currentIndex) throws Exception&#123;</span><br><span class="line">        ArrayList&lt;Music&gt; music=mus.data(currentIndex);</span><br><span class="line">        model.addAttribute(&quot;music&quot;,music);</span><br><span class="line">        // model.addAttribute(&quot;index&quot;,currentIndex);</span><br><span class="line">        return &quot;Index01.html&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h4><p>获取前台出来的json格式的数据javascript</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">        type: &#x27;POST&#x27;,//方法类型</span><br><span class="line">        url: url,</span><br><span class="line">        contentType: &#x27;application/json&#x27;,</span><br><span class="line">        data: &#123;</span><br><span class="line">        	&quot;username&quot;:&quot;小明&quot;,</span><br><span class="line">        	&quot;sex&quot;:&quot;男&quot;,</span><br><span class="line">        	&quot;age&quot;:&quot;18&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        success: function (result) &#123;</span><br><span class="line">            if (result == 200) &#123;</span><br><span class="line">                $(&#x27;#goodsModal&#x27;).modal(&#x27;hide&#x27;);</span><br><span class="line">                swal(&#123;</span><br><span class="line">                    title: swlMessage,</span><br><span class="line">                    type: &#x27;success&#x27;,</span><br><span class="line">                    showCancelButton: false,</span><br><span class="line">                    confirmButtonColor: &#x27;#1baeae&#x27;,</span><br><span class="line">                    confirmButtonText: &#x27;返回商品列表&#x27;,</span><br><span class="line">                    confirmButtonClass: &#x27;btn btn-success&#x27;,</span><br><span class="line">                    buttonsStyling: false</span><br><span class="line">                &#125;).then(function () &#123;</span><br><span class="line">                    window.location.href = &quot;/admin/goods&quot;;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                $(&#x27;#goodsModal&#x27;).modal(&#x27;hide&#x27;);</span><br><span class="line">                swal(result.message, &#123;</span><br><span class="line">                    icon: &quot;error&quot;,</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">// bean</span><br><span class="line">public class User&#123;</span><br><span class="line">	private String username;</span><br><span class="line">	private String sex;</span><br><span class="line">		..</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Controller中代码片断</span><br><span class="line">@RequestMapper(value=&quot;path/&#123;id&#125;&quot;,method = RequestMethod.POST)</span><br><span class="line">public void test(@RequestBody User user)&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-HttpServletRequest方法"><a href="#2-HttpServletRequest方法" class="headerlink" title="2 HttpServletRequest方法"></a>2 HttpServletRequest方法</h4><p>原文链接：<a href="https://blog.csdn.net/qq_43656233/article/details/103000794">https://blog.csdn.net/qq_43656233/article/details/103000794</a></p>
+<p>很古老的方法，简单来说就是通过调用request的getParameter方法来获取参数，不建议使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   @Controller</span><br><span class="line">public class indexController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/login&quot;)</span><br><span class="line">    public String Login(HttpServletRequest request)&#123;</span><br><span class="line">        String username=request.getParameter(&quot;username&quot;);</span><br><span class="line">        String password=request.getParameter(&quot;password&quot;);</span><br><span class="line">        Student student = new Student(username,password);</span><br><span class="line">        request.getSession().setAttribute(&quot;username&quot;,username);</span><br><span class="line">        request.getSession().setAttribute(&quot;password&quot;,password);</span><br><span class="line">        return &quot;Result&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&quot;)</span><br><span class="line">    public String index()&#123;</span><br><span class="line">        return &quot;Login&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">①getParameter()获取的是客户端设置的数据。</span><br><span class="line">getAttribute()获取的是服务器设置的数据。</span><br><span class="line">②getParameter()永远返回字符串</span><br><span class="line">getAttribute()返回值是任意类型</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>login页面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">        &lt;title&gt;Getting Started: Handling Form Submission&lt;/title&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action=&quot;login&quot; method=&quot;get&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;passwod&quot; name=&quot;password&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Result页面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">        &lt;title&gt;Getting Started: Handling Form Submission&lt;/title&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    123</span><br><span class="line">    &lt;p th:text=&quot;$&#123;session.username&#125;&quot;/&gt;</span><br><span class="line">    &lt;p th:text=&quot;$&#123;session.password&#125;&quot;/&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="HttpServletRequest与Model的区别"><a href="#HttpServletRequest与Model的区别" class="headerlink" title="HttpServletRequest与Model的区别"></a>HttpServletRequest与Model的区别</h3><p>原文链接：<a href="https://blog.csdn.net/weixin_47872288/article/details/122362891">https://blog.csdn.net/weixin_47872288/article/details/122362891</a></p>
+<p>1.1 HttpServletRequest<br>HttpServletRequest对象代表客户端的请求，当客户端通过HTTP协议访问服务器时，HTTP请求头中的所有信息都封装在这个对象中，通过这个对象提供的方法，可以获得客户端请求的所有信息</p>
+<p>具体其功能函数有如下：</p>
+<ul>
+<li><p>函数                        功能<br>getRequestURL     返回客户端请求时的完整URL<br>getQueryString     返回请求行中的参数部分<br>getPathInfo           返回请求URL中的额外路径信息<br>getRemoteAddr    返回发出请求的客户机的IP地址<br>getRemoteHost    返回发出请求的客户机的完整主机名<br>getRemotePort     返回客户机所使用的网络端口号<br>getLocalAddr        返回WEB服务器的IP地址<br>getLocalName      返回WEB服务器的主机名</p>
+</li>
+<li><h4 id="model"><a href="#model" class="headerlink" title="model"></a>model</h4></li>
+<li><p>关于model的这个类</p>
+</li>
+</ul>
+<p>只传输数据而不会自动寻址，由于model的每次请求会自动创建对象，所以不用new<br>ModelAndView会自动寻址，就会链接到WebCotent下的view，modelandview请求不会自动创建对象，每次使用都要new</p>
+<p>srpingMVC内部机制决定的,请求处理方法执行完成后，最终返回一个 ModelAndView 对象。</p>
+<p>model数据最终还是写到HttpServletRequest属性中，只是model的写法更体现了MVC思想减少各层间耦合</p>
+<ol start="2">
+<li>总结<br>Model是每次请求中都存在的默认参数，利用其addAttribute()方法即可将服务器的值传递到jsp页面中；<br>ModelAndView包含model和view两部分，使用时需要自己实例化，利用ModelMap用来传值，也可以设置view的名称<br>关于其写法的具体展示<br>具体如下：</li>
+</ol>
+<p>1.request.setAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;把值存到request<br>其取值具体是通过request.getAttribute(“manongyanjiuseng”)<br>2.modelMap.addAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;把值存到modelMap<br>其取值具体是通过${manongyanjiuseng}<br>3.model.addAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;把值存到model<br>其取值具体是通过${manongyanjiuseng}<br>4.request.getSession.setAttribute(“name”,”manongyanjiuseng”);&#x2F;&#x2F;先获取，在把值存到Session<br>其取值具体是通过request.getSession().getAttribute(“manongyanjiuseng”)</p>
+<p>以上取值中${manongyanjiuseng}这种方式是最快的</p>
+<h4 id="也就是model和HttpServletRequest，model的取值比较快"><a href="#也就是model和HttpServletRequest，model的取值比较快" class="headerlink" title="也就是model和HttpServletRequest，model的取值比较快"></a>也就是model和HttpServletRequest，model的取值比较快</h4>]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -6972,6 +7041,168 @@ public class NodeController &#123;
       </tags>
   </entry>
   <entry>
+    <title>css盒子模型（三）</title>
+    <url>/2022/04/02/css%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="一、css三大特性"><a href="#一、css三大特性" class="headerlink" title="一、css三大特性"></a>一、css三大特性</h2><h3 id="1、层叠性"><a href="#1、层叠性" class="headerlink" title="1、层叠性"></a>1、层叠性</h3><p>​        相同选择器给设置相同的样式，此时一个样式就会覆盖（层叠）另一个冲突的样式。层叠性主要解决样式冲突的问题</p>
+<p>​        层叠性原则:</p>
+<ul>
+<li>样式冲突，遵循的原则是就近原则，哪个样式离结构近，就执行哪个样式</li>
+<li>样式不冲突，不会层叠</li>
+</ul>
+<p><img src="/images/1571490015544.png" alt="1571490015544"></p>
+<h3 id="2、继承性"><a href="#2、继承性" class="headerlink" title="2、继承性"></a>2、继承性</h3><p>​        CSS中的继承: 子标签会继承父标签的某些样式，如文本颜色和字号。恰当地使用继承可以简化代码，降低 CSS 样式的复杂性。</p>
+<p><img src="/images/1571490049279.png" alt="1571490049279"></p>
+<p>子元素可以继承父元素的样式：</p>
+<p>​    </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（text-，font-，line-这些元素开头的可以继承，以及color属性）</span><br></pre></td></tr></table></figure>
+
+<p>继承性口诀：龙生龙，凤生凤，老鼠生的孩子会打洞</p>
+<p>行高的继承性：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>:<span class="number">12px</span>/<span class="number">1.5</span> Microsoft YaHei；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>行高可以跟单位也可以不跟单位</li>
+<li>如果子元素没有设置行高，则会继承父元素的行高为 1.5</li>
+<li>此时子元素的行高是：当前子元素的文字大小 * 1.5</li>
+<li>body 行高 1.5  这样写法最大的优势就是里面子元素可以根据自己文字大小自动调整行高</li>
+</ul>
+<h3 id="3、优先级"><a href="#3、优先级" class="headerlink" title="3、优先级"></a>3、优先级</h3><p>当同一个元素指定多个选择器，就会有优先级的产生。</p>
+<ul>
+<li>选择器相同，则执行层叠性</li>
+<li>选择器不同，则根据选择器权重执行</li>
+</ul>
+<p>选择器优先级计算表格：</p>
+<p><img src="/images/1571490129794.png" alt="1571490129794"></p>
+<p>优先级注意点:</p>
+<ol>
+<li><p>权重是有4组数字组成,但是不会有进位。</p>
+</li>
+<li><p>可以理解为类选择器永远大于元素选择器, id选择器永远大于类选择器,以此类推..</p>
+</li>
+<li><p>等级判断从左向右，如果某一位数值相同，则判断下一位数值。</p>
+</li>
+<li><p>可以简单记忆法:  通配符和继承权重为0, 标签选择器为1,类(伪类)选择器为 10, id选择器 100, 行内样式表为 1000, !important 无穷大.</p>
+</li>
+<li><p>继承的权重是0， 如果该元素没有直接选中，不管父元素权重多高，子元素得到的权重都是 0。</p>
+</li>
+</ol>
+<p>权重叠加：如果是复合选择器，则会有权重叠加，需要计算权重。</p>
+<ul>
+<li>div ul  li   ——&gt;      0,0,0,3</li>
+<li>.nav ul li   ——&gt;      0,0,1,2</li>
+<li>a:hover      —–—&gt;   0,0,1,1</li>
+<li>.nav a       ——&gt;      0,0,1,1</li>
+</ul>
+<h2 id="二、盒子模型"><a href="#二、盒子模型" class="headerlink" title="二、盒子模型"></a>二、盒子模型</h2><h3 id="1、网页布局的本质"><a href="#1、网页布局的本质" class="headerlink" title="1、网页布局的本质"></a>1、网页布局的本质</h3><p>网页布局的核心本质： 就是利用 CSS 摆盒子。</p>
+<p><img src="/images/1571492334739.png" alt="1571492334739"></p>
+<p>网页布局过程：</p>
+<ol>
+<li>先准备好相关的网页元素，网页元素基本都是盒子 Box 。</li>
+<li>利用 CSS 设置好盒子样式，然后摆放到相应位置。</li>
+<li>往盒子里面装内容</li>
+</ol>
+<h3 id="2、盒子模型（Box-Model）组成"><a href="#2、盒子模型（Box-Model）组成" class="headerlink" title="2、盒子模型（Box Model）组成"></a>2、盒子模型（Box Model）组成</h3><p>​        盒子模型：把 HTML 页面中的布局元素看作是一个矩形的盒子，也就是一个盛装内容的容器。</p>
+<p>​        CSS 盒子模型本质上是一个盒子，封装周围的 HTML 元素，它包括：<strong>边框</strong>、<strong>外边距</strong>、<strong>内边距</strong>、和 <strong>实际内容</strong></p>
+<p><img src="/images/1571492536942.png" alt="1571492536942"></p>
+<h3 id="3、边框（border）"><a href="#3、边框（border）" class="headerlink" title="3、边框（border）"></a>3、边框（border）</h3><h4 id="3-1、边框的使用"><a href="#3-1、边框的使用" class="headerlink" title="3.1、边框的使用"></a>3.1、边框的使用</h4><p>1、border可以设置元素的边框。边框有三部分组成：边框宽度(粗细) 边框样式  边框颜色；</p>
+<p>2、语法：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border</span> : border-width || border-style || border-color;   </span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/1571492659260.png" alt="1571492659260"></p>
+<p>边框样式 border-style 可以设置如下值：</p>
+<ul>
+<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
+<li>solid：边框为单实线(最为常用的)</li>
+<li>dashed：边框为虚线  </li>
+<li>dotted：边框为点线</li>
+</ul>
+<p>3、边框的合写分写</p>
+<p>边框简写：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border</span>: <span class="number">1px</span> solid red;  </span><br></pre></td></tr></table></figure>
+
+<p>边框分开写法：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border-top</span>: <span class="number">1px</span> solid red;  <span class="comment">/* 只设定上边框， 其余同理 */</span>   </span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2、表格的细线边框"><a href="#3-2、表格的细线边框" class="headerlink" title="3.2、表格的细线边框"></a>3.2、表格的细线边框</h4><p>1、border-collapse 属性控制浏览器绘制表格边框的方式。它控制相邻单元格的边框。</p>
+<p>2、语法：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border-collapse</span>:collapse; </span><br></pre></td></tr></table></figure>
+
+<p>collapse 单词是合并的意思</p>
+<p>border-collapse: collapse; 表示相邻边框合并在一起</p>
+<h4 id="3-3、边框会影响盒子实际大小"><a href="#3-3、边框会影响盒子实际大小" class="headerlink" title="3.3、边框会影响盒子实际大小"></a>3.3、边框会影响盒子实际大小</h4><p>边框会额外增加盒子的实际大小。因此我们有两种方案解决：</p>
+<ul>
+<li>测量盒子大小的时候,不量边框。</li>
+<li>如果测量的时候包含了边框,则需要 width&#x2F;height 减去边框宽度</li>
+</ul>
+<h3 id="4、内边距（padding）"><a href="#4、内边距（padding）" class="headerlink" title="4、内边距（padding）"></a>4、内边距（padding）</h3><h4 id="4-1、内边距的使用方式"><a href="#4-1、内边距的使用方式" class="headerlink" title="4.1、内边距的使用方式"></a>4.1、内边距的使用方式</h4><p>1、padding 属性用于设置内边距，即边框与内容之间的距离。</p>
+<p>2、语法：</p>
+<p>合写属性：</p>
+<p><img src="/images/1571493298248.png" alt="1571493298248"></p>
+<p>分写属性：</p>
+<p><img src="/images/1571493260536.png" alt="1571493260536"></p>
+<h4 id="4-2、内边距会影响盒子实际大小"><a href="#4-2、内边距会影响盒子实际大小" class="headerlink" title="4.2、内边距会影响盒子实际大小"></a>4.2、内边距会影响盒子实际大小</h4><p>1、当我们给盒子指定 padding 值之后，发生了 2 件事情：</p>
+<ol>
+<li>内容和边框有了距离，添加了内边距。</li>
+<li>padding影响了盒子实际大小。</li>
+</ol>
+<p>2、内边距对盒子大小的影响：</p>
+<ul>
+<li>如果盒子已经有了宽度和高度，此时再指定内边框，会撑大盒子。</li>
+<li>如何盒子本身没有指定width&#x2F;height属性, 则此时padding不会撑开盒子大小。</li>
+</ul>
+<p>3、解决方案：</p>
+<p>​        如果保证盒子跟效果图大小保持一致，则让 width&#x2F;height 减去多出来的内边距大小即可。</p>
+<h3 id="5、外边距（margin）"><a href="#5、外边距（margin）" class="headerlink" title="5、外边距（margin）"></a>5、外边距（margin）</h3><h4 id="5-1、外边距的使用方式"><a href="#5-1、外边距的使用方式" class="headerlink" title="5.1、外边距的使用方式"></a>5.1、外边距的使用方式</h4><p>margin 属性用于设置外边距，即控制盒子和盒子之间的距离。</p>
+<p><img src="/images/1571493741272.png" alt="1571493741272"></p>
+<h4 id="5-2、外边距典型应用"><a href="#5-2、外边距典型应用" class="headerlink" title="5.2、外边距典型应用"></a>5.2、外边距典型应用</h4><p>外边距可以让块级盒子水平居中的两个条件：</p>
+<ul>
+<li>盒子必须指定了宽度（width）。</li>
+<li>盒子左右的外边距都设置为 auto 。</li>
+</ul>
+<p>常见的写法，以下三种都可以：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">margin-left</span>: auto;   <span class="attribute">margin-right</span>: auto;</span><br><span class="line"><span class="attribute">margin</span>: auto;</span><br><span class="line"><span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br></pre></td></tr></table></figure>
+
+<p>注意：以上方法是让块级元素水平居中，行内元素或者行内块元素水平居中给其父元素添加 text-align:center 即可。</p>
+<h4 id="5-3、外边距合并"><a href="#5-3、外边距合并" class="headerlink" title="5.3、外边距合并"></a>5.3、外边距合并</h4><p>使用 margin 定义块元素的垂直外边距时，可能会出现外边距的合并。</p>
+<p>主要有两种情况:</p>
+<p>1、相邻块元素垂直外边距的合并</p>
+<p>​        当上下相邻的两个块元素（兄弟关系）相遇时，如果上面的元素有下外边距 margin-bottom，下面的元素有上外边距 margin-top ，则他们之间的垂直间距不是 margin-bottom 与 margin-top 之和。取两个值中的较大者这种现象被称为相邻块元素垂直外边距的合并。</p>
+<p><img src="/images/1571494239103.png" alt="1571494239103"></p>
+<p>解决方案：<br>        尽量只给一个盒子添加 margin 值。</p>
+<p>2、嵌套块元素垂直外边距的塌陷</p>
+<p>​        对于两个嵌套关系（父子关系）的块元素，父元素有上外边距同时子元素也有上外边距，此时父元素会塌陷较大的外边距值。</p>
+<p><img src="/images/1571494373778.png" alt="1571494373778"></p>
+<p>解决方案：</p>
+<ul>
+<li>可以为父元素定义上边框。</li>
+<li>可以为父元素定义上内边距。</li>
+<li>可以为父元素添加 overflow:hidden。</li>
+</ul>
+<h4 id="5-4、清除内外边距"><a href="#5-4、清除内外边距" class="headerlink" title="5.4、清除内外边距"></a>5.4、清除内外边距</h4><p>​        网页元素很多都带有默认的内外边距，而且不同浏览器默认的也不一致。因此我们在布局前，首先要清除下网页元素的内外边距。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">   <span class="attribute">padding</span>:<span class="number">0</span>;   <span class="comment">/* 清除内边距 */</span></span><br><span class="line">   <span class="attribute">margin</span>:<span class="number">0</span>;    <span class="comment">/* 清除外边距 */</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        注意：行内元素为了照顾兼容性，尽量只设置左右内外边距，不要设置上下内外边距。但是转换为块级和行内块元素就可以了</p>
+<h2 id="三、PS-基本操作"><a href="#三、PS-基本操作" class="headerlink" title="三、PS 基本操作"></a>三、PS 基本操作</h2><p>​        因为网页美工大部分效果图都是利用 PS（Photoshop）来做的，所以以后我们大部分切图工作都是在 PS 里面完成。</p>
+<p>​        部分操作：</p>
+<ul>
+<li>文件→打开 ：可以打开我们要测量的图片</li>
+<li>Ctrl+R：可以打开标尺，或者 视图→标尺</li>
+<li>右击标尺，把里面的单位改为像素</li>
+<li>Ctrl+ 加号(+)可以放大视图， Ctrl+ 减号(-)可以缩小视图</li>
+<li>按住空格键，鼠标可以变成小手，拖动 PS 视图</li>
+<li>用选区拖动  可以测量大小</li>
+<li>Ctrl+ D 可以取消选区，或者在旁边空白处点击一下也可以取消选区</li>
+</ul>
+<p><img src="/images/1571494543539.png" alt="1571494543539"></p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>css精灵图与图标（七）</title>
     <url>/2022/04/02/css%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/</url>
     <content><![CDATA[<blockquote>
@@ -7176,168 +7407,6 @@ public class NodeController &#123;
 <p>把中文字体的名称用相应的Unicode编码来代替，这样就可以有效的避免浏览器解释CSS代码时候出现乱码的问题。</p>
 <p>比如：</p>
 <p>黑体 \9ED1\4F53<br>宋体 \5B8B\4F53<br>微软雅黑 \5FAE\8F6F\96C5\9ED1</p>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>css盒子模型（三）</title>
-    <url>/2022/04/02/css%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="一、css三大特性"><a href="#一、css三大特性" class="headerlink" title="一、css三大特性"></a>一、css三大特性</h2><h3 id="1、层叠性"><a href="#1、层叠性" class="headerlink" title="1、层叠性"></a>1、层叠性</h3><p>​        相同选择器给设置相同的样式，此时一个样式就会覆盖（层叠）另一个冲突的样式。层叠性主要解决样式冲突的问题</p>
-<p>​        层叠性原则:</p>
-<ul>
-<li>样式冲突，遵循的原则是就近原则，哪个样式离结构近，就执行哪个样式</li>
-<li>样式不冲突，不会层叠</li>
-</ul>
-<p><img src="/images/1571490015544.png" alt="1571490015544"></p>
-<h3 id="2、继承性"><a href="#2、继承性" class="headerlink" title="2、继承性"></a>2、继承性</h3><p>​        CSS中的继承: 子标签会继承父标签的某些样式，如文本颜色和字号。恰当地使用继承可以简化代码，降低 CSS 样式的复杂性。</p>
-<p><img src="/images/1571490049279.png" alt="1571490049279"></p>
-<p>子元素可以继承父元素的样式：</p>
-<p>​    </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（text-，font-，line-这些元素开头的可以继承，以及color属性）</span><br></pre></td></tr></table></figure>
-
-<p>继承性口诀：龙生龙，凤生凤，老鼠生的孩子会打洞</p>
-<p>行高的继承性：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>:<span class="number">12px</span>/<span class="number">1.5</span> Microsoft YaHei；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>行高可以跟单位也可以不跟单位</li>
-<li>如果子元素没有设置行高，则会继承父元素的行高为 1.5</li>
-<li>此时子元素的行高是：当前子元素的文字大小 * 1.5</li>
-<li>body 行高 1.5  这样写法最大的优势就是里面子元素可以根据自己文字大小自动调整行高</li>
-</ul>
-<h3 id="3、优先级"><a href="#3、优先级" class="headerlink" title="3、优先级"></a>3、优先级</h3><p>当同一个元素指定多个选择器，就会有优先级的产生。</p>
-<ul>
-<li>选择器相同，则执行层叠性</li>
-<li>选择器不同，则根据选择器权重执行</li>
-</ul>
-<p>选择器优先级计算表格：</p>
-<p><img src="/images/1571490129794.png" alt="1571490129794"></p>
-<p>优先级注意点:</p>
-<ol>
-<li><p>权重是有4组数字组成,但是不会有进位。</p>
-</li>
-<li><p>可以理解为类选择器永远大于元素选择器, id选择器永远大于类选择器,以此类推..</p>
-</li>
-<li><p>等级判断从左向右，如果某一位数值相同，则判断下一位数值。</p>
-</li>
-<li><p>可以简单记忆法:  通配符和继承权重为0, 标签选择器为1,类(伪类)选择器为 10, id选择器 100, 行内样式表为 1000, !important 无穷大.</p>
-</li>
-<li><p>继承的权重是0， 如果该元素没有直接选中，不管父元素权重多高，子元素得到的权重都是 0。</p>
-</li>
-</ol>
-<p>权重叠加：如果是复合选择器，则会有权重叠加，需要计算权重。</p>
-<ul>
-<li>div ul  li   ——&gt;      0,0,0,3</li>
-<li>.nav ul li   ——&gt;      0,0,1,2</li>
-<li>a:hover      —–—&gt;   0,0,1,1</li>
-<li>.nav a       ——&gt;      0,0,1,1</li>
-</ul>
-<h2 id="二、盒子模型"><a href="#二、盒子模型" class="headerlink" title="二、盒子模型"></a>二、盒子模型</h2><h3 id="1、网页布局的本质"><a href="#1、网页布局的本质" class="headerlink" title="1、网页布局的本质"></a>1、网页布局的本质</h3><p>网页布局的核心本质： 就是利用 CSS 摆盒子。</p>
-<p><img src="/images/1571492334739.png" alt="1571492334739"></p>
-<p>网页布局过程：</p>
-<ol>
-<li>先准备好相关的网页元素，网页元素基本都是盒子 Box 。</li>
-<li>利用 CSS 设置好盒子样式，然后摆放到相应位置。</li>
-<li>往盒子里面装内容</li>
-</ol>
-<h3 id="2、盒子模型（Box-Model）组成"><a href="#2、盒子模型（Box-Model）组成" class="headerlink" title="2、盒子模型（Box Model）组成"></a>2、盒子模型（Box Model）组成</h3><p>​        盒子模型：把 HTML 页面中的布局元素看作是一个矩形的盒子，也就是一个盛装内容的容器。</p>
-<p>​        CSS 盒子模型本质上是一个盒子，封装周围的 HTML 元素，它包括：<strong>边框</strong>、<strong>外边距</strong>、<strong>内边距</strong>、和 <strong>实际内容</strong></p>
-<p><img src="/images/1571492536942.png" alt="1571492536942"></p>
-<h3 id="3、边框（border）"><a href="#3、边框（border）" class="headerlink" title="3、边框（border）"></a>3、边框（border）</h3><h4 id="3-1、边框的使用"><a href="#3-1、边框的使用" class="headerlink" title="3.1、边框的使用"></a>3.1、边框的使用</h4><p>1、border可以设置元素的边框。边框有三部分组成：边框宽度(粗细) 边框样式  边框颜色；</p>
-<p>2、语法：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border</span> : border-width || border-style || border-color;   </span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/1571492659260.png" alt="1571492659260"></p>
-<p>边框样式 border-style 可以设置如下值：</p>
-<ul>
-<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
-<li>solid：边框为单实线(最为常用的)</li>
-<li>dashed：边框为虚线  </li>
-<li>dotted：边框为点线</li>
-</ul>
-<p>3、边框的合写分写</p>
-<p>边框简写：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border</span>: <span class="number">1px</span> solid red;  </span><br></pre></td></tr></table></figure>
-
-<p>边框分开写法：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border-top</span>: <span class="number">1px</span> solid red;  <span class="comment">/* 只设定上边框， 其余同理 */</span>   </span><br></pre></td></tr></table></figure>
-
-<h4 id="3-2、表格的细线边框"><a href="#3-2、表格的细线边框" class="headerlink" title="3.2、表格的细线边框"></a>3.2、表格的细线边框</h4><p>1、border-collapse 属性控制浏览器绘制表格边框的方式。它控制相邻单元格的边框。</p>
-<p>2、语法：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">border-collapse</span>:collapse; </span><br></pre></td></tr></table></figure>
-
-<p>collapse 单词是合并的意思</p>
-<p>border-collapse: collapse; 表示相邻边框合并在一起</p>
-<h4 id="3-3、边框会影响盒子实际大小"><a href="#3-3、边框会影响盒子实际大小" class="headerlink" title="3.3、边框会影响盒子实际大小"></a>3.3、边框会影响盒子实际大小</h4><p>边框会额外增加盒子的实际大小。因此我们有两种方案解决：</p>
-<ul>
-<li>测量盒子大小的时候,不量边框。</li>
-<li>如果测量的时候包含了边框,则需要 width&#x2F;height 减去边框宽度</li>
-</ul>
-<h3 id="4、内边距（padding）"><a href="#4、内边距（padding）" class="headerlink" title="4、内边距（padding）"></a>4、内边距（padding）</h3><h4 id="4-1、内边距的使用方式"><a href="#4-1、内边距的使用方式" class="headerlink" title="4.1、内边距的使用方式"></a>4.1、内边距的使用方式</h4><p>1、padding 属性用于设置内边距，即边框与内容之间的距离。</p>
-<p>2、语法：</p>
-<p>合写属性：</p>
-<p><img src="/images/1571493298248.png" alt="1571493298248"></p>
-<p>分写属性：</p>
-<p><img src="/images/1571493260536.png" alt="1571493260536"></p>
-<h4 id="4-2、内边距会影响盒子实际大小"><a href="#4-2、内边距会影响盒子实际大小" class="headerlink" title="4.2、内边距会影响盒子实际大小"></a>4.2、内边距会影响盒子实际大小</h4><p>1、当我们给盒子指定 padding 值之后，发生了 2 件事情：</p>
-<ol>
-<li>内容和边框有了距离，添加了内边距。</li>
-<li>padding影响了盒子实际大小。</li>
-</ol>
-<p>2、内边距对盒子大小的影响：</p>
-<ul>
-<li>如果盒子已经有了宽度和高度，此时再指定内边框，会撑大盒子。</li>
-<li>如何盒子本身没有指定width&#x2F;height属性, 则此时padding不会撑开盒子大小。</li>
-</ul>
-<p>3、解决方案：</p>
-<p>​        如果保证盒子跟效果图大小保持一致，则让 width&#x2F;height 减去多出来的内边距大小即可。</p>
-<h3 id="5、外边距（margin）"><a href="#5、外边距（margin）" class="headerlink" title="5、外边距（margin）"></a>5、外边距（margin）</h3><h4 id="5-1、外边距的使用方式"><a href="#5-1、外边距的使用方式" class="headerlink" title="5.1、外边距的使用方式"></a>5.1、外边距的使用方式</h4><p>margin 属性用于设置外边距，即控制盒子和盒子之间的距离。</p>
-<p><img src="/images/1571493741272.png" alt="1571493741272"></p>
-<h4 id="5-2、外边距典型应用"><a href="#5-2、外边距典型应用" class="headerlink" title="5.2、外边距典型应用"></a>5.2、外边距典型应用</h4><p>外边距可以让块级盒子水平居中的两个条件：</p>
-<ul>
-<li>盒子必须指定了宽度（width）。</li>
-<li>盒子左右的外边距都设置为 auto 。</li>
-</ul>
-<p>常见的写法，以下三种都可以：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">margin-left</span>: auto;   <span class="attribute">margin-right</span>: auto;</span><br><span class="line"><span class="attribute">margin</span>: auto;</span><br><span class="line"><span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br></pre></td></tr></table></figure>
-
-<p>注意：以上方法是让块级元素水平居中，行内元素或者行内块元素水平居中给其父元素添加 text-align:center 即可。</p>
-<h4 id="5-3、外边距合并"><a href="#5-3、外边距合并" class="headerlink" title="5.3、外边距合并"></a>5.3、外边距合并</h4><p>使用 margin 定义块元素的垂直外边距时，可能会出现外边距的合并。</p>
-<p>主要有两种情况:</p>
-<p>1、相邻块元素垂直外边距的合并</p>
-<p>​        当上下相邻的两个块元素（兄弟关系）相遇时，如果上面的元素有下外边距 margin-bottom，下面的元素有上外边距 margin-top ，则他们之间的垂直间距不是 margin-bottom 与 margin-top 之和。取两个值中的较大者这种现象被称为相邻块元素垂直外边距的合并。</p>
-<p><img src="/images/1571494239103.png" alt="1571494239103"></p>
-<p>解决方案：<br>        尽量只给一个盒子添加 margin 值。</p>
-<p>2、嵌套块元素垂直外边距的塌陷</p>
-<p>​        对于两个嵌套关系（父子关系）的块元素，父元素有上外边距同时子元素也有上外边距，此时父元素会塌陷较大的外边距值。</p>
-<p><img src="/images/1571494373778.png" alt="1571494373778"></p>
-<p>解决方案：</p>
-<ul>
-<li>可以为父元素定义上边框。</li>
-<li>可以为父元素定义上内边距。</li>
-<li>可以为父元素添加 overflow:hidden。</li>
-</ul>
-<h4 id="5-4、清除内外边距"><a href="#5-4、清除内外边距" class="headerlink" title="5.4、清除内外边距"></a>5.4、清除内外边距</h4><p>​        网页元素很多都带有默认的内外边距，而且不同浏览器默认的也不一致。因此我们在布局前，首先要清除下网页元素的内外边距。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">   <span class="attribute">padding</span>:<span class="number">0</span>;   <span class="comment">/* 清除内边距 */</span></span><br><span class="line">   <span class="attribute">margin</span>:<span class="number">0</span>;    <span class="comment">/* 清除外边距 */</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​        注意：行内元素为了照顾兼容性，尽量只设置左右内外边距，不要设置上下内外边距。但是转换为块级和行内块元素就可以了</p>
-<h2 id="三、PS-基本操作"><a href="#三、PS-基本操作" class="headerlink" title="三、PS 基本操作"></a>三、PS 基本操作</h2><p>​        因为网页美工大部分效果图都是利用 PS（Photoshop）来做的，所以以后我们大部分切图工作都是在 PS 里面完成。</p>
-<p>​        部分操作：</p>
-<ul>
-<li>文件→打开 ：可以打开我们要测量的图片</li>
-<li>Ctrl+R：可以打开标尺，或者 视图→标尺</li>
-<li>右击标尺，把里面的单位改为像素</li>
-<li>Ctrl+ 加号(+)可以放大视图， Ctrl+ 减号(-)可以缩小视图</li>
-<li>按住空格键，鼠标可以变成小手，拖动 PS 视图</li>
-<li>用选区拖动  可以测量大小</li>
-<li>Ctrl+ D 可以取消选区，或者在旁边空白处点击一下也可以取消选区</li>
-</ul>
-<p><img src="/images/1571494543539.png" alt="1571494543539"></p>
 ]]></content>
       <categories>
         <category>css</category>
@@ -8729,6 +8798,40 @@ public class NodeController &#123;
       </tags>
   </entry>
   <entry>
+    <title>python爬虫概念</title>
+    <url>/2022/10/31/python%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h2 id="python爬虫概念"><a href="#python爬虫概念" class="headerlink" title="python爬虫概念"></a>python爬虫概念</h2><p>1</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">什么是爬虫：</span><br><span class="line">    - 通过编写程序，模拟浏览器上网，然后让其去互联网上抓取数据的过程。</span><br></pre></td></tr></table></figure>
+
+<p>2</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫究竟是合法还是违法的？</span><br><span class="line">- 在法律中是不被禁止</span><br><span class="line">- 具有违法风险</span><br><span class="line">- 善意爬虫  恶意爬虫</span><br></pre></td></tr></table></figure>
+
+<p>3</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫究竟是合法还是违法的？</span><br><span class="line">- 在法律中是不被禁止</span><br><span class="line">- 具有违法风险</span><br><span class="line">- 善意爬虫  恶意爬虫</span><br><span class="line"></span><br><span class="line">爬虫带来的风险可以体现在如下2方面：</span><br><span class="line">    - 爬虫干扰了被访问网站的正常运营</span><br><span class="line">    - 爬虫抓取了收到法律保护的特定类型的数据或信息</span><br><span class="line"></span><br><span class="line">如何在使用编写爬虫的过程中避免进入局子的厄运呢？</span><br><span class="line">    - 时常的优化自己的程序，避免干扰被访问网站的正常运行</span><br><span class="line">    - 在使用，传播爬取到的数据时，审查抓取到的内容，如果发现了涉及到用户隐私</span><br><span class="line">    商业机密等敏感内容需要及时停止爬取或传播</span><br></pre></td></tr></table></figure>
+
+<p>4</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫在使用场景中的分类</span><br><span class="line">    - 通用爬虫：</span><br><span class="line">        抓取系统重要组成部分。抓取的是一整张页面数据。</span><br><span class="line">    - 聚焦爬虫：</span><br><span class="line">        是建立在通用爬虫的基础之上。抓取的是页面中特定的局部内容。</span><br><span class="line">    - 增量式爬虫：</span><br><span class="line">        检测网站中数据更新的情况。只会抓取网站中最新更新出来的数据。</span><br></pre></td></tr></table></figure>
+
+<p>5</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫的矛与盾</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">反爬机制</span><br><span class="line">    门户网站，可以通过制定相应的策略或者技术手段，防止爬虫程序进行网站数据的爬取。</span><br><span class="line"></span><br><span class="line">反反爬策略</span><br><span class="line">    爬虫程序可以通过制定相关的策略或者技术手段，破解门户网站中具备的反爬机制，从而可以获取门户网站中相关的数据。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">robots.txt协议：</span><br><span class="line">    君子协议。规定了网站中哪些数据可以被爬虫爬取哪些数据不可以被爬取。</span><br></pre></td></tr></table></figure>
+
+<p>6</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http协议</span><br><span class="line">    - 概念：就是服务器和客户端进行数据交互的一种形式。</span><br><span class="line">常用请求头信息</span><br><span class="line">    - User-Agent：请求载体的身份标识</span><br><span class="line">    - Connection：请求完毕后，是断开连接还是保持连接</span><br><span class="line"></span><br><span class="line">常用响应头信息</span><br><span class="line">    - Content-Type：服务器响应回客户端的数据类型</span><br><span class="line"></span><br><span class="line">https协议：</span><br><span class="line">    - 安全的超文本传输协议</span><br><span class="line"></span><br><span class="line">加密方式</span><br><span class="line">    - 对称秘钥加密</span><br><span class="line">    - 非对称秘钥加密</span><br><span class="line">    - 证书秘钥加密</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">聚焦爬虫:爬取页面中指定的页面内容。</span><br><span class="line">    - 编码流程：</span><br><span class="line">        - 指定url</span><br><span class="line">        - 发起请求</span><br><span class="line">        - 获取响应数据</span><br><span class="line">        - 数据解析</span><br><span class="line">        - 持久化存储</span><br><span class="line"></span><br><span class="line">数据解析分类：</span><br><span class="line">    - 正则</span><br><span class="line">    - bs4</span><br><span class="line">    - xpath（***）</span><br><span class="line"></span><br><span class="line">数据解析原理概述：</span><br><span class="line">    - 解析的局部的文本内容都会在标签之间或者标签对应的属性中进行存储</span><br><span class="line">    - 1.进行指定标签的定位</span><br><span class="line">    - 2.标签或者标签对应的属性中存储的数据值进行提取（解析）</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python爬虫基础汇总</title>
     <url>/2022/10/31/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/</url>
     <content><![CDATA[<h2 id="聚焦爬虫"><a href="#聚焦爬虫" class="headerlink" title="聚焦爬虫"></a>聚焦爬虫</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">聚焦爬虫:爬取页面中指定的页面内容。</span><br><span class="line">    - 编码流程：</span><br><span class="line">        - 指定url</span><br><span class="line">        - 发起请求</span><br><span class="line">        - 获取响应数据</span><br><span class="line">        - 数据解析</span><br><span class="line">        - 持久化存储</span><br></pre></td></tr></table></figure>
@@ -8769,6 +8872,12 @@ public class NodeController &#123;
 <h3 id="动态页面爬取，自动化工具的使用"><a href="#动态页面爬取，自动化工具的使用" class="headerlink" title="动态页面爬取，自动化工具的使用"></a>动态页面爬取，自动化工具的使用</h3><p>需要下载浏览器驱动放在项目目录中，可以64位不能用的话可以下载32位，谷歌驱动下载网址:<a href="https://chromedriver.chromium.org/downloads">https://chromedriver.chromium.org/downloads</a></p>
 <p>关于代理，推荐一个比较好用的ip池，需要本地跑一个程序，附GitHub链接:<a href="https://github.com/Python3WebSpider/ProxyPool">https://github.com/Python3WebSpider/ProxyPool</a></p>
 <h4 id="1，Helium"><a href="#1，Helium" class="headerlink" title="1，Helium"></a>1，Helium</h4><p>Helium工具是对Selenium的封装，将Selenium工具的使用变得更加简单。Selenium虽然好，但是在它的使用过程中元素的提取还是比较复杂的，不论是CSSselector、还是Xpath语法的使用都有一定的学习曲线。因此，在实际自动化项目中，建议搭配 Selenium 和 Helium 使用，简单的页面使用 Helium，复杂的页面切换到 Selenium</p>
+<p>Helium 自带 WebDriver，不需要下载、配置浏览器驱动</p>
+<p>内嵌页面 iframe 页面元素直接操作，不需要使用 switch_to.frame() 切换 iframe</p>
+<p>窗体管理更方便，可以直接使用窗口标题或部分标题内容来切换窗体</p>
+<p>隐式等待，针对某个元素执行点击操作，Selenium 如果元素没有出现，脚本会执行失败；而 Helium 默认最多等待 10s，等待元素出现后立马执行点击操作</p>
+<p>显式等待，Helium 提供更加优雅的 API 来等待页面元素出现</p>
+<p>API 更简洁直观，代码量少</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from helium import *  # 导入helium工具的所有对象</span><br><span class="line"></span><br><span class="line">start_chrome(&quot;https://www.baidu.com&quot;)  # 使用谷歌浏览器打开链接</span><br><span class="line"></span><br><span class="line">write(&#x27;Python&#x27;)  # 在搜索框写入搜索内容</span><br><span class="line"></span><br><span class="line">press(ENTER)  # 按下enter键</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from helium import *  # 导入helium工具的所有对象</span><br><span class="line"></span><br><span class="line">start_chrome(&quot;https://www.baidu.com&quot;)  # 使用谷歌浏览器打开链接</span><br><span class="line"></span><br><span class="line">click(Link(&#x27;地图&#x27;))  # 点击超链接</span><br></pre></td></tr></table></figure>
@@ -8866,6 +8975,23 @@ public class NodeController &#123;
 <p>JSONPath 有多种实现，在主流的编程语言中都有对应的库。但由于 JSONPath 没有严格规范的语法，各个实现都有自己的理解，导致同一个 JSONPath 表达式在不同的编程语言中有不同结果。</p>
 <h4 id="7-JMESPath"><a href="#7-JMESPath" class="headerlink" title="7.JMESPath"></a>7.JMESPath</h4><p>JMESPath 是最近几年最流行的 JSON 文档查询、提取、转换的语言。克服了 JSONPath 的缺点，并提供更加强大功能，例如投影和管道。</p>
 <p>JMESPath 的基本表达式包括：标识符、子表达式（用于访问嵌套结构）、下标访问表达式。高级表达式包括：切片、投影、管道、多选、函数。特意没有提供递归下降的功能。</p>
+<h4 id="8-JS-引擎-for-Python"><a href="#8-JS-引擎-for-Python" class="headerlink" title="8.JS 引擎 for Python"></a>8.JS 引擎 for Python</h4><p>写爬虫经常会遇到一些场景，某个请求需要一些参数，而这些参数是经过执行一段复杂的 JavaScript 代码生成的。在用 Python 代码模拟发出该请求时，你可以选择用 Python 重写对于的 js 逻辑，这样会很麻烦，因为你要保证你的 Python 代码逻辑和对应的 JS 代码一模一样，通常还有考虑两种编程语言的异同。如果这段 JS 代码被混淆过，读懂它的逻辑就需要很大的工作量，更便捷的方法是直接将这段 JS 代码拷贝下来，放到一个 JavaScript 环境中执行，再拿到其结果。这就需要一个能在 Python 中使用的 JS 引擎库。</p>
+<p>另外在用 Python 脚本分析 JavaScript 代码时，也会需要一个 JavaScript 引擎 for Python。</p>
+<p>在 PyV8、PyExecJS 等库都停止维护的情况下，目前唯一比较好的选择是 PyMiniRacer。</p>
+<h4 id="PyMiniRacer"><a href="#PyMiniRacer" class="headerlink" title="PyMiniRacer"></a>PyMiniRacer</h4><p>PyMiniRacer 是适用于 Python 的最小的现代嵌入式 V8。虽然维护团队很小，但却是目前的唯一选择。PyMiniRacer 支持最新的 ECMAScript 标准，支持 Assembly，并提供可重用的上下文。</p>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>支持最新的 ECMAScript。</li>
+<li>内存消耗小。</li>
+<li>不需要额外安装 JavaScript 环境。</li>
+<li>提供可重用上下文。</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>维护团队较小，至今未发布 1.0.0 版本。</li>
+</ul>
+<h4 id="9-虚拟显示器"><a href="#9-虚拟显示器" class="headerlink" title="9.虚拟显示器"></a>9.虚拟显示器</h4><p>服务器一般不会配置显式设备，服务器上的 Linux 系统一般也不会安装桌面环境。但如果我们要将一个使用有头浏览器的爬虫部署到服务器上，甚至是 Docker 容器里，该怎么办呢？这时候就可以用虚拟显示器了。目前只有 Xvfb 一个选择。</p>
+<p>Xvfb 是一个 X server，可以在没有显式硬件和物理输入设备的机器上运行，用虚拟内存模拟帧缓冲。</p>
+<p>Xvfb 可以设置模拟屏幕的分辨率、像素深度。</p>
+<p>我们可以使用 xvfb 启动需要界面的爬虫，或者使用 python 的 xvfbwrapper 在启动需要界面的浏览器之前启动一个虚拟显示器。</p>
 <h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="Scrapy"><a href="#Scrapy" class="headerlink" title="Scrapy"></a>Scrapy</h3><p>Scrapy 是一款流行了 11 年的 web 爬虫框架，也许是唯一广泛流行的 Python 爬虫框架。Scrapy 框架集成了 HTTP 请求、数据解析、数据持久化、请求调度、并发爬取。</p>
 <p>Scrapy 架构包括七个组件，包括：引擎、spider、spider 中间件、调度器、item 管道、下载器、下载器中间件。最基本的爬虫只需要用户继承 <code>scrapy.Spider</code>，并实现解析方法 <code>parse</code>。</p>
 <p>Scrapy 的一般用法是，自定义 spider 类实现请求和解析逻辑，通过 item 管道处理爬取到的数据，通过配置定制爬虫行为，添加 spider 中间件和下载器中间件扩展 Scrapy 的功能。</p>
@@ -8906,37 +9032,31 @@ public class NodeController &#123;
       </tags>
   </entry>
   <entry>
-    <title>python爬虫概念</title>
-    <url>/2022/10/31/python%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h2 id="python爬虫概念"><a href="#python爬虫概念" class="headerlink" title="python爬虫概念"></a>python爬虫概念</h2><p>1</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">什么是爬虫：</span><br><span class="line">    - 通过编写程序，模拟浏览器上网，然后让其去互联网上抓取数据的过程。</span><br></pre></td></tr></table></figure>
-
-<p>2</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫究竟是合法还是违法的？</span><br><span class="line">- 在法律中是不被禁止</span><br><span class="line">- 具有违法风险</span><br><span class="line">- 善意爬虫  恶意爬虫</span><br></pre></td></tr></table></figure>
-
-<p>3</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫究竟是合法还是违法的？</span><br><span class="line">- 在法律中是不被禁止</span><br><span class="line">- 具有违法风险</span><br><span class="line">- 善意爬虫  恶意爬虫</span><br><span class="line"></span><br><span class="line">爬虫带来的风险可以体现在如下2方面：</span><br><span class="line">    - 爬虫干扰了被访问网站的正常运营</span><br><span class="line">    - 爬虫抓取了收到法律保护的特定类型的数据或信息</span><br><span class="line"></span><br><span class="line">如何在使用编写爬虫的过程中避免进入局子的厄运呢？</span><br><span class="line">    - 时常的优化自己的程序，避免干扰被访问网站的正常运行</span><br><span class="line">    - 在使用，传播爬取到的数据时，审查抓取到的内容，如果发现了涉及到用户隐私</span><br><span class="line">    商业机密等敏感内容需要及时停止爬取或传播</span><br></pre></td></tr></table></figure>
-
-<p>4</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫在使用场景中的分类</span><br><span class="line">    - 通用爬虫：</span><br><span class="line">        抓取系统重要组成部分。抓取的是一整张页面数据。</span><br><span class="line">    - 聚焦爬虫：</span><br><span class="line">        是建立在通用爬虫的基础之上。抓取的是页面中特定的局部内容。</span><br><span class="line">    - 增量式爬虫：</span><br><span class="line">        检测网站中数据更新的情况。只会抓取网站中最新更新出来的数据。</span><br></pre></td></tr></table></figure>
-
-<p>5</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爬虫的矛与盾</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">反爬机制</span><br><span class="line">    门户网站，可以通过制定相应的策略或者技术手段，防止爬虫程序进行网站数据的爬取。</span><br><span class="line"></span><br><span class="line">反反爬策略</span><br><span class="line">    爬虫程序可以通过制定相关的策略或者技术手段，破解门户网站中具备的反爬机制，从而可以获取门户网站中相关的数据。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">robots.txt协议：</span><br><span class="line">    君子协议。规定了网站中哪些数据可以被爬虫爬取哪些数据不可以被爬取。</span><br></pre></td></tr></table></figure>
-
-<p>6</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http协议</span><br><span class="line">    - 概念：就是服务器和客户端进行数据交互的一种形式。</span><br><span class="line">常用请求头信息</span><br><span class="line">    - User-Agent：请求载体的身份标识</span><br><span class="line">    - Connection：请求完毕后，是断开连接还是保持连接</span><br><span class="line"></span><br><span class="line">常用响应头信息</span><br><span class="line">    - Content-Type：服务器响应回客户端的数据类型</span><br><span class="line"></span><br><span class="line">https协议：</span><br><span class="line">    - 安全的超文本传输协议</span><br><span class="line"></span><br><span class="line">加密方式</span><br><span class="line">    - 对称秘钥加密</span><br><span class="line">    - 非对称秘钥加密</span><br><span class="line">    - 证书秘钥加密</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
+    <title>二叉树</title>
+    <url>/2022/04/25/%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<ol>
 <li></li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">聚焦爬虫:爬取页面中指定的页面内容。</span><br><span class="line">    - 编码流程：</span><br><span class="line">        - 指定url</span><br><span class="line">        - 发起请求</span><br><span class="line">        - 获取响应数据</span><br><span class="line">        - 数据解析</span><br><span class="line">        - 持久化存储</span><br><span class="line"></span><br><span class="line">数据解析分类：</span><br><span class="line">    - 正则</span><br><span class="line">    - bs4</span><br><span class="line">    - xpath（***）</span><br><span class="line"></span><br><span class="line">数据解析原理概述：</span><br><span class="line">    - 解析的局部的文本内容都会在标签之间或者标签对应的属性中进行存储</span><br><span class="line">    - 1.进行指定标签的定位</span><br><span class="line">    - 2.标签或者标签对应的属性中存储的数据值进行提取（解析）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct BiNode&#123;	//二叉链表定义</span><br><span class="line">	char data;</span><br><span class="line">	struct BiNode *lchild,*rchild;</span><br><span class="line">&#125;BiTNode,*BiTree;</span><br><span class="line">void PreorderTraverse(BiTree T);//先序遍历二叉树T的递归函数声明</span><br><span class="line"></span><br><span class="line">//用算法5.3 先序遍历的顺序建立二叉链表</span><br><span class="line">void CreateBiTree(BiTree &amp;T)&#123;</span><br><span class="line">//按先序次序输入二叉树中结点的值（一个字符），创建二叉链表表示的二叉树T</span><br><span class="line">	char ch;</span><br><span class="line">	cin &gt;&gt; ch;</span><br><span class="line">	if(ch==&#x27;#&#x27;)  T=NULL;	//递归结束，建空树</span><br><span class="line">	else&#123;</span><br><span class="line">	T=new BiTNode;</span><br><span class="line">	T-&gt;data=ch;	//生成根结点</span><br><span class="line">	CreateBiTree(T-&gt;lchild);	//递归创建左子树</span><br><span class="line">	CreateBiTree(T-&gt;rchild);	//递归创建右子树</span><br><span class="line">&#125;	//else</span><br><span class="line">&#125;	//CreateBiTree</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	BiTree tree;</span><br><span class="line">	//cout&lt;&lt;&quot;请输入建立二叉链表的序列：\n&quot;;</span><br><span class="line">	CreateBiTree(tree);</span><br><span class="line">	//cout&lt;&lt;&quot;先序遍历的结果为：\n&quot;;</span><br><span class="line">	PreorderTraverse(tree);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">//先序遍历</span><br><span class="line">void PreorderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T)</span><br><span class="line">    &#123;</span><br><span class="line">    cout&lt;&lt;T-&gt;data;</span><br><span class="line">    PreorderTraverse(T-&gt;lchild);</span><br><span class="line">    PreorderTraverse(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//中序遍历</span><br><span class="line">void InOrderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T)</span><br><span class="line">    &#123;</span><br><span class="line">    InOrderTraverse(T-&gt;lchild);</span><br><span class="line">    cout&lt;&lt;T-&gt;data;</span><br><span class="line">    InOrderTraverse(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//后序遍历</span><br><span class="line">void PostorderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T)</span><br><span class="line">    &#123;</span><br><span class="line">    PostorderTraverse(T-&gt;lchild);</span><br><span class="line">    PostorderTraverse(T-&gt;rchild);</span><br><span class="line">    cout&lt;&lt;T-&gt;data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.统计二叉树中结点的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int NodeCount(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T==NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">        return NodeCount(T-&gt;lchild)+NodeCount(T-&gt;rchild)+1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3.统计二叉树中叶子结点的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Leafnum(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T==NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    if(T-&gt;lchild==NULL&amp;&amp;T-&gt;rchild==NULL)</span><br><span class="line">        return 1;</span><br><span class="line">    return Leafnum(T-&gt;lchild)+Leafnum(T-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>4.求树的深度</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Depth(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    int m,n;</span><br><span class="line">    if(T==NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        m=Depth(T-&gt;lchild);</span><br><span class="line">        n=Depth(T-&gt;rchild);</span><br><span class="line">        if(m&gt;n)</span><br><span class="line">            return(m+1);</span><br><span class="line">        else</span><br><span class="line">            return (n+1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>5.先序遍历的顺序建立二叉链表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//二叉树的二叉链表存储表示</span><br><span class="line">typedef struct BiNode</span><br><span class="line">&#123;</span><br><span class="line">char data;	//结点数据域</span><br><span class="line">struct BiNode *lchild,*rchild;	//左右孩子指针</span><br><span class="line">&#125;BiTNode,*BiTree;</span><br><span class="line"></span><br><span class="line">void CreateBiTree(BiTree &amp;T);	//CreateBiTree</span><br><span class="line"></span><br><span class="line">//用算法5.1 中序遍历的递归算法</span><br><span class="line">void InOrderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">//中序遍历二叉树T的递归算法</span><br><span class="line">if(T)&#123;</span><br><span class="line">InOrderTraverse(T-&gt;lchild);</span><br><span class="line">cout &lt;&lt; T-&gt;data;</span><br><span class="line">InOrderTraverse(T-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	BiTree tree;</span><br><span class="line">	//cout&lt;&lt;&quot;请输入建立二叉链表的序列：\n&quot;;</span><br><span class="line">	CreateBiTree(tree);</span><br><span class="line">	//cout&lt;&lt;&quot;所建立的二叉链表中序序列：\n&quot;;</span><br><span class="line">	InOrderTraverse(tree);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">void CreateBiTree(BiTree &amp;T)</span><br><span class="line">&#123;</span><br><span class="line">    char ch;</span><br><span class="line">    cin&gt;&gt;ch;</span><br><span class="line">    if(ch==&#x27;#&#x27;)</span><br><span class="line">        T=NULL;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        T=new BiTNode;</span><br><span class="line">        T-&gt;data=ch;</span><br><span class="line">        CreateBiTree(T-&gt;lchild);</span><br><span class="line">        CreateBiTree(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>Python</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -9109,34 +9229,6 @@ public class NodeController &#123;
       </categories>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>二叉树</title>
-    <url>/2022/04/25/%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
-    <content><![CDATA[<ol>
-<li></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct BiNode&#123;	//二叉链表定义</span><br><span class="line">	char data;</span><br><span class="line">	struct BiNode *lchild,*rchild;</span><br><span class="line">&#125;BiTNode,*BiTree;</span><br><span class="line">void PreorderTraverse(BiTree T);//先序遍历二叉树T的递归函数声明</span><br><span class="line"></span><br><span class="line">//用算法5.3 先序遍历的顺序建立二叉链表</span><br><span class="line">void CreateBiTree(BiTree &amp;T)&#123;</span><br><span class="line">//按先序次序输入二叉树中结点的值（一个字符），创建二叉链表表示的二叉树T</span><br><span class="line">	char ch;</span><br><span class="line">	cin &gt;&gt; ch;</span><br><span class="line">	if(ch==&#x27;#&#x27;)  T=NULL;	//递归结束，建空树</span><br><span class="line">	else&#123;</span><br><span class="line">	T=new BiTNode;</span><br><span class="line">	T-&gt;data=ch;	//生成根结点</span><br><span class="line">	CreateBiTree(T-&gt;lchild);	//递归创建左子树</span><br><span class="line">	CreateBiTree(T-&gt;rchild);	//递归创建右子树</span><br><span class="line">&#125;	//else</span><br><span class="line">&#125;	//CreateBiTree</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	BiTree tree;</span><br><span class="line">	//cout&lt;&lt;&quot;请输入建立二叉链表的序列：\n&quot;;</span><br><span class="line">	CreateBiTree(tree);</span><br><span class="line">	//cout&lt;&lt;&quot;先序遍历的结果为：\n&quot;;</span><br><span class="line">	PreorderTraverse(tree);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">//先序遍历</span><br><span class="line">void PreorderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T)</span><br><span class="line">    &#123;</span><br><span class="line">    cout&lt;&lt;T-&gt;data;</span><br><span class="line">    PreorderTraverse(T-&gt;lchild);</span><br><span class="line">    PreorderTraverse(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//中序遍历</span><br><span class="line">void InOrderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T)</span><br><span class="line">    &#123;</span><br><span class="line">    InOrderTraverse(T-&gt;lchild);</span><br><span class="line">    cout&lt;&lt;T-&gt;data;</span><br><span class="line">    InOrderTraverse(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//后序遍历</span><br><span class="line">void PostorderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T)</span><br><span class="line">    &#123;</span><br><span class="line">    PostorderTraverse(T-&gt;lchild);</span><br><span class="line">    PostorderTraverse(T-&gt;rchild);</span><br><span class="line">    cout&lt;&lt;T-&gt;data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.统计二叉树中结点的个数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int NodeCount(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T==NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">        return NodeCount(T-&gt;lchild)+NodeCount(T-&gt;rchild)+1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>3.统计二叉树中叶子结点的个数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Leafnum(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    if(T==NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    if(T-&gt;lchild==NULL&amp;&amp;T-&gt;rchild==NULL)</span><br><span class="line">        return 1;</span><br><span class="line">    return Leafnum(T-&gt;lchild)+Leafnum(T-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>4.求树的深度</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Depth(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">    int m,n;</span><br><span class="line">    if(T==NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        m=Depth(T-&gt;lchild);</span><br><span class="line">        n=Depth(T-&gt;rchild);</span><br><span class="line">        if(m&gt;n)</span><br><span class="line">            return(m+1);</span><br><span class="line">        else</span><br><span class="line">            return (n+1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>5.先序遍历的顺序建立二叉链表</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//二叉树的二叉链表存储表示</span><br><span class="line">typedef struct BiNode</span><br><span class="line">&#123;</span><br><span class="line">char data;	//结点数据域</span><br><span class="line">struct BiNode *lchild,*rchild;	//左右孩子指针</span><br><span class="line">&#125;BiTNode,*BiTree;</span><br><span class="line"></span><br><span class="line">void CreateBiTree(BiTree &amp;T);	//CreateBiTree</span><br><span class="line"></span><br><span class="line">//用算法5.1 中序遍历的递归算法</span><br><span class="line">void InOrderTraverse(BiTree T)</span><br><span class="line">&#123;</span><br><span class="line">//中序遍历二叉树T的递归算法</span><br><span class="line">if(T)&#123;</span><br><span class="line">InOrderTraverse(T-&gt;lchild);</span><br><span class="line">cout &lt;&lt; T-&gt;data;</span><br><span class="line">InOrderTraverse(T-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	BiTree tree;</span><br><span class="line">	//cout&lt;&lt;&quot;请输入建立二叉链表的序列：\n&quot;;</span><br><span class="line">	CreateBiTree(tree);</span><br><span class="line">	//cout&lt;&lt;&quot;所建立的二叉链表中序序列：\n&quot;;</span><br><span class="line">	InOrderTraverse(tree);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">void CreateBiTree(BiTree &amp;T)</span><br><span class="line">&#123;</span><br><span class="line">    char ch;</span><br><span class="line">    cin&gt;&gt;ch;</span><br><span class="line">    if(ch==&#x27;#&#x27;)</span><br><span class="line">        T=NULL;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        T=new BiTNode;</span><br><span class="line">        T-&gt;data=ch;</span><br><span class="line">        CreateBiTree(T-&gt;lchild);</span><br><span class="line">        CreateBiTree(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>

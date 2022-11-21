@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>python爬虫基础汇总 | 星辰的博客</title>
+  <meta name="description" content="Python 自动化工具的改进Selenium 启动的浏览器，有几十个特征可以被网站通过 JavaScript 探测到。Puppeteer 启动的浏览器，也有很多特征能够被网站探测。 爬虫都会碰到某些网站刚刚打开页面就被判定为：非人类行为 因为很多网站有对selenium的js监测机制。比如：navigator.webdriver，navigator.languages，navigator.plu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫基础汇总">
+<meta property="og:url" content="http://example.com/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="Python 自动化工具的改进Selenium 启动的浏览器，有几十个特征可以被网站通过 JavaScript 探测到。Puppeteer 启动的浏览器，也有很多特征能够被网站探测。 爬虫都会碰到某些网站刚刚打开页面就被判定为：非人类行为 因为很多网站有对selenium的js监测机制。比如：navigator.webdriver，navigator.languages，navigator.plu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-21T17:49:12.000Z">
+<meta property="article:modified_time" content="2022-11-21T17:50:07.964Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.13px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.88px;">JavaScript</a> <a href="/tags/Mysql/" style="font-size: 13.25px;">Mysql</a> <a href="/tags/Python/" style="font-size: 13.5px;">Python</a> <a href="/tags/Vue/" style="font-size: 13.13px;">Vue</a> <a href="/tags/css/" style="font-size: 13.63px;">css</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 13px;">其他</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.38px;">嵌入式</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">服务器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.75px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">43</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/22/Python%20%E7%88%AC%E8%99%AB%E6%9C%80%E4%BD%B3%E7%BB%84%E5%90%88/" class="title">python爬虫基础汇总</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-21T17:50:01.000Z" itemprop="datePublished">2022-11-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/" class="title">python爬虫基础汇总</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-21T17:49:12.000Z" itemprop="datePublished">2022-11-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/10/31/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" class="title">python爬虫基础汇总</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-10-31T03:26:23.000Z" itemprop="datePublished">2022-10-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/10/31/python%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/" class="title">python爬虫概念</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-10-31T03:25:11.000Z" itemprop="datePublished">2022-10-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/09/26/Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="title">Python数据分析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-09-26T15:26:15.000Z" itemprop="datePublished">2022-09-26</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Python Selenium自动化工具的改进" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python爬虫基础汇总
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/" class="article-date">
+	  <time datetime="2022-11-21T17:49:12.000Z" itemprop="datePublished">2022-11-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/" class="leancloud_visitors"  data-flag-title="python爬虫基础汇总">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Python-自动化工具的改进"><a href="#Python-自动化工具的改进" class="headerlink" title="Python 自动化工具的改进"></a>Python 自动化工具的改进</h2><p>Selenium 启动的浏览器，有几十个特征可以被网站通过 JavaScript 探测到。Puppeteer 启动的浏览器，也有很多特征能够被网站探测。</p>
+<p>爬虫都会碰到某些网站刚刚打开页面就被判定为：非人类行为</p>
+<p>因为很多网站有对selenium的js监测机制。比如：navigator.webdriver，navigator.languages，navigator.plugins.length……</p>
+<p>具体解决方案：</p>
+<p>第一种：使用mitmproxy用中间人的方式截取服务器发送来的js，修改js里面函数的参值方式发送给服务器。相当于在browser和server之间做一层中介的拦截。不过此方法要对js非常熟悉的人才好实施。</p>
+<p>第二种方法依旧通过selenium，不过是在服务器在第一次发送js并在本地验证的时候，做好‘第一次’的伪装，从而实现‘第一次登陆’有效。。方法简单，适合小白。</p>
+<p>第三种，最新版，Playwright规避检测。入门教程：<a target="_blank" rel="noopener" href="https://www.ngui.cc/article/show-529806.html?action=onClick">https://www.ngui.cc/article/show-529806.html?action=onClick</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/487281255">https://zhuanlan.zhihu.com/p/487281255</a></p>
+<h3 id="1-使用pyppeteer"><a href="#1-使用pyppeteer" class="headerlink" title="1.使用pyppeteer"></a>1.使用pyppeteer</h3><p>pyppeteer 加 asyncio 绕过selenium检测，实现鼠标滑动后自动登陆（代码很简单。主要熟悉异步模块及pyppeteer模块。pyppeteer模块看不懂就去看puppeteer文档，pyppeteer只是在puppeteer之上稍微包装了下而已 ）。</p>
+<p>首先是main.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">import asyncio</span><br><span class="line">import time,random</span><br><span class="line">from pyppeteer.launcher import launch # 控制模拟浏览器用</span><br><span class="line">from retrying import retry #设置重试次数用的</span><br><span class="line"> </span><br><span class="line">async def main(username, pwd, url):# 定义main协程函数，</span><br><span class="line">    #以下使用await 可以针对耗时的操作进行挂起</span><br><span class="line">    browser = await launch(&#123;&#x27;headless&#x27;: False, &#x27;args&#x27;: [&#x27;--no-sandbox&#x27;], &#125;) # 启动pyppeteer 属于内存中实现交互的模拟器</span><br><span class="line">    page = await browser.newPage()  # 启动个新的浏览器页面</span><br><span class="line">    await page.setUserAgent(</span><br><span class="line">        &#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36&#x27;)</span><br><span class="line"> </span><br><span class="line">    await page.goto(url) # 访问登录页面</span><br><span class="line">    # 替换淘宝在检测浏览时采集的一些参数。</span><br><span class="line">    # 就是在浏览器运行的时候，始终让window.navigator.webdriver=false</span><br><span class="line">    # navigator是windiw对象的一个属性，同时修改plugins，languages，navigator 且让</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; Object.defineProperties(navigator,&#123; webdriver:&#123; get: () =&gt; false &#125; &#125;) &#125;&#x27;&#x27;&#x27;) #以下为插入中间js，将淘宝会为了检测浏览器而调用的js修改其结果。</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; window.navigator.chrome = &#123; runtime: &#123;&#125;,  &#125;; &#125;&#x27;&#x27;&#x27;)</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; Object.defineProperty(navigator, &#x27;languages&#x27;, &#123; get: () =&gt; [&#x27;en-US&#x27;, &#x27;en&#x27;] &#125;); &#125;&#x27;&#x27;&#x27;)</span><br><span class="line">    await page.evaluate(&#x27;&#x27;&#x27;() =&gt;&#123; Object.defineProperty(navigator, &#x27;plugins&#x27;, &#123; get: () =&gt; [1, 2, 3, 4, 5,6], &#125;); &#125;&#x27;&#x27;&#x27;)</span><br><span class="line"> </span><br><span class="line">    # 使用type选定页面元素，并修改其数值，用于输入账号密码，修改的速度仿人类操作，因为有个输入速度的检测机制</span><br><span class="line">    # 因为 pyppeteer 框架需要转换为js操作，而js和python的类型定义不同，所以写法与参数要用字典，类型导入</span><br><span class="line">    await page.type(&#x27;.J_UserName&#x27;, username, &#123;&#x27;delay&#x27;: input_time_random() - 50&#125;)</span><br><span class="line">    await page.type(&#x27;#J_StandardPwd input&#x27;, pwd, &#123;&#x27;delay&#x27;: input_time_random()&#125;)</span><br><span class="line"> </span><br><span class="line">    #await page.screenshot(&#123;&#x27;path&#x27;: &#x27;./headless-test-result.png&#x27;&#125;)    # 截图测试</span><br><span class="line">    time.sleep(2)</span><br><span class="line"> </span><br><span class="line">    # 检测页面是否有滑块。原理是检测页面元素。</span><br><span class="line">    slider = await page.Jeval(&#x27;#nocaptcha&#x27;, &#x27;node =&gt; node.style&#x27;)  # 是否有滑块</span><br><span class="line"> </span><br><span class="line">    if slider:</span><br><span class="line">        print(&#x27;当前页面出现滑块&#x27;)</span><br><span class="line">        #await page.screenshot(&#123;&#x27;path&#x27;: &#x27;./headless-login-slide.png&#x27;&#125;) # 截图测试</span><br><span class="line">        flag,page = await mouse_slide(page=page) #js拉动滑块过去。</span><br><span class="line">        if flag:</span><br><span class="line">            await page.keyboard.press(&#x27;Enter&#x27;) # 确保内容输入完毕，少数页面会自动完成按钮点击</span><br><span class="line">            print(&quot;print enter&quot;,flag)</span><br><span class="line">            await page.evaluate(&#x27;&#x27;&#x27;document.getElementById(&quot;J_SubmitStatic&quot;).click()&#x27;&#x27;&#x27;) # 如果无法通过回车键完成点击，就调用js模拟点击登录按钮。</span><br><span class="line"> </span><br><span class="line">            time.sleep(2)</span><br><span class="line">            #cookies_list = await page.cookies()</span><br><span class="line">            #print(cookies_list)</span><br><span class="line">            await get_cookie(page) # 导出cookie 完成登陆后就可以拿着cookie玩各种各样的事情了。</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;&quot;)</span><br><span class="line">        await page.keyboard.press(&#x27;Enter&#x27;)</span><br><span class="line">        print(&quot;print enter&quot;)</span><br><span class="line">        await page.evaluate(&#x27;&#x27;&#x27;document.getElementById(&quot;J_SubmitStatic&quot;).click()&#x27;&#x27;&#x27;)</span><br><span class="line">        await page.waitFor(20)</span><br><span class="line">        await page.waitForNavigation()</span><br><span class="line"> </span><br><span class="line">        try:</span><br><span class="line">            global error # 检测是否是账号密码错误</span><br><span class="line">            print(&quot;error_1:&quot;,error)</span><br><span class="line">            error = await page.Jeval(&#x27;.error&#x27;, &#x27;node =&gt; node.textContent&#x27;)</span><br><span class="line">            print(&quot;error_2:&quot;,error)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            error = None</span><br><span class="line">        finally:</span><br><span class="line">            if error:</span><br><span class="line">                print(&#x27;确保账户安全重新入输入&#x27;)</span><br><span class="line">                # 程序退出。</span><br><span class="line">                loop.close()</span><br><span class="line">              else:</span><br><span class="line">                print(page.url)</span><br><span class="line">                await get_cookie(page)</span><br><span class="line">    #time.sleep(100)</span><br><span class="line"># 获取登录后cookie</span><br><span class="line">async def get_cookie(page):</span><br><span class="line">    #res = await page.content()</span><br><span class="line">    cookies_list = await page.cookies()</span><br><span class="line">    cookies = &#x27;&#x27;</span><br><span class="line">    for cookie in cookies_list:</span><br><span class="line">        str_cookie = &#x27;&#123;0&#125;=&#123;1&#125;;&#x27;</span><br><span class="line">        str_cookie = str_cookie.format(cookie.get(&#x27;name&#x27;), cookie.get(&#x27;value&#x27;))</span><br><span class="line">        cookies += str_cookie</span><br><span class="line">    print(cookies)</span><br><span class="line">    return cookies</span><br><span class="line"> </span><br><span class="line">def retry_if_result_none(result):</span><br><span class="line">    return result is None</span><br><span class="line"> </span><br><span class="line">@retry(retry_on_result=retry_if_result_none,)</span><br><span class="line">async def mouse_slide(page=None):</span><br><span class="line">    await asyncio.sleep(2)</span><br><span class="line">    try :</span><br><span class="line">        #鼠标移动到滑块，按下，滑动到头（然后延时处理），松开按键</span><br><span class="line">        await page.hover(&#x27;#nc_1_n1z&#x27;) # 不同场景的验证码模块能名字不同。</span><br><span class="line">        await page.mouse.down()</span><br><span class="line">        await page.mouse.move(2000, 0, &#123;&#x27;delay&#x27;: random.randint(1000, 2000)&#125;)</span><br><span class="line">        await page.mouse.up()</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(e, &#x27;:验证失败&#x27;)</span><br><span class="line">        return None,page</span><br><span class="line">    else:</span><br><span class="line">        await asyncio.sleep(2)</span><br><span class="line">        # 判断是否通过</span><br><span class="line">        slider_again = await page.Jeval(&#x27;.nc-lang-cnt&#x27;, &#x27;node =&gt; node.textContent&#x27;)</span><br><span class="line">        if slider_again != &#x27;验证通过&#x27;:</span><br><span class="line">            return None,page</span><br><span class="line">        else:</span><br><span class="line">            #await page.screenshot(&#123;&#x27;path&#x27;: &#x27;./headless-slide-result.png&#x27;&#125;) # 截图测试</span><br><span class="line">            print(&#x27;验证通过&#x27;)</span><br><span class="line">            return 1,page</span><br><span class="line"> </span><br><span class="line">def input_time_random():</span><br><span class="line">    return random.randint(100, 151)</span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    username = &#x27;xxxxxxxxx&#x27; # 淘宝用户名</span><br><span class="line">    pwd = &#x27;xxxxxxxxxxx&#x27; #密码</span><br><span class="line">    url = &#x27;https://login.taobao.com/member/login.jhtml?style=mini&amp;css_style=b2b&amp;from=b2b&amp;full_redirect=true&amp;redirect_url=https://login.1688.com/member/jump.htm?target=https://login.1688.com/member/marketSigninJump.htm?Done=http://login.1688.com/member/taobaoSellerLoginDispatch.htm&amp;reg= http://member.1688.com/member/join/enterprise_join.htm?lead=http://login.1688.com/member/taobaoSellerLoginDispatch.htm&amp;leadUrl=http://login.1688.com/member/&#x27;</span><br><span class="line">    loop = asyncio.get_event_loop()  #协程，开启个无限循环的程序流程，把一些函数注册到事件循环上。当满足事件发生的时候，调用相应的协程函数。</span><br><span class="line">    loop.run_until_complete(main(username, pwd, url))  #将协程注册到事件循环，并启动事件循环</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Playwright规避检测"><a href="#2-Playwright规避检测" class="headerlink" title="2.Playwright规避检测"></a>2.Playwright规避检测</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from playwright.sync_api import sync_playwright</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">p = sync_playwright().start()</span><br><span class="line">browser = p.chromium.launch(headless=False) #关闭无头模式，方便看到页面加载情况</span><br><span class="line">page = browser.new_page() #创建page对象</span><br><span class="line"></span><br><span class="line">js=&quot;&quot;&quot;</span><br><span class="line">Object.defineProperties(navigator, &#123;webdriver:&#123;get:()=&gt;undefined&#125;&#125;);</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    page.add_init_script(js);</span><br><span class="line">    page.goto(&quot;https://antispider1.scrape.center/&quot;)</span><br><span class="line">    print(page.title())</span><br><span class="line">except Exception as err:</span><br><span class="line">    print(err)</span><br><span class="line">finally:</span><br><span class="line">    time.sleep(1000) #等待1000s防止看不到页面</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首先上一个被拷贝的惨不忍睹 上一个是滑块验证[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/carl-/p/15761861.html]">https://www.cnblogs.com/carl-/p/15761861.html]</a></p>
+<p>还是前两天做一个商城后台爬虫，限制用户缓存，不能用谷歌开发版本，同时需要下载文件。</p>
+<p>话不多说上代码[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/carl-/p/15762714.html]">https://www.cnblogs.com/carl-/p/15762714.html]</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import getpass</span><br><span class="line">from playwright.sync_api import sync_playwright</span><br><span class="line"># 不出意外这个可以获取到你google的本地缓存文件</span><br><span class="line">__USER_DATE_DIR_PATH__ = f&quot;C:\\Users\\&#123;getpass.getuser()&#125;\\AppData\Local\Google\Chrome\\User Data&quot;</span><br><span class="line">playwright = sync_playwright().start()</span><br><span class="line">browser = playwright.chromium.launch_persistent_context(</span><br><span class="line">                    # 指定本机用户缓存地址</span><br><span class="line">                    user_data_dir=__USER_DATE_DIR_PATH__,</span><br><span class="line">                    # 指定本机google客户端exe的路径</span><br><span class="line">                    executable_path=__EXECUTABLE_PATH__,</span><br><span class="line">                    # 要想通过这个下载文件这个必然要开  默认是False</span><br><span class="line">                    accept_downloads=True,</span><br><span class="line">                    # 设置不是无头模式</span><br><span class="line">                    headless=False,</span><br><span class="line">                    bypass_csp=True,</span><br><span class="line">                    slow_mo=10，</span><br><span class="line">                    #跳过检测</span><br><span class="line">                    args=[&#x27;--disable-blink-features=AutomationControlled&#x27;]</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+
+<p>注意用这个方法启动的浏览器会自带一个页面存在，当然你还是可以重新再起一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 打开新页</span><br><span class="line">page = browser.new_page()</span><br><span class="line"># 访问谷歌首页</span><br><span class="line">page.goto(&#x27;https://www.google.com&#x27;,wait_until=&#x27;networkidle&#x27;,timeout=90000)</span><br></pre></td></tr></table></figure>
+
+<h6 id="wait-until-x3D-’networkidle’-意思是-跳转过后再一定时间内没有网络请求链接"><a href="#wait-until-x3D-’networkidle’-意思是-跳转过后再一定时间内没有网络请求链接" class="headerlink" title="wait_until&#x3D;’networkidle’ 意思是 跳转过后再一定时间内没有网络请求链接"></a>wait_until&#x3D;’networkidle’ 意思是 跳转过后再一定时间内没有网络请求链接</h6><h6 id="timeout-很好理解-超时时间90秒"><a href="#timeout-很好理解-超时时间90秒" class="headerlink" title="timeout 很好理解 超时时间90秒"></a>timeout 很好理解 超时时间90秒</h6><p>js注入（用途的话是选择器选择元素用的，具体的js 你们自己写）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 算是获得句柄吧</span><br><span class="line">window_handle = page.evaluate_handle(&quot;window&quot;)</span><br><span class="line"># 选择元素</span><br><span class="line">window_handle.evaluate(&quot;document.querySelectorAll(&#x27;#drrReportRangeTypeRadioMonthly&#x27;)[0].checked=true&quot;)</span><br><span class="line"># 自带select选择 data自行补充</span><br><span class="line">drrMonthlySelect = page.wait_for_selector(&#x27;//select[@id=&quot;drrMonthlySelect&quot;]&#x27;)</span><br><span class="line">drrMonthlySelect.select_option(date)</span><br></pre></td></tr></table></figure>
+
+<h4 id="接下来是下载操作"><a href="#接下来是下载操作" class="headerlink" title="接下来是下载操作"></a>接下来是下载操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 打开下载器</span><br><span class="line">with page.expect_download() as download_info:</span><br><span class="line">  #找到你要下载的东西，找到点击的元素，点击</span><br><span class="line">  page.wait_for_selector(&#x27;//a[@id=&quot;sspa-reports:report-settings-page:-download-button&quot;]&#x27;).click()</span><br><span class="line"># 下载的东西</span><br><span class="line">download = download_info.value</span><br><span class="line"># 下载的路径</span><br><span class="line">download.path()</span><br><span class="line"># 下载的文件名</span><br><span class="line">download.suggested_filename</span><br><span class="line"># 关闭页面</span><br><span class="line">page.close()</span><br><span class="line"># 关闭浏览器</span><br><span class="line">browser.stop()</span><br></pre></td></tr></table></figure>
+
+<h4 id="剩下的操作-你想干啥干啥"><a href="#剩下的操作-你想干啥干啥" class="headerlink" title="剩下的操作 你想干啥干啥"></a>剩下的操作 你想干啥干啥</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 补充几个</span><br><span class="line"># 点击</span><br><span class="line">page.click(&#x27;//input[@id=&quot;signInSubmit&quot;]&#x27;)</span><br><span class="line"># 等待完成</span><br><span class="line">self.page.wait_for_load_state(&quot;domcontentloaded&quot;)</span><br><span class="line"># 输入</span><br><span class="line">page.fill(&#x27;//input[@id=&quot;ap_email&quot;]&#x27;, user_str)</span><br><span class="line"># 查找元素</span><br><span class="line">page.wait_for_selector(&#x27;//select[@id=&quot;drrMonthlySelect&quot;]&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>原文地址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/carl-/p/15762714.html">https://www.cnblogs.com/carl-/p/15762714.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.pianshen.com/article/3395153606/">https://www.pianshen.com/article/3395153606/</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/" title="python爬虫基础汇总" target="_blank" rel="external">http://example.com/2022/11/22/Python Selenium自动化工具的改进/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/11/22/Python%20%E7%88%AC%E8%99%AB%E6%9C%80%E4%BD%B3%E7%BB%84%E5%90%88/" title="python爬虫基础汇总"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/10/31/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="python爬虫基础汇总"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
