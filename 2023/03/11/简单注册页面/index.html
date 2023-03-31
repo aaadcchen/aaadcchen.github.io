@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>简单注册页面 | 星辰的博客</title>
+  <meta name="description" content="注册页面1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单注册页面">
+<meta property="og:url" content="http://example.com/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/index.html">
+<meta property="og:site_name" content="星辰的博客">
+<meta property="og:description" content="注册页面1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-11T03:46:41.000Z">
+<meta property="article:modified_time" content="2023-03-11T03:51:10.652Z">
+<meta property="article:author" content="陈斌">
+<meta property="article:tag" content="其他">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="星辰的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body class="main-center theme-black# 主题颜色 theme-black theme-blue theme-green theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aaadcchen" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈斌</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 东营, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!<br>有需要请联系</br></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/HTML/" style="font-size: 13.13px;">HTML</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.88px;">JavaScript</a> <a href="/tags/Mysql/" style="font-size: 13.25px;">Mysql</a> <a href="/tags/Python/" style="font-size: 13.5px;">Python</a> <a href="/tags/Vue/" style="font-size: 13.13px;">Vue</a> <a href="/tags/css/" style="font-size: 13.63px;">css</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 13.38px;">其他</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 13.38px;">嵌入式</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">服务器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.75px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">43</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/24/MybatisPlus%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%95/" class="title">MybatisPlus代码记录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-24T07:12:15.000Z" itemprop="datePublished">2023-03-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/11/%E7%AE%80%E5%8D%95vue%E7%9A%84table%E9%A1%B5%E9%9D%A2/" class="title">简单vue的table页面</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-11T03:59:41.000Z" itemprop="datePublished">2023-03-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/" class="title">简单注册页面</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-11T03:46:41.000Z" itemprop="datePublished">2023-03-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/22/Python%20%E7%88%AC%E8%99%AB%E6%9C%80%E4%BD%B3%E7%BB%84%E5%90%88/" class="title">Python 爬虫最佳组合</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-21T17:50:01.000Z" itemprop="datePublished">2022-11-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/22/Python%20Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E6%94%B9%E8%BF%9B/" class="title">Python Selenium自动化工具的改进</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-21T17:49:12.000Z" itemprop="datePublished">2022-11-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-简单注册页面" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      简单注册页面
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/" class="article-date">
+	  <time datetime="2023-03-11T03:46:41.000Z" itemprop="datePublished">2023-03-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/" class="leancloud_visitors"  data-flag-title="简单注册页面">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;个人注册&lt;/title&gt;</span><br><span class="line">    &lt;!-- 引入我们初始化的css --&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/base.css&quot;&gt;</span><br><span class="line">    &lt;!-- 引入我们自己的注册页面的css --&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/register.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class=&quot;w&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div class=&quot;registerarea&quot;&gt;</span><br><span class="line">            &lt;h3&gt;注册新用户</span><br><span class="line">                &lt;div class=&quot;login&quot;&gt;我有账号，去&lt;a href=&quot;#&quot;&gt;登陆&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">            &lt;/h3&gt;</span><br><span class="line">            &lt;div class=&quot;reg_form&quot;&gt;</span><br><span class="line">                &lt;form action=&quot;&quot;&gt;</span><br><span class="line">                    &lt;ul&gt;</span><br><span class="line">                        &lt;li&gt;&lt;label for=&quot;&quot;&gt;手机号：&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;inp&quot; id=&quot;tel&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;label for=&quot;&quot;&gt;短信验证码：&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;inp&quot; id=&quot;msg&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;label for=&quot;&quot;&gt;昵称：&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;inp&quot; id=&quot;nc&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;label for=&quot;chen&quot;&gt;登录密码：&lt;/label&gt; &lt;input type=&quot;password&quot; class=&quot;inp&quot; id=&quot;mima1&quot;&gt;</span><br><span class="line">                            &lt;span class=&quot;message&quot; id=&quot;span1&quot;&gt;  请输入6—16位密码（可包含数字 字母 下划线） &lt;/span&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;li class=&quot;safe&quot;&gt;安全程度 &lt;em class=&quot;ruo1&quot;&gt;弱&lt;/em&gt; &lt;em class=&quot;zhong2&quot;&gt;中&lt;/em&gt; &lt;em class=&quot;qiang3&quot;&gt;强&lt;/em&gt; &lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;label for=&quot;&quot;&gt;确认密码：&lt;/label&gt; &lt;input type=&quot;password&quot; class=&quot;inp&quot; id=&quot;mima2&quot;&gt;</span><br><span class="line">                            &lt;span class=&quot;message&quot; id=&quot;span2&quot;&gt;  &lt;/span&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;label for=&quot;&quot;&gt;验证码：&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;inp&quot; id=&quot;inputRandom&quot;&gt;</span><br><span class="line">                            &lt;label id=&quot;autoRandom&quot; value=&quot;&quot;&gt;&lt;/label&gt;</span><br><span class="line">                            &lt;INPUT TYPE=&quot;button&quot; class=&quot;testma&quot; VALUE=&quot;获取验证码&quot; ONCLICK=&quot;autoRandom.innerHTML=createCode(5)&quot;&gt;</span><br><span class="line"></span><br><span class="line">                            &lt;input type=&quot;button&quot; value=&quot;验证&quot; onclick=&quot;test()&quot;&gt;</span><br><span class="line">                        &lt;/li&gt;</span><br><span class="line">                        &lt;li class=&quot;chen&quot; id=&quot;yanzheng&quot;&gt; &lt;/li&gt;</span><br><span class="line">                        &lt;li class=&quot;agree&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;&quot; id=&quot;&quot;&gt; 同意协议并注册 &lt;a href=&quot;#&quot;&gt;《知晓用户协议》&lt;/a&gt;</span><br><span class="line">                        &lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;</span><br><span class="line">                            &lt;input type=&quot;submit&quot; value=&quot;完成注册&quot; class=&quot;btn&quot;&gt;</span><br><span class="line">                        &lt;/li&gt;</span><br><span class="line">                    &lt;/ul&gt;</span><br><span class="line">                &lt;/form&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        window.onload = function() &#123;</span><br><span class="line">            var regtel = /^1\d&#123;10&#125;$/;</span><br><span class="line">            var regnc = /^[\u4e00-\u9fa5]&#123;2,8&#125;$/;</span><br><span class="line">            var regmsg = /^\d&#123;6&#125;$/;</span><br><span class="line">            var regpwd = /^[a-zA-Z0-9_-]&#123;6,16&#125;$/;</span><br><span class="line">            var tel = document.querySelector(&#x27;#tel&#x27;);</span><br><span class="line">            var nc = document.querySelector(&#x27;#nc&#x27;);</span><br><span class="line">            var msg = document.querySelector(&#x27;#msg&#x27;);</span><br><span class="line"></span><br><span class="line">            var surepwd = document.querySelector(&#x27;#mima2&#x27;);</span><br><span class="line">            regexp(tel, regtel);</span><br><span class="line">            regexp(nc, regnc);</span><br><span class="line">            regexp(msg, regmsg);</span><br><span class="line"></span><br><span class="line">            function regexp(ele, reg) &#123;</span><br><span class="line">                ele.onblur = function() &#123;</span><br><span class="line">                    if (reg.test(this.value)) &#123;</span><br><span class="line"></span><br><span class="line">                        this.nextElementSibling.className = &#x27;success&#x27;;</span><br><span class="line">                        this.nextElementSibling.innerHTML = &#x27;恭喜您输入正确&#x27;;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line"></span><br><span class="line">                        this.nextElementSibling.className = &#x27;error&#x27;;</span><br><span class="line">                        this.nextElementSibling.innerHTML = &#x27;格式不正确，请从新输入 &#x27;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            surepwd.onblur = function() &#123;</span><br><span class="line">                if (this.value.length == 0) &#123;</span><br><span class="line">                    this.nextElementSibling.className = &#x27;error&#x27;;</span><br><span class="line">                    this.nextElementSibling = &#x27;不能为空&#x27;;</span><br><span class="line">                &#125; else if (this.value == pwd.value) &#123;</span><br><span class="line">                    this.nextElementSibling.className = &#x27;success&#x27;;</span><br><span class="line">                    this.nextElementSibling.innerHTML = &#x27; 恭喜您输入正确&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    this.nextElementSibling.className = &#x27;error&#x27;;</span><br><span class="line">                    this.nextElementSibling.innerHTML = &#x27; 两次密码输入不一致&#x27;;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        var regpwd = /^[a-zA-Z0-9_-]&#123;6,16&#125;$/;</span><br><span class="line">        var pwd = document.querySelector(&#x27;#mima1&#x27;);</span><br><span class="line">        var aaa = document.querySelector(&#x27;.ruo1&#x27;);</span><br><span class="line">        var bbb = document.querySelector(&#x27;.zhong2&#x27;);</span><br><span class="line">        var ccc = document.querySelector(&#x27;.qiang3&#x27;);</span><br><span class="line">        var ruo = /^\d&#123;6,16&#125;$/;</span><br><span class="line">        var zhong = /^[\da-z]&#123;6,16&#125;$/;</span><br><span class="line">        var qiang = /^[\d\w]&#123;6,16&#125;$/;</span><br><span class="line">        pwd.onblur = function() &#123;</span><br><span class="line">            if (!regpwd.test(this.value)) &#123;</span><br><span class="line">                this.nextElementSibling.className = &#x27;error&#x27;;</span><br><span class="line">                this.nextElementSibling.innerHTML = &#x27;格式不正确，请从新输入 &#x27;;</span><br><span class="line">            &#125; else if (ruo.test(this.value)) &#123;</span><br><span class="line">                aaa.className = &#x27;ruo&#x27;;</span><br><span class="line">                this.nextElementSibling.className = &#x27;success&#x27;;</span><br><span class="line">                this.nextElementSibling.innerHTML = &#x27;恭喜您输入正确&#x27;;</span><br><span class="line">            &#125; else if (zhong.test(this.value)) &#123;</span><br><span class="line">                aaa.className = &#x27;ruo&#x27;;</span><br><span class="line">                bbb.className = &#x27;zhong&#x27;;</span><br><span class="line">                this.nextElementSibling.className = &#x27;success&#x27;;</span><br><span class="line">                this.nextElementSibling.innerHTML = &#x27;恭喜您输入正确&#x27;;</span><br><span class="line">            &#125; else if (qiang.test(this.value)) &#123;</span><br><span class="line">                aaa.className = &#x27;ruo&#x27;;</span><br><span class="line">                bbb.className = &#x27;zhong&#x27;;</span><br><span class="line">                ccc.className = &#x27;qiang&#x27;;</span><br><span class="line">                this.nextElementSibling.className = &#x27;success&#x27;;</span><br><span class="line">                this.nextElementSibling.innerHTML = &#x27;恭喜您输入正确&#x27;;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                this.nextElementSibling.className = &#x27;error&#x27;;</span><br><span class="line">                this.nextElementSibling.innerHTML = &#x27;格式不正确，请从新输入 &#x27;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        function createCode(len) &#123;</span><br><span class="line">            var seed = new Array(</span><br><span class="line">                &#x27;abcdefghijklmnopqrstuvwxyz&#x27;,</span><br><span class="line">                &#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;,</span><br><span class="line">                &#x27;0123456789&#x27;</span><br><span class="line">            ); //创建需要的数据数组  </span><br><span class="line">            var idx, i;</span><br><span class="line">            var result = &#x27;&#x27;; //返回的结果变量  </span><br><span class="line">            for (i = 0; i &lt; len; i++) //根据指定的长度  </span><br><span class="line">            &#123;</span><br><span class="line">                idx = Math.floor(Math.random() * 3); //获得随机数据的整数部分-获取一个随机整数  </span><br><span class="line">                result += seed[idx].substr(Math.floor(Math.random() * (seed[idx].length)), 1); //根据随机数获取数据中一个值  </span><br><span class="line">            &#125;</span><br><span class="line">            return result; //返回随机结果  </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        function test() &#123;</span><br><span class="line">            var inputRandom = document.getElementById(&quot;inputRandom&quot;).value;</span><br><span class="line">            var autoRandom = document.getElementById(&quot;autoRandom&quot;).innerHTML;</span><br><span class="line">            var yanzheng = document.querySelector(&#x27;#yanzheng&#x27;);</span><br><span class="line">            if (inputRandom == autoRandom) &#123;</span><br><span class="line">                yanzheng.className = &#x27;chen success&#x27;;</span><br><span class="line">                yanzheng.innerHTML = &#x27;通过验证&#x27;;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                yanzheng.className = &#x27;chen error&#x27;;</span><br><span class="line">                yanzheng.innerHTML = &#x27;没有通过验证&#x27;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>base.css</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">/* 把我们所有标签的内外边距清零 */</span><br><span class="line"></span><br><span class="line">* &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">    /* css3盒子模型 */</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* em 和 i 斜体的文字不倾斜 */</span><br><span class="line"></span><br><span class="line">em,</span><br><span class="line">i &#123;</span><br><span class="line">    font-style: normal</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 去掉li 的小圆点 */</span><br><span class="line"></span><br><span class="line">li &#123;</span><br><span class="line">    list-style: none</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">img &#123;</span><br><span class="line">    /* border 0 照顾低版本浏览器 如果 图片外面包含了链接会有边框的问题 */</span><br><span class="line">    border: 0;</span><br><span class="line">    /* 取消图片底侧有空白缝隙的问题 */</span><br><span class="line">    vertical-align: middle</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button &#123;</span><br><span class="line">    /* 当我们鼠标经过button 按钮的时候，鼠标变成小手 */</span><br><span class="line">    cursor: pointer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a &#123;</span><br><span class="line">    color: #666;</span><br><span class="line">    text-decoration: none</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a:hover &#123;</span><br><span class="line">    color: #c81623</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button,</span><br><span class="line">input &#123;</span><br><span class="line">    /* &quot;\5B8B\4F53&quot; 就是宋体的意思 这样浏览器兼容性比较好 */</span><br><span class="line">    font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, &quot;\5B8B\4F53&quot;, sans-serif;</span><br><span class="line">    /* 默认有灰色边框我们需要手动去掉 */</span><br><span class="line">    border: 0;</span><br><span class="line">    outline: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">    /* CSS3 抗锯齿形 让文字显示的更加清晰 */</span><br><span class="line">    -webkit-font-smoothing: antialiased;</span><br><span class="line">    background-color: #fff;</span><br><span class="line">    font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, &quot;\5B8B\4F53&quot;, sans-serif;</span><br><span class="line">    color: #666</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.hide,</span><br><span class="line">.none &#123;</span><br><span class="line">    display: none</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 清除浮动 */</span><br><span class="line"></span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    visibility: hidden;</span><br><span class="line">    clear: both;</span><br><span class="line">    display: block;</span><br><span class="line">    content: &quot;.&quot;;</span><br><span class="line">    height: 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix &#123;</span><br><span class="line">    *zoom: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>register.css</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">.w &#123;</span><br><span class="line">    width: 1200px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.message &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.registerarea &#123;</span><br><span class="line">    height: 600px;</span><br><span class="line">    border: 1px solid #ccc;</span><br><span class="line">    margin-top: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.registerarea h3 &#123;</span><br><span class="line">    height: 42px;</span><br><span class="line">    border-bottom: 1px solid #ccc;</span><br><span class="line">    background-color: #ececec;</span><br><span class="line">    line-height: 42px;</span><br><span class="line">    padding: 0 10px;</span><br><span class="line">    font-size: 18px;</span><br><span class="line">    font-weight: 400;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.login &#123;</span><br><span class="line">    float: right;</span><br><span class="line">    font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.login a &#123;</span><br><span class="line">    color: #c81523;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.reg_form &#123;</span><br><span class="line">    width: 600px;</span><br><span class="line">    margin: 50px auto 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.reg_form ul li &#123;</span><br><span class="line">    margin-bottom: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.reg_form ul li label &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    width: 88px;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.reg_form ul li .inp &#123;</span><br><span class="line">    width: 242px;</span><br><span class="line">    height: 37px;</span><br><span class="line">    border: 1px solid #ccc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.error &#123;</span><br><span class="line">    color: #c81523;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.error_icon,</span><br><span class="line">.success_icon &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">    width: 20px;</span><br><span class="line">    height: 20px;</span><br><span class="line">    background: url(../images/error.png) no-repeat;</span><br><span class="line">    margin-top: -2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.success &#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.success_icon &#123;</span><br><span class="line">    background: url(../images/success.png) no-repeat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.safe &#123;</span><br><span class="line">    padding-left: 170px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.safe em &#123;</span><br><span class="line">    padding: 0 12px;</span><br><span class="line">    color: #fff;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.chen &#123;</span><br><span class="line">    padding-left: 170px</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.ruo &#123;</span><br><span class="line">    background-color: #de1111;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.zhong &#123;</span><br><span class="line">    background-color: #40b83f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.qiang &#123;</span><br><span class="line">    background-color: #f79100;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.agree &#123;</span><br><span class="line">    padding-left: 95px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.agree input &#123;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.agree a &#123;</span><br><span class="line">    color: #1ba1e6;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.btn &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 34px;</span><br><span class="line">    background-color: #c81623;</span><br><span class="line">    font-size: 14px;</span><br><span class="line">    color: #fff;</span><br><span class="line">    margin: 30px 0 0 70px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.mod_copyright &#123;</span><br><span class="line">    text-align: center;</span><br><span class="line">    padding-top: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.links &#123;</span><br><span class="line">    margin-bottom: 15px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.links a &#123;</span><br><span class="line">    margin: 0 3px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.copyright &#123;</span><br><span class="line">    line-height: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/03/11/%E7%AE%80%E5%8D%95%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2/" title="简单注册页面" target="_blank" rel="external">http://example.com/2023/03/11/简单注册页面/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aaadcchen" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aaadcchen" target="_blank"><span class="text-dark">陈斌</span><small class="ml-1x">Java Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/03/11/%E7%AE%80%E5%8D%95vue%E7%9A%84table%E9%A1%B5%E9%9D%A2/" title="简单vue的table页面"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/11/22/Python%20%E7%88%AC%E8%99%AB%E6%9C%80%E4%BD%B3%E7%BB%84%E5%90%88/" title="Python 爬虫最佳组合"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aaadcchen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+  appKey: 'LdoFinge5qiJz3Czj7IsHSK3'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 's8DDStV44q1s8bCumFKsDwdK-gzGzoHsz',
+    appKey: 'LdoFinge5qiJz3Czj7IsHSK3',
+    placeholder: '评论一下呗',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
